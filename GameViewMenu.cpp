@@ -70,7 +70,7 @@ using namespace std;
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
         {
             menuWindow.close();
-           return true;
+            return true;
         }
     }
 
