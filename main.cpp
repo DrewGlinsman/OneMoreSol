@@ -1,24 +1,52 @@
+// Chris Wolinski SFML Pong
+
+// Location of main loop and keyboard input
+
 #include <SFML/Graphics.hpp>
+#include "GameViewMenu.h"
 
-int main()
+using namespace std;
+
+int main(int argc, char** argv)
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
 
-    while (window.isOpen())
+    sf::Event Event; // Process events
+
+    string currentWinner;
+
+    bool gameOver = false; // Never gets set to true
+    bool twoPlayerGame = false;
+    bool quit = false;
+
+    while(!gameOver) // Start game loop
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        GameViewMenu* currentMenu = new GameViewMenu(); //Create menu window for player
+
+        currentMenu -> menuWindow.display();
+
+        currentMenu -> updateMenu();
+
+        while(currentMenu -> menuWindow.isOpen()) // Menu loop
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+            while(currentMenu -> menuWindow.pollEvent(Event))
+            {
+                if(Event.type == sf::Event::Closed)
+                {
+                    currentMenu -> menuWindow.close(); // Quit game
+                    return 0;
+                }
+            }
+
+            twoPlayerGame = currentMenu -> menuSelection(); // Determines # of players
+
         }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
+        delete currentMenu; // Contain any memory leaks
 
-    return 0;
+    }
 }
+
+        // # of players has been determined and the game is starting
+
+        //--------------------------------------------------------------------------------------
+
