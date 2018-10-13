@@ -1,4 +1,20 @@
-.depend
-.layout
-.cbp
+#Codeblocks files
+*.depend
+
+*.layout
+
+*.cbp
+
 \Debug
+
+#executables
+*.exe
+
+#Dynamic Libraries
+*.dll
+
+#Compiled object files
+*.o
+*.obj
+*.lo
+*.slo
