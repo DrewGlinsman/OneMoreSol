@@ -1,13 +1,27 @@
 //This is where the player views what happens onscreen.
 
 #include "GameViewMenu.h"
+#include "GameViewPlayer.h"
+#include "Gun.h"
 
 using namespace std;
 
 GameViewMenu::GameViewMenu() // Menu window constructor
     : menuWindow(sf::VideoMode(1440, 900, 32), "One More Soul",sf::Style::Titlebar | sf::Style::Close)
 {
-    if (!menuImage.loadFromFile("assets/Menu_Screen.png"))
+    if (!menuImage.loadFromFile("assets/menuScreen.png"))
+        cout << "Could not load requested image." << endl;
+    if (!playBtnImg.loadFromFile("assets/playButton.png"))
+        cout << "Could not load requested image." << endl;
+    if (!playBtnHImg.loadFromFile("assets/playButtonH.png"))
+        cout << "Could not load requested image." << endl;
+    if (!storyBtnImg.loadFromFile("assets/storyButton.png"))
+        cout << "Could not load requested image." << endl;
+    if (!storyBtnHImg.loadFromFile("assets/storyButtonH.png"))
+        cout << "Could not load requested image." << endl;
+    if (!exitBtnImg.loadFromFile("assets/exitButton.png"))
+        cout << "Could not load requested image." << endl;
+    if (!exitBtnHImg.loadFromFile("assets/exitButtonH.png"))
         cout << "Could not load requested image." << endl;
 
     if (!menuSound.loadFromFile("assets/Menu_Music.ogg"))
@@ -20,6 +34,25 @@ GameViewMenu::GameViewMenu() // Menu window constructor
     background.setPosition(0,0);
     background.setSize(sf::Vector2f(1440,900));
     background.setTexture(&menuImage);
+
+    playBtnRec.setPosition(486,301);
+    playBtnRec.setSize(sf::Vector2f(1308,224));
+    playBtnRec.setTexture(&playBtnImg);
+    playBtnHRec.setPosition(486,301);
+    playBtnHRec.setSize(sf::Vector2f(1308,224));
+    playBtnHRec.setTexture(&playBtnHImg);
+    storyBtnRec.setPosition(486,401);
+    storyBtnRec.setSize(sf::Vector2f(1050,117));
+    storyBtnRec.setTexture(&storyBtnImg);
+    storyBtnHRec.setPosition(486,401);
+    storyBtnHRec.setSize(sf::Vector2f(1050,117));
+    storyBtnHRec.setTexture(&storyBtnHImg);
+    exitBtnRec.setPosition(486,501);
+    exitBtnRec.setSize(sf::Vector2f(888,117));
+    exitBtnRec.setTexture(&exitBtnImg);
+    exitBtnHRec.setPosition(486,501);
+    exitBtnHRec.setSize(sf::Vector2f(888,117));
+    exitBtnHRec.setTexture(&exitBtnHImg);
 
 
     menuMusic.setBuffer(menuSound);
@@ -97,6 +130,7 @@ void GameViewMenu::updateMenu(void) // Updates screen
     menuWindow.clear(sf::Color::Black);
 
     menuWindow.draw(background);
+    menuWindow.draw(playBtnRec);
 
     // display
     menuWindow.display();

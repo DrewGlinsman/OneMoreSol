@@ -15,7 +15,20 @@ class GameViewMenu
 private:
     sf::Font menuFont;
     sf::Texture menuImage;
+    sf::Texture playBtnImg;
+    sf::Texture playBtnHImg;
+    sf::Texture storyBtnImg;
+    sf::Texture storyBtnHImg;
+    sf::Texture exitBtnImg;
+    sf::Texture exitBtnHImg;
+
     sf::RectangleShape background;
+    sf::RectangleShape playBtnRec;
+    sf::RectangleShape playBtnHRec;
+    sf::RectangleShape storyBtnRec;
+    sf::RectangleShape storyBtnHRec;
+    sf::RectangleShape exitBtnRec;
+    sf::RectangleShape exitBtnHRec;
     sf::SoundBuffer menuSound;
     sf::Sound menuMusic;
     sf::Text menuTitle;
