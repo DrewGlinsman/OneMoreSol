@@ -35,24 +35,26 @@ GameViewMenu::GameViewMenu() // Menu window constructor
     background.setSize(sf::Vector2f(1440,900));
     background.setTexture(&menuImage);
 
-    playBtnRec.setOrigin(1308,0);
-    playBtnRec.setPosition(1440,301);
-    playBtnRec.setSize(sf::Vector2f(1308,224));
+    playBtnRec.setOrigin((1308/2),0);
+    playBtnRec.setPosition(1440,400);
+    playBtnRec.setSize(sf::Vector2f((1308/2),(224/2)));
     playBtnRec.setTexture(&playBtnImg);
     playBtnHRec.setOrigin(1308,0);
-    playBtnHRec.setPosition(1440,301);
+    playBtnHRec.setPosition(1440,400);
     playBtnHRec.setSize(sf::Vector2f(1308,224));
     playBtnHRec.setTexture(&playBtnHImg);
 
-    storyBtnRec.setPosition(486,401);
-    storyBtnRec.setSize(sf::Vector2f(1050,117));
+    storyBtnRec.setOrigin((1050/2),0);
+    storyBtnRec.setPosition(1440,530);
+    storyBtnRec.setSize(sf::Vector2f((1050/2),(117/2)));
     storyBtnRec.setTexture(&storyBtnImg);
     storyBtnHRec.setPosition(486,401);
     storyBtnHRec.setSize(sf::Vector2f(1050,117));
     storyBtnHRec.setTexture(&storyBtnHImg);
 
-    exitBtnRec.setPosition(486,501);
-    exitBtnRec.setSize(sf::Vector2f(888,117));
+    exitBtnRec.setOrigin((444),0);
+    exitBtnRec.setPosition(1440,605);
+    exitBtnRec.setSize(sf::Vector2f(444,(117/2)));
     exitBtnRec.setTexture(&exitBtnImg);
     exitBtnHRec.setPosition(486,501);
     exitBtnHRec.setSize(sf::Vector2f(888,117));
@@ -135,6 +137,8 @@ void GameViewMenu::updateMenu(void) // Updates screen
 
     menuWindow.draw(background);
     menuWindow.draw(playBtnRec);
+    menuWindow.draw(storyBtnRec);
+    menuWindow.draw(exitBtnRec);
 
     // display
     menuWindow.display();
