@@ -81,23 +81,7 @@ int main(int argc, char** argv)
                         }
                     }
 
-                    if(Event.key.code == sf::Keyboard::Space)
-                    {
-                        if(sf::Vector2f (0,0) == selector.getPosition())
-                        {
-                            currentMenu -> menuWindow.close();
-                        }
-                        if(sf::Vector2f (0,1) == selector.getPosition())
-                        {
-                            currentMenu -> menuWindow.close();
-                        }
-                        if(sf::Vector2f (0,2) == selector.getPosition())
-                        {
-                            currentMenu -> menuWindow.close();
-                            return 0;
-                        }
-                    }
-                    if(Event.key.code == sf::Keyboard::Enter)
+                    if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
                     {
                         if(sf::Vector2f (0,0) == selector.getPosition())
                         {
