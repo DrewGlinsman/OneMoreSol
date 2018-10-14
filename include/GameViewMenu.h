@@ -24,11 +24,8 @@ private:
 
     sf::RectangleShape background;
     sf::RectangleShape playBtnRec;
-    sf::RectangleShape playBtnHRec;
     sf::RectangleShape storyBtnRec;
-    sf::RectangleShape storyBtnHRec;
     sf::RectangleShape exitBtnRec;
-    sf::RectangleShape exitBtnHRec;
     sf::SoundBuffer menuSound;
     sf::Sound menuMusic;
     sf::Text menuTitle;
