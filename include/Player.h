@@ -9,30 +9,12 @@ public:
     Player();
     virtual ~Player();
 
-    unsigned int getHealth()
-    {
-        return health;
-    }
-    void setHealth(unsigned int val)
-    {
-        health = val;
-    }
-    float getSpeed()
-    {
-        return speed;
-    }
-    void setSpeed(float val)
-    {
-        speed = val;
-    }
-    Gun getGun()
-    {
-        return gun;
-    }
-    void setGun(Gun val)
-    {
-        gun = val;
-    }
+    unsigned int getHealth();
+    void setHealth(unsigned int val);
+    float getSpeed();
+    void setSpeed(float val);
+    Gun getGun();
+    void setGun(Gun val);
 
 protected:
 

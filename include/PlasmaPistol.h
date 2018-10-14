@@ -9,8 +9,8 @@ class PlasmaPistol : public Gun
     public:
         PlasmaPistol();
         virtual ~PlasmaPistol();
-        Shoot();
-        Reload();
+        void Shoot();
+        void Reload();
 
     protected:
 
