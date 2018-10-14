@@ -61,6 +61,7 @@ public:
     GameViewMenu();
     bool menuSelection();
     void updateMenu(void);
+    void selectButton(int, int);
 
 
 };

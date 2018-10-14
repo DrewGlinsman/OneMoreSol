@@ -42,16 +42,19 @@ int main(int argc, char** argv)
                         if(sf::Vector2f (0,0) == selector.getPosition())
                         {
                             selector.setPosition(0,2);
+                            currentMenu -> selectButton(0,2);
                             cout << "0,2" << endl;
                         }
                         else if(sf::Vector2f (0,1) == selector.getPosition())
                         {
                             selector.setPosition(0,0);
+                            currentMenu -> selectButton(0,0);
                             cout << "0,0" << endl;
                         }
                         else if(sf::Vector2f (0,2) == selector.getPosition())
                         {
                             selector.setPosition(0,1);
+                            currentMenu -> selectButton(0,1);
                             cout << "0,1" << endl;
                         }
                     }
@@ -61,16 +64,19 @@ int main(int argc, char** argv)
                         if(sf::Vector2f (0,0) == selector.getPosition())
                         {
                             selector.setPosition(0,1);
+                            currentMenu -> selectButton(0,1);
                             cout << "0,1" << endl;
                         }
                         else if(sf::Vector2f (0,1) == selector.getPosition())
                         {
                             selector.setPosition(0,2);
+                            currentMenu -> selectButton(0,2);
                             cout << "0,2" << endl;
                         }
                         else if(sf::Vector2f (0,2) == selector.getPosition())
                         {
                             selector.setPosition(0,0);
+                            currentMenu -> selectButton(0,0);
                             cout << "0,0" << endl;
                         }
                     }
@@ -91,11 +97,24 @@ int main(int argc, char** argv)
                             return 0;
                         }
                     }
+                    if(Event.key.code == sf::Keyboard::Enter)
+                    {
+                        if(sf::Vector2f (0,0) == selector.getPosition())
+                        {
+                            currentMenu -> menuWindow.close();
+                        }
+                        if(sf::Vector2f (0,1) == selector.getPosition())
+                        {
+                            currentMenu -> menuWindow.close();
+                        }
+                        if(sf::Vector2f (0,2) == selector.getPosition())
+                        {
+                            currentMenu -> menuWindow.close();
+                            return 0;
+                        }
+                    }
                 }
             }
-
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-                currentMenu -> menuWindow.close();
         }
 
         delete currentMenu; // Contain any memory leaks

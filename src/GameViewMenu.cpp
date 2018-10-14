@@ -38,26 +38,26 @@ GameViewMenu::GameViewMenu() // Menu window constructor
     playBtnRec.setOrigin((1308/2),0);
     playBtnRec.setPosition(1440,400);
     playBtnRec.setSize(sf::Vector2f((1308/2),(224/2)));
-    playBtnRec.setTexture(&playBtnImg);
-    playBtnHRec.setOrigin(1308,0);
+    playBtnRec.setTexture(&playBtnHImg);
+    playBtnHRec.setOrigin((1308/2),0);
     playBtnHRec.setPosition(1440,400);
-    playBtnHRec.setSize(sf::Vector2f(1308,224));
+    playBtnHRec.setSize(sf::Vector2f((1308/2),(224/2)));
     playBtnHRec.setTexture(&playBtnHImg);
 
     storyBtnRec.setOrigin((1050/2),0);
     storyBtnRec.setPosition(1440,530);
     storyBtnRec.setSize(sf::Vector2f((1050/2),(117/2)));
     storyBtnRec.setTexture(&storyBtnImg);
-    storyBtnHRec.setPosition(486,401);
-    storyBtnHRec.setSize(sf::Vector2f(1050,117));
+    storyBtnHRec.setPosition(1440,530);
+    storyBtnHRec.setSize(sf::Vector2f((1050/2),(117/2)));
     storyBtnHRec.setTexture(&storyBtnHImg);
 
     exitBtnRec.setOrigin((444),0);
     exitBtnRec.setPosition(1440,605);
     exitBtnRec.setSize(sf::Vector2f(444,(117/2)));
     exitBtnRec.setTexture(&exitBtnImg);
-    exitBtnHRec.setPosition(486,501);
-    exitBtnHRec.setSize(sf::Vector2f(888,117));
+    exitBtnHRec.setPosition(1440,605);
+    exitBtnHRec.setSize(sf::Vector2f(444,(117/2)));
     exitBtnHRec.setTexture(&exitBtnHImg);
 
 
@@ -142,4 +142,31 @@ void GameViewMenu::updateMenu(void) // Updates screen
 
     // display
     menuWindow.display();
+}
+
+/*
+* Accepts the coordinates of the selection
+* and changes the shape textures to respond.
+*/
+void GameViewMenu::selectButton(int x, int y)
+{
+    if(y == 0)
+    {
+        playBtnRec.setTexture(&playBtnHImg);
+        storyBtnRec.setTexture(&storyBtnImg);
+        exitBtnRec.setTexture(&exitBtnImg);
+    }
+    else if(y == 1)
+    {
+        playBtnRec.setTexture(&playBtnImg);
+        storyBtnRec.setTexture(&storyBtnHImg);
+        exitBtnRec.setTexture(&exitBtnImg);
+    }
+    else if(y == 2)
+    {
+        playBtnRec.setTexture(&playBtnImg);
+        storyBtnRec.setTexture(&storyBtnImg);
+        exitBtnRec.setTexture(&exitBtnHImg);
+    }
+    updateMenu();//could this be more optimally placed?
 }
