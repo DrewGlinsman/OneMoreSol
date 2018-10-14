@@ -112,8 +112,6 @@ int main(int argc, char** argv)
 
         currentGame -> updateGame();
 
-        currentGame -> gameWindow.display();
-
         while(currentGame -> gameWindow.isOpen()) // Game loop
         {
             while(currentGame -> gameWindow.pollEvent(Event))
