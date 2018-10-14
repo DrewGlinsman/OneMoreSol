@@ -8,6 +8,9 @@ class Bullet
         Bullet();
         virtual ~Bullet();
 
+        float getVelocity();
+        void setVelocity(float);
+
     protected:
 
     private:
