@@ -26,14 +26,14 @@ using namespace std;
     }
 
     void GameViewPlayer::movePlayer(float timePassed)
-{
+    {
 
-}
+    }
 
-void GameViewPlayer::moveEnemy(float timePassed)
-{
+    void GameViewPlayer::moveEnemy(float timePassed)
+    {
 
-}
+    }
 
     void GameViewPlayer::updateGame(void) // Draws all elements of screen
     {
