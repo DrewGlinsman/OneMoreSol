@@ -10,7 +10,8 @@ public:
     unsigned int damage;
     unsigned int clip;
     float reloadSpeed;
-    float dmgMultipier;
+    float dmgMultiplier;
+    float fireRate;
 };
 
 #endif // GUN_H
