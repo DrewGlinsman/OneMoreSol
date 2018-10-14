@@ -17,14 +17,6 @@ public:
     {
         health = val;
     }
-    float getSpeed()
-    {
-        return speed;
-    }
-    void setSpeed(float val)
-    {
-        speed = val;
-    }
     Gun getGun()
     {
         return gun;
