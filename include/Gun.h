@@ -14,7 +14,9 @@ private:
     unsigned int damage;
     unsigned int clip;
     float reloadSpeed;
-    float dmgMultipier;
+    string dmgMultipier;
+    float fireRate;
+    sf::Image image;
 
 };
 
