@@ -11,6 +11,15 @@ class Bullet
     protected:
 
     private:
+        //damage
+        float damage;
+
+        //speed
+        float velocity;
+
+        //location
+        float positionX;
+        float positionY;
 };
 
 #endif // BULLET_H
