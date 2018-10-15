@@ -3,6 +3,7 @@
 #include "GameViewMenu.h"
 #include "GameViewPlayer.h"
 #include "Gun.h"
+#include <windows.h>
 
 using namespace std;
 
@@ -68,13 +69,100 @@ GameViewMenu::GameViewMenu() // Menu window constructor
 
 }
 
-void GameViewMenu::playTransitionEffect()
+bool GameViewMenu::gameViewMenuIsOpen()
 {
-    menuTransition.play();
-}
-void GameViewMenu::playSelectionEffect()
-{
-    menuSelection.play();
+    updateMenu();
+    selector.setPosition(0,0);
+    cout << "0,0" << endl;
+    while(menuWindow.isOpen()) // Menu loop
+        {
+            while(menuWindow.pollEvent(Event))
+            {
+                if(Event.type == sf::Event::Closed)
+                {
+                    menuWindow.close(); // Quit game
+                    return true;
+                }
+
+                if(Event.type == sf::Event::KeyPressed)
+                {
+                    if(Event.key.code == sf::Keyboard::Up)
+                    {
+                        if(sf::Vector2f (0,0) == selector.getPosition())
+                        {
+                            selector.setPosition(0,2);
+                            selectButton(0,2);
+                            menuTransition.play();
+                            cout << "0,2" << endl;
+                        }
+                        else if(sf::Vector2f (0,1) == selector.getPosition())
+                        {
+                            selector.setPosition(0,0);
+                            selectButton(0,0);
+                            menuTransition.play();
+                            cout << "0,0" << endl;
+                        }
+                        else if(sf::Vector2f (0,2) == selector.getPosition())
+                        {
+                            selector.setPosition(0,1);
+                            selectButton(0,1);
+                            menuTransition.play();
+                            cout << "0,1" << endl;
+                        }
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Down)
+                    {
+                        if(sf::Vector2f (0,0) == selector.getPosition())
+                        {
+                            selector.setPosition(0,1);
+                            selectButton(0,1);
+                            menuTransition.play();
+                            cout << "0,1" << endl;
+                        }
+                        else if(sf::Vector2f (0,1) == selector.getPosition())
+                        {
+                            selector.setPosition(0,2);
+                            selectButton(0,2);
+                            menuTransition.play();
+                            cout << "0,2" << endl;
+                        }
+                        else if(sf::Vector2f (0,2) == selector.getPosition())
+                        {
+                            selector.setPosition(0,0);
+                            selectButton(0,0);
+                            menuTransition.play();
+                            cout << "0,0" << endl;
+                        }
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+                    {
+                        if(sf::Vector2f (0,0) == selector.getPosition())
+                        {
+                            menuSelection.play();
+                            Sleep(900);
+                            menuWindow.close();
+                            return false;
+                        }
+                        if(sf::Vector2f (0,1) == selector.getPosition())
+                        {
+                            menuSelection.play();
+                            Sleep(900);
+                            menuWindow.close();
+                            return false;
+                        }
+                        if(sf::Vector2f (0,2) == selector.getPosition())
+                        {
+                            menuSelection.play();
+                            Sleep(900);
+                            menuWindow.close();
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
 }
 
 void GameViewMenu::updateMenu(void) // Updates screen

@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "GameViewPlayer.h"
 #include "GameViewMenu.h"
-#include <windows.h>
 
 using namespace std;
 
@@ -13,105 +12,17 @@ int main(int argc, char** argv)
     string currentWinner;
 
     bool gameOver = false; // Never gets set to true
-    bool twoPlayerGame = false;
-    bool quit = false;
-    sf::Event event;
+    bool quit = false; // Checks to see if player quit
+
     while(!gameOver) // Start game loop
     {
         GameViewMenu* currentMenu = new GameViewMenu(); //Create menu window for player
 
-        currentMenu -> menuWindow.display();
-        sf::RectangleShape selector;
-        selector.setPosition(0,0);
-        cout << "0,0" << endl;
-        currentMenu -> updateMenu();
+        quit = currentMenu -> gameViewMenuIsOpen();
 
-        while(currentMenu -> menuWindow.isOpen()) // Menu loop
+        if(quit == true)
         {
-            while(currentMenu -> menuWindow.pollEvent(Event))
-            {
-                if(Event.type == sf::Event::Closed)
-                {
-                    currentMenu -> menuWindow.close(); // Quit game
-                    return 0;
-                }
-
-                if(Event.type == sf::Event::KeyPressed)
-                {
-                    if(Event.key.code == sf::Keyboard::Up)
-                    {
-                        if(sf::Vector2f (0,0) == selector.getPosition())
-                        {
-                            selector.setPosition(0,2);
-                            currentMenu -> selectButton(0,2);
-                            currentMenu -> playTransitionEffect();
-                            cout << "0,2" << endl;
-                        }
-                        else if(sf::Vector2f (0,1) == selector.getPosition())
-                        {
-                            selector.setPosition(0,0);
-                            currentMenu -> selectButton(0,0);
-                            currentMenu -> playTransitionEffect();
-                            cout << "0,0" << endl;
-                        }
-                        else if(sf::Vector2f (0,2) == selector.getPosition())
-                        {
-                            selector.setPosition(0,1);
-                            currentMenu -> selectButton(0,1);
-                            currentMenu -> playTransitionEffect();
-                            cout << "0,1" << endl;
-                        }
-                    }
-
-                    if(Event.key.code == sf::Keyboard::Down)
-                    {
-                        if(sf::Vector2f (0,0) == selector.getPosition())
-                        {
-                            selector.setPosition(0,1);
-                            currentMenu -> selectButton(0,1);
-                            currentMenu -> playTransitionEffect();
-                            cout << "0,1" << endl;
-                        }
-                        else if(sf::Vector2f (0,1) == selector.getPosition())
-                        {
-                            selector.setPosition(0,2);
-                            currentMenu -> selectButton(0,2);
-                            currentMenu -> playTransitionEffect();
-                            cout << "0,2" << endl;
-                        }
-                        else if(sf::Vector2f (0,2) == selector.getPosition())
-                        {
-                            selector.setPosition(0,0);
-                            currentMenu -> selectButton(0,0);
-                            currentMenu -> playTransitionEffect();
-                            cout << "0,0" << endl;
-                        }
-                    }
-
-                    if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
-                    {
-                        if(sf::Vector2f (0,0) == selector.getPosition())
-                        {
-                            currentMenu -> playSelectionEffect();
-                            Sleep(900);
-                            currentMenu -> menuWindow.close();
-                        }
-                        if(sf::Vector2f (0,1) == selector.getPosition())
-                        {
-                            currentMenu -> playSelectionEffect();
-                            Sleep(900);
-                            currentMenu -> menuWindow.close();
-                        }
-                        if(sf::Vector2f (0,2) == selector.getPosition())
-                        {
-                            currentMenu -> playSelectionEffect();
-                            Sleep(900);
-                            currentMenu -> menuWindow.close();
-                            return 0;
-                        }
-                    }
-                }
-            }
+            return 0;
         }
 
         delete currentMenu; // Contain any memory leaks

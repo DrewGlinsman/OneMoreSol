@@ -21,8 +21,10 @@ private:
     sf::Texture storyBtnHImg;
     sf::Texture exitBtnImg;
     sf::Texture exitBtnHImg;
+    sf::Event Event;
 
     sf::RectangleShape background;
+    sf::RectangleShape selector;
     sf::RectangleShape playBtnRec;
     sf::RectangleShape storyBtnRec;
     sf::RectangleShape exitBtnRec;
@@ -60,8 +62,7 @@ private:
 public:
     sf::RenderWindow menuWindow;
     GameViewMenu();
-    void playTransitionEffect(void);
-    void playSelectionEffect(void);
+    bool gameViewMenuIsOpen(void);
     void updateMenu(void);
     void selectButton(int, int);
 
