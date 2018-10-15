@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameViewPlayer.h"
 #include "GameViewMenu.h"
+#include <windows.h>
 
 using namespace std;
 
@@ -43,18 +44,21 @@ int main(int argc, char** argv)
                         {
                             selector.setPosition(0,2);
                             currentMenu -> selectButton(0,2);
+                            currentMenu -> playTransitionEffect();
                             cout << "0,2" << endl;
                         }
                         else if(sf::Vector2f (0,1) == selector.getPosition())
                         {
                             selector.setPosition(0,0);
                             currentMenu -> selectButton(0,0);
+                            currentMenu -> playTransitionEffect();
                             cout << "0,0" << endl;
                         }
                         else if(sf::Vector2f (0,2) == selector.getPosition())
                         {
                             selector.setPosition(0,1);
                             currentMenu -> selectButton(0,1);
+                            currentMenu -> playTransitionEffect();
                             cout << "0,1" << endl;
                         }
                     }
@@ -65,18 +69,21 @@ int main(int argc, char** argv)
                         {
                             selector.setPosition(0,1);
                             currentMenu -> selectButton(0,1);
+                            currentMenu -> playTransitionEffect();
                             cout << "0,1" << endl;
                         }
                         else if(sf::Vector2f (0,1) == selector.getPosition())
                         {
                             selector.setPosition(0,2);
                             currentMenu -> selectButton(0,2);
+                            currentMenu -> playTransitionEffect();
                             cout << "0,2" << endl;
                         }
                         else if(sf::Vector2f (0,2) == selector.getPosition())
                         {
                             selector.setPosition(0,0);
                             currentMenu -> selectButton(0,0);
+                            currentMenu -> playTransitionEffect();
                             cout << "0,0" << endl;
                         }
                     }
@@ -85,14 +92,20 @@ int main(int argc, char** argv)
                     {
                         if(sf::Vector2f (0,0) == selector.getPosition())
                         {
+                            currentMenu -> playSelectionEffect();
+                            Sleep(900);
                             currentMenu -> menuWindow.close();
                         }
                         if(sf::Vector2f (0,1) == selector.getPosition())
                         {
+                            currentMenu -> playSelectionEffect();
+                            Sleep(900);
                             currentMenu -> menuWindow.close();
                         }
                         if(sf::Vector2f (0,2) == selector.getPosition())
                         {
+                            currentMenu -> playSelectionEffect();
+                            Sleep(900);
                             currentMenu -> menuWindow.close();
                             return 0;
                         }

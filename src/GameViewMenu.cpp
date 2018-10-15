@@ -24,11 +24,27 @@ GameViewMenu::GameViewMenu() // Menu window constructor
     if (!exitBtnHImg.loadFromFile("assets/exitButtonH.png"))
         cout << "Could not load requested image." << endl;
 
-    if (!menuSound.loadFromFile("assets/Menu_Music.ogg"))
+    if (!Menu_Music.loadFromFile("assets/Menu_Music.ogg"))
+        cout << "Could not load request music." << endl;
+    if (!Menu_Transition.loadFromFile("assets/Menu_Transition.ogg"))
+        cout << "Could not load request music." << endl;
+    if (!Menu_Selection.loadFromFile("assets/Menu_Selection.ogg"))
         cout << "Could not load request music." << endl;
 
     //selector.setPosition(0,0);
     //cout << "0,0" << endl;
+
+    menuMusic.setBuffer(Menu_Music);
+
+    menuMusic.play();
+
+    menuMusic.setLoop(true);
+
+    menuTransition.setBuffer(Menu_Transition);
+
+    menuSelection.setBuffer(Menu_Selection);
+
+
     background.setSize(sf::Vector2f(1,1));
 
     background.setPosition(0,0);
@@ -50,75 +66,16 @@ GameViewMenu::GameViewMenu() // Menu window constructor
     exitBtnRec.setSize(sf::Vector2f(444,(117/2)));
     exitBtnRec.setTexture(&exitBtnImg);
 
-
-    menuMusic.setBuffer(menuSound);
-
-    menuMusic.play();
-
-    menuMusic.setLoop(true);
-
-
 }
 
-/*
-bool GameViewMenu::menuSelection()
+void GameViewMenu::playTransitionEffect()
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !buttonHeld) // End menu loop and set player count
-    {
-        if(sf::Vector2f (0,0) == selector.getPosition())
-        {
-            selector.setPosition(0,2);
-            cout << "0,2" << endl;
-        }
-        else if(sf::Vector2f (0,1) == selector.getPosition())
-        {
-            selector.setPosition(0,0);
-            cout << "0,0" << endl;
-        }
-        else if(sf::Vector2f (0,2) == selector.getPosition())
-        {
-            selector.setPosition(0,1);
-            cout << "0,1" << endl;
-        }
-
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !buttonHeld)
-    {
-        if(sf::Vector2f (0,0) == selector.getPosition())
-        {
-            selector.setPosition(0,1);
-            cout << "0,1" << endl;
-        }
-        else if(sf::Vector2f (0,1) == selector.getPosition())
-        {
-            selector.setPosition(0,2);
-            cout << "0,2" << endl;
-        }
-        else if(sf::Vector2f (0,2) == selector.getPosition())
-        {
-            selector.setPosition(0,0);
-            cout << "0,0" << endl;
-        }
-
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        if(sf::Vector2f (0,0) == selector.getPosition())
-        {
-
-        }
-        if(sf::Vector2f (0,1) == selector.getPosition())
-        {
-
-        }
-        if(sf::Vector2f (0,2) == selector.getPosition())
-        {
-
-        }
-    }
+    menuTransition.play();
 }
-
-*/
+void GameViewMenu::playSelectionEffect()
+{
+    menuSelection.play();
+}
 
 void GameViewMenu::updateMenu(void) // Updates screen
 {

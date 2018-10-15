@@ -26,8 +26,12 @@ private:
     sf::RectangleShape playBtnRec;
     sf::RectangleShape storyBtnRec;
     sf::RectangleShape exitBtnRec;
-    sf::SoundBuffer menuSound;
+    sf::SoundBuffer Menu_Music;
+    sf::SoundBuffer Menu_Transition;
+    sf::SoundBuffer Menu_Selection;
     sf::Sound menuMusic;
+    sf::Sound menuTransition;
+    sf::Sound menuSelection;
     sf::Text menuTitle;
     sf::Text menuPlay1;
     sf::Text menuPlay2;
@@ -56,7 +60,8 @@ private:
 public:
     sf::RenderWindow menuWindow;
     GameViewMenu();
-    bool menuSelection();
+    void playTransitionEffect(void);
+    void playSelectionEffect(void);
     void updateMenu(void);
     void selectButton(int, int);
 
