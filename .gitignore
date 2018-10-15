@@ -42,6 +42,7 @@ local.properties
 
 # CDT-specific (C/C++ Development Tooling)
 .cproject
+.project
 
 # CDT- autotools
 .autotools
