@@ -28,7 +28,8 @@ private:
     sf::RectangleShape playBtnRec;
     sf::RectangleShape storyBtnRec;
     sf::RectangleShape exitBtnRec;
-    sf::SoundBuffer Menu_Music;
+    //sf::SoundBuffer Menu_Music;
+    sf::SoundBuffer menuSound;
     sf::SoundBuffer Menu_Transition;
     sf::SoundBuffer Menu_Selection;
     sf::Sound menuMusic;
