@@ -19,3 +19,7 @@ class PlasmaPistol : public Gun
 };
 
 #endif // PLASMAPISTOL_H
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/master

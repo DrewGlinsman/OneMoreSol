@@ -15,9 +15,25 @@ class GameViewMenu
 private:
     sf::Font menuFont;
     sf::Texture menuImage;
+    sf::Texture playBtnImg;
+    sf::Texture playBtnHImg;
+    sf::Texture storyBtnImg;
+    sf::Texture storyBtnHImg;
+    sf::Texture exitBtnImg;
+    sf::Texture exitBtnHImg;
+    sf::Event Event;
+
     sf::RectangleShape background;
-    sf::SoundBuffer menuSound;
+    sf::RectangleShape selector;
+    sf::RectangleShape playBtnRec;
+    sf::RectangleShape storyBtnRec;
+    sf::RectangleShape exitBtnRec;
+    sf::SoundBuffer Menu_Music;
+    sf::SoundBuffer Menu_Transition;
+    sf::SoundBuffer Menu_Selection;
     sf::Sound menuMusic;
+    sf::Sound menuTransition;
+    sf::Sound menuSelection;
     sf::Text menuTitle;
     sf::Text menuPlay1;
     sf::Text menuPlay2;
@@ -46,8 +62,9 @@ private:
 public:
     sf::RenderWindow menuWindow;
     GameViewMenu();
-    bool menuSelection();
+    bool gameViewMenuIsOpen(void);
     void updateMenu(void);
+    void selectButton(int, int);
 
 
 };
