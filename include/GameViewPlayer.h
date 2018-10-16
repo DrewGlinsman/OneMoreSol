@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Gun.h"
+#include "MajorTom.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ public:
     sf::Sound gameMusic;
     sf::Event Event;
     float* currentPlayer;
+    MajorTom majorTom;
 
     GameViewPlayer();
     bool playerViewIsOpen();

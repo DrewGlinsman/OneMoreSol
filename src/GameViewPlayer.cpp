@@ -65,7 +65,7 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 {
 
     gameWindow.clear(sf::Color::Black);
-
+    majorTom.drawTom(gameWindow);
     gameWindow.draw(sky);
     gameWindow.draw(background);
 
