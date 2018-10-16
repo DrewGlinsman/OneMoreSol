@@ -16,17 +16,28 @@ private:
 
 public:
     sf::Font gameFont;
+    const int iconScale = 75;
 
     sf::RenderWindow gameWindow;
     sf::RectangleShape background;
     sf::CircleShape sky;
+
     sf::RectangleShape weapon1;
+    sf::RectangleShape weapon2;
+    sf::RectangleShape weapon3;
+    sf::RectangleShape weapon4;
+    sf::RectangleShape weapon5;
+    sf::RectangleShape weapon6;
+    sf::RectangleShape weapon7;
+
     sf::Texture gameImage;
     sf::Texture playerImage;
     sf::Texture gameSky;
     sf::Texture lockIcon;
+
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
+    sf::Text survivorCnt;
     sf::Event Event;
     float* currentPlayer;
     MajorTom majorTom;
