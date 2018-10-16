@@ -40,9 +40,9 @@ void KoratEmpire::setSpeed(float speed) {
 	this->speed = speed;
 }
 
-bool checkDeath()
+bool KoratEmpire::checkDeath()
 {
-    if (health <= 0)
+    if (this->health <= 0)
         return true;
     return false;
 }
