@@ -15,6 +15,7 @@ private:
 
 public:
     sf::Font gameFont;
+    const int iconScale = 75;
 
     sf::RenderWindow gameWindow;
     sf::RectangleShape background;
@@ -32,8 +33,10 @@ public:
     sf::Texture playerImage;
     sf::Texture gameSky;
     sf::Texture lockIcon;
+
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
+    sf::Text survivorCnt;
     sf::Event Event;
     float* currentPlayer;
 

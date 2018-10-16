@@ -6,7 +6,7 @@ using namespace std;
 GameViewPlayer::GameViewPlayer() // Player window constructor
     : gameWindow(sf::VideoMode(1440, 900, 32), "One More Sol",sf::Style::Titlebar | sf::Style::Close)
 {
-    if(!gameFont.loadFromFile("assets/Game_Font.ttf"))
+    if(!gameFont.loadFromFile("assets/impact.ttf"))
         cout << "Could not load requested font." << endl;
 
     if (!gameSound.loadFromFile("assets/Gamex_Music.ogg"))
@@ -31,21 +31,33 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     background.setSize(sf::Vector2f(1440,724));
     background.setTexture(&gameImage);
 
-    weapon1.setSize(sf::Vector2f(75,75));
-    weapon2.setSize(sf::Vector2f(335,335));
-    weapon3.setSize(sf::Vector2f(335,335));
-    weapon4.setSize(sf::Vector2f(335,335));
-    weapon5.setSize(sf::Vector2f(335,335));
-    weapon6.setSize(sf::Vector2f(335,335));
-    weapon7.setSize(sf::Vector2f(335,335));
-    weapon1.setPosition(295, 790);
-    /*weapon2
-    weapon3
-    weapon4
-    weapon5
-    weapon6
-    weapon7*/
+    weapon1.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon2.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon3.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon4.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon5.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon6.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon7.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon1.setPosition(295,790);
+    weapon2.setPosition(423,790);
+    weapon3.setPosition(551,790);
+    weapon4.setPosition(679,790);
+    weapon5.setPosition(807,790);
+    weapon6.setPosition(935,790);
+    weapon7.setPosition(1063,790);
     weapon1.setTexture(&lockIcon);
+    weapon2.setTexture(&lockIcon);
+    weapon3.setTexture(&lockIcon);
+    weapon4.setTexture(&lockIcon);
+    weapon5.setTexture(&lockIcon);
+    weapon6.setTexture(&lockIcon);
+    weapon7.setTexture(&lockIcon);
+
+    survivorCnt.setFont(gameFont);
+    survivorCnt.setCharacterSize(22);
+    survivorCnt.setString("20/20 Survivors");
+    survivorCnt.setFillColor(sf::Color(0,0,0,255));
+    survivorCnt.setPosition(75,860);
 
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
@@ -87,7 +99,15 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 
     gameWindow.draw(sky);
     gameWindow.draw(background);
+
+    gameWindow.draw(survivorCnt);
     gameWindow.draw(weapon1);
+    gameWindow.draw(weapon2);
+    gameWindow.draw(weapon3);
+    gameWindow.draw(weapon4);
+    gameWindow.draw(weapon5);
+    gameWindow.draw(weapon6);
+    gameWindow.draw(weapon7);
 
     gameWindow.display();
 }
