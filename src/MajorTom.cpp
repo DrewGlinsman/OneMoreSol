@@ -122,3 +122,10 @@ void MajorTom::setGun(Gun newGun)
     currentGun = newGun;
 }
 
+bool MajorTom::checkDeath()
+{
+    if (currentHealth <= 0)
+        return true;
+    return false;
+}
+

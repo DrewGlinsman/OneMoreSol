@@ -22,7 +22,7 @@ class MajorTom {
     public:
         sf::RectangleShape majorTom;
 
-        MajorTom ();
+        MajorTom();
 
         void drawTom(sf::RenderWindow& window);
 
@@ -41,6 +41,8 @@ class MajorTom {
         Gun getGun();
 
         void setGun(Gun newGun);
+
+        bool checkDeath();
 
 };
 
