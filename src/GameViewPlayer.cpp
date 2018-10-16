@@ -46,6 +46,14 @@ bool GameViewPlayer::playerViewIsOpen()
                     gameWindow.close(); // Quit game
                     return true;
                 }
+                if(Event.type == sf::Event::keyPressed)
+                {
+                    if(Event.key.code == sf::Keyboard::Escape)
+                    {
+                        gameWindow.close();
+                        return true;
+                    }
+                }
             }
     }
     return false;
