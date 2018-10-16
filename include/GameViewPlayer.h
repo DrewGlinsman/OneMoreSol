@@ -24,10 +24,11 @@ public:
     sf::Texture gameSky;
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
-
+    sf::Event Event;
     float* currentPlayer;
 
     GameViewPlayer();
+    bool playerViewIsOpen();
     void movePlayer(float timePassed);
     void moveEnemy(float timePassed);
     void updateGame(void);
