@@ -67,9 +67,12 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 
 bool GameViewPlayer::playerViewIsOpen()
 {
-    updateGame();
+    sf::Clock clock;
+    float delta;
+
     while(gameWindow.isOpen())
     {
+        updateGame();
          while(gameWindow.pollEvent(Event))
             {
                 if(Event.type == sf::Event::Closed)
@@ -77,12 +80,26 @@ bool GameViewPlayer::playerViewIsOpen()
                     gameWindow.close(); // Quit game
                     return true;
                 }
+
+                delta = clock.getElapsedTime().asSeconds();
+                clock.restart();
+
                 if(Event.type == sf::Event::KeyPressed)
                 {
                     if(Event.key.code == sf::Keyboard::Escape)
                     {
                         gameWindow.close();
                         return true;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Up)
+                    {
+                        majorTom.moveTomUp(delta);
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Down)
+                    {
+                        majorTom.moveTomDown(delta);
                     }
                 }
             }
@@ -104,10 +121,11 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 {
 
     gameWindow.clear(sf::Color::Black);
-    majorTom.drawTom(gameWindow);
+
     gameWindow.draw(sky);
     gameWindow.draw(background);
 
+    majorTom.drawTom(gameWindow);
     gameWindow.draw(survivorCnt);
     gameWindow.draw(weapon1);
     gameWindow.draw(weapon2);

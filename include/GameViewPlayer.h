@@ -35,6 +35,8 @@ public:
     sf::Texture gameSky;
     sf::Texture lockIcon;
 
+
+
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
     sf::Text survivorCnt;

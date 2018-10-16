@@ -9,7 +9,7 @@ MajorTom::MajorTom()
     majorTom.setSize(sf::Vector2f(50,100));
     //majorTom.setTexture()
     majorTom.setOrigin(majorTom.getSize().x / 2, majorTom.getSize().y / 2);
-    majorTom.setPosition(0,100);
+    majorTom.setPosition(156,508);
     currentHealth = 100;
     //currentGun = PlasmaPistol;
 
@@ -40,28 +40,28 @@ void MajorTom::moveTomUp(float timePassed)
     {
         while(majorTom.getPosition().y > 335)
         {
-            majorTom.move(0, timePassed * -400);
+            majorTom.move(0, timePassed * -5);
         }
     }
     else if (majorTom.getPosition().y > 507 && majorTom.getPosition().y < 509)
     {
         while(majorTom.getPosition().y > 422)
         {
-            majorTom.move(0, timePassed * -400);
+            majorTom.move(0, timePassed * -5);
         }
     }
     else if (majorTom.getPosition().y > 593 && majorTom.getPosition().y < 595)
     {
         while(majorTom.getPosition().y > 508)
         {
-            majorTom.move(0, timePassed * -400);
+            majorTom.move(0, timePassed * -5);
         }
     }
     else if (majorTom.getPosition().y > 679 && majorTom.getPosition().y < 681)
     {
         while(majorTom.getPosition().y > 594)
         {
-            majorTom.move(0, timePassed * -400);
+            majorTom.move(0, timePassed * -5);
         }
     }
 }
@@ -72,28 +72,28 @@ void MajorTom::moveTomDown(float timePassed)
     {
         while(majorTom.getPosition().y < 422)
         {
-            majorTom.move(0, timePassed * 400);
+            majorTom.move(0, timePassed * 5);
         }
     }
     else if (majorTom.getPosition().y > 421 && majorTom.getPosition().y < 423)
     {
         while(majorTom.getPosition().y < 508)
         {
-            majorTom.move(0, timePassed * 400);
+            majorTom.move(0, timePassed * 5);
         }
     }
     else if (majorTom.getPosition().y > 507 && majorTom.getPosition().y < 509)
     {
         while(majorTom.getPosition().y < 594)
         {
-            majorTom.move(0, timePassed * 400);
+            majorTom.move(0, timePassed * 5);
         }
     }
     else if (majorTom.getPosition().y > 593 && majorTom.getPosition().y < 595)
     {
         while(majorTom.getPosition().y < 680)
         {
-            majorTom.move(0, timePassed * 400);
+            majorTom.move(0, timePassed * 5);
         }
     }
     else if (majorTom.getPosition().y > 679 && majorTom.getPosition().y < 681)
