@@ -13,6 +13,7 @@
 Grunt::Grunt() {
 	// TODO Auto-generated constructor stub
 	setHealth(100);
+	setSpeed(100);
 }
 
 Grunt::~Grunt() {
@@ -26,4 +27,12 @@ Grunt::~Grunt() {
 void Grunt::wasShot()
 {
 	setHealth(getHealth()-1);
+}
+
+/**
+ * @brief Called to draw Grunt
+ */
+void Grunt::drawGrunt (sf::RenderWindow& window)
+{
+    window.draw(grunt);
 }
