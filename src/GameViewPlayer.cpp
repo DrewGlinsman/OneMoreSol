@@ -12,17 +12,51 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!gameSound.loadFromFile("assets/Gamex_Music.ogg"))
         cout << "Could not load request music." << endl;
 
-    if (!gameImage.loadFromFile("assets/Game_Screen.png"))
+    if (!gameImage.loadFromFile("assets/playField.png"))
         cout << "Could not load requested image." << endl;
 
-    background.setPosition(0,0);                    // Applies textures to ball, paddles and background
-    background.setSize(sf::Vector2f(1440,900));
+    if (!gameSky.loadFromFile("assets/skyBox.png"))
+        cout << "Failed to Load Skybox." << endl;
+
+    sky.setRadius(894);
+    sky.setOrigin(894,894);
+    sky.setPosition(720, 450);
+    sky.setTexture(&gameSky);
+
+    background.setOrigin(0,724);
+    background.setPosition(0,900);                    // Applies textures to ball, paddles and background
+    background.setSize(sf::Vector2f(1440,724));
     background.setTexture(&gameImage);
 
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
     gameMusic.setLoop(true);
 
+}
+
+bool GameViewPlayer::playerViewIsOpen()
+{
+    updateGame();
+    while(gameWindow.isOpen())
+    {
+         while(gameWindow.pollEvent(Event))
+            {
+                if(Event.type == sf::Event::Closed)
+                {
+                    gameWindow.close(); // Quit game
+                    return true;
+                }
+                if(Event.type == sf::Event::keyPressed)
+                {
+                    if(Event.key.code == sf::Keyboard::Escape)
+                    {
+                        gameWindow.close();
+                        return true;
+                    }
+                }
+            }
+    }
+    return false;
 }
 
 void GameViewPlayer::movePlayer(float timePassed)
@@ -39,7 +73,8 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 {
 
     gameWindow.clear(sf::Color::Black);
-
+    majorTom.drawTom(gameWindow);
+    gameWindow.draw(sky);
     gameWindow.draw(background);
 
     gameWindow.display();

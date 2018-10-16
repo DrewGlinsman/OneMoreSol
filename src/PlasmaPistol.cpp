@@ -6,7 +6,7 @@ PlasmaPistol::PlasmaPistol()
     fireRate = 0.5;
     clip = 10;
     damage = 5;
-    dmgMultiplier = "plasma";
+    dmgMultiplier = 2;
     reloadSpeed = 1.5;
     //TODO set the image to the PlasmaPistol sprite.
 }

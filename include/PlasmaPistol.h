@@ -2,7 +2,7 @@
 #define PLASMAPISTOL_H
 
 #include <Gun.h>
-
+#include <Bullet.h>
 
 class PlasmaPistol : public Gun
 {
@@ -15,6 +15,7 @@ class PlasmaPistol : public Gun
     protected:
 
     private:
+        Bullet bullet;
 
 };
 
