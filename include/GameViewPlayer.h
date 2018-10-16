@@ -19,9 +19,11 @@ public:
     sf::RenderWindow gameWindow;
     sf::RectangleShape background;
     sf::CircleShape sky;
+    sf::RectangleShape weapon1;
     sf::Texture gameImage;
     sf::Texture playerImage;
     sf::Texture gameSky;
+    sf::Texture lockIcon;
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
     sf::Event Event;
