@@ -24,7 +24,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     sky.setTexture(&gameSky);
 
     background.setOrigin(0,724);
-    background.setPosition(0,900);                    // Applies textures to ball, paddles and background
+    background.setPosition(0,900);
     background.setSize(sf::Vector2f(1440,724));
     background.setTexture(&gameImage);
 

@@ -32,34 +32,34 @@ void MajorTom::setTomPosition(float positionPassed)
 
 void MajorTom::moveTomUp(float timePassed)
 {
-    if (majorTom.getPosition().y == 100)
+    if (majorTom.getPosition().y > 330 && majorTom.getPosition().y < 340)
     {
         // Do not move up - top lane
     }
-    else if (majorTom.getPosition().y == 200)
+    else if (majorTom.getPosition().y > 417 && majorTom.getPosition().y < 427)
     {
-        while(majorTom.getPosition().y != 100)
+        while(majorTom.getPosition().y > 335)
         {
             majorTom.move(0, timePassed * -400);
         }
     }
-    else if (majorTom.getPosition().y == 300)
+    else if (majorTom.getPosition().y > 503 && majorTom.getPosition().y < 518)
     {
-        while(majorTom.getPosition().y != 200)
+        while(majorTom.getPosition().y > 422)
         {
             majorTom.move(0, timePassed * -400);
         }
     }
-    else if (majorTom.getPosition().y == 400)
+    else if (majorTom.getPosition().y > 589 && majorTom.getPosition().y < 594)
     {
-        while(majorTom.getPosition().y != 300)
+        while(majorTom.getPosition().y > 508)
         {
             majorTom.move(0, timePassed * -400);
         }
     }
-    else if (majorTom.getPosition().y == 500)
+    else if (majorTom.getPosition().y > 675 && majorTom.getPosition().y < 685)
     {
-        while(majorTom.getPosition().y != 400)
+        while(majorTom.getPosition().y > 594)
         {
             majorTom.move(0, timePassed * -400);
         }
@@ -68,35 +68,35 @@ void MajorTom::moveTomUp(float timePassed)
 
 void MajorTom::moveTomDown(float timePassed)
 {
-    if (majorTom.getPosition().y == 100)
+    if (majorTom.getPosition().y > 330 && majorTom.getPosition().y < 340)
     {
-        while(majorTom.getPosition().y != 200)
+        while(majorTom.getPosition().y < 422)
         {
             majorTom.move(0, timePassed * 400);
         }
     }
-    else if (majorTom.getPosition().y == 200)
+    else if (majorTom.getPosition().y > 417 && majorTom.getPosition().y < 427)
     {
-        while(majorTom.getPosition().y != 300)
+        while(majorTom.getPosition().y < 508)
         {
             majorTom.move(0, timePassed * 400);
         }
     }
-    else if (majorTom.getPosition().y == 300)
+    else if (majorTom.getPosition().y > 503 && majorTom.getPosition().y < 518)
     {
-        while(majorTom.getPosition().y != 400)
+        while(majorTom.getPosition().y < 594)
         {
             majorTom.move(0, timePassed * 400);
         }
     }
-    else if (majorTom.getPosition().y == 400)
+    else if (majorTom.getPosition().y > 589 && majorTom.getPosition().y < 594)
     {
-        while(majorTom.getPosition().y != 500)
+        while(majorTom.getPosition().y < 680)
         {
             majorTom.move(0, timePassed * 400);
         }
     }
-    else if (majorTom.getPosition().y == 500)
+    else if (majorTom.getPosition().y > 675 && majorTom.getPosition().y < 685)
     {
         // Do not move down - bottom lane
     }
