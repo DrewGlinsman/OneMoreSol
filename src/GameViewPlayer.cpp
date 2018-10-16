@@ -12,7 +12,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!gameSound.loadFromFile("assets/Gamex_Music.ogg"))
         cout << "Could not load request music." << endl;
 
-    if (!gameImage.loadFromFile("assets/Game_Screen.png"))
+    if (!gameImage.loadFromFile("assets/playField.png"))
         cout << "Could not load requested image." << endl;
 
     background.setPosition(0,0);                    // Applies textures to ball, paddles and background
