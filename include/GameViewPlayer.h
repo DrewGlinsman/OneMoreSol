@@ -18,8 +18,10 @@ public:
 
     sf::RenderWindow gameWindow;
     sf::RectangleShape background;
+    sf::CircleShape sky;
     sf::Texture gameImage;
     sf::Texture playerImage;
+    sf::Texture gameSky;
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
 
