@@ -77,7 +77,7 @@ bool GameViewPlayer::playerViewIsOpen()
                     gameWindow.close(); // Quit game
                     return true;
                 }
-                if(Event.type == sf::Event::keyPressed)
+                if(Event.type == sf::Event::KeyPressed)
                 {
                     if(Event.key.code == sf::Keyboard::Escape)
                     {
