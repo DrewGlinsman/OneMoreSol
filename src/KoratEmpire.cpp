@@ -39,3 +39,10 @@ float KoratEmpire::getSpeed() const {
 void KoratEmpire::setSpeed(float speed) {
 	this->speed = speed;
 }
+
+bool KoratEmpire::checkDeath()
+{
+    if (this->health <= 0)
+        return true;
+    return false;
+}

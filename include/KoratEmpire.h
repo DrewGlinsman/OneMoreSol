@@ -25,6 +25,8 @@ public:
 	float getSpeed() const;
 	void setSpeed(float speed);
 
+	bool checkDeath();
+
 private:
 	unsigned int health;
 	float speed;
