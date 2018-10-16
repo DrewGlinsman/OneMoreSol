@@ -53,6 +53,23 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 
 }
 
+bool GameViewPlayer::playerViewIsOpen()
+{
+    updateGame();
+    while(gameWindow.isOpen())
+    {
+         while(gameWindow.pollEvent(Event))
+            {
+                if(Event.type == sf::Event::Closed)
+                {
+                    gameWindow.close(); // Quit game
+                    return true;
+                }
+            }
+    }
+    return false;
+}
+
 void GameViewPlayer::movePlayer(float timePassed)
 {
 

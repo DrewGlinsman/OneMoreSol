@@ -37,22 +37,16 @@ int main(int argc, char** argv)
 
         float delta; // Time between game loops
 
-        currentGame -> updateGame();
+        quit = currentGame -> playerViewIsOpen();
 
-        while(currentGame -> gameWindow.isOpen()) // Game loop
+        if (quit == true)
         {
-            while(currentGame -> gameWindow.pollEvent(Event))
-            {
-                if(Event.type == sf::Event::Closed)
-                {
-                    currentGame -> gameWindow.close(); // Quit game
-                    return 0;
-                }
-            }
-
-            delta = clock.getElapsedTime().asSeconds(); // Gets clock time between loops
-
-            clock.restart();  // Resets game clock between loops
+            return 0;
         }
+
+        delta = clock.getElapsedTime().asSeconds(); // Gets clock time between loops
+
+        clock.restart();  // Resets game clock between loops
+
     }
 }
