@@ -19,7 +19,15 @@ public:
     sf::RenderWindow gameWindow;
     sf::RectangleShape background;
     sf::CircleShape sky;
+
     sf::RectangleShape weapon1;
+    sf::RectangleShape weapon2;
+    sf::RectangleShape weapon3;
+    sf::RectangleShape weapon4;
+    sf::RectangleShape weapon5;
+    sf::RectangleShape weapon6;
+    sf::RectangleShape weapon7;
+
     sf::Texture gameImage;
     sf::Texture playerImage;
     sf::Texture gameSky;

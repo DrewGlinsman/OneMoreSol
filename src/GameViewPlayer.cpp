@@ -18,6 +18,9 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!gameSky.loadFromFile("assets/skyBox.png"))
         cout << "Failed to Load Skybox." << endl;
 
+    if (!lockIcon.loadFromFile("assets/lockIcon.png"))
+        cout << "Failed to Load Lock Icon." << endl;
+
     sky.setRadius(894);
     sky.setOrigin(894,894);
     sky.setPosition(720, 450);
@@ -27,6 +30,22 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     background.setPosition(0,900);                    // Applies textures to ball, paddles and background
     background.setSize(sf::Vector2f(1440,724));
     background.setTexture(&gameImage);
+
+    weapon1.setSize(sf::Vector2f(75,75));
+    weapon2.setSize(sf::Vector2f(335,335));
+    weapon3.setSize(sf::Vector2f(335,335));
+    weapon4.setSize(sf::Vector2f(335,335));
+    weapon5.setSize(sf::Vector2f(335,335));
+    weapon6.setSize(sf::Vector2f(335,335));
+    weapon7.setSize(sf::Vector2f(335,335));
+    weapon1.setPosition(295, 790);
+    /*weapon2
+    weapon3
+    weapon4
+    weapon5
+    weapon6
+    weapon7*/
+    weapon1.setTexture(&lockIcon);
 
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
@@ -51,6 +70,7 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 
     gameWindow.draw(sky);
     gameWindow.draw(background);
+    gameWindow.draw(weapon1);
 
     gameWindow.display();
 }
