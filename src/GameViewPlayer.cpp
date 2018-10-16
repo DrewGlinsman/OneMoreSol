@@ -15,8 +15,9 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!gameImage.loadFromFile("assets/playField.png"))
         cout << "Could not load requested image." << endl;
 
-    background.setPosition(0,0);                    // Applies textures to ball, paddles and background
-    background.setSize(sf::Vector2f(1440,900));
+    background.setOrigin(0,724);
+    background.setPosition(0,900);                    // Applies textures to ball, paddles and background
+    background.setSize(sf::Vector2f(1440,724));
     background.setTexture(&gameImage);
 
     gameMusic.setBuffer(gameSound);
