@@ -36,9 +36,12 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 
 bool GameViewPlayer::playerViewIsOpen()
 {
+    sf::Clock clock; // Game loop clock
+    float delta; // Time between game loops
     updateGame();
     while(gameWindow.isOpen())
     {
+        delta = clock.getElapsedTime().asSeconds(); // Gets clock time between loops
          while(gameWindow.pollEvent(Event))
             {
                 if(Event.type == sf::Event::Closed)
@@ -46,15 +49,24 @@ bool GameViewPlayer::playerViewIsOpen()
                     gameWindow.close(); // Quit game
                     return true;
                 }
-                if(Event.type == sf::Event::keyPressed)
+                if(Event.type == sf::Event::KeyPressed)
                 {
                     if(Event.key.code == sf::Keyboard::Escape)
                     {
                         gameWindow.close();
                         return true;
                     }
+                    if(Event.key.code == sf::Keyboard::Up)
+                    {
+                        majorTom.moveTomUp(delta);
+                    }
+                    if(Event.key.code == sf::Keyboard::Down)
+                    {
+                        majorTom.moveTomDown(delta);
+                    }
                 }
             }
+        clock.restart();  // Resets game clock between loops
     }
     return false;
 }
