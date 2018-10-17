@@ -10,11 +10,11 @@
 /**
  * @brief Grunts spawn with 100 health.
  */
-Grunt::Grunt() {
+Grunt::Grunt(float startLane) {
 	// TODO Auto-generated constructor stub
 	grunt.setSize(sf::Vector2f(25,50));
 	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
-	grunt.setPosition(1500,508);
+	grunt.setPosition(1500,startLane);
 	setHealth(100);
 	setSpeed(100);
 }

@@ -15,7 +15,7 @@ class Grunt: public KoratEmpire {
 public:
 	sf::RectangleShape grunt;
 
-	Grunt();
+	Grunt(float startLane);
 	virtual ~Grunt();
 
 	void wasShot();

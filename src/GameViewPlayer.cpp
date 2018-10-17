@@ -60,9 +60,16 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
+    grunt1 = new Grunt(lane1);
+    grunt2 = new Grunt(lane2);
+    grunt3 = new Grunt(lane3);
+    grunt4 = new Grunt(lane4);
+    grunt5 = new Grunt(lane5);
+
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
     gameMusic.setLoop(true);
+
 
 }
 
@@ -70,6 +77,7 @@ bool GameViewPlayer::playerViewIsOpen()
 {
     sf::Clock clock;
     float delta;
+
     bool keepMovingUp = false;
     bool keepMovingDown = false;
     bool lockOutKeyboard = false;
@@ -82,7 +90,11 @@ bool GameViewPlayer::playerViewIsOpen()
         delta = clock.getElapsedTime().asSeconds();
         clock.restart();
 
-        grunt.moveGrunt(delta);
+        grunt1 -> moveGrunt(delta);
+        grunt2 -> moveGrunt(delta);
+        grunt3 -> moveGrunt(delta);
+        grunt4 -> moveGrunt(delta);
+        grunt5 -> moveGrunt(delta);
 
         if(keepMovingUp == true)
         {
@@ -167,7 +179,11 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
     gameWindow.draw(sky);
     gameWindow.draw(background);
     majorTom.drawTom(gameWindow);
-    grunt.drawGrunt(gameWindow);
+    grunt1 -> drawGrunt(gameWindow);
+    grunt2 -> drawGrunt(gameWindow);
+    grunt3 -> drawGrunt(gameWindow);
+    grunt4 -> drawGrunt(gameWindow);
+    grunt5 -> drawGrunt(gameWindow);
     gameWindow.draw(survivorCnt);
     gameWindow.draw(weapon1);
     gameWindow.draw(weapon2);

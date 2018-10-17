@@ -37,6 +37,12 @@ public:
     sf::Texture gameSky;
     sf::Texture lockIcon;
 
+    float lane1 = 335;
+    float lane2 = 422;
+    float lane3 = 508;
+    float lane4 = 594;
+    float lane5 = 680;
+
 
 
     sf::SoundBuffer gameSound;
@@ -44,8 +50,13 @@ public:
     sf::Text survivorCnt;
     sf::Event Event;
     float* currentPlayer;
+
     MajorTom majorTom;
-    Grunt grunt;
+    Grunt* grunt1;
+    Grunt* grunt2;
+    Grunt* grunt3;
+    Grunt* grunt4;
+    Grunt* grunt5;
 
     GameViewPlayer();
     bool playerViewIsOpen();
