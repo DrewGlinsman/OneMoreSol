@@ -105,53 +105,53 @@ bool MajorTom::keepMoving(float timePassed, string direction)
     {
         if (majorTom.getPosition().y < 422 && majorTom.getPosition().y > 335)
         {
-            if(majorTom.getPosition().y > 335 && majorTom.getPosition().y < 336)
+            if(majorTom.getPosition().y > 335 && majorTom.getPosition().y < 341)
             {
                 setTomPosition(335);
                 return false;
             }
             else
             {
-                majorTom.move(timePassed * 50, timePassed * -100);
+                majorTom.move(timePassed * 250, timePassed * -500);
                 return true;
             }
         }
         else if (majorTom.getPosition().y < 508 && majorTom.getPosition().y > 422)
         {
-            if(majorTom.getPosition().y > 422 && majorTom.getPosition().y < 423)
+            if(majorTom.getPosition().y > 422 && majorTom.getPosition().y < 428)
             {
                 setTomPosition(422);
                 return false;
             }
             else
             {
-                majorTom.move(timePassed * 50, timePassed * -100);
+                majorTom.move(timePassed * 250, timePassed * -500);
                 return true;
             }
         }
         else if (majorTom.getPosition().y < 594 && majorTom.getPosition().y > 508)
         {
-            if(majorTom.getPosition().y > 508 && majorTom.getPosition().y < 509)
+            if(majorTom.getPosition().y > 508 && majorTom.getPosition().y < 514)
             {
                 setTomPosition(508);
                 return false;
             }
             else
             {
-                majorTom.move(timePassed * 50, timePassed * -100);
+                majorTom.move(timePassed * 250, timePassed * -500);
                 return true;
             }
         }
         else if (majorTom.getPosition().y < 680 && majorTom.getPosition().y > 594)
         {
-            if(majorTom.getPosition().y > 594 && majorTom.getPosition().y < 595)
+            if(majorTom.getPosition().y > 594 && majorTom.getPosition().y < 600)
             {
                 setTomPosition(594);
                 return false;
             }
             else
             {
-                majorTom.move(timePassed * 50, timePassed * -100);
+                majorTom.move(timePassed * 250, timePassed * -500);
                 return true;
             }
         }
@@ -161,53 +161,53 @@ bool MajorTom::keepMoving(float timePassed, string direction)
         if (majorTom.getPosition().y < 422 && majorTom.getPosition().y > 335)
         {
 
-            if(majorTom.getPosition().y < 422 && majorTom.getPosition().y > 421)
+            if(majorTom.getPosition().y < 422 && majorTom.getPosition().y > 416)
             {
                 setTomPosition(422);
                 return false;
             }
             else
             {
-                majorTom.move(timePassed * -50, timePassed * 100);
+                majorTom.move(timePassed * -250, timePassed * 500);
                 return true;
             }
         }
         else if (majorTom.getPosition().y < 508 && majorTom.getPosition().y > 422)
         {
-            if(majorTom.getPosition().y < 508 && majorTom.getPosition().y > 507)
+            if(majorTom.getPosition().y < 508 && majorTom.getPosition().y > 502)
             {
                 setTomPosition(508);
                 return false;
             }
             else
             {
-                majorTom.move(timePassed * -50, timePassed * 100);
+                majorTom.move(timePassed * -250, timePassed * 500);
                 return true;
             }
         }
         else if (majorTom.getPosition().y < 594 && majorTom.getPosition().y > 508)
         {
-            if(majorTom.getPosition().y < 594 && majorTom.getPosition().y > 593)
+            if(majorTom.getPosition().y < 594 && majorTom.getPosition().y > 588)
             {
                 setTomPosition(594);
                 return false;
             }
             else
             {
-                majorTom.move(timePassed * -50, timePassed * 100);
+                majorTom.move(timePassed * -250, timePassed * 500);
                 return true;
             }
         }
         else if (majorTom.getPosition().y < 680 && majorTom.getPosition().y > 594)
         {
-            if(majorTom.getPosition().y < 680 && majorTom.getPosition().y > 679)
+            if(majorTom.getPosition().y < 680 && majorTom.getPosition().y > 673)
             {
                 setTomPosition(680);
                 return false;
             }
             else
             {
-                majorTom.move(timePassed * -50, timePassed * 100);
+                majorTom.move(timePassed * -250, timePassed * 500);
                 return true;
             }
         }
