@@ -28,7 +28,9 @@ class MajorTom {
 
         float getTomPosition();
 
-        void setTomPosition(float newPosition);
+        void setTomPositionX(float positionPassed);
+
+        void setTomPositionY(float positionPassed);
 
         bool initMove(float timePassed, string direction);
 
