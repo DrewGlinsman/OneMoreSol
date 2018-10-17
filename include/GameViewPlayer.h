@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include "Gun.h"
 #include "MajorTom.h"
+#include "GameLogic.h"
 
 using namespace std;
 

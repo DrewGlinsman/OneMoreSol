@@ -31,7 +31,8 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     background.setSize(sf::Vector2f(1440,724));
     background.setTexture(&gameImage);
 
-    weapon1.setSize(sf::Vector2f(iconScale,iconScale));
+
+/*    weapon1.setSize(sf::Vector2f(iconScale,iconScale));
     weapon2.setSize(sf::Vector2f(iconScale,iconScale));
     weapon3.setSize(sf::Vector2f(iconScale,iconScale));
     weapon4.setSize(sf::Vector2f(iconScale,iconScale));
@@ -58,7 +59,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setString("20/20 Survivors");
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
-
+*/
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
     gameMusic.setLoop(true);
@@ -69,10 +70,33 @@ bool GameViewPlayer::playerViewIsOpen()
 {
     sf::Clock clock;
     float delta;
+    bool keepMovingUp = false;
+    bool keepMovingDown = false;
+    bool lockOutKeyboard = false;
 
     while(gameWindow.isOpen())
     {
         updateGame();
+
+        delta = clock.getElapsedTime().asSeconds();
+        clock.restart();
+
+        if(keepMovingUp == true)
+        {
+            keepMovingUp = majorTom.keepMoving(delta, "Up");
+            lockOutKeyboard = true;
+        }
+        else if(keepMovingDown == true)
+        {
+            keepMovingDown = majorTom.keepMoving(delta, "Down");
+            lockOutKeyboard = true;
+        }
+        else
+            lockOutKeyboard = false;
+
+        cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
+        cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
+
          while(gameWindow.pollEvent(Event))
             {
                 if(Event.type == sf::Event::Closed)
@@ -80,9 +104,6 @@ bool GameViewPlayer::playerViewIsOpen()
                     gameWindow.close(); // Quit game
                     return true;
                 }
-
-                delta = clock.getElapsedTime().asSeconds();
-                clock.restart();
 
                 if(Event.type == sf::Event::KeyPressed)
                 {
@@ -94,22 +115,30 @@ bool GameViewPlayer::playerViewIsOpen()
 
                     if(Event.key.code == sf::Keyboard::Up)
                     {
-                        majorTom.moveTomUp(delta);
+                        //majorTom.moveTomUp(delta);
+                        if(lockOutKeyboard == false)
+                        keepMovingUp = majorTom.initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::Down)
                     {
-                        majorTom.moveTomDown(delta);
+                        //majorTom.moveTomDown(delta);
+                        if(lockOutKeyboard == false)
+                        keepMovingDown = majorTom.initMove(delta, "Down");
                     }
 
                     if(Event.key.code == sf::Keyboard::W)
                     {
-                        majorTom.moveTomUp(delta);
+                        //majorTom.moveTomUp(delta);
+                        if(lockOutKeyboard == false)
+                        keepMovingUp = majorTom.initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::S)
                     {
-                        majorTom.moveTomDown(delta);
+                        //majorTom.moveTomDown(delta);
+                        if(lockOutKeyboard == false)
+                        keepMovingDown = majorTom.initMove(delta, "Down");
                     }
                 }
             }

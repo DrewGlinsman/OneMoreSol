@@ -30,6 +30,10 @@ class MajorTom {
 
         void setTomPosition(float newPosition);
 
+        bool initMove(float timePassed, string direction);
+
+        bool keepMoving(float timePassed, string direction);
+
         void moveTomUp(float timePassed);
 
         void moveTomDown(float timePassed);

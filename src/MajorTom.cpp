@@ -30,6 +30,190 @@ void MajorTom::setTomPosition(float positionPassed)
     majorTom.setPosition(majorTom.getPosition().x, positionPassed);
 }
 
+bool MajorTom::initMove(float timePassed, string direction)
+{
+    if(direction == "Up")
+    {
+        if(majorTom.getPosition().y == 335)
+        {
+            //At Top
+            return false;
+        }
+        else if(majorTom.getPosition().y == 422)
+        {
+            setTomPosition(421);
+            return keepMoving(timePassed, direction);
+        }
+        else if(majorTom.getPosition().y == 508)
+        {
+            setTomPosition(507);
+            return keepMoving(timePassed, direction);
+        }
+        else if(majorTom.getPosition().y == 594)
+        {
+            setTomPosition(593);
+            return keepMoving(timePassed, direction);
+        }
+        else if(majorTom.getPosition().y == 680)
+        {
+            setTomPosition(679);
+            return keepMoving(timePassed, direction);
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else if(direction == "Down")
+    {
+        if(majorTom.getPosition().y == 335)
+        {
+            setTomPosition(336);
+            return keepMoving(timePassed, direction);
+        }
+        else if(majorTom.getPosition().y == 422)
+        {
+            setTomPosition(423);
+            return keepMoving(timePassed, direction);
+        }
+        else if(majorTom.getPosition().y == 508)
+        {
+            setTomPosition(509);
+            return keepMoving(timePassed, direction);
+        }
+        else if(majorTom.getPosition().y == 594)
+        {
+            setTomPosition(595);
+            return keepMoving(timePassed, direction);
+        }
+        else if(majorTom.getPosition().y == 680)
+        {
+            //At Bottom
+            return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else return false;
+}
+
+bool MajorTom::keepMoving(float timePassed, string direction)
+{
+    if(direction == "Up")
+    {
+        if (majorTom.getPosition().y < 422 && majorTom.getPosition().y > 335)
+        {
+            if(majorTom.getPosition().y > 335 && majorTom.getPosition().y < 341)
+            {
+                setTomPosition(335);
+                return false;
+            }
+            else
+            {
+                majorTom.move(timePassed * 250, timePassed * -500);
+                return true;
+            }
+        }
+        else if (majorTom.getPosition().y < 508 && majorTom.getPosition().y > 422)
+        {
+            if(majorTom.getPosition().y > 422 && majorTom.getPosition().y < 428)
+            {
+                setTomPosition(422);
+                return false;
+            }
+            else
+            {
+                majorTom.move(timePassed * 250, timePassed * -500);
+                return true;
+            }
+        }
+        else if (majorTom.getPosition().y < 594 && majorTom.getPosition().y > 508)
+        {
+            if(majorTom.getPosition().y > 508 && majorTom.getPosition().y < 514)
+            {
+                setTomPosition(508);
+                return false;
+            }
+            else
+            {
+                majorTom.move(timePassed * 250, timePassed * -500);
+                return true;
+            }
+        }
+        else if (majorTom.getPosition().y < 680 && majorTom.getPosition().y > 594)
+        {
+            if(majorTom.getPosition().y > 594 && majorTom.getPosition().y < 600)
+            {
+                setTomPosition(594);
+                return false;
+            }
+            else
+            {
+                majorTom.move(timePassed * 250, timePassed * -500);
+                return true;
+            }
+        }
+    }
+    else if(direction == "Down")
+    {
+        if (majorTom.getPosition().y < 422 && majorTom.getPosition().y > 335)
+        {
+
+            if(majorTom.getPosition().y < 422 && majorTom.getPosition().y > 416)
+            {
+                setTomPosition(422);
+                return false;
+            }
+            else
+            {
+                majorTom.move(timePassed * -250, timePassed * 500);
+                return true;
+            }
+        }
+        else if (majorTom.getPosition().y < 508 && majorTom.getPosition().y > 422)
+        {
+            if(majorTom.getPosition().y < 508 && majorTom.getPosition().y > 502)
+            {
+                setTomPosition(508);
+                return false;
+            }
+            else
+            {
+                majorTom.move(timePassed * -250, timePassed * 500);
+                return true;
+            }
+        }
+        else if (majorTom.getPosition().y < 594 && majorTom.getPosition().y > 508)
+        {
+            if(majorTom.getPosition().y < 594 && majorTom.getPosition().y > 588)
+            {
+                setTomPosition(594);
+                return false;
+            }
+            else
+            {
+                majorTom.move(timePassed * -250, timePassed * 500);
+                return true;
+            }
+        }
+        else if (majorTom.getPosition().y < 680 && majorTom.getPosition().y > 594)
+        {
+            if(majorTom.getPosition().y < 680 && majorTom.getPosition().y > 673)
+            {
+                setTomPosition(680);
+                return false;
+            }
+            else
+            {
+                majorTom.move(timePassed * -250, timePassed * 500);
+                return true;
+            }
+        }
+    }
+}
+
 void MajorTom::moveTomUp(float timePassed)
 {
     if (majorTom.getPosition().y > 334 && majorTom.getPosition().y < 346)
@@ -137,7 +321,7 @@ bool MajorTom::checkDeath()
         return true;
     return false;
 }
-/*
+
 void MajorTom::updateGame(sf::RenderWindow& gameWindow) // Draws all elements of screen
 {
 
@@ -157,4 +341,4 @@ void MajorTom::updateGame(sf::RenderWindow& gameWindow) // Draws all elements of
 
     gameWindow.display();
 }
-*/
+
