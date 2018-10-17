@@ -112,7 +112,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             }
             else
             {
-                majorTom.move(timePassed * 5, timePassed * -100);
+                majorTom.move(timePassed * 50, timePassed * -100);
                 return true;
             }
         }
@@ -125,7 +125,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             }
             else
             {
-                majorTom.move(timePassed * 5, timePassed * -100);
+                majorTom.move(timePassed * 50, timePassed * -100);
                 return true;
             }
         }
@@ -138,7 +138,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             }
             else
             {
-                majorTom.move(timePassed * 5, timePassed * -100);
+                majorTom.move(timePassed * 50, timePassed * -100);
                 return true;
             }
         }
@@ -151,7 +151,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             }
             else
             {
-                majorTom.move(timePassed * 5, timePassed * -100);
+                majorTom.move(timePassed * 50, timePassed * -100);
                 return true;
             }
         }
@@ -168,7 +168,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             }
             else
             {
-                majorTom.move(timePassed * -5, timePassed * 100);
+                majorTom.move(timePassed * -50, timePassed * 100);
                 return true;
             }
         }
@@ -181,7 +181,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             }
             else
             {
-                majorTom.move(timePassed * -5, timePassed * 100);
+                majorTom.move(timePassed * -50, timePassed * 100);
                 return true;
             }
         }
@@ -194,7 +194,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             }
             else
             {
-                majorTom.move(timePassed * -5, timePassed * 100);
+                majorTom.move(timePassed * -50, timePassed * 100);
                 return true;
             }
         }
@@ -207,7 +207,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             }
             else
             {
-                majorTom.move(timePassed * -5, timePassed * 100);
+                majorTom.move(timePassed * -50, timePassed * 100);
                 return true;
             }
         }
