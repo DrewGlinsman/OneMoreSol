@@ -322,23 +322,3 @@ bool MajorTom::checkDeath()
     return false;
 }
 
-void MajorTom::updateGame(sf::RenderWindow& gameWindow) // Draws all elements of screen
-{
-
-    gameWindow.clear(sf::Color::Black);
-
-    gameWindow.draw(sky);
-    gameWindow.draw(background);
-    majorTom.drawTom(gameWindow);
-    gameWindow.draw(survivorCnt);
-    gameWindow.draw(weapon1);
-    gameWindow.draw(weapon2);
-    gameWindow.draw(weapon3);
-    gameWindow.draw(weapon4);
-    gameWindow.draw(weapon5);
-    gameWindow.draw(weapon6);
-    gameWindow.draw(weapon7);
-
-    gameWindow.display();
-}
-
