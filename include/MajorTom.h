@@ -44,6 +44,8 @@ class MajorTom {
 
         bool checkDeath();
 
+        void updateGame(sf::RenderWindow& gameWindow);
+
 };
 
 #endif

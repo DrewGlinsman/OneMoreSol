@@ -101,6 +101,16 @@ bool GameViewPlayer::playerViewIsOpen()
                     {
                         majorTom.moveTomDown(delta);
                     }
+
+                    if(Event.key.code == sf::Keyboard::W)
+                    {
+                        majorTom.moveTomUp(delta);
+                    }
+
+                    if(Event.key.code == sf::Keyboard::S)
+                    {
+                        majorTom.moveTomDown(delta);
+                    }
                 }
             }
     }
@@ -124,7 +134,6 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 
     gameWindow.draw(sky);
     gameWindow.draw(background);
-
     majorTom.drawTom(gameWindow);
     gameWindow.draw(survivorCnt);
     gameWindow.draw(weapon1);

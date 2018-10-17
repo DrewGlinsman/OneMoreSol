@@ -40,29 +40,33 @@ void MajorTom::moveTomUp(float timePassed)
     {
         while(majorTom.getPosition().y > 335)
         {
-            majorTom.move(0, timePassed * -5);
+            majorTom.move(timePassed * .05, timePassed * -.1);
         }
+        setTomPosition(335);
     }
     else if (majorTom.getPosition().y > 507 && majorTom.getPosition().y < 509)
     {
         while(majorTom.getPosition().y > 422)
         {
-            majorTom.move(0, timePassed * -5);
+            majorTom.move(timePassed * .05, timePassed * -.1);
         }
+        setTomPosition(422);
     }
     else if (majorTom.getPosition().y > 593 && majorTom.getPosition().y < 595)
     {
         while(majorTom.getPosition().y > 508)
         {
-            majorTom.move(0, timePassed * -5);
+            majorTom.move(timePassed * .05, timePassed * -.1);
         }
+        setTomPosition(508);
     }
     else if (majorTom.getPosition().y > 679 && majorTom.getPosition().y < 681)
     {
         while(majorTom.getPosition().y > 594)
         {
-            majorTom.move(0, timePassed * -5);
+            majorTom.move(timePassed * .05, timePassed * -.1);
         }
+        setTomPosition(594);
     }
 }
 
@@ -72,35 +76,40 @@ void MajorTom::moveTomDown(float timePassed)
     {
         while(majorTom.getPosition().y < 422)
         {
-            majorTom.move(0, timePassed * 5);
+            majorTom.move(timePassed * -.05, timePassed * .1);
         }
+        setTomPosition(422);
     }
     else if (majorTom.getPosition().y > 421 && majorTom.getPosition().y < 423)
     {
         while(majorTom.getPosition().y < 508)
         {
-            majorTom.move(0, timePassed * 5);
+            majorTom.move(timePassed * -.05, timePassed * .1);
         }
+        setTomPosition(508);
     }
     else if (majorTom.getPosition().y > 507 && majorTom.getPosition().y < 509)
     {
         while(majorTom.getPosition().y < 594)
         {
-            majorTom.move(0, timePassed * 5);
+            majorTom.move(timePassed * -.05, timePassed * .1);
         }
+        setTomPosition(594);
     }
     else if (majorTom.getPosition().y > 593 && majorTom.getPosition().y < 595)
     {
         while(majorTom.getPosition().y < 680)
         {
-            majorTom.move(0, timePassed * 5);
+            majorTom.move(timePassed * -.05, timePassed * .1);
         }
+        setTomPosition(680);
     }
     else if (majorTom.getPosition().y > 679 && majorTom.getPosition().y < 681)
     {
         // Do not move down - bottom lane
     }
 }
+
 
 int MajorTom::getHealth()
 {
@@ -128,4 +137,24 @@ bool MajorTom::checkDeath()
         return true;
     return false;
 }
+/*
+void MajorTom::updateGame(sf::RenderWindow& gameWindow) // Draws all elements of screen
+{
 
+    gameWindow.clear(sf::Color::Black);
+
+    gameWindow.draw(sky);
+    gameWindow.draw(background);
+    majorTom.drawTom(gameWindow);
+    gameWindow.draw(survivorCnt);
+    gameWindow.draw(weapon1);
+    gameWindow.draw(weapon2);
+    gameWindow.draw(weapon3);
+    gameWindow.draw(weapon4);
+    gameWindow.draw(weapon5);
+    gameWindow.draw(weapon6);
+    gameWindow.draw(weapon7);
+
+    gameWindow.display();
+}
+*/
