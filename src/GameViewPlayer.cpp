@@ -70,8 +70,8 @@ bool GameViewPlayer::playerViewIsOpen()
 {
     sf::Clock clock;
     float delta;
-    bool keepMovingUp;
-    bool keepMovingDown;
+    bool keepMovingUp = false;
+    bool keepMovingDown = false;
 
     while(gameWindow.isOpen())
     {
