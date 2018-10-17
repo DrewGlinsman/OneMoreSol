@@ -59,6 +59,10 @@ bool MajorTom::initMove(float timePassed, string direction)
             setTomPosition(679);
             return keepMoving(timePassed, direction);
         }
+        else
+        {
+            false;
+        }
     }
     else if(direction == "Down")
     {
@@ -85,6 +89,10 @@ bool MajorTom::initMove(float timePassed, string direction)
         else if(majorTom.getPosition().y == 680)
         {
             //At Bottom
+            return false;
+        }
+        else
+        {
             return false;
         }
     }

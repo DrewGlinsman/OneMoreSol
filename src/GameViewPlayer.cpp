@@ -76,6 +76,10 @@ bool GameViewPlayer::playerViewIsOpen()
     while(gameWindow.isOpen())
     {
         updateGame();
+
+        delta = clock.getElapsedTime().asSeconds();
+        clock.restart();
+
         if(keepMovingUp == true)
         {
             keepMovingUp = majorTom.keepMoving(delta, "Up");
@@ -84,8 +88,10 @@ bool GameViewPlayer::playerViewIsOpen()
         {
             keepMovingDown = majorTom.keepMoving(delta, "Down");
         }
+
         cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
         cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
+
          while(gameWindow.pollEvent(Event))
             {
                 if(Event.type == sf::Event::Closed)
@@ -93,9 +99,6 @@ bool GameViewPlayer::playerViewIsOpen()
                     gameWindow.close(); // Quit game
                     return true;
                 }
-
-                delta = clock.getElapsedTime().asSeconds();
-                clock.restart();
 
                 if(Event.type == sf::Event::KeyPressed)
                 {
