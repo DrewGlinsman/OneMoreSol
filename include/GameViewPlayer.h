@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include "Gun.h"
 #include "MajorTom.h"
+#include "Grunt.h"
 #include "GameLogic.h"
 
 using namespace std;
@@ -44,6 +45,7 @@ public:
     sf::Event Event;
     float* currentPlayer;
     MajorTom majorTom;
+    Grunt grunt;
 
     GameViewPlayer();
     bool playerViewIsOpen();

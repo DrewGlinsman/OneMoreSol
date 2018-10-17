@@ -12,6 +12,9 @@
  */
 Grunt::Grunt() {
 	// TODO Auto-generated constructor stub
+	grunt.setSize(sf::Vector2f(25,50));
+	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
+	grunt.setPosition(1500,508);
 	setHealth(100);
 	setSpeed(100);
 }
@@ -27,6 +30,12 @@ Grunt::~Grunt() {
 void Grunt::wasShot()
 {
 	setHealth(getHealth()-1);
+}
+
+void Grunt::moveGrunt(float timePassed)
+{
+    if(grunt.getPosition().x > 0)
+    grunt.move(-100 * timePassed,0);
 }
 
 /**

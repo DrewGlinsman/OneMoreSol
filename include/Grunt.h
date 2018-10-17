@@ -20,6 +20,8 @@ public:
 
 	void wasShot();
 
+	void moveGrunt(float timePassed);
+
 	void drawGrunt(sf::RenderWindow& window);
 
 };

@@ -32,7 +32,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     background.setTexture(&gameImage);
 
 
-/*    weapon1.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon1.setSize(sf::Vector2f(iconScale,iconScale));
     weapon2.setSize(sf::Vector2f(iconScale,iconScale));
     weapon3.setSize(sf::Vector2f(iconScale,iconScale));
     weapon4.setSize(sf::Vector2f(iconScale,iconScale));
@@ -59,7 +59,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setString("20/20 Survivors");
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
-*/
+
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
     gameMusic.setLoop(true);
@@ -78,8 +78,11 @@ bool GameViewPlayer::playerViewIsOpen()
     {
         updateGame();
 
+
         delta = clock.getElapsedTime().asSeconds();
         clock.restart();
+
+        grunt.moveGrunt(delta);
 
         if(keepMovingUp == true)
         {
@@ -164,6 +167,7 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
     gameWindow.draw(sky);
     gameWindow.draw(background);
     majorTom.drawTom(gameWindow);
+    grunt.drawGrunt(gameWindow);
     gameWindow.draw(survivorCnt);
     gameWindow.draw(weapon1);
     gameWindow.draw(weapon2);

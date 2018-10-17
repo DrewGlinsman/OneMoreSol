@@ -10,7 +10,7 @@ MajorTom::MajorTom()
     //majorTom.setTexture()
     majorTom.setOrigin(majorTom.getSize().x / 2, majorTom.getSize().y / 2);
     majorTom.setPosition(156,508);
-    currentHealth = 100;
+    setHealth(100);
     //currentGun = PlasmaPistol;
 
 }
