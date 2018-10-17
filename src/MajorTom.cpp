@@ -213,7 +213,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
         }
     }
 }
-
+/*
 void MajorTom::moveTomUp(float timePassed)
 {
     if (majorTom.getPosition().y > 334 && majorTom.getPosition().y < 346)
@@ -293,7 +293,7 @@ void MajorTom::moveTomDown(float timePassed)
         // Do not move down - bottom lane
     }
 }
-
+*/
 
 int MajorTom::getHealth()
 {
