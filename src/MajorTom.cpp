@@ -61,7 +61,7 @@ bool MajorTom::initMove(float timePassed, string direction)
         }
         else
         {
-            false;
+            return false;
         }
     }
     else if(direction == "Down")

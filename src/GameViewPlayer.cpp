@@ -72,6 +72,7 @@ bool GameViewPlayer::playerViewIsOpen()
     float delta;
     bool keepMovingUp = false;
     bool keepMovingDown = false;
+    bool lockOutKeyboard = false;
 
     while(gameWindow.isOpen())
     {
@@ -83,11 +84,15 @@ bool GameViewPlayer::playerViewIsOpen()
         if(keepMovingUp == true)
         {
             keepMovingUp = majorTom.keepMoving(delta, "Up");
+            lockOutKeyboard = true;
         }
-        if(keepMovingDown == true)
+        else if(keepMovingDown == true)
         {
             keepMovingDown = majorTom.keepMoving(delta, "Down");
+            lockOutKeyboard = true;
         }
+        else
+            lockOutKeyboard = false;
 
         cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
         cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
@@ -111,24 +116,28 @@ bool GameViewPlayer::playerViewIsOpen()
                     if(Event.key.code == sf::Keyboard::Up)
                     {
                         //majorTom.moveTomUp(delta);
+                        if(lockOutKeyboard == false)
                         keepMovingUp = majorTom.initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::Down)
                     {
                         //majorTom.moveTomDown(delta);
+                        if(lockOutKeyboard == false)
                         keepMovingDown = majorTom.initMove(delta, "Down");
                     }
 
                     if(Event.key.code == sf::Keyboard::W)
                     {
                         //majorTom.moveTomUp(delta);
+                        if(lockOutKeyboard == false)
                         keepMovingUp = majorTom.initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::S)
                     {
                         //majorTom.moveTomDown(delta);
+                        if(lockOutKeyboard == false)
                         keepMovingDown = majorTom.initMove(delta, "Down");
                     }
                 }
