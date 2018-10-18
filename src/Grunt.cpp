@@ -11,7 +11,6 @@
  * @brief Grunts spawn with 100 health.
  */
 Grunt::Grunt(float startLane) {
-	// TODO Auto-generated constructor stub
 	grunt.setSize(sf::Vector2f(25,50));
 	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
 	grunt.setPosition(1500,startLane);
@@ -35,7 +34,9 @@ void Grunt::wasShot()
 void Grunt::moveGrunt(float timePassed)
 {
     if(grunt.getPosition().x > 0)
-    grunt.move(-100 * timePassed,0);
+    {
+    	grunt.move(getSpeed() * timePassed,0);
+    }
 }
 
 /**
