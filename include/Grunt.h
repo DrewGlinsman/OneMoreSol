@@ -22,7 +22,13 @@ public:
 
 	void moveGrunt(float timePassed);
 
+	void setLane(float lane);
+	float getLane();
+
 	void drawGrunt(sf::RenderWindow& window);
+
+private:
+	float lane;
 
 };
 

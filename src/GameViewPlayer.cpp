@@ -109,8 +109,8 @@ bool GameViewPlayer::playerViewIsOpen()
         else
             lockOutKeyboard = false;
 
-        cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
-        cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
+        //cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
+       //cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
 
          while(gameWindow.pollEvent(Event))
             {
