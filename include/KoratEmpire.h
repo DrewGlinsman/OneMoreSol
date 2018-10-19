@@ -28,21 +28,22 @@ public:
 	bool checkDeath();
 
 	void setLane(int lane);
-	float getLane();
+	int getLane();
 
+    void setType(int type);
 
 private:
 	unsigned int health;
 	float speed;
 	Gun gun;
+    int koratType;
+	int lane;
 
-	float lane;
-
-    float lane1 = 335;
-    float lane2 = 422;
-    float lane3 = 508;
-    float lane4 = 594;
-    float lane5 = 680;
+    int lane1 = 335;
+    int lane2 = 422;
+    int lane3 = 508;
+    int lane4 = 594;
+    int lane5 = 680;
 };
 
 #endif /* INCLUDE_KORATEMPIRE_H_ */

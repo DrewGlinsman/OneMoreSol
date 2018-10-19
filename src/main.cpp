@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameViewPlayer.h"
 #include "GameViewMenu.h"
+#include "GameLogic.h"
 
 using namespace std;
 
@@ -39,9 +40,9 @@ int main(int argc, char** argv)
 
         int x = 0;
         GameLogic logic;
-        while(x < 20)
+        while(x < 100)
         {
-            logic.spawnKorat(5.0);
+            logic.selectKorat(delta);
             x++;
         }
 

@@ -24,9 +24,43 @@ void GameLogic::moveKorat(float timePassed)
 
 }
 
-void GameLogic::spawnKorat(float timePassed)
+void GameLogic::selectKorat(float timePassed)
 {
     spawnLane = decideLane();
+
+    if(currentLevel < 3)
+        spawnType = decideType(enemyPool1);
+    else if(currentLevel >= 3 && currentLevel < 6)
+        spawnType = decideType(enemyPool2);
+    else if(currentLevel >= 6 && currentLevel < 9)
+        spawnType = decideType(enemyPool3);
+    else if(currentLevel == 9)
+        spawnType = decideType(enemyPool4);
+    else if(currentLevel == 11)
+        spawnType = decideType(enemyPool5);
+    else if(currentLevel >= 12 && currentLevel < 15)
+        spawnType = decideType(enemyPool6);
+    else if(currentLevel >= 15 && currentLevel < 20)
+        spawnType = decideType(enemyPool7);
+    //cout << "Type = " << spawnType << " | Lane = " << spawnLane << endl;
+    spawnKorat(timePassed);
+}
+
+void GameLogic::spawnKorat(float timePassed)
+{
+    KoratEmpire newKorat;
+    newKorat.setLane(spawnLane);
+    /*
+    switch(spawnType)
+    {
+        case 1:
+            (Grunt) newKorat = new Grunt(spawnLane);
+        case 2:
+            (Korat2) newKorat = new Korat2(spawnLane);
+        case 3:
+            (Korat3) newKorat = new Korat3(spawnLane);
+    }
+    */
 }
 
 int GameLogic::decideLane()
@@ -45,4 +79,11 @@ int GameLogic::decideLane()
 
     lane = (int) lane;
     return lane;
+}
+
+int GameLogic::decideType(std::vector<int> enemyPool)
+{
+    double enemyType = Random() * enemyPool.size();
+    enemyType = (int) enemyType;
+    return enemyPool[enemyType];
 }
