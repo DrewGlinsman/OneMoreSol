@@ -1,18 +1,18 @@
 /*
- * Korat4.cpp
+ * ArcBullet.cpp
  *
  *  Created on: Oct 19, 2018
- *      Author: jabowden
+ *      Author: Bowden
  */
 
-#include <Korat4.h>
+#include <ArcBullet.h>
 
-Korat4::Korat4(int startLane) {
+ArcBullet::ArcBullet() {
 	// TODO Auto-generated constructor stub
 
 }
 
-Korat4::~Korat4() {
+ArcBullet::~ArcBullet() {
 	// TODO Auto-generated destructor stub
 }
 

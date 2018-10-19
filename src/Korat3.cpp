@@ -7,7 +7,7 @@
 
 #include <Korat3.h>
 
-Korat3::Korat3() {
+Korat3::Korat3(int startLane) {
 	// TODO Auto-generated constructor stub
 
 }

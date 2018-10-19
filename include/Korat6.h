@@ -10,7 +10,7 @@
 
 class Korat6 {
 public:
-	Korat6();
+	Korat6(int startLane);
 	virtual ~Korat6();
 };
 

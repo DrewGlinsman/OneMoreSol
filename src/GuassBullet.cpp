@@ -1,18 +1,18 @@
 /*
- * Korat4.cpp
+ * GuassBullet.cpp
  *
  *  Created on: Oct 19, 2018
- *      Author: jabowden
+ *      Author: Bowden
  */
 
-#include <Korat4.h>
+#include <GuassBullet.h>
 
-Korat4::Korat4(int startLane) {
+GuassBullet::GuassBullet() {
 	// TODO Auto-generated constructor stub
 
 }
 
-Korat4::~Korat4() {
+GuassBullet::~GuassBullet() {
 	// TODO Auto-generated destructor stub
 }
 

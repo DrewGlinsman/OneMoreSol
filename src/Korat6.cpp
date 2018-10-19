@@ -7,7 +7,7 @@
 
 #include <Korat6.h>
 
-Korat6::Korat6() {
+Korat6::Korat6(int startLane) {
 	// TODO Auto-generated constructor stub
 
 }
