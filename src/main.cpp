@@ -37,6 +37,15 @@ int main(int argc, char** argv)
 
         float delta; // Time between game loops
 
+        int x = 0;
+        GameLogic logic;
+        while(x < 20)
+        {
+            logic.spawnKorat(5.0);
+            x++;
+        }
+
+
         quit = currentGame -> playerViewIsOpen();
 
         if (quit == true)

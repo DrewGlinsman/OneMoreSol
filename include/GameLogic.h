@@ -17,6 +17,8 @@ class GameLogic{
         sf::SoundBuffer gunSound;
         sf::Sound gunSoundEffect;
         int survivorCount;
+
+        double spawnLane;
         int lane1 = 335;
         int lane2 = 422;
         int lane3 = 508;
@@ -25,9 +27,10 @@ class GameLogic{
 
     public:
         GameLogic();
-        moveKorat(float timePassed);
-        spawnKorat(float timePassed);
+        void moveKorat(float timePassed);
+        void spawnKorat(float timePassed);
         bool checkEnd();
+        int decideLane();
 
 };
 
