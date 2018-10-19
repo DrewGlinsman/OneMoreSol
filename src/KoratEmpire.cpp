@@ -37,7 +37,7 @@ float KoratEmpire::getSpeed() const {
 }
 
 void KoratEmpire::setSpeed(float speed) {
-	this->speed = speed;
+	this->speed = -speed; //set all speed to negative, because the Korat will all be progressing backwards down the lane
 }
 
 bool KoratEmpire::checkDeath()
