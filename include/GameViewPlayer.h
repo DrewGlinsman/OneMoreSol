@@ -15,6 +15,7 @@ class GameViewPlayer
 
 private:
     float timePassed;
+    std::vector<Grunt*> grunts;
 
 public:
     sf::Font gameFont;
@@ -37,14 +38,6 @@ public:
     sf::Texture gameSky;
     sf::Texture lockIcon;
 
-    float lane1 = 335;
-    float lane2 = 422;
-    float lane3 = 508;
-    float lane4 = 594;
-    float lane5 = 680;
-
-
-
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
     sf::Text survivorCnt;
@@ -52,11 +45,7 @@ public:
     float* currentPlayer;
 
     MajorTom majorTom;
-    Grunt* grunt1;
-    Grunt* grunt2;
-    Grunt* grunt3;
-    Grunt* grunt4;
-    Grunt* grunt5;
+    unsigned int nEnemies = 5;
 
     GameViewPlayer();
     bool playerViewIsOpen();

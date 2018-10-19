@@ -60,11 +60,16 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
-    grunt1 = new Grunt(lane1);
-    grunt2 = new Grunt(lane2);
-    grunt3 = new Grunt(lane3);
-    grunt4 = new Grunt(lane4);
-    grunt5 = new Grunt(lane5);
+//    grunt1 = new Grunt(lane1);
+//    grunt2 = new Grunt(lane2);
+//    grunt3 = new Grunt(lane3);
+//    grunt4 = new Grunt(lane4);
+//    grunt5 = new Grunt(lane5);
+
+    for (unsigned int x=0; x<nEnemies; x++) {
+    	Grunt *grunt = new Grunt(x+1);
+		grunts.push_back(grunt);
+    }
 
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
@@ -90,11 +95,15 @@ bool GameViewPlayer::playerViewIsOpen()
         delta = clock.getElapsedTime().asSeconds();
         clock.restart();
 
-        grunt1 -> moveGrunt(delta);
-        grunt2 -> moveGrunt(delta);
-        grunt3 -> moveGrunt(delta);
-        grunt4 -> moveGrunt(delta);
-        grunt5 -> moveGrunt(delta);
+//        grunt1 -> moveGrunt(delta);
+//        grunt2 -> moveGrunt(delta);
+//        grunt3 -> moveGrunt(delta);
+//        grunt4 -> moveGrunt(delta);
+//        grunt5 -> moveGrunt(delta);
+
+        for (unsigned int x=0; x<nEnemies; x++) {
+        	grunts[x]->moveGrunt(delta);
+        }
 
         if(keepMovingUp == true)
         {
@@ -179,11 +188,14 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
     gameWindow.draw(sky);
     gameWindow.draw(background);
     majorTom.drawTom(gameWindow);
-    grunt1 -> drawGrunt(gameWindow);
-    grunt2 -> drawGrunt(gameWindow);
-    grunt3 -> drawGrunt(gameWindow);
-    grunt4 -> drawGrunt(gameWindow);
-    grunt5 -> drawGrunt(gameWindow);
+//    grunt1 -> drawGrunt(gameWindow);
+//    grunt2 -> drawGrunt(gameWindow);
+//    grunt3 -> drawGrunt(gameWindow);
+//    grunt4 -> drawGrunt(gameWindow);
+//    grunt5 -> drawGrunt(gameWindow);
+	for (unsigned int x=0; x<nEnemies; x++) {
+		grunts[x]->drawGrunt(gameWindow);
+	}
     gameWindow.draw(survivorCnt);
     gameWindow.draw(weapon1);
     gameWindow.draw(weapon2);

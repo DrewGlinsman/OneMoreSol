@@ -20,6 +20,39 @@ unsigned int KoratEmpire::getHealth() const {
 	return health;
 }
 
+void KoratEmpire::setLane(int givenLane)
+{
+	switch(givenLane)
+	{
+		case 1:
+			lane = lane1;
+			break;
+		case 2:
+			lane = lane2;
+			break;
+		case 3:
+			lane = lane3;
+			break;
+		case 4:
+			lane = lane4;
+			break;
+		case 5:
+			lane = lane5;
+			break;
+		default:
+			lane = lane1;
+			break;
+	}
+
+
+	givenLane = lane;
+}
+
+float KoratEmpire::getLane()
+{
+	return this->lane;
+}
+
 void KoratEmpire::setHealth(unsigned int health) {
 	this->health = health;
 }
@@ -32,11 +65,11 @@ void KoratEmpire::setGun(const Gun& gun) {
 	this->gun = gun;
 }
 
-float KoratEmpire::getSpeed() const {
+int KoratEmpire::getSpeed() const {
 	return speed;
 }
 
-void KoratEmpire::setSpeed(float speed) {
+void KoratEmpire::setSpeed(int speed) {
 	this->speed = -speed; //set all speed to negative, because the Korat will all be progressing backwards down the lane
 }
 

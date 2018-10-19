@@ -22,13 +22,11 @@ public:
 
 	void moveGrunt(float timePassed);
 
-	void setLane(float lane);
-	float getLane();
-
 	void drawGrunt(sf::RenderWindow& window);
 
 private:
-	float lane;
+    int maxEnemySpeedRand = 150;
+    int minEnemySpeedRand = 75;
 
 };
 
