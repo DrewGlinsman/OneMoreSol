@@ -1,8 +1,8 @@
 #ifndef PLASMAPISTOL_H
 #define PLASMAPISTOL_H
 
-#include <Gun.h>
-#include <Bullet.h>
+#include "Gun.h"
+#include "Bullet.h"
 
 class PlasmaPistol : public Gun
 {
