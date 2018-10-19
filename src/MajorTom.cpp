@@ -108,7 +108,13 @@ bool MajorTom::keepMoving(float timePassed, string direction)
 {
     if(direction == "Up")
     {
-        if (majorTom.getPosition().y < 422 && majorTom.getPosition().y > 335)
+        if (majorTom.getPosition().y < 335)
+        {
+            setTomPositionX(238);
+            setTomPositionY(335);
+            return false;
+        }
+        else if (majorTom.getPosition().y < 422 && majorTom.getPosition().y > 335)
         {
             if(majorTom.getPosition().y > 335 && majorTom.getPosition().y < 345)
             {
@@ -224,7 +230,13 @@ bool MajorTom::keepMoving(float timePassed, string direction)
                 return true;
             }
         }
-    }
+        else if (majorTom.getPosition().y > 680)
+            {
+                setTomPositionX(72);
+                setTomPositionY(680);
+                return false;
+            }
+        }
 }
 /*
 void MajorTom::moveTomUp(float timePassed)
