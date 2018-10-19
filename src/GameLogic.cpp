@@ -15,3 +15,12 @@ bool GameLogic::checkEnd()
         return true;
 }
 
+GameLogic::moveKorat(float timePassed)
+{
+
+}
+
+GameLogic::spawnKorat(float timePassed)
+{
+
+}

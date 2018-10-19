@@ -25,8 +25,8 @@ class GameLogic{
 
     public:
         GameLogic();
-        moveKorat();
-        spawnKorat();
+        moveKorat(float timePassed);
+        spawnKorat(float timePassed);
         bool checkEnd();
 
 };
