@@ -15,10 +15,10 @@
 Grunt::Grunt(int startLane) {
 	grunt.setSize(sf::Vector2f(25,50));
 	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
-	grunt.setPosition(1500,startLane);
 	setLane(startLane);
+	grunt.setPosition(1500,getLane());
 	setHealth(100);
-	setSpeed(100);
+	setSpeed(rand()%(maxEnemySpeedRand-minEnemySpeedRand + 1) + minEnemySpeedRand);
 }
 
 Grunt::~Grunt() {
@@ -40,21 +40,9 @@ void Grunt::moveGrunt(float timePassed)
     if(grunt.getPosition().x > -1) //if grunt hasnt totally left the screen
     {
     	grunt.move(getSpeed() * timePassed,0);
+    } else {
+    	grunt.setPosition(1500,getLane());
     }
-    else
-    {
-    	grunt.move(1500,getLane());
-    }
-}
-
-void Grunt::setLane(int givenLane)
-{
-	givenLane = lane;
-}
-
-int Grunt::getLane()
-{
-	return this->lane;
 }
 
 /**
