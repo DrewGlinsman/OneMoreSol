@@ -50,7 +50,7 @@ void KoratEmpire::setLane(int givenLane)
 
 float KoratEmpire::getLane()
 {
-	return this->lane;
+	return lane;
 }
 
 void KoratEmpire::setHealth(unsigned int health) {

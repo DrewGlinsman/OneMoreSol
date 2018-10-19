@@ -12,7 +12,7 @@
 /**
  * @brief Grunts spawn with 100 health.
  */
-Grunt::Grunt(float startLane) {
+Grunt::Grunt(int startLane) {
 	grunt.setSize(sf::Vector2f(25,50));
 	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
 	setLane(startLane);

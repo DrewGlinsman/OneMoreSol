@@ -15,7 +15,7 @@ class Grunt: public KoratEmpire {
 public:
 	sf::RectangleShape grunt;
 
-	Grunt(float startLane);
+	Grunt(int startLane);
 	virtual ~Grunt();
 
 	void wasShot();
@@ -27,7 +27,7 @@ public:
 private:
     int maxEnemySpeedRand = 150;
     int minEnemySpeedRand = 75;
-
+	int lane;
 };
 
 #endif /* INCLUDE_GRUNT_H_ */

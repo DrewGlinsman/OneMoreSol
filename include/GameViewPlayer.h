@@ -38,6 +38,13 @@ public:
     sf::Texture gameSky;
     sf::Texture lockIcon;
 
+    int lane1 = 335;
+    int lane2 = 422;
+    int lane3 = 508;
+    int lane4 = 594;
+    int lane5 = 680;
+
+
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
     sf::Text survivorCnt;

@@ -1,5 +1,6 @@
 #include "GameViewPlayer.h"
 #include <iostream>
+#include <typeinfo>
 
 using namespace std;
 
