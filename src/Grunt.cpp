@@ -18,7 +18,7 @@ Grunt::Grunt(int startLane) {
 	setLane(startLane);
 	grunt.setPosition(1500,getLane());
 	setHealth(100);
-	setSpeed(rand()%(maxEnemySpeedRand-minEnemySpeedRand + 1) + minEnemySpeedRand);
+	setSpeed(100);
 }
 
 Grunt::~Grunt() {
