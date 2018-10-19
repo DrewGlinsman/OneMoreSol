@@ -2,6 +2,7 @@
 GameLogic.cpp
 
 */
+#include "GameLogic.h"
 
 GameLogic::GameLogic()
 {

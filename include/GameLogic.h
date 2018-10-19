@@ -6,12 +6,13 @@
 #include "KoratEmpire.h"
 
 using namespace std;
+
 class GameLogic{
 
     private:
         MajorTom majorTom;
         //wrap it in reference wrapper so that it passes references instead of copies
-        std::vector<std::reference_wrapper<KoratEmpire>> currentKorat;
+        std::vector<KoratEmpire> currentKorat;
         sf::SoundBuffer gunSound;
         sf::Sound gunSoundEffect;
         int survivorCount;
