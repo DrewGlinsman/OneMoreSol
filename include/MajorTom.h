@@ -21,6 +21,7 @@ class MajorTom {
 
     public:
         sf::RectangleShape majorTom;
+        sf::Texture mtPlasmaPistol;
 
         MajorTom();
 
@@ -28,7 +29,13 @@ class MajorTom {
 
         float getTomPosition();
 
-        void setTomPosition(float newPosition);
+        void setTomPositionX(float positionPassed);
+
+        void setTomPositionY(float positionPassed);
+
+        bool initMove(float timePassed, string direction);
+
+        bool keepMoving(float timePassed, string direction);
 
         void moveTomUp(float timePassed);
 
@@ -43,6 +50,8 @@ class MajorTom {
         void setGun(Gun newGun);
 
         bool checkDeath();
+
+        void updateGame(sf::RenderWindow& gameWindow);
 
 };
 

@@ -22,15 +22,28 @@ public:
 	const Gun& getGun() const;
 	void setGun(const Gun& gun);
 
-	float getSpeed() const;
-	void setSpeed(float speed);
+	int getSpeed() const;
+	void setSpeed(int speed);
 
 	bool checkDeath();
+
+	void setLane(int lane);
+	int getLane();
+
+    void setType(int type);
 
 private:
 	unsigned int health;
 	float speed;
 	Gun gun;
+    int koratType;
+	int lane;
+
+    int lane1 = 335;
+    int lane2 = 422;
+    int lane3 = 508;
+    int lane4 = 594;
+    int lane5 = 680;
 };
 
 #endif /* INCLUDE_KORATEMPIRE_H_ */

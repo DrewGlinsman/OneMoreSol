@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameViewPlayer.h"
 #include "GameViewMenu.h"
+#include "GameLogic.h"
 
 using namespace std;
 
@@ -36,6 +37,15 @@ int main(int argc, char** argv)
         sf::Clock clock; // Game loop clock
 
         float delta; // Time between game loops
+
+        int x = 0;
+        GameLogic logic;
+        while(x < 100)
+        {
+            logic.selectKorat(delta);
+            x++;
+        }
+
 
         quit = currentGame -> playerViewIsOpen();
 
