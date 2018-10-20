@@ -9,7 +9,7 @@
 
 KoratEmpire::KoratEmpire() {
 	// TODO Auto-generated constructor stub
-
+    lane = 0;
 }
 
 KoratEmpire::~KoratEmpire() {

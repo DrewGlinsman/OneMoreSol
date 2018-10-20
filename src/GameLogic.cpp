@@ -56,7 +56,7 @@ void GameLogic::selectKorat(float timePassed)
 void GameLogic::spawnKorat(float timePassed)
 {
     KoratEmpire* newKorat;
-    newKorat -> setLane(spawnLane);
+    bool print;
 
     switch(spawnType)
     {
@@ -79,17 +79,31 @@ void GameLogic::spawnKorat(float timePassed)
         default:
             newKorat = new Grunt(spawnLane);
     }
+    currentKorat[spawnLane - 1].push_back(*newKorat);
 
-    /*
-    currentKorat[spawnLane].push_back(*newKorat);
+    cout << endl;
+    cout << "==============================" << endl;
     for (int i = 0; i < currentKorat.size(); i ++)
     {
-        for (int j = 0; j < currentKorat[i].size(); j++)
-            cout << currentKorat[i][j].getLane() << ' ';
-        cout << endl;
-    }
-    */
 
+        for (int j = 0; j < currentKorat[i].size(); j++)
+        {
+
+            cout << currentKorat[i][j].getLane() << ' ';
+            if (currentKorat[i][j].getLane() == 680)
+            {
+                 print = false;
+            }
+            else
+                 print = true;
+
+        }
+        if(print == true)
+        cout << endl << "------------------------------" << endl;
+        else
+            cout << endl;
+    }
+    cout << "==============================" << endl;
 }
 
 int GameLogic::decideLane()

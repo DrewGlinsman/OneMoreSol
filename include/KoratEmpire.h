@@ -9,6 +9,7 @@
 #define INCLUDE_KORATEMPIRE_H_
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "Gun.h"
 
 class KoratEmpire {
@@ -18,21 +19,23 @@ public:
 
 	virtual bool checkDeath();
 
-	virtual void setLane(int lane);
+	virtual void setLane(int givenLane);
 	virtual int getLane();
 
-private:
-	unsigned int health;
-	float speed;
-	Gun gun;
-    int koratType;
-	int lane;
+    int lane;
 
     int lane1 = 335;
     int lane2 = 422;
     int lane3 = 508;
     int lane4 = 594;
     int lane5 = 680;
+
+private:
+	unsigned int health;
+	float speed;
+	Gun gun;
+    int koratType;
+
 };
 
 #endif /* INCLUDE_KORATEMPIRE_H_ */

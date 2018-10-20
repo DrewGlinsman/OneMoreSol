@@ -41,13 +41,13 @@ int main(int argc, char** argv)
         int x = 0;
         GameLogic logic;
 
-        /*
-        while(x < 1)
+
+        while(x < 20)
         {
             logic.selectKorat(delta);
             x++;
         }
-        */
+
 
         quit = currentGame -> playerViewIsOpen();
 
