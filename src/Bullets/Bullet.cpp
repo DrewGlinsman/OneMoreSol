@@ -53,7 +53,7 @@ float Bullet::setPosition(sf::Vector2f newPos)
     positionY = newPos.y;
 }
 
-Bullet::Bullet doDamage()
+Bullet::doDamage()
 {
 
 }
