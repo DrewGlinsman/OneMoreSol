@@ -19,7 +19,7 @@ private:
 
 public:
     sf::Font gameFont;
-    const int iconScale = 75;
+    const int iconScale = 64;
 
     sf::RenderWindow gameWindow;
     sf::RectangleShape background;
@@ -37,6 +37,7 @@ public:
     sf::Texture playerImage;
     sf::Texture gameSky;
     sf::Texture lockIcon;
+    sf::Texture pPistol;
 
     int lane1 = 335;
     int lane2 = 422;

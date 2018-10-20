@@ -1,13 +1,17 @@
 // Chris Wolinski SFML Pong
 
 #include "MajorTom.h"
+#include <iostream>
 
 using namespace std;
 
 MajorTom::MajorTom()
 {
-    majorTom.setSize(sf::Vector2f(50,100));
-    //majorTom.setTexture()
+    if(!mtPlasmaPistol.loadFromFile("assets/mtPlasmaPistol.png"))
+        cout << "Failed to load TomPP." << endl;
+
+    majorTom.setSize(sf::Vector2f(64,64));
+    majorTom.setTexture(&mtPlasmaPistol);
     majorTom.setOrigin(majorTom.getSize().x / 2, majorTom.getSize().y / 2);
     majorTom.setPosition(156,508);
     setHealth(100);

@@ -22,6 +22,9 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         cout << "Failed to Load Lock Icon." << endl;
 
+    if (!pPistol.loadFromFile("assets/plasmaPistol.png"))
+        cout << "Failed to Load plasma Pistol." << endl;
+
     sky.setRadius(894);
     sky.setOrigin(894,894);
     sky.setPosition(720, 450);
@@ -47,7 +50,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     weapon5.setPosition(807,790);
     weapon6.setPosition(935,790);
     weapon7.setPosition(1063,790);
-    weapon1.setTexture(&lockIcon);
+    weapon1.setTexture(&pPistol);
     weapon2.setTexture(&lockIcon);
     weapon3.setTexture(&lockIcon);
     weapon4.setTexture(&lockIcon);

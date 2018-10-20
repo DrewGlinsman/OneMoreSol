@@ -21,6 +21,7 @@ class MajorTom {
 
     public:
         sf::RectangleShape majorTom;
+        sf::Texture mtPlasmaPistol;
 
         MajorTom();
 
