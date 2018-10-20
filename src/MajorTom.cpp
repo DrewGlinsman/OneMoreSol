@@ -11,6 +11,7 @@ MajorTom::MajorTom()
         cout << "Failed to load TomPP." << endl;
 
     majorTom.setSize(sf::Vector2f(64,64));
+    mtPlasmaPistol.setSmooth(true);
     majorTom.setTexture(&mtPlasmaPistol);
     majorTom.setOrigin(majorTom.getSize().x / 2, majorTom.getSize().y / 2);
     majorTom.setPosition(156,508);
