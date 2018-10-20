@@ -11,13 +11,14 @@ PlasmaPistol::PlasmaPistol()
     //TODO set the image to the PlasmaPistol sprite.
 }
 
-void PlasmaPistol::Shoot()
+void PlasmaPistol::shoot()
 {
+
     //TODO make shoot spawn a bullet object in the correct lane and communicate back
     //the bullet to be drawn, also use fireRate to limit the shooting to a certain speed.
 }
 
-void PlasmaPistol::Reload()
+void PlasmaPistol::reload()
 {
     //TODO make reload take the right amount of time and update the UI feedback.
 }

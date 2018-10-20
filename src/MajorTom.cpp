@@ -9,7 +9,8 @@ MajorTom::MajorTom()
 {
     if(!mtPlasmaPistol.loadFromFile("assets/mtPlasmaPistol.png"))
         cout << "Failed to load TomPP." << endl;
-
+    Gun* gun = new PlasmaPistol();
+    setGun(*gun);
     majorTom.setSize(sf::Vector2f(64,64));
     majorTom.setTexture(&mtPlasmaPistol);
     majorTom.setOrigin(majorTom.getSize().x / 2, majorTom.getSize().y / 2);
@@ -241,6 +242,11 @@ bool MajorTom::keepMoving(float timePassed, string direction)
                 return false;
             }
         }
+}
+
+void MajorTom::shoot(float timePassed)
+{
+    currentGun.shoot(timePassed);
 }
 /*
 void MajorTom::moveTomUp(float timePassed)

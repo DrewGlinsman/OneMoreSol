@@ -8,6 +8,8 @@ public:
     Gun();
     virtual ~Gun();
 
+    virtual void shoot(float timePassed);
+
     unsigned int damage;
     unsigned int clip;
     float reloadSpeed;

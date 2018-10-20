@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Gun.h"
+#include "PlasmaPistol.h"
 
 using namespace std;
 
@@ -17,7 +18,6 @@ class MajorTom {
         int currentHealth;
         int newHealth;
         Gun currentGun;
-        Gun newGun;
 
     public:
         sf::RectangleShape majorTom;
@@ -40,6 +40,8 @@ class MajorTom {
         void moveTomUp(float timePassed);
 
         void moveTomDown(float timePassed);
+
+        void shoot(float timePassed);
 
         int getHealth();
 

@@ -9,3 +9,8 @@ Gun::~Gun()
 {
     //dtor
 }
+
+void Gun::shoot(float timePassed)
+{
+
+}

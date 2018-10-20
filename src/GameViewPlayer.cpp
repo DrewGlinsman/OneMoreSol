@@ -95,7 +95,6 @@ bool GameViewPlayer::playerViewIsOpen()
     {
         updateGame();
 
-
         delta = clock.getElapsedTime().asSeconds();
         clock.restart();
 
@@ -168,6 +167,11 @@ bool GameViewPlayer::playerViewIsOpen()
                         if(lockOutKeyboard == false)
                         keepMovingDown = majorTom.initMove(delta, "Down");
                     }
+
+                    if(Event.key.code == sf::Keyboard::Space)
+                    {
+                        majorTom.shoot(delta);
+                    }
                 }
             }
     }
@@ -183,6 +187,8 @@ void GameViewPlayer::moveEnemy(float timePassed)
 {
 
 }
+
+
 
 void GameViewPlayer::updateGame(void) // Draws all elements of screen
 {
