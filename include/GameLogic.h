@@ -5,8 +5,6 @@
 #include "MajorTom.h"
 #include "KoratEmpire.h"
 #include "Grunt.h"
-#include "Korat2.h"
-#include "Korat3.h"
 #include "rngs.h"
 
 using namespace std;
@@ -16,15 +14,15 @@ class GameLogic{
     private:
         MajorTom majorTom;
         //wrap it in reference wrapper so that it passes references instead of copies
-        std::vector<std::vector<KoratEmpire> > currentKorat;
+        std::vector<std::vector<KoratEmpire>> currentKorat;
         sf::SoundBuffer gunSound;
         sf::Sound gunSoundEffect;
         int survivorCount;
         int currentLevel = 19;
 
         double spawnRate;
-        double spawnLane;
-        double spawnType;
+        int spawnLane;
+        int spawnType;
 
         std::vector <int> enemyPool1 {1};
         std::vector <int> enemyPool2 {1, 2};

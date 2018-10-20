@@ -7,8 +7,9 @@
 
 #ifndef INCLUDE_KORAT5_H_
 #define INCLUDE_KORAT5_H_
+#include "KoratEmpire.h"
 
-class Korat5 {
+class Korat5: public KoratEmpire{
 public:
 	Korat5(int startLane);
 	virtual ~Korat5();

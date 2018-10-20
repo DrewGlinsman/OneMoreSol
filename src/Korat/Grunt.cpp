@@ -40,6 +40,11 @@ void Grunt::wasShot(int damage)
     }
 }
 
+int Grunt::getLane()
+{
+    return this->lane;
+}
+
 void Grunt::moveGrunt(float timePassed)
 {
     if(grunt.getPosition().x > -1) //if grunt hasnt totally left the screen

@@ -4,6 +4,7 @@ GameLogic.cpp
 */
 #include "GameLogic.h"
 #include <iostream>
+#include <typeinfo>
 
 using namespace std;
 
@@ -28,6 +29,12 @@ void GameLogic::selectKorat(float timePassed)
 {
     spawnLane = decideLane();
 
+    /*
+        checks what level the player is on and
+        decides what pool of types to randomly
+        pick from excluding levels 10 and 20
+        because they are boss levels
+    */
     if(currentLevel < 3)
         spawnType = decideType(enemyPool1);
     else if(currentLevel >= 3 && currentLevel < 6)
@@ -48,19 +55,41 @@ void GameLogic::selectKorat(float timePassed)
 
 void GameLogic::spawnKorat(float timePassed)
 {
-    KoratEmpire newKorat;
-    newKorat.setLane(spawnLane);
-    /*
+    KoratEmpire* newKorat;
+    newKorat -> setLane(spawnLane);
+
     switch(spawnType)
     {
         case 1:
-            (Grunt) newKorat = new Grunt(spawnLane);
+            newKorat = new Grunt(spawnLane);
+        /*
         case 2:
-            (Korat2) newKorat = new Korat2(spawnLane);
+            newKorat = new Korat2(spawnLane);
         case 3:
-            (Korat3) newKorat = new Korat3(spawnLane);
+            newKorat = new Korat3(spawnLane);
+        case 4:
+            newKorat = new Korat4(spawnLane);
+        case 5:
+            newKorat = new Korat5(spawnLane);
+        case 6:
+            newKorat = new Korat6(spawnLane);
+        case 7:
+            newKorat = new Korat7(spawnLane);
+        */
+        default:
+            newKorat = new Grunt(spawnLane);
+    }
+
+    /*
+    currentKorat[spawnLane].push_back(*newKorat);
+    for (int i = 0; i < currentKorat.size(); i ++)
+    {
+        for (int j = 0; j < currentKorat[i].size(); j++)
+            cout << currentKorat[i][j].getLane() << ' ';
+        cout << endl;
     }
     */
+
 }
 
 int GameLogic::decideLane()

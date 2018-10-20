@@ -19,6 +19,7 @@ public:
 	Grunt(int startLane);
 	virtual ~Grunt();
 
+	int getLane();
 	void wasShot(int damage);
 
 	void moveGrunt(float timePassed);
