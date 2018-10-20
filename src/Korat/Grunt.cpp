@@ -20,8 +20,6 @@ Grunt::Grunt(int startLane) {
 	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
 	setLane(startLane);
 	grunt.setPosition(1500,getLane());
-	setHealth(100);
-	setSpeed(100);
 }
 
 Grunt::~Grunt() {
@@ -33,16 +31,20 @@ Grunt::~Grunt() {
  * @brief Called when Grunt is damaged by bullet. Decreases health by 1.
  *
  */
-void Grunt::wasShot()
+void Grunt::wasShot(int damage)
 {
-	setHealth(getHealth()-1);
+	health - damage;
+	if(health < 0)
+    {
+        //trigger grunt death
+    }
 }
 
 void Grunt::moveGrunt(float timePassed)
 {
     if(grunt.getPosition().x > -1) //if grunt hasnt totally left the screen
     {
-    	grunt.move(getSpeed() * timePassed,0);
+    	grunt.move(speed * timePassed,0);
     } else {
     	grunt.setPosition(1500,getLane());
     }

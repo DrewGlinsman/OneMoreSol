@@ -16,21 +16,10 @@ public:
 	KoratEmpire();
 	virtual ~KoratEmpire();
 
-	unsigned int getHealth() const;
-	void setHealth(unsigned int health);
+	virtual bool checkDeath();
 
-	const Gun& getGun() const;
-	void setGun(const Gun& gun);
-
-	int getSpeed() const;
-	void setSpeed(int speed);
-
-	bool checkDeath();
-
-	void setLane(int lane);
-	int getLane();
-
-    void setType(int type);
+	virtual void setLane(int lane);
+	virtual int getLane();
 
 private:
 	unsigned int health;

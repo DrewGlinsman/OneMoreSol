@@ -19,16 +19,16 @@ public:
 	Grunt(int startLane);
 	virtual ~Grunt();
 
-	void wasShot();
+	void wasShot(int damage);
 
 	void moveGrunt(float timePassed);
 
 	void drawGrunt(sf::RenderWindow& window);
 
 private:
-    int maxEnemySpeedRand = 150;
-    int minEnemySpeedRand = 75;
 	int lane;
+	int speed = 100;
+	int health = 100;
 };
 
 #endif /* INCLUDE_GRUNT_H_ */
