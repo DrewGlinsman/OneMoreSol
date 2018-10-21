@@ -20,6 +20,7 @@ Grunt::Grunt(int startLane){
 	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
 	setLane(startLane);
 	grunt.setPosition(1500, lane);
+	std::cout << "I'm a grunt" << std::endl;
 }
 
 Grunt::~Grunt() {

@@ -95,6 +95,7 @@ void GameLogic::spawnKorat(float timePassed)
         */
         default:
             newKorat = new Grunt(spawnLane);
+
     }
     currentKorat[spawnLane - 1].push_back(*newKorat);
 
@@ -126,13 +127,13 @@ void GameLogic::spawnKorat(float timePassed)
 int GameLogic::decideLane()
 {
     double lane = Random() * 5;
-    if (lane > 0 && lane < 1)
+    if (lane >= 0 && lane <= 1)
         lane = 1;
-    else if (lane > 1 && lane < 2)
+    else if (lane > 1 && lane <= 2)
         lane = 2;
-    else if (lane > 2 && lane < 3)
+    else if (lane > 2 && lane <= 3)
         lane = 3;
-    else if (lane > 3 && lane < 4)
+    else if (lane > 3 && lane <= 4)
         lane = 4;
     else
         lane = 5;
@@ -144,6 +145,6 @@ int GameLogic::decideLane()
 int GameLogic::decideType(std::vector<int> enemyPool)
 {
     double enemyType = Random() * enemyPool.size();
-    enemyType = (int) enemyType;
+    enemyType = (int) enemyType - 1;
     return enemyPool[enemyType];
 }
