@@ -5,7 +5,7 @@
  *      Author: jabowden
  */
 
-#include <Grunt.h>
+#include "Grunt.h"
 #include <iostream>
 
 /**
@@ -14,7 +14,7 @@
 Grunt::Grunt(int startLane){
     if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
         std::cout << "Failed to load plasmaGrunt." << std::endl;
-
+    lane = 0;
 	grunt.setSize(sf::Vector2f(64,64));
 	grunt.setTexture(&gruntPlasma);
 	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
@@ -46,18 +46,44 @@ int Grunt::getLane()
     return this->lane;
 }
 
+void Grunt::setLane(int givenLane)
+{
+     switch(givenLane)
+	{
+		case 1:
+			lane = lane1;
+			break;
+		case 2:
+			lane = lane2;
+			break;
+		case 3:
+			lane = lane3;
+			break;
+		case 4:
+			lane = lane4;
+			break;
+		case 5:
+			lane = lane5;
+			break;
+		default:
+			lane = lane1;
+			break;
+	}
+}
+
 void Grunt::moveCurrentKorat(float timePassed)
 {
         if(grunt.getPosition().x > -5) //if grunt hasnt totally left the screen
     {
-    	grunt.move(speed * timePassed,0);
+    	grunt.move(-speed * timePassed, 0);
     } else {
     	grunt.setPosition(1500,getLane());
+
     }
 }
 
 void Grunt::drawCurrentKorat(sf::RenderWindow& window)
 {
     window.draw(grunt);
-    std::cout << "grunt was drawn" << std::endl;
+    //std::cout << "grunt was drawn" << std::endl;
 }

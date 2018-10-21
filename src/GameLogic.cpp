@@ -26,7 +26,7 @@ void GameLogic::moveKorat(float timePassed)
     {
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            currentKorat[i][j].moveCurrentKorat(timePassed);
+            currentKorat[i][j] -> moveCurrentKorat(timePassed);
         }
     }
 }
@@ -37,7 +37,7 @@ void GameLogic::drawKorat(sf::RenderWindow& window)
     {
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            currentKorat[i][j].drawCurrentKorat(window);
+            currentKorat[i][j] -> drawCurrentKorat(window);
         }
     }
 }
@@ -79,25 +79,33 @@ void GameLogic::spawnKorat(float timePassed)
     {
         case 1:
             newKorat = new Grunt(spawnLane);
+            break;
         /*
         case 2:
             newKorat = new Korat2(spawnLane);
+            break;
         case 3:
             newKorat = new Korat3(spawnLane);
+            break;
         case 4:
             newKorat = new Korat4(spawnLane);
+            break;
         case 5:
             newKorat = new Korat5(spawnLane);
+            break;
         case 6:
             newKorat = new Korat6(spawnLane);
+            break;
         case 7:
             newKorat = new Korat7(spawnLane);
+            break;
         */
         default:
             newKorat = new Grunt(spawnLane);
+            break;
 
     }
-    currentKorat[spawnLane - 1].push_back(*newKorat);
+    currentKorat[spawnLane - 1].push_back(newKorat);
 
     cout << endl;
     cout << "==============================" << endl;
@@ -107,8 +115,8 @@ void GameLogic::spawnKorat(float timePassed)
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
 
-            cout << currentKorat[i][j].getLane() << ' ';
-            if (currentKorat[i][j].getLane() == 680)
+            cout << currentKorat[i][j] -> getLane() << ' ';
+            if (currentKorat[i][j] -> getLane() == 680)
             {
                  print = false;
             }

@@ -34,6 +34,7 @@ public:
     int lane4 = 594;
     int lane5 = 680;
 
+
 private:
 	unsigned int health;
 	float speed;
