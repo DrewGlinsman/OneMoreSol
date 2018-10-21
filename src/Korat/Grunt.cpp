@@ -11,7 +11,7 @@
 /**
  * @brief Grunts spawn with 100 health.
  */
-Grunt::Grunt(int startLane) {
+Grunt::Grunt(int startLane){
     if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
         std::cout << "Failed to load plasmaGrunt." << std::endl;
 
@@ -19,7 +19,7 @@ Grunt::Grunt(int startLane) {
 	grunt.setTexture(&gruntPlasma);
 	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
 	setLane(startLane);
-	grunt.setPosition(1500,getLane());
+	grunt.setPosition(1500, lane);
 }
 
 Grunt::~Grunt() {
@@ -45,9 +45,9 @@ int Grunt::getLane()
     return this->lane;
 }
 
-void Grunt::moveGrunt(float timePassed)
+void Grunt::moveCurrentKorat(float timePassed)
 {
-    if(grunt.getPosition().x > -1) //if grunt hasnt totally left the screen
+        if(grunt.getPosition().x > -5) //if grunt hasnt totally left the screen
     {
     	grunt.move(speed * timePassed,0);
     } else {
@@ -55,10 +55,8 @@ void Grunt::moveGrunt(float timePassed)
     }
 }
 
-/**
- * @brief Called to draw Grunt
- */
-void Grunt::drawGrunt (sf::RenderWindow& window)
+void Grunt::drawCurrentKorat(sf::RenderWindow& window)
 {
     window.draw(grunt);
+    std::cout << "grunt was drawn" << std::endl;
 }

@@ -22,7 +22,24 @@ bool GameLogic::checkEnd()
 
 void GameLogic::moveKorat(float timePassed)
 {
+    for (int i = 0; i < currentKorat.size(); i ++)
+    {
+        for (int j = 0; j < currentKorat[i].size(); j++)
+        {
+            currentKorat[i][j].moveCurrentKorat(timePassed);
+        }
+    }
+}
 
+void GameLogic::drawKorat(sf::RenderWindow& window)
+{
+    for (int i = 0; i < currentKorat.size(); i ++)
+    {
+        for (int j = 0; j < currentKorat[i].size(); j++)
+        {
+            currentKorat[i][j].drawCurrentKorat(window);
+        }
+    }
 }
 
 void GameLogic::selectKorat(float timePassed)

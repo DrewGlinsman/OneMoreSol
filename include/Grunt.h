@@ -22,9 +22,9 @@ public:
 	int getLane();
 	void wasShot(int damage);
 
-	void moveGrunt(float timePassed);
+	void moveCurrentKorat(float timePassed);
 
-	void drawGrunt(sf::RenderWindow& window);
+	void drawCurrentKorat(sf::RenderWindow& window);
 
 private:
 	int lane;

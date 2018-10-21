@@ -1,7 +1,7 @@
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
 
-#include "GameViewPlayer.h"
+
 #include "MajorTom.h"
 #include "KoratEmpire.h"
 #include "Grunt.h"
@@ -12,11 +12,8 @@ using namespace std;
 class GameLogic{
 
     private:
-        MajorTom majorTom;
         //wrap it in reference wrapper so that it passes references instead of copies
         std::vector<std::vector<KoratEmpire>> currentKorat {{},{},{},{},{}};
-        sf::SoundBuffer gunSound;
-        sf::Sound gunSoundEffect;
         int survivorCount;
         int currentLevel = 19;
 
@@ -41,6 +38,8 @@ class GameLogic{
     public:
         GameLogic();
         void moveKorat(float timePassed);
+        void drawKorat(sf::RenderWindow& window);
+
         void selectKorat(float timePassed);
         void spawnKorat(float timePassed);
         bool checkEnd();

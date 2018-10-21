@@ -47,6 +47,16 @@ int KoratEmpire::getLane()
 	return lane;
 }
 
+void KoratEmpire::moveCurrentKorat(float timepassed)
+{
+
+}
+
+void KoratEmpire::drawCurrentKorat(sf::RenderWindow& window)
+{
+   // std::cout << "not drawing empty function" << std::endl;
+}
+
 bool KoratEmpire::checkDeath()
 {
     if (this->health <= 0)

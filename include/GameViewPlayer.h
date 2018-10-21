@@ -52,8 +52,9 @@ public:
     sf::Event Event;
     float* currentPlayer;
 
+    GameLogic* logic;
+
     MajorTom majorTom;
-    unsigned int nEnemies = 5;
 
     GameViewPlayer();
     bool playerViewIsOpen();

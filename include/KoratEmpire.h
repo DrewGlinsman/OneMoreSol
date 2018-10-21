@@ -22,6 +22,10 @@ public:
 	virtual void setLane(int givenLane);
 	virtual int getLane();
 
+	virtual void moveCurrentKorat(float timepassed);
+
+	virtual void drawCurrentKorat(sf::RenderWindow& window);
+
     int lane;
 
     int lane1 = 335;

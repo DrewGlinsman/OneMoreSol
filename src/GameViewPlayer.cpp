@@ -70,10 +70,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 //    grunt4 = new Grunt(lane4);
 //    grunt5 = new Grunt(lane5);
 
-    for (unsigned int x=0; x<nEnemies; x++) {
-    	Grunt *grunt = new Grunt(x+1);
-		grunts.push_back(grunt);
-    }
+    logic = new GameLogic();
 
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
@@ -84,8 +81,10 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 
 bool GameViewPlayer::playerViewIsOpen()
 {
-    sf::Clock clock;
+    sf::Clock gameClock;
+    sf::Clock koratClock;
     float delta;
+    float gamma;
 
     bool keepMovingUp = false;
     bool keepMovingDown = false;
@@ -95,8 +94,10 @@ bool GameViewPlayer::playerViewIsOpen()
     {
         updateGame();
 
-        delta = clock.getElapsedTime().asSeconds();
-        clock.restart();
+        delta = gameClock.getElapsedTime().asSeconds();
+        gameClock.restart();
+
+        gamma = koratClock.getElapsedTime().asSeconds();
 
 //        grunt1 -> moveGrunt(delta);
 //        grunt2 -> moveGrunt(delta);
@@ -104,10 +105,17 @@ bool GameViewPlayer::playerViewIsOpen()
 //        grunt4 -> moveGrunt(delta);
 //        grunt5 -> moveGrunt(delta);
 
-        for (unsigned int x=0; x<nEnemies; x++) {
-        	grunts[x]->moveGrunt(delta);
-        }
+//-----------------------------------------------------------------
 
+            //cout << gamma << endl;
+            if (gamma > 3)
+            {
+            logic -> selectKorat(delta);
+            koratClock.restart();
+            }
+            logic -> moveKorat(delta);
+
+//-----------------------------------------------------------------
         if(keepMovingUp == true)
         {
             keepMovingUp = majorTom.keepMoving(delta, "Up");
@@ -198,14 +206,15 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
     gameWindow.draw(sky);
     gameWindow.draw(background);
     majorTom.drawTom(gameWindow);
+
 //    grunt1 -> drawGrunt(gameWindow);
 //    grunt2 -> drawGrunt(gameWindow);
 //    grunt3 -> drawGrunt(gameWindow);
 //    grunt4 -> drawGrunt(gameWindow);
 //    grunt5 -> drawGrunt(gameWindow);
-	for (unsigned int x=0; x<nEnemies; x++) {
-		grunts[x]->drawGrunt(gameWindow);
-	}
+
+    logic -> drawKorat(gameWindow);
+
     gameWindow.draw(survivorCnt);
     gameWindow.draw(weapon1);
     gameWindow.draw(weapon2);

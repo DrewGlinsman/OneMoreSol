@@ -38,16 +38,6 @@ int main(int argc, char** argv)
 
         float delta; // Time between game loops
 
-        int x = 0;
-        GameLogic logic;
-
-
-        while(x < 20)
-        {
-            logic.selectKorat(delta);
-            x++;
-        }
-
 
         quit = currentGame -> playerViewIsOpen();
 
