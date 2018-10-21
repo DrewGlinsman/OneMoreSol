@@ -25,6 +25,8 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!pPistol.loadFromFile("assets/plasmaPistol.png"))
         cout << "Failed to Load plasma Pistol." << endl;
 
+    pPistol.setSmooth(true);
+
     sky.setRadius(894);
     sky.setOrigin(894,894);
     sky.setPosition(720, 450);
