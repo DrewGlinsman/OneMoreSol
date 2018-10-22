@@ -1,5 +1,7 @@
+
 #ifndef GUN_H
 #define GUN_H
+
 #include<SFML/Graphics.hpp>
 
 class Gun
@@ -19,4 +21,4 @@ public:
 
 };
 
-#endif // GUN_H
+#endif

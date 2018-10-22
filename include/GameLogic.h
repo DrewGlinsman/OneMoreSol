@@ -1,6 +1,6 @@
+
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
-
 
 #include "MajorTom.h"
 #include "KoratEmpire.h"
@@ -51,7 +51,6 @@ class GameLogic{
         bool checkEnd();
         int decideLane();
         int decideType(std::vector<int> enemyPool);
-
 };
 
 

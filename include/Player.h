@@ -1,5 +1,7 @@
+
 #ifndef PLAYER_H
 #define PLAYER_H
+
 #include <SFML/Graphics.hpp>
 #include "Gun.h"
 
@@ -25,4 +27,4 @@ private:
     Gun gun;
 };
 
-#endif // PLAYER_H
+#endif

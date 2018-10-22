@@ -1,3 +1,4 @@
+
 #include "PlasmaPistol.h"
 
 //instantiate all the basic values for a plasma pistol.

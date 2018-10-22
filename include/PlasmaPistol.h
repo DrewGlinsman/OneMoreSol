@@ -1,3 +1,4 @@
+
 #ifndef PLASMAPISTOL_H
 #define PLASMAPISTOL_H
 
@@ -19,4 +20,4 @@ class PlasmaPistol : public Gun
 
 };
 
-#endif // PLASMAPISTOL_H
+#endif

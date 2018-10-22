@@ -1,9 +1,3 @@
-/*
- * PlasmaBullet.h
- *
- *  Created on: Oct 19, 2018
- *      Author: jabowden
- */
 
 #ifndef INCLUDE_PLASMABULLET_H_
 #define INCLUDE_PLASMABULLET_H_
@@ -14,4 +8,4 @@ public:
 	virtual ~PlasmaBullet();
 };
 
-#endif /* INCLUDE_PLASMABULLET_H_ */
+#endif

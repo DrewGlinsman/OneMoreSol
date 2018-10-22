@@ -1,16 +1,9 @@
-/*
- * KoratEmpire.h
- *
- *  Created on: Oct 14, 2018
- *      Author: jabowden
- */
 
 #ifndef INCLUDE_KORATEMPIRE_H_
 #define INCLUDE_KORATEMPIRE_H_
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Gun.h"
 
 class KoratEmpire {
 public:
@@ -38,9 +31,8 @@ public:
 private:
 	unsigned int health;
 	float speed;
-	Gun gun;
     int koratType;
 
 };
 
-#endif /* INCLUDE_KORATEMPIRE_H_ */
+#endif

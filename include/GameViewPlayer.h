@@ -1,3 +1,4 @@
+
 #ifndef GAMEVIEWPLAYER_H
 #define GAMEVIEWPLAYER_H
 
@@ -5,7 +6,6 @@
 #include <SFML/Audio.hpp>
 #include "Gun.h"
 #include "MajorTom.h"
-#include "Grunt.h"
 #include "GameLogic.h"
 
 using namespace std;

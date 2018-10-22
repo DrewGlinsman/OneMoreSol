@@ -1,12 +1,12 @@
 
-#include "ArcThrower.h"
+#include "LaserMinigun.h"
 
-ArcThrower::ArcThrower() {
+LaserMinigun::LaserMinigun() {
 	// TODO Auto-generated constructor stub
 
 }
 
-ArcThrower::~ArcThrower() {
+LaserMinigun::~LaserMinigun() {
 	// TODO Auto-generated destructor stub
 }
 

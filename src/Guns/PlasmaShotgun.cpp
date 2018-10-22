@@ -1,11 +1,5 @@
-/*
- * PlasmaShotgun.cpp
- *
- *  Created on: Oct 19, 2018
- *      Author: jabowden
- */
 
-#include <PlasmaShotgun.h>
+#include "PlasmaShotgun.h"
 
 PlasmaShotgun::PlasmaShotgun() {
 	// TODO Auto-generated constructor stub

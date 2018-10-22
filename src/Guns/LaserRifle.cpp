@@ -1,12 +1,12 @@
 
-#include "ArcThrower.h"
+#include "LaserRifle.h"
 
-ArcThrower::ArcThrower() {
+LaserRifle::LaserRifle() {
 	// TODO Auto-generated constructor stub
 
 }
 
-ArcThrower::~ArcThrower() {
+LaserRifle::~LaserRifle() {
 	// TODO Auto-generated destructor stub
 }
 
