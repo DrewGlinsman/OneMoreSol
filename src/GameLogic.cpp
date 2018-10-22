@@ -100,7 +100,7 @@ void GameLogic::spawnKorat(float timePassed)
             break;
         default:
             newKorat = new Grunt(spawnLane);
-            cout << "Break case activated = Random is not working" << endl;
+            cout << "Break Case Activated" << endl;
             break;
 
     }
@@ -151,6 +151,6 @@ int GameLogic::decideLane()
 int GameLogic::decideType(std::vector<int> enemyPool)
 {
     double enemyType = Random() * enemyPool.size();
-    enemyType = (int) enemyType - 1;
+    enemyType = (int) enemyType;
     return enemyPool[enemyType];
 }
