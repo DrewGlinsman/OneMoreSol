@@ -5,6 +5,12 @@
 #include "MajorTom.h"
 #include "KoratEmpire.h"
 #include "Grunt.h"
+#include "Jackal.h"
+#include "Elite.h"
+#include "Hunter.h"
+#include "Brute.h"
+#include "Bomber.h"
+#include "Biker.h"
 #include "rngs.h"
 
 using namespace std;

@@ -1,39 +1,39 @@
 
-#include "Grunt.h"
+#include "Elite.h"
 #include <iostream>
 
-Grunt::Grunt(int startLane){
+Elite::Elite(int startLane){
     if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
         std::cout << "Failed to load plasmaGrunt." << std::endl;
     lane = 0;
-	grunt.setSize(sf::Vector2f(64,64));
-	grunt.setTexture(&gruntPlasma);
-	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
+	elite.setSize(sf::Vector2f(64,64));
+	elite.setTexture(&gruntPlasma);
+	elite.setOrigin(elite.getSize().x / 2, elite.getSize().y /2);
 	setLane(startLane);
-	grunt.setPosition(1500, lane);
-	std::cout << "I'm a grunt" << std::endl;
+	elite.setPosition(1500, lane);
+	std::cout << "I'm a elite" << std::endl;
 }
 
-Grunt::~Grunt() {
+Elite::~Elite() {
 	// TODO Auto-generated destructor stub
 
 }
 
-void Grunt::wasShot(int damage)
+void Elite::wasShot(int damage)
 {
 	health - damage;
 	if(health < 0)
     {
-        //trigger grunt death
+        //trigger elite death
     }
 }
 
-int Grunt::getLane()
+int Elite::getLane()
 {
     return lane;
 }
 
-void Grunt::setLane(int givenLane)
+void Elite::setLane(int givenLane)
 {
      switch(givenLane)
 	{
@@ -58,20 +58,20 @@ void Grunt::setLane(int givenLane)
 	}
 }
 
-void Grunt::moveCurrentKorat(float timePassed)
+void Elite::moveCurrentKorat(float timePassed)
 {
-        if(grunt.getPosition().x > -40)
+        if(elite.getPosition().x > -40)
         {
-            grunt.move(-speed * timePassed, 0);
+            elite.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Grunt
+            // delete Elite
             // survior - 1
         }
 }
 
-void Grunt::drawCurrentKorat(sf::RenderWindow& window)
+void Elite::drawCurrentKorat(sf::RenderWindow& window)
 {
-    window.draw(grunt);
+    window.draw(elite);
 }

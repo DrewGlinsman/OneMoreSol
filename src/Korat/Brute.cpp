@@ -1,39 +1,39 @@
 
-#include "Grunt.h"
+#include "Brute.h"
 #include <iostream>
 
-Grunt::Grunt(int startLane){
+Brute::Brute(int startLane){
     if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
         std::cout << "Failed to load plasmaGrunt." << std::endl;
     lane = 0;
-	grunt.setSize(sf::Vector2f(64,64));
-	grunt.setTexture(&gruntPlasma);
-	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
+	brute.setSize(sf::Vector2f(64,64));
+	brute.setTexture(&gruntPlasma);
+	brute.setOrigin(brute.getSize().x / 2, brute.getSize().y /2);
 	setLane(startLane);
-	grunt.setPosition(1500, lane);
-	std::cout << "I'm a grunt" << std::endl;
+	brute.setPosition(1500, lane);
+	std::cout << "I'm a brute" << std::endl;
 }
 
-Grunt::~Grunt() {
+Brute::~Brute() {
 	// TODO Auto-generated destructor stub
 
 }
 
-void Grunt::wasShot(int damage)
+void Brute::wasShot(int damage)
 {
 	health - damage;
 	if(health < 0)
     {
-        //trigger grunt death
+        //trigger brute death
     }
 }
 
-int Grunt::getLane()
+int Brute::getLane()
 {
     return lane;
 }
 
-void Grunt::setLane(int givenLane)
+void Brute::setLane(int givenLane)
 {
      switch(givenLane)
 	{
@@ -58,20 +58,20 @@ void Grunt::setLane(int givenLane)
 	}
 }
 
-void Grunt::moveCurrentKorat(float timePassed)
+void Brute::moveCurrentKorat(float timePassed)
 {
-        if(grunt.getPosition().x > -40)
+        if(brute.getPosition().x > -40)
         {
-            grunt.move(-speed * timePassed, 0);
+            brute.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Grunt
+            // delete Brute
             // survior - 1
         }
 }
 
-void Grunt::drawCurrentKorat(sf::RenderWindow& window)
+void Brute::drawCurrentKorat(sf::RenderWindow& window)
 {
-    window.draw(grunt);
+    window.draw(brute);
 }

@@ -80,34 +80,32 @@ void GameLogic::spawnKorat(float timePassed)
         case 1:
             newKorat = new Grunt(spawnLane);
             break;
-        /*
         case 2:
-            newKorat = new Korat2(spawnLane);
+            newKorat = new Jackal(spawnLane);
             break;
         case 3:
-            newKorat = new Korat3(spawnLane);
+            newKorat = new Elite(spawnLane);
             break;
         case 4:
-            newKorat = new Korat4(spawnLane);
+            newKorat = new Hunter(spawnLane);
             break;
         case 5:
-            newKorat = new Korat5(spawnLane);
+            newKorat = new Brute(spawnLane);
             break;
         case 6:
-            newKorat = new Korat6(spawnLane);
+            newKorat = new Bomber(spawnLane);
             break;
         case 7:
-            newKorat = new Korat7(spawnLane);
+            newKorat = new Biker(spawnLane);
             break;
-        */
         default:
             newKorat = new Grunt(spawnLane);
+            cout << "Break case activated = Random is not working" << endl;
             break;
 
     }
     currentKorat[spawnLane - 1].push_back(newKorat);
 
-    cout << endl;
     cout << "==============================" << endl;
     for (int i = 0; i < currentKorat.size(); i ++)
     {

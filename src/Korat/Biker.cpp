@@ -1,39 +1,39 @@
 
-#include "Grunt.h"
+#include "Biker.h"
 #include <iostream>
 
-Grunt::Grunt(int startLane){
+Biker::Biker(int startLane){
     if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
         std::cout << "Failed to load plasmaGrunt." << std::endl;
     lane = 0;
-	grunt.setSize(sf::Vector2f(64,64));
-	grunt.setTexture(&gruntPlasma);
-	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
+	biker.setSize(sf::Vector2f(64,64));
+	biker.setTexture(&gruntPlasma);
+	biker.setOrigin(biker.getSize().x / 2, biker.getSize().y /2);
 	setLane(startLane);
-	grunt.setPosition(1500, lane);
-	std::cout << "I'm a grunt" << std::endl;
+	biker.setPosition(1500, lane);
+	std::cout << "I'm a biker" << std::endl;
 }
 
-Grunt::~Grunt() {
+Biker::~Biker() {
 	// TODO Auto-generated destructor stub
 
 }
 
-void Grunt::wasShot(int damage)
+void Biker::wasShot(int damage)
 {
 	health - damage;
 	if(health < 0)
     {
-        //trigger grunt death
+        //trigger biker death
     }
 }
 
-int Grunt::getLane()
+int Biker::getLane()
 {
     return lane;
 }
 
-void Grunt::setLane(int givenLane)
+void Biker::setLane(int givenLane)
 {
      switch(givenLane)
 	{
@@ -58,20 +58,20 @@ void Grunt::setLane(int givenLane)
 	}
 }
 
-void Grunt::moveCurrentKorat(float timePassed)
+void Biker::moveCurrentKorat(float timePassed)
 {
-        if(grunt.getPosition().x > -40)
+        if(biker.getPosition().x > -40)
         {
-            grunt.move(-speed * timePassed, 0);
+            biker.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Grunt
+            // delete Biker
             // survior - 1
         }
 }
 
-void Grunt::drawCurrentKorat(sf::RenderWindow& window)
+void Biker::drawCurrentKorat(sf::RenderWindow& window)
 {
-    window.draw(grunt);
+    window.draw(biker);
 }

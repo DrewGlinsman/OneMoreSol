@@ -1,9 +1,3 @@
-/*
- * Grunt.h
- *
- *  Created on: Oct 14, 2018
- *      Author: jabowden
- */
 
 #ifndef INCLUDE_GRUNT_H_
 #define INCLUDE_GRUNT_H_
@@ -42,4 +36,4 @@ private:
     int lane5 = 680;
 };
 
-#endif /* INCLUDE_GRUNT_H_ */
+#endif
