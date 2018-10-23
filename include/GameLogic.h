@@ -2,6 +2,8 @@
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
 
+#include <SFML/Graphics.hpp>
+
 #include "MajorTom.h"
 #include "KoratEmpire.h"
 #include "Grunt.h"
@@ -41,9 +43,11 @@ class GameLogic{
         int lane4 = 594;
         int lane5 = 680;
 
+        int level = 1;
         int sunStartOrientation = 0;
         int sunRiseOrientation = 340;
         int sunSetOrientation = 134;
+        float levelSpeedModifier = 20;
 
     public:
         GameLogic();
@@ -55,6 +59,7 @@ class GameLogic{
         bool checkEnd();
         int decideLane();
         int decideType(std::vector<int> enemyPool);
+        void runLevel(sf::CircleShape& gameSky, float timePassed);
 };
 
 

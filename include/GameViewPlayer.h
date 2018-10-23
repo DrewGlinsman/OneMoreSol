@@ -62,8 +62,6 @@ public:
     void moveEnemy(float timePassed);
     void updateGame(void);
     void deleteObjects(void);
-    void rotateSun(float delta, int modifier);
-
 
 };
 

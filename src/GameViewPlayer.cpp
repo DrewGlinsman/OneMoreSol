@@ -183,8 +183,7 @@ bool GameViewPlayer::playerViewIsOpen()
                     }
                 }
             }
-
-         rotateSun(delta, 1);
+         logic -> runLevel(sky, delta);
     }
     return false;
 }
@@ -198,8 +197,6 @@ void GameViewPlayer::moveEnemy(float timePassed)
 {
 
 }
-
-
 
 void GameViewPlayer::updateGame(void) // Draws all elements of screen
 {
@@ -233,16 +230,4 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 void GameViewPlayer::deleteObjects(void)
 {
     delete currentPlayer;
-}
-
-void GameViewPlayer::rotateSun(float delta, int modifier)
-{
-	float rotation = sky.getRotation();
-	//std::cout << rotation << std::endl;
-
-	if (rotation >= 134) // if the sun has set
-	{
-		sky.rotate(-rotation);
-	}
-	sky.rotate(delta * modifier);
 }

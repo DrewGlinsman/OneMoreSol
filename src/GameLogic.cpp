@@ -154,3 +154,20 @@ int GameLogic::decideType(std::vector<int> enemyPool)
     enemyType = (int) enemyType;
     return enemyPool[enemyType];
 }
+
+void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
+{
+	float rotation = gameSky.getRotation();
+
+	//Chris, should we spawn first wave of Korat here?
+
+	if (rotation >= 134) // if the sun has set
+	{
+		gameSky.rotate(-rotation); //rotate the sun back to the beginning
+		level += 1;
+		levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
+
+		//Chris, should we stop spawning Korat here, give a cool down time, then spawn them again?
+	}
+	gameSky.rotate(timePassed * levelSpeedModifier);
+}
