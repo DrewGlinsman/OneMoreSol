@@ -43,9 +43,8 @@ class GameLogic{
         int lane4 = 594;
         int lane5 = 680;
 
-        int level = 1;
         int sunStartOrientation = 0;
-        int sunRiseOrientation = 340;
+        int sunRiseOrientation = 10;
         int sunSetOrientation = 134;
         float levelSpeedModifier = 20;
 
