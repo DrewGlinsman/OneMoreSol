@@ -153,6 +153,7 @@ bool GameViewPlayer::playerViewIsOpen()
                         //majorTom.moveTomUp(delta);
                         if(lockOutKeyboard == false)
                         keepMovingUp = majorTom.initMove(delta, "Up");
+                        sky.rotate(delta);
                     }
 
                     if(Event.key.code == sf::Keyboard::Down)
@@ -182,6 +183,8 @@ bool GameViewPlayer::playerViewIsOpen()
                     }
                 }
             }
+
+         rotateSun(delta, 1);
     }
     return false;
 }
@@ -230,4 +233,16 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 void GameViewPlayer::deleteObjects(void)
 {
     delete currentPlayer;
+}
+
+void GameViewPlayer::rotateSun(float delta, int modifier)
+{
+	float rotation = sky.getRotation();
+	//std::cout << rotation << std::endl;
+
+	if (rotation >= 134) // if the sun has set
+	{
+		sky.rotate(-rotation);
+	}
+	sky.rotate(delta * modifier);
 }

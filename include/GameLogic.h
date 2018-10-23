@@ -41,6 +41,10 @@ class GameLogic{
         int lane4 = 594;
         int lane5 = 680;
 
+        int sunStartOrientation = 0;
+        int sunRiseOrientation = 340;
+        int sunSetOrientation = 134;
+
     public:
         GameLogic();
         void moveKorat(float timePassed);
