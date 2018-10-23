@@ -161,6 +161,8 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
 
 	//Chris, should we spawn first wave of Korat here?
 
+	//Yes we should Jack, but not the first wave, just start the spawning process, it will know what level it is spawn appropriately.
+
 	if (rotation >= 134) // if the sun has set
 	{
 		gameSky.rotate(-rotation); //rotate the sun back to the beginning
@@ -168,6 +170,10 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
 		levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
 
 		//Chris, should we stop spawning Korat here, give a cool down time, then spawn them again?
+
+		//No from here we stop spawning the Korat, once all Korat are dead we transition to the Text adventure,
+		//afterwards we restart the process with the next level, with special checks for level 10 and 20 that
+		//disable the spawning process and only spawn the bosses.
 	}
 	gameSky.rotate(timePassed * levelSpeedModifier);
 }
