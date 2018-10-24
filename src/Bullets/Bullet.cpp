@@ -7,8 +7,9 @@
  * \param velocity speed of bullet
  *
  */
-Bullet::Bullet()
+Bullet::Bullet(sf::Vector2f size)
 {
+    bullet.setSize(size);
     float positionX = 5;
     float positionY = 10;
     float damage = 100;
@@ -51,6 +52,11 @@ float Bullet::setPosition(sf::Vector2f newPos)
 {
     positionX = newPos.x;
     positionY = newPos.y;
+}
+
+void Bullet::fire(float timePassed)
+{
+    bullet.move(velocity*timePassed, 0);
 }
 
 Bullet::doDamage()

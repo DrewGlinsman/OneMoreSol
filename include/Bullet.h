@@ -6,7 +6,7 @@
 class Bullet
 {
     public:
-        Bullet();
+        Bullet(sf::Vector2f size);
         virtual ~Bullet();
 
         float getVelocity();
@@ -14,7 +14,7 @@ class Bullet
         float getPositionX();
         float getPositionY();
         float setPosition(sf::Vector2f newPos);
-
+        void fire(float timePassed);
         virtual doDamage();
 
     protected:
@@ -26,6 +26,7 @@ class Bullet
         //speed
         float velocity;
 
+        sf::RectangleShape bullet;
         //location
         float positionX;
         float positionY;
