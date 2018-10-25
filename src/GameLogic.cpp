@@ -171,10 +171,10 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
 
 	//Yes we should Jack, but not the first wave, just start the spawning process, it will know what level it is spawn appropriately.
 
-	if (rotation >= 134) // if the sun has set
+	if (rotation >= sunSetOrientation) // if the sun has set
 	{
 		gameSky.rotate(-rotation); //rotate the sun back to the beginning
-		level += 1;
+		currentLevel += 1;
 		levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
 
 		//Chris, should we stop spawning Korat here, give a cool down time, then spawn them again?
