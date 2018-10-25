@@ -1,9 +1,3 @@
-/*
- * Grunt.h
- *
- *  Created on: Oct 14, 2018
- *      Author: jabowden
- */
 
 #ifndef INCLUDE_GRUNT_H_
 #define INCLUDE_GRUNT_H_
@@ -19,16 +13,29 @@ public:
 	Grunt(int startLane);
 	virtual ~Grunt();
 
-	void wasShot();
+	int getLane();
 
-	void moveGrunt(float timePassed);
+	void setLane(int givenLane);
 
-	void drawGrunt(sf::RenderWindow& window);
+	void wasShot(int damage);
+
+    bool checkDeath();
+
+	void moveCurrentKorat(float timePassed);
+
+	void drawCurrentKorat(sf::RenderWindow& window);
 
 private:
-    int maxEnemySpeedRand = 150;
-    int minEnemySpeedRand = 75;
+
 	int lane;
+	int speed = 100;
+	int health = 100;
+
+    int lane1 = 335;
+    int lane2 = 422;
+    int lane3 = 508;
+    int lane4 = 594;
+    int lane5 = 680;
 };
 
-#endif /* INCLUDE_GRUNT_H_ */
+#endif

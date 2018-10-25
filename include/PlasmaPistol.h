@@ -1,3 +1,4 @@
+
 #ifndef PLASMAPISTOL_H
 #define PLASMAPISTOL_H
 
@@ -9,8 +10,8 @@ class PlasmaPistol : public Gun
     public:
         PlasmaPistol();
         virtual ~PlasmaPistol();
-        void Shoot();
-        void Reload();
+        void shoot();
+        void reload();
 
     protected:
 
@@ -19,4 +20,4 @@ class PlasmaPistol : public Gun
 
 };
 
-#endif // PLASMAPISTOL_H
+#endif

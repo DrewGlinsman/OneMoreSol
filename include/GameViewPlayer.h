@@ -1,3 +1,4 @@
+
 #ifndef GAMEVIEWPLAYER_H
 #define GAMEVIEWPLAYER_H
 
@@ -5,7 +6,6 @@
 #include <SFML/Audio.hpp>
 #include "Gun.h"
 #include "MajorTom.h"
-#include "Grunt.h"
 #include "GameLogic.h"
 
 using namespace std;
@@ -52,8 +52,9 @@ public:
     sf::Event Event;
     float* currentPlayer;
 
+    GameLogic* logic;
+
     MajorTom majorTom;
-    unsigned int nEnemies = 5;
 
     GameViewPlayer();
     bool playerViewIsOpen();
@@ -61,7 +62,6 @@ public:
     void moveEnemy(float timePassed);
     void updateGame(void);
     void deleteObjects(void);
-
 
 };
 

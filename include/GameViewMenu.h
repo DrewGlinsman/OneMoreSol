@@ -1,4 +1,3 @@
-// Chris Wolinski SFML Pong
 
 #ifndef GAMEVIEWMENU_H
 #define GAMEVIEWMENU_H

@@ -1,3 +1,4 @@
+
 #include "Gun.h"
 
 Gun::Gun()
@@ -8,4 +9,9 @@ Gun::Gun()
 Gun::~Gun()
 {
     //dtor
+}
+
+void Gun::shoot(float timePassed)
+{
+
 }

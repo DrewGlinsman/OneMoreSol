@@ -1,12 +1,19 @@
+
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
 
-#include "GameViewPlayer.h"
+#include <SFML/Graphics.hpp>
+#include <memory>
+
 #include "MajorTom.h"
 #include "KoratEmpire.h"
 #include "Grunt.h"
-#include "Korat2.h"
-#include "Korat3.h"
+#include "Jackal.h"
+#include "Elite.h"
+#include "Hunter.h"
+#include "Brute.h"
+#include "Bomber.h"
+#include "Biker.h"
 #include "rngs.h"
 
 using namespace std;
@@ -14,17 +21,14 @@ using namespace std;
 class GameLogic{
 
     private:
-        MajorTom majorTom;
         //wrap it in reference wrapper so that it passes references instead of copies
-        std::vector<std::vector<KoratEmpire> > currentKorat;
-        sf::SoundBuffer gunSound;
-        sf::Sound gunSoundEffect;
+        std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         int survivorCount;
         int currentLevel = 19;
 
         double spawnRate;
-        double spawnLane;
-        double spawnType;
+        int spawnLane;
+        int spawnType;
 
         std::vector <int> enemyPool1 {1};
         std::vector <int> enemyPool2 {1, 2};
@@ -40,15 +44,22 @@ class GameLogic{
         int lane4 = 594;
         int lane5 = 680;
 
+        int sunStartOrientation = 0;
+        int sunRiseOrientation = 10;
+        int sunSetOrientation = 134;
+        float levelSpeedModifier = 20;
+
     public:
         GameLogic();
         void moveKorat(float timePassed);
+        void drawKorat(sf::RenderWindow& window);
+
         void selectKorat(float timePassed);
         void spawnKorat(float timePassed);
         bool checkEnd();
         int decideLane();
         int decideType(std::vector<int> enemyPool);
-
+        void runLevel(sf::CircleShape& gameSky, float timePassed);
 };
 
 

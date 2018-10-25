@@ -8,7 +8,7 @@ using namespace std;
 int main(int argc, char** argv)
 {
 
-    sf::Event Event; // Process events
+    //sf::Event Event; // Process events
 
     string currentWinner;
 
@@ -37,14 +37,6 @@ int main(int argc, char** argv)
         sf::Clock clock; // Game loop clock
 
         float delta; // Time between game loops
-
-        int x = 0;
-        GameLogic logic;
-        while(x < 100)
-        {
-            logic.selectKorat(delta);
-            x++;
-        }
 
 
         quit = currentGame -> playerViewIsOpen();

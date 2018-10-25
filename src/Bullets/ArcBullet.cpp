@@ -1,18 +1,18 @@
 /*
- * GuassRifle.cpp
+ * ArcBullet.cpp
  *
  *  Created on: Oct 19, 2018
  *      Author: Bowden
  */
 
-#include <GaussRifle.h>
+#include <ArcBullet.h>
 
-GaussRifle::GaussRifle() {
+ArcBullet::ArcBullet() {
 	// TODO Auto-generated constructor stub
 
 }
 
-GaussRifle::~GaussRifle() {
+ArcBullet::~ArcBullet() {
 	// TODO Auto-generated destructor stub
 }
 

@@ -1,49 +1,39 @@
-/*
- * KoratEmpire.h
- *
- *  Created on: Oct 14, 2018
- *      Author: jabowden
- */
 
 #ifndef INCLUDE_KORATEMPIRE_H_
 #define INCLUDE_KORATEMPIRE_H_
 
 #include <SFML/Graphics.hpp>
-#include "Gun.h"
+#include <iostream>
 
 class KoratEmpire {
 public:
 	KoratEmpire();
 	virtual ~KoratEmpire();
 
-	unsigned int getHealth() const;
-	void setHealth(unsigned int health);
+	virtual bool checkDeath();
 
-	const Gun& getGun() const;
-	void setGun(const Gun& gun);
+	virtual void setLane(int givenLane);
 
-	int getSpeed() const;
-	void setSpeed(int speed);
+	virtual int getLane();
 
-	bool checkDeath();
+	virtual void moveCurrentKorat(float timepassed);
 
-	void setLane(int lane);
-	int getLane();
+	virtual void drawCurrentKorat(sf::RenderWindow& window);
 
-    void setType(int type);
-
-private:
-	unsigned int health;
-	float speed;
-	Gun gun;
-    int koratType;
-	int lane;
+    int lane;
 
     int lane1 = 335;
     int lane2 = 422;
     int lane3 = 508;
     int lane4 = 594;
     int lane5 = 680;
+
+
+private:
+	unsigned int health;
+	float speed;
+    int koratType;
+
 };
 
-#endif /* INCLUDE_KORATEMPIRE_H_ */
+#endif
