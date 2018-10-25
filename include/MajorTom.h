@@ -16,7 +16,6 @@ class MajorTom {
         float newPosition;
         float timePassed;
         int currentHealth;
-        int newHealth;
         Gun currentGun;
 
     public:

@@ -8,7 +8,7 @@
 using namespace std;
 
 GameViewMenu::GameViewMenu() // Menu window constructor
-    : menuWindow(sf::VideoMode(1440, 900, 32), "One More Soul",sf::Style::Titlebar | sf::Style::Close)
+    : menuWindow(sf::VideoMode(1440, 900, 32), "One More Sol",sf::Style::Titlebar | sf::Style::Close)
 {
     if (!menuImage.loadFromFile("assets/menuScreen.png"))
         cout << "Could not load requested image." << endl;

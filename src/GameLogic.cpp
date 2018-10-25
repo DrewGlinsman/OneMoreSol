@@ -52,7 +52,7 @@ void GameLogic::drawKorat(sf::RenderWindow& window)
 
 void GameLogic::selectKorat(float timePassed)
 {
-    spawnLane = decideLane();
+    spawnLane = decideLane(timePassed);
 
     /*
         checks what level the player is on and
@@ -138,8 +138,9 @@ void GameLogic::spawnKorat(float timePassed)
     cout << "==============================" << endl;
 }
 
-int GameLogic::decideLane()
+int GameLogic::decideLane(float timePassed)
 {
+    PutSeed(-5);
     double lane = Random() * 5;
     if (lane >= 0 && lane <= 1)
         lane = 1;

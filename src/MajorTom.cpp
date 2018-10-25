@@ -1,4 +1,4 @@
-// Chris Wolinski SFML Pong
+// Chris Wolinski
 
 #include "MajorTom.h"
 #include <iostream>
@@ -248,87 +248,6 @@ void MajorTom::shoot(float timePassed)
 {
     currentGun.shoot(timePassed);
 }
-/*
-void MajorTom::moveTomUp(float timePassed)
-{
-    if (majorTom.getPosition().y > 334 && majorTom.getPosition().y < 346)
-    {
-        // Do not move up - top lane
-    }
-    else if (majorTom.getPosition().y > 421 && majorTom.getPosition().y < 423)
-    {
-        while(majorTom.getPosition().y > 335)
-        {
-            majorTom.move(timePassed * .05, timePassed * -.1);
-        }
-        setTomPosition(335);
-    }
-    else if (majorTom.getPosition().y > 507 && majorTom.getPosition().y < 509)
-    {
-        while(majorTom.getPosition().y > 422)
-        {
-            majorTom.move(timePassed * .05, timePassed * -.1);
-        }
-        setTomPosition(422);
-    }
-    else if (majorTom.getPosition().y > 593 && majorTom.getPosition().y < 595)
-    {
-        while(majorTom.getPosition().y > 508)
-        {
-            majorTom.move(timePassed * .05, timePassed * -.1);
-        }
-        setTomPosition(508);
-    }
-    else if (majorTom.getPosition().y > 679 && majorTom.getPosition().y < 681)
-    {
-        while(majorTom.getPosition().y > 594)
-        {
-            majorTom.move(timePassed * .05, timePassed * -.1);
-        }
-        setTomPosition(594);
-    }
-}
-
-void MajorTom::moveTomDown(float timePassed)
-{
-    if (majorTom.getPosition().y > 334 && majorTom.getPosition().y < 336)
-    {
-        while(majorTom.getPosition().y < 422)
-        {
-            majorTom.move(timePassed * -.05, timePassed * .1);
-        }
-        setTomPosition(422);
-    }
-    else if (majorTom.getPosition().y > 421 && majorTom.getPosition().y < 423)
-    {
-        while(majorTom.getPosition().y < 508)
-        {
-            majorTom.move(timePassed * -.05, timePassed * .1);
-        }
-        setTomPosition(508);
-    }
-    else if (majorTom.getPosition().y > 507 && majorTom.getPosition().y < 509)
-    {
-        while(majorTom.getPosition().y < 594)
-        {
-            majorTom.move(timePassed * -.05, timePassed * .1);
-        }
-        setTomPosition(594);
-    }
-    else if (majorTom.getPosition().y > 593 && majorTom.getPosition().y < 595)
-    {
-        while(majorTom.getPosition().y < 680)
-        {
-            majorTom.move(timePassed * -.05, timePassed * .1);
-        }
-        setTomPosition(680);
-    }
-    else if (majorTom.getPosition().y > 679 && majorTom.getPosition().y < 681)
-    {
-        // Do not move down - bottom lane
-    }
-}
-*/
 
 int MajorTom::getHealth()
 {

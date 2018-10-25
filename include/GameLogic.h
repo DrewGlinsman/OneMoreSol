@@ -57,7 +57,7 @@ class GameLogic{
         void selectKorat(float timePassed);
         void spawnKorat(float timePassed);
         bool checkEnd();
-        int decideLane();
+        int decideLane(float timePased);
         int decideType(std::vector<int> enemyPool);
         void runLevel(sf::CircleShape& gameSky, float timePassed);
 };
