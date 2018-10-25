@@ -60,18 +60,24 @@ void Grunt::setLane(int givenLane)
 
 void Grunt::moveCurrentKorat(float timePassed)
 {
-        if(grunt.getPosition().x > -40)
+        if(grunt.getPosition().x > 500)
         {
             grunt.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Grunt
-            // survior - 1
+            health = 0;
         }
 }
 
 void Grunt::drawCurrentKorat(sf::RenderWindow& window)
 {
     window.draw(grunt);
+}
+
+bool Grunt::checkDeath()
+{
+    if (health <= 0)
+        return true;
+    return false;
 }

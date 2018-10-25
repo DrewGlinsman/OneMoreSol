@@ -60,18 +60,24 @@ void Biker::setLane(int givenLane)
 
 void Biker::moveCurrentKorat(float timePassed)
 {
-        if(biker.getPosition().x > -40)
+        if(biker.getPosition().x > 500)
         {
             biker.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Biker
-            // survior - 1
+            health = 0;
         }
 }
 
 void Biker::drawCurrentKorat(sf::RenderWindow& window)
 {
     window.draw(biker);
+}
+
+bool Biker::checkDeath()
+{
+    if (health <= 0)
+        return true;
+    return false;
 }

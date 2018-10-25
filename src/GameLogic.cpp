@@ -26,7 +26,14 @@ void GameLogic::moveKorat(float timePassed)
     {
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            currentKorat[i][j] -> moveCurrentKorat(timePassed);
+            if (currentKorat[i][j] -> checkDeath() == false)
+            {
+                currentKorat[i][j] -> moveCurrentKorat(timePassed);
+            }
+            else
+            {
+                currentKorat[i].erase(currentKorat[i].begin() + j);
+            }
         }
     }
 }
@@ -37,7 +44,8 @@ void GameLogic::drawKorat(sf::RenderWindow& window)
     {
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            currentKorat[i][j] -> drawCurrentKorat(window);
+                currentKorat[i][j] -> drawCurrentKorat(window);
+
         }
     }
 }
@@ -104,7 +112,7 @@ void GameLogic::spawnKorat(float timePassed)
             break;
 
     }
-    currentKorat[spawnLane - 1].push_back(newKorat);
+    currentKorat[spawnLane - 1].emplace_back(newKorat);
 
     cout << "==============================" << endl;
     for (int i = 0; i < currentKorat.size(); i ++)

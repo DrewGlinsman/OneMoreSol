@@ -60,18 +60,24 @@ void Hunter::setLane(int givenLane)
 
 void Hunter::moveCurrentKorat(float timePassed)
 {
-        if(hunter.getPosition().x > -40)
+        if(hunter.getPosition().x > 500)
         {
             hunter.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Hunter
-            // survior - 1
+            health = 0;
         }
 }
 
 void Hunter::drawCurrentKorat(sf::RenderWindow& window)
 {
     window.draw(hunter);
+}
+
+bool Hunter::checkDeath()
+{
+    if (health <= 0)
+        return true;
+    return false;
 }

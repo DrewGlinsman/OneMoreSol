@@ -19,6 +19,8 @@ public:
 
 	void wasShot(int damage);
 
+    bool checkDeath();
+
 	void moveCurrentKorat(float timePassed);
 
 	void drawCurrentKorat(sf::RenderWindow& window);

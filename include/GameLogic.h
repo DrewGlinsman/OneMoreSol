@@ -3,6 +3,7 @@
 #define GAMELOGIC_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 #include "MajorTom.h"
 #include "KoratEmpire.h"
@@ -21,7 +22,7 @@ class GameLogic{
 
     private:
         //wrap it in reference wrapper so that it passes references instead of copies
-        std::vector<std::vector<KoratEmpire*>> currentKorat {{},{},{},{},{}};
+        std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         int survivorCount;
         int currentLevel = 19;
 

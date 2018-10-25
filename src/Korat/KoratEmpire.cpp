@@ -59,7 +59,7 @@ void KoratEmpire::drawCurrentKorat(sf::RenderWindow& window)
 
 bool KoratEmpire::checkDeath()
 {
-    if (this->health <= 0)
+    if (health <= 0)
         return true;
     return false;
 }

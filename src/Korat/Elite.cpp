@@ -60,18 +60,24 @@ void Elite::setLane(int givenLane)
 
 void Elite::moveCurrentKorat(float timePassed)
 {
-        if(elite.getPosition().x > -40)
+        if(elite.getPosition().x > 500)
         {
             elite.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Elite
-            // survior - 1
+            health = 0;
         }
 }
 
 void Elite::drawCurrentKorat(sf::RenderWindow& window)
 {
     window.draw(elite);
+}
+
+bool Elite::checkDeath()
+{
+    if (health <= 0)
+        return true;
+    return false;
 }

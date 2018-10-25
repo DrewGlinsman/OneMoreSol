@@ -13,6 +13,7 @@ public:
 	virtual bool checkDeath();
 
 	virtual void setLane(int givenLane);
+
 	virtual int getLane();
 
 	virtual void moveCurrentKorat(float timepassed);

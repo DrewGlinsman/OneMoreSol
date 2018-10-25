@@ -60,18 +60,24 @@ void Jackal::setLane(int givenLane)
 
 void Jackal::moveCurrentKorat(float timePassed)
 {
-        if(jackal.getPosition().x > -40)
+        if(jackal.getPosition().x > 500)
         {
             jackal.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Jackal
-            // survior - 1
+            health = 0;
         }
 }
 
 void Jackal::drawCurrentKorat(sf::RenderWindow& window)
 {
     window.draw(jackal);
+}
+
+bool Jackal::checkDeath()
+{
+    if (health <= 0)
+        return true;
+    return false;
 }

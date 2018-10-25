@@ -8,7 +8,7 @@ using namespace std;
 int main(int argc, char** argv)
 {
 
-    sf::Event Event; // Process events
+    //sf::Event Event; // Process events
 
     string currentWinner;
 

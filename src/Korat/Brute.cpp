@@ -60,18 +60,24 @@ void Brute::setLane(int givenLane)
 
 void Brute::moveCurrentKorat(float timePassed)
 {
-        if(brute.getPosition().x > -40)
+        if(brute.getPosition().x > 500)
         {
             brute.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Brute
-            // survior - 1
+            health = 0;
         }
 }
 
 void Brute::drawCurrentKorat(sf::RenderWindow& window)
 {
     window.draw(brute);
+}
+
+bool Brute::checkDeath()
+{
+    if (health <= 0)
+        return true;
+    return false;
 }

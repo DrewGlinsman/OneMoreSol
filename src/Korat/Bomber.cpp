@@ -60,18 +60,24 @@ void Bomber::setLane(int givenLane)
 
 void Bomber::moveCurrentKorat(float timePassed)
 {
-        if(bomber.getPosition().x > -40)
+        if(bomber.getPosition().x > 500)
         {
             bomber.move(-speed * timePassed, 0);
         }
         else
         {
-            // delete Bomber
-            // survior - 1
+            health = 0;
         }
 }
 
 void Bomber::drawCurrentKorat(sf::RenderWindow& window)
 {
     window.draw(bomber);
+}
+
+bool Bomber::checkDeath()
+{
+    if (health <= 0)
+        return true;
+    return false;
 }
