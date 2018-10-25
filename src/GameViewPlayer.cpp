@@ -153,7 +153,7 @@ bool GameViewPlayer::playerViewIsOpen()
                         //majorTom.moveTomUp(delta);
                         if(lockOutKeyboard == false)
                         keepMovingUp = majorTom.initMove(delta, "Up");
-                        sky.rotate(delta);
+                        //sky.rotate(delta);
                     }
 
                     if(Event.key.code == sf::Keyboard::Down)

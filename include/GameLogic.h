@@ -44,6 +44,8 @@ class GameLogic{
         int lane4 = 594;
         int lane5 = 680;
 
+        int currentKoratCount = 0;
+
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
         int sunSetOrientation = 134;
