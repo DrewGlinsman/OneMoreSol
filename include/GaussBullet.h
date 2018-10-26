@@ -8,6 +8,8 @@ class GaussBullet: public Bullet {
 public:
 	GaussBullet();
 	virtual ~GaussBullet();
+
+	float getPositionX();
 };
 
 #endif

@@ -62,6 +62,11 @@ sf::RectangleShape KoratEmpire::getKorat()
 
 }
 
+float KoratEmpire::getPositionX()
+{
+
+}
+
 bool KoratEmpire::checkDeath()
 {
     if (health <= 0)

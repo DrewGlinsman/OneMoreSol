@@ -27,6 +27,8 @@ public:
 
 	sf::RectangleShape getKorat();
 
+	float getPositionX();
+
 private:
 
 	int lane;

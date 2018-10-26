@@ -20,6 +20,8 @@ public:
 
 	virtual void drawCurrentKorat(sf::RenderWindow& window);
 
+	virtual float getPositionX();
+
 	sf::RectangleShape getKorat();
 
     int lane;

@@ -12,6 +12,11 @@ LaserBullet::LaserBullet() {
 
 }
 
+float LaserBullet::getPositionX()
+{
+   // return plasma.getPosition().x;
+}
+
 LaserBullet::~LaserBullet() {
 	// TODO Auto-generated destructor stub
 }

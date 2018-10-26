@@ -12,6 +12,12 @@ ArcBullet::ArcBullet() {
 
 }
 
+
+float ArcBullet::getPositionX()
+{
+    //return plasma.getPosition().x;
+}
+
 ArcBullet::~ArcBullet() {
 	// TODO Auto-generated destructor stub
 }

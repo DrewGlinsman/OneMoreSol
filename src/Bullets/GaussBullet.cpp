@@ -12,6 +12,11 @@ GaussBullet::GaussBullet() {
 
 }
 
+float GaussBullet::getPositionX()
+{
+   // return plasma.getPosition().x;
+}
+
 GaussBullet::~GaussBullet() {
 	// TODO Auto-generated destructor stub
 }

@@ -25,6 +25,8 @@ public:
 
 	void drawCurrentKorat(sf::RenderWindow& window);
 
+	float getPositionX();
+
 	sf::Sprite getKorat();
 
 private:

@@ -78,7 +78,7 @@ class GameLogic{
         int decideKoratLane();
         int decideKoratType(std::vector<int> enemyPool);
 
-        bool bulletHitsKorat(Bullet selectedBullet, std::vector<shared_ptr<KoratEmpire>> currentLaneKorat);
+        bool bulletHitsKorat(int checkLane,Bullet* selectedBullet, std::vector<std::vector<shared_ptr<KoratEmpire>>>* currentLaneKorat);
 
         void moveBullet(float timePassed);
         void drawBullet(sf::RenderWindow& window);

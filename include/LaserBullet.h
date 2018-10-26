@@ -8,6 +8,8 @@ class LaserBullet: public Bullet {
 public:
 	LaserBullet();
 	virtual ~LaserBullet();
+
+	float getPositionX();
 };
 
 #endif

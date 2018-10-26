@@ -80,6 +80,11 @@ sf::RectangleShape Jackal::getKorat()
     return jackal;
 }
 
+float Jackal::getPositionX()
+{
+    return jackal.getPosition().x;
+}
+
 bool Jackal::checkDeath()
 {
     if (health <= 0)

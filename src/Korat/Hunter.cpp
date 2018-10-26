@@ -80,6 +80,11 @@ sf::RectangleShape Hunter::getKorat()
     return hunter;
 }
 
+float Hunter::getPositionX()
+{
+    return hunter.getPosition().x;
+}
+
 bool Hunter::checkDeath()
 {
     if (health <= 0)

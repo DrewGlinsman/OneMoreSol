@@ -80,6 +80,11 @@ sf::RectangleShape Elite::getKorat()
     return elite;
 }
 
+float Elite::getPositionX()
+{
+    return elite.getPosition().x;
+}
+
 bool Elite::checkDeath()
 {
     if (health <= 0)

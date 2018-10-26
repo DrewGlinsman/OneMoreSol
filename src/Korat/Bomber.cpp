@@ -80,6 +80,11 @@ sf::RectangleShape Bomber::getKorat()
     return bomber;
 }
 
+float Bomber::getPositionX()
+{
+    return bomber.getPosition().x;
+}
+
 bool Bomber::checkDeath()
 {
     if (health <= 0)

@@ -21,6 +21,11 @@ int PlasmaBullet::getLane()
     return lane;
 }
 
+float PlasmaBullet::getPositionX()
+{
+    return plasma.getPosition().x;
+}
+
 void PlasmaBullet::setLane(int givenLane)
 {
      switch(givenLane)
@@ -48,7 +53,7 @@ void PlasmaBullet::setLane(int givenLane)
 
 void PlasmaBullet::moveCurrentBullet(float timePassed)
 {
-        if(plasma.getPosition().x < 1000)
+        if(plasma.getPosition().x < 1200)
         {
             plasma.move(speed * timePassed, 0);
             outOfBounds = false;

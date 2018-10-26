@@ -79,6 +79,11 @@ sf::Sprite Grunt::getKorat()
     return grunt;
 }
 
+float Grunt::getPositionX()
+{
+    return grunt.getPosition().x;
+}
+
 bool Grunt::checkDeath()
 {
     if (health <= 0)

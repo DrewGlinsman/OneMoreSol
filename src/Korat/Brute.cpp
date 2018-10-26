@@ -80,6 +80,11 @@ sf::RectangleShape Brute::getKorat()
     return brute;
 }
 
+float Brute::getPositionX()
+{
+    return brute.getPosition().x;
+}
+
 bool Brute::checkDeath()
 {
     if (health <= 0)

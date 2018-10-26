@@ -24,6 +24,8 @@ public:
 
 	bool getOutOfBounds();
 
+	float getPositionX();
+
 
 
 private:

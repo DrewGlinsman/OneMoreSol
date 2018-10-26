@@ -168,12 +168,14 @@ int GameLogic::decideKoratType(std::vector<int> enemyPool)
 
 //----------------------------------------------------------
 //Bullets generation and drawing
-
-bool GameLogic::bulletHitsKorat(Bullet selectedBullet, std::vector<shared_ptr<KoratEmpire>> currentLaneKorat)
+/*
+bool GameLogic::bulletHitsKorat(int checkLane, Bullet *selectedBullet, std::vector<std::vector<shared_ptr<KoratEmpire>>> *currentLaneKorat)
 {
-    for (int i = 0; i < currentLaneKorat.size(); i ++)
+    for (int i = 0; i < currentLaneKorat -> size(); i ++)
     {
-//        if (selectedBullet.getBullet().getGlobalBounds().intersects(currentLaneKorat[i].getKorat().getGlobalBounds()) == true)
+        //cout << currentLaneKorat -> size() << endl;
+        sf::FloatRect test = currentLaneKorat[i].getKorat().getGlobalBounds();
+        if (selectedBullet -> getBullet().getGlobalBounds().intersects(currentLaneKorat[i].getKorat().getGlobalBounds()) == true)
         {
             return true;
         }
@@ -181,6 +183,7 @@ bool GameLogic::bulletHitsKorat(Bullet selectedBullet, std::vector<shared_ptr<Ko
     return false;
 
 }
+*/
 
 void GameLogic::moveBullet(float timePassed)
 {
@@ -188,7 +191,20 @@ void GameLogic::moveBullet(float timePassed)
     {
         for (int j = 0; j < currentBullet[i].size(); j++)
         {
-            //if(bulletHitsKorat(currentBullet[i][j], currentBullet[i]) == false)
+            if (currentKorat[i].size() != 0)
+            {
+                //cout << currentKorat[i].size() << endl;
+                //cout << currentBullet[i][j] -> getBullet().getPosition().x << " " << currentKorat[i][0] -> getPositionX() << endl;
+                if(currentBullet[i][j] -> getPositionX() < currentKorat[i][0] -> getPositionX())
+                {
+                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                }
+                else
+                {
+                    currentBullet[i].erase(currentBullet[i].begin() + j);
+                }
+            }
+            else
             {
                 if (currentBullet[i][j] -> getOutOfBounds() == false)
                 {
@@ -198,10 +214,6 @@ void GameLogic::moveBullet(float timePassed)
                 {
                     currentBullet[i].erase(currentBullet[i].begin() + j);
                 }
-            }
-            //else
-            {
-               // currentBullet[i].erase(currentBullet[i].begin() + j);
             }
         }
     }

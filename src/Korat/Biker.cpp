@@ -80,6 +80,11 @@ sf::RectangleShape Biker::getKorat()
     return biker;
 }
 
+float Biker::getPositionX()
+{
+    return biker.getPosition().x;
+}
+
 bool Biker::checkDeath()
 {
     if (health <= 0)

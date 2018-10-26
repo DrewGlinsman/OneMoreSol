@@ -8,6 +8,8 @@ class ArcBullet: public Bullet {
 public:
 	ArcBullet();
 	virtual ~ArcBullet();
+
+	float getPositionX();
 };
 
 #endif
