@@ -2,13 +2,10 @@
 #include "Grunt.h"
 #include <iostream>
 
-Grunt::Grunt(int startLane){
+Grunt::Grunt(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
-    if (!mtSpriteSheet.loadFromFile("assets/mtSpriteSheet.png"))
-        std::cout << "Failed to Load mtSpriteSheet." << std::endl;
-
-	grunt.setTexture(mtSpriteSheet);
+	grunt.setTexture(loadedTextures->mtSpriteSheet);
 	grunt.setTextureRect(sf::IntRect(0,448,64,64));
 	grunt.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);

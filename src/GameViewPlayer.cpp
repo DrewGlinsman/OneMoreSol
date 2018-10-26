@@ -1,7 +1,4 @@
 #include "GameViewPlayer.h"
-#include "TextureLoader.h"
-#include <iostream>
-#include <typeinfo>
 
 using namespace std;
 

@@ -11,6 +11,7 @@ using namespace std;
 GameLogic::GameLogic()
 {
     survivorCount = 20;
+    loadedTextures = new TextureLoader();
 }
 
 bool GameLogic::checkEnd()
@@ -87,7 +88,7 @@ void GameLogic::spawnKorat(float timePassed)
     switch(koratSpawnType)
     {
         case 1:
-            newKorat = new Grunt(koratSpawnLane);
+            newKorat = new Grunt(koratSpawnLane, loadedTextures);
             break;
         case 2:
             newKorat = new Jackal(koratSpawnLane);
@@ -108,16 +109,16 @@ void GameLogic::spawnKorat(float timePassed)
             newKorat = new Biker(koratSpawnLane);
             break;
         default:
-            newKorat = new Grunt(koratSpawnLane);
-            cout << "Break Case Activated" << endl;
+            newKorat = new Grunt(koratSpawnLane, loadedTextures);
+            std::cout << "Break Case Activated" << std::endl;
             break;
 
     }
     currentKorat[koratSpawnLane - 1].emplace_back(newKorat);
     currentKoratCount++;
-    cout << "currentKoratCount = " << currentKoratCount << endl;
+    std::cout << "currentKoratCount = " << currentKoratCount << std::endl;
 
-    cout << "==============================" << endl;
+    std::cout << "==============================" << std::endl;
     for (int i = 0; i < currentKorat.size(); i ++)
     {
 

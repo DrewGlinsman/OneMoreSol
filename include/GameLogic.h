@@ -21,6 +21,7 @@
 #include "GaussBullet.h"
 #include "LaserBullet.h"
 #include "PlasmaBullet.h"
+#include "TextureLoader.h"
 
 #include "rngs.h"
 
@@ -65,6 +66,9 @@ class GameLogic{
 
     public:
         GameLogic();
+
+        TextureLoader* loadedTextures;
+
         void moveKorat(float timePassed);
         void drawKorat(sf::RenderWindow& window);
 

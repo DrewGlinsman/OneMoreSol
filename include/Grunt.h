@@ -4,14 +4,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "KoratEmpire.h"
+#include "TextureLoader.h"
 
 class Grunt: public KoratEmpire {
 public:
 	sf::Sprite grunt;
-	sf::Texture mtSpriteSheet;
 
-
-	Grunt(int startLane);
+	Grunt(int, TextureLoader*);
 	virtual ~Grunt();
 
 	int getLane();
