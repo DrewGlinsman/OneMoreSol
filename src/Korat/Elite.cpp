@@ -60,7 +60,7 @@ void Elite::setLane(int givenLane)
 
 void Elite::moveCurrentKorat(float timePassed)
 {
-        if(elite.getPosition().x > 500)
+        if(elite.getPosition().x > -100)
         {
             elite.move(-speed * timePassed, 0);
         }

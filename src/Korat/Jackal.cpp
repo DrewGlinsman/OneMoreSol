@@ -60,7 +60,7 @@ void Jackal::setLane(int givenLane)
 
 void Jackal::moveCurrentKorat(float timePassed)
 {
-        if(jackal.getPosition().x > 500)
+        if(jackal.getPosition().x > -100)
         {
             jackal.move(-speed * timePassed, 0);
         }

@@ -60,7 +60,7 @@ void Hunter::setLane(int givenLane)
 
 void Hunter::moveCurrentKorat(float timePassed)
 {
-        if(hunter.getPosition().x > 500)
+        if(hunter.getPosition().x > -100)
         {
             hunter.move(-speed * timePassed, 0);
         }

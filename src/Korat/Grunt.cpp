@@ -59,7 +59,7 @@ void Grunt::setLane(int givenLane)
 
 void Grunt::moveCurrentKorat(float timePassed)
 {
-        if(grunt.getPosition().x > 500)
+        if(grunt.getPosition().x > -100)
         {
             grunt.move(-speed * timePassed, 0);
         }

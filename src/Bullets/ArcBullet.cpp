@@ -1,24 +1,81 @@
-/*
- * ArcBullet.cpp
- *
- *  Created on: Oct 19, 2018
- *      Author: Bowden
- */
 
-#include <ArcBullet.h>
+#include "ArcBullet.h"
+#include <iostream>
 
-ArcBullet::ArcBullet() {
-	// TODO Auto-generated constructor stub
-
-}
-
-
-float ArcBullet::getPositionX()
-{
-    //return plasma.getPosition().x;
+ArcBullet::ArcBullet(int startLane) {
+    //if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
+        //std::cout << "Failed to load plasmaGrunt." << std::endl;
+    arc.setSize(sf::Vector2f(16,16));
+	//arc.setTexture(&gruntPlasma);
+	arc.setOrigin(arc.getSize().x / 2, arc.getSize().y /2);
+	setLane(startLane);
+	arc.setPosition(100, lane);
 }
 
 ArcBullet::~ArcBullet() {
 	// TODO Auto-generated destructor stub
+}
+
+int ArcBullet::getLane()
+{
+    return lane;
+}
+
+float ArcBullet::getPositionX()
+{
+    return arc.getPosition().x;
+}
+
+void ArcBullet::setLane(int givenLane)
+{
+     switch(givenLane)
+	{
+		case 1:
+			lane = lane1;
+			break;
+		case 2:
+			lane = lane2;
+			break;
+		case 3:
+			lane = lane3;
+			break;
+		case 4:
+			lane = lane4;
+			break;
+		case 5:
+			lane = lane5;
+			break;
+		default:
+			lane = lane1;
+			break;
+	}
+}
+
+void ArcBullet::moveCurrentBullet(float timePassed)
+{
+        if(arc.getPosition().x < 1500)
+        {
+            arc.move(speed * timePassed, 0);
+            outOfBounds = false;
+        }
+        else
+        {
+            outOfBounds = true;
+        }
+}
+
+void ArcBullet::drawCurrentBullet(sf::RenderWindow& window)
+{
+    window.draw(arc);
+}
+
+bool ArcBullet::getOutOfBounds()
+{
+    return outOfBounds;
+}
+
+sf::RectangleShape ArcBullet::getBullet()
+{
+    return arc;
 }
 

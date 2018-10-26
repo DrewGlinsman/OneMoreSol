@@ -26,8 +26,6 @@ public:
 
 	float getPositionX();
 
-
-
 private:
 
 	int lane;

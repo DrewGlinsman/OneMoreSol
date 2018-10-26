@@ -60,7 +60,7 @@ void Bomber::setLane(int givenLane)
 
 void Bomber::moveCurrentKorat(float timePassed)
 {
-        if(bomber.getPosition().x > 500)
+        if(bomber.getPosition().x > -100)
         {
             bomber.move(-speed * timePassed, 0);
         }

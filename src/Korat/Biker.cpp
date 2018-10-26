@@ -60,7 +60,7 @@ void Biker::setLane(int givenLane)
 
 void Biker::moveCurrentKorat(float timePassed)
 {
-        if(biker.getPosition().x > 500)
+        if(biker.getPosition().x > -100)
         {
             biker.move(-speed * timePassed, 0);
         }

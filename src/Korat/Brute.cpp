@@ -60,7 +60,7 @@ void Brute::setLane(int givenLane)
 
 void Brute::moveCurrentKorat(float timePassed)
 {
-        if(brute.getPosition().x > 500)
+        if(brute.getPosition().x > -100)
         {
             brute.move(-speed * timePassed, 0);
         }
