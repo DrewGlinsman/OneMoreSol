@@ -9,7 +9,7 @@ ArcBullet::ArcBullet(int startLane) {
 	//arc.setTexture(&gruntPlasma);
 	arc.setOrigin(arc.getSize().x / 2, arc.getSize().y /2);
 	setLane(startLane);
-	arc.setPosition(100, lane);
+	arc.setPosition(height, lane);
 }
 
 ArcBullet::~ArcBullet() {
@@ -32,21 +32,27 @@ void ArcBullet::setLane(int givenLane)
 	{
 		case 1:
 			lane = lane1;
+			height = height1;
 			break;
 		case 2:
 			lane = lane2;
+			height = height2;
 			break;
 		case 3:
 			lane = lane3;
+			height = height3;
 			break;
 		case 4:
 			lane = lane4;
+			height = height4;
 			break;
 		case 5:
 			lane = lane5;
+			height = height5;
 			break;
 		default:
 			lane = lane1;
+			height = height1;
 			break;
 	}
 }

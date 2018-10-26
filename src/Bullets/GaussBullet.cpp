@@ -9,7 +9,7 @@ GaussBullet::GaussBullet(int startLane) {
 	//gauss.setTexture(&gruntPlasma);
 	gauss.setOrigin(gauss.getSize().x / 2, gauss.getSize().y /2);
 	setLane(startLane);
-	gauss.setPosition(100, lane);
+	gauss.setPosition(height, lane);
 }
 
 GaussBullet::~GaussBullet() {
@@ -32,21 +32,27 @@ void GaussBullet::setLane(int givenLane)
 	{
 		case 1:
 			lane = lane1;
+			height = height1;
 			break;
 		case 2:
 			lane = lane2;
+			height = height2;
 			break;
 		case 3:
 			lane = lane3;
+			height = height3;
 			break;
 		case 4:
 			lane = lane4;
+			height = height4;
 			break;
 		case 5:
 			lane = lane5;
+			height = height5;
 			break;
 		default:
 			lane = lane1;
+			height = height1;
 			break;
 	}
 }

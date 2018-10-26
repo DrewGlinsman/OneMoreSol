@@ -9,7 +9,7 @@ PlasmaBullet::PlasmaBullet(int startLane) {
 	//plasma.setTexture(&gruntPlasma);
 	plasma.setOrigin(plasma.getSize().x / 2, plasma.getSize().y /2);
 	setLane(startLane);
-	plasma.setPosition(100, lane);
+	plasma.setPosition(height, lane);
 }
 
 PlasmaBullet::~PlasmaBullet() {
@@ -32,21 +32,27 @@ void PlasmaBullet::setLane(int givenLane)
 	{
 		case 1:
 			lane = lane1;
+			height = height1;
 			break;
 		case 2:
 			lane = lane2;
+			height = height2;
 			break;
 		case 3:
 			lane = lane3;
+			height = height3;
 			break;
 		case 4:
 			lane = lane4;
+			height = height4;
 			break;
 		case 5:
 			lane = lane5;
+			height = height5;
 			break;
 		default:
 			lane = lane1;
+			height = height1;
 			break;
 	}
 }

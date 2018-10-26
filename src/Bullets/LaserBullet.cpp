@@ -9,7 +9,7 @@ LaserBullet::LaserBullet(int startLane) {
 	//laser.setTexture(&gruntPlasma);
 	laser.setOrigin(laser.getSize().x / 2, laser.getSize().y /2);
 	setLane(startLane);
-	laser.setPosition(100, lane);
+	laser.setPosition(height, lane);
 }
 
 LaserBullet::~LaserBullet() {
@@ -32,21 +32,27 @@ void LaserBullet::setLane(int givenLane)
 	{
 		case 1:
 			lane = lane1;
+			height = height1;
 			break;
 		case 2:
 			lane = lane2;
+			height = height2;
 			break;
 		case 3:
 			lane = lane3;
+			height = height3;
 			break;
 		case 4:
 			lane = lane4;
+			height = height4;
 			break;
 		case 5:
 			lane = lane5;
+			height = height5;
 			break;
 		default:
 			lane = lane1;
+			height = height1;
 			break;
 	}
 }
