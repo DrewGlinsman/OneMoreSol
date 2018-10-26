@@ -27,14 +27,24 @@ void GameLogic::moveKorat(float timePassed)
     {
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            if (currentKorat[i][j] -> checkDeath() == false)
+            if (currentKorat[i][j] -> checkSurvive() == false)
             {
-                currentKorat[i][j] -> moveCurrentKorat(timePassed);
+                if (currentKorat[i][j] -> checkDeath() == false)
+                {
+                    currentKorat[i][j] -> moveCurrentKorat(timePassed);
+                }
+                else
+                {
+                    currentKorat[i].erase(currentKorat[i].begin() + j);
+                    currentKoratCount--;
+                }
             }
             else
             {
                 currentKorat[i].erase(currentKorat[i].begin() + j);
                 currentKoratCount--;
+                survivorCount--;
+                cout << "survivor count = " << survivorCount << endl;
             }
         }
     }

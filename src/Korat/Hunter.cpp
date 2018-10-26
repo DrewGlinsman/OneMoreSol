@@ -62,7 +62,7 @@ void Hunter::moveCurrentKorat(float timePassed)
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -86,4 +86,9 @@ bool Hunter::checkDeath()
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Hunter::checkSurvive()
+{
+    return survive;
 }

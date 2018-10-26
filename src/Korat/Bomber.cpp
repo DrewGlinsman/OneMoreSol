@@ -62,7 +62,7 @@ void Bomber::moveCurrentKorat(float timePassed)
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -86,4 +86,9 @@ bool Bomber::checkDeath()
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Bomber::checkSurvive()
+{
+    return survive;
 }

@@ -62,7 +62,7 @@ void Biker::moveCurrentKorat(float timePassed)
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -86,4 +86,9 @@ bool Biker::checkDeath()
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Biker::checkSurvive()
+{
+    return survive;
 }

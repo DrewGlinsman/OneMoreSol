@@ -62,7 +62,7 @@ void Jackal::moveCurrentKorat(float timePassed)
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -86,4 +86,9 @@ bool Jackal::checkDeath()
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Jackal::checkSurvive()
+{
+    return survive;
 }

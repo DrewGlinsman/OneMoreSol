@@ -62,7 +62,7 @@ void Brute::moveCurrentKorat(float timePassed)
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -86,4 +86,9 @@ bool Brute::checkDeath()
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Brute::checkSurvive()
+{
+    return survive;
 }

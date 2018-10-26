@@ -25,15 +25,18 @@ public:
 
 	void drawCurrentKorat(sf::RenderWindow& window);
 
+    sf::Sprite getKorat();
+
 	float getPositionX();
 
-	sf::Sprite getKorat();
+	bool checkSurvive();
 
 private:
 
 	int lane;
 	int speed = 100;
 	int health = 100;
+	bool survive = false;
 
     int lane1 = 335;
     int lane2 = 422;

@@ -62,7 +62,7 @@ void Elite::moveCurrentKorat(float timePassed)
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -86,4 +86,9 @@ bool Elite::checkDeath()
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Elite::checkSurvive()
+{
+    return survive;
 }

@@ -26,6 +26,8 @@ public:
 
 	sf::RectangleShape getKorat();
 
+	virtual bool checkSurvive();
+
     int lane;
 
     int lane1 = 335;

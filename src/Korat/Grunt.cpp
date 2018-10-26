@@ -61,7 +61,7 @@ void Grunt::moveCurrentKorat(float timePassed)
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -85,4 +85,9 @@ bool Grunt::checkDeath()
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Grunt::checkSurvive()
+{
+    return survive;
 }
