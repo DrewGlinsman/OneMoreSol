@@ -7,8 +7,9 @@
 
 class Grunt: public KoratEmpire {
 public:
-	sf::RectangleShape grunt;
-	sf::Texture gruntPlasma;
+	sf::Sprite grunt;
+	sf::Texture mtSpriteSheet;
+
 
 	Grunt(int startLane);
 	virtual ~Grunt();

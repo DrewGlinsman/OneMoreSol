@@ -3,12 +3,14 @@
 #include <iostream>
 
 Grunt::Grunt(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
     lane = 0;
-	grunt.setSize(sf::Vector2f(64,64));
-	grunt.setTexture(&gruntPlasma);
-	grunt.setOrigin(grunt.getSize().x / 2, grunt.getSize().y /2);
+
+    if (!mtSpriteSheet.loadFromFile("assets/mtSpriteSheet.png"))
+        std::cout << "Failed to Load mtSpriteSheet." << std::endl;
+
+	grunt.setTexture(mtSpriteSheet);
+	grunt.setTextureRect(sf::IntRect(0,448,64,64));
+	grunt.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
 	grunt.setPosition(1500, lane);
 	std::cout << "I'm a grunt" << std::endl;
