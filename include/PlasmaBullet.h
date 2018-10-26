@@ -26,11 +26,14 @@ public:
 
 	float getPositionX();
 
+	int getDamage();
+
 private:
 
 	int lane;
 	int height;
 	int speed = 500;
+	int damage = 35;
 
     int lane1 = 335;
     int lane2 = 422;

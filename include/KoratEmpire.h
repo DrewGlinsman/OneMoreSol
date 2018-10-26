@@ -22,6 +22,8 @@ public:
 
 	virtual float getPositionX();
 
+	virtual void wasShot(int damage);
+
 	sf::RectangleShape getKorat();
 
     int lane;

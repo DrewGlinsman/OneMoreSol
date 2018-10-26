@@ -21,11 +21,7 @@ Jackal::~Jackal() {
 
 void Jackal::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger jackal death
-    }
+    health = health - damage;
 }
 
 int Jackal::getLane()

@@ -21,11 +21,7 @@ Biker::~Biker() {
 
 void Biker::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger biker death
-    }
+    health = health - damage;
 }
 
 int Biker::getLane()

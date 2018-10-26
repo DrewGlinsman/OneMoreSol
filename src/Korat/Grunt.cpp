@@ -20,11 +20,7 @@ Grunt::~Grunt() {
 
 void Grunt::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger grunt death
-    }
+	 health = health - damage;
 }
 
 int Grunt::getLane()

@@ -16,6 +16,10 @@ KoratEmpire::~KoratEmpire() {
 	// TODO Auto-generated destructor stub
 }
 
+void KoratEmpire::wasShot(int damage)
+{
+
+}
 
 void KoratEmpire::setLane(int givenLane)
 {

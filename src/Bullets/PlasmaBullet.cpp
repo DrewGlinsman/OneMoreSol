@@ -16,6 +16,11 @@ PlasmaBullet::~PlasmaBullet() {
 	// TODO Auto-generated destructor stub
 }
 
+int PlasmaBullet::getDamage()
+{
+    return damage;
+}
+
 int PlasmaBullet::getLane()
 {
     return lane;

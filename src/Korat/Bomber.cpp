@@ -21,11 +21,7 @@ Bomber::~Bomber() {
 
 void Bomber::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger bomber death
-    }
+    health = health - damage;
 }
 
 int Bomber::getLane()

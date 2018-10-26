@@ -201,7 +201,9 @@ void GameLogic::moveBullet(float timePassed)
                 }
                 else
                 {
+                    currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
                     currentBullet[i].erase(currentBullet[i].begin() + j);
+
                 }
             }
             else

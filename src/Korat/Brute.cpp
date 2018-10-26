@@ -21,11 +21,7 @@ Brute::~Brute() {
 
 void Brute::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger brute death
-    }
+    health = health - damage;
 }
 
 int Brute::getLane()

@@ -21,11 +21,7 @@ Elite::~Elite() {
 
 void Elite::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger elite death
-    }
+    health = health - damage;
 }
 
 int Elite::getLane()

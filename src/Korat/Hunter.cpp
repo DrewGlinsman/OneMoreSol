@@ -21,11 +21,7 @@ Hunter::~Hunter() {
 
 void Hunter::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger hunter death
-    }
+    health = health - damage;
 }
 
 int Hunter::getLane()
