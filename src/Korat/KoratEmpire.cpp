@@ -57,6 +57,11 @@ void KoratEmpire::drawCurrentKorat(sf::RenderWindow& window)
    // std::cout << "not drawing empty function" << std::endl;
 }
 
+sf::RectangleShape KoratEmpire::getKorat()
+{
+
+}
+
 bool KoratEmpire::checkDeath()
 {
     if (health <= 0)

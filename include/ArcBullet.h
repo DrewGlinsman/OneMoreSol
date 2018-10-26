@@ -2,7 +2,9 @@
 #ifndef INCLUDE_ARCBULLET_H_
 #define INCLUDE_ARCBULLET_H_
 
-class ArcBullet {
+#include "Bullet.h"
+
+class ArcBullet: public Bullet {
 public:
 	ArcBullet();
 	virtual ~ArcBullet();

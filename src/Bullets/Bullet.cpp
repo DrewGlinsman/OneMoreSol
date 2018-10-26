@@ -53,7 +53,22 @@ float Bullet::setPosition(sf::Vector2f newPos)
     positionY = newPos.y;
 }
 
-Bullet::doDamage()
+void Bullet::moveCurrentBullet(float timePassed)
+{
+
+}
+
+void Bullet::drawCurrentBullet(sf::RenderWindow& window)
+{
+
+}
+
+void Bullet::doDamage()
+{
+
+}
+
+sf::RectangleShape Bullet::getBullet()
 {
 
 }

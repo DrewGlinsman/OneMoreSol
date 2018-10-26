@@ -70,12 +70,6 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
-//    grunt1 = new Grunt(lane1);
-//    grunt2 = new Grunt(lane2);
-//    grunt3 = new Grunt(lane3);
-//    grunt4 = new Grunt(lane4);
-//    grunt5 = new Grunt(lane5);
-
     logic = new GameLogic();
 
     gameMusic.setBuffer(gameSound);
@@ -120,6 +114,7 @@ bool GameViewPlayer::playerViewIsOpen()
             koratClock.restart();
             }
             logic -> moveKorat(delta);
+            logic -> moveBullet(delta);
 
 //-----------------------------------------------------------------
         if(keepMovingUp == true)
@@ -159,7 +154,7 @@ bool GameViewPlayer::playerViewIsOpen()
                         //majorTom.moveTomUp(delta);
                         if(lockOutKeyboard == false)
                         keepMovingUp = majorTom.initMove(delta, "Up");
-                        sky.rotate(delta);
+                        //sky.rotate(delta);
                     }
 
                     if(Event.key.code == sf::Keyboard::Down)
@@ -185,7 +180,8 @@ bool GameViewPlayer::playerViewIsOpen()
 
                     if(Event.key.code == sf::Keyboard::Space)
                     {
-                        majorTom.shoot(delta);
+                        if(lockOutKeyboard == false)
+                        logic -> selectBullet(majorTom, delta);
                     }
                 }
             }
@@ -220,6 +216,7 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 //    grunt5 -> drawGrunt(gameWindow);
 
     logic -> drawKorat(gameWindow);
+    logic -> drawBullet(gameWindow);
 
     gameWindow.draw(survivorCnt);
     gameWindow.draw(weapon1);

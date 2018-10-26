@@ -26,6 +26,8 @@ public:
 
 	void drawCurrentKorat(sf::RenderWindow& window);
 
+	sf::RectangleShape getKorat();
+
 private:
 
 	int lane;

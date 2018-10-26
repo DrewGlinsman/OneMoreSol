@@ -33,6 +33,7 @@ void GameLogic::moveKorat(float timePassed)
             else
             {
                 currentKorat[i].erase(currentKorat[i].begin() + j);
+                currentKoratCount--;
             }
         }
     }
@@ -52,7 +53,7 @@ void GameLogic::drawKorat(sf::RenderWindow& window)
 
 void GameLogic::selectKorat(float timePassed)
 {
-    spawnLane = decideLane();
+    koratSpawnLane = decideKoratLane();
 
     /*
         checks what level the player is on and
@@ -61,20 +62,20 @@ void GameLogic::selectKorat(float timePassed)
         because they are boss levels
     */
     if(currentLevel < 3)
-        spawnType = decideType(enemyPool1);
+        koratSpawnType = decideKoratType(enemyPool1);
     else if(currentLevel >= 3 && currentLevel < 6)
-        spawnType = decideType(enemyPool2);
+        koratSpawnType = decideKoratType(enemyPool2);
     else if(currentLevel >= 6 && currentLevel < 9)
-        spawnType = decideType(enemyPool3);
+        koratSpawnType = decideKoratType(enemyPool3);
     else if(currentLevel == 9)
-        spawnType = decideType(enemyPool4);
+        koratSpawnType = decideKoratType(enemyPool4);
     else if(currentLevel == 11)
-        spawnType = decideType(enemyPool5);
+        koratSpawnType = decideKoratType(enemyPool5);
     else if(currentLevel >= 12 && currentLevel < 15)
-        spawnType = decideType(enemyPool6);
+        koratSpawnType = decideKoratType(enemyPool6);
     else if(currentLevel >= 15 && currentLevel < 20)
-        spawnType = decideType(enemyPool7);
-    //cout << "Type = " << spawnType << " | Lane = " << spawnLane << endl;
+        koratSpawnType = decideKoratType(enemyPool7);
+    //cout << "Type = " << koratSpawnType << " | Lane = " << koratSpawnLane << endl;
     spawnKorat(timePassed);
 }
 
@@ -83,36 +84,38 @@ void GameLogic::spawnKorat(float timePassed)
     KoratEmpire* newKorat;
     bool print;
 
-    switch(spawnType)
+    switch(koratSpawnType)
     {
         case 1:
-            newKorat = new Grunt(spawnLane);
+            newKorat = new Grunt(koratSpawnLane);
             break;
         case 2:
-            newKorat = new Jackal(spawnLane);
+            newKorat = new Jackal(koratSpawnLane);
             break;
         case 3:
-            newKorat = new Elite(spawnLane);
+            newKorat = new Elite(koratSpawnLane);
             break;
         case 4:
-            newKorat = new Hunter(spawnLane);
+            newKorat = new Hunter(koratSpawnLane);
             break;
         case 5:
-            newKorat = new Brute(spawnLane);
+            newKorat = new Brute(koratSpawnLane);
             break;
         case 6:
-            newKorat = new Bomber(spawnLane);
+            newKorat = new Bomber(koratSpawnLane);
             break;
         case 7:
-            newKorat = new Biker(spawnLane);
+            newKorat = new Biker(koratSpawnLane);
             break;
         default:
-            newKorat = new Grunt(spawnLane);
+            newKorat = new Grunt(koratSpawnLane);
             cout << "Break Case Activated" << endl;
             break;
 
     }
-    currentKorat[spawnLane - 1].emplace_back(newKorat);
+    currentKorat[koratSpawnLane - 1].emplace_back(newKorat);
+    currentKoratCount++;
+    cout << "currentKoratCount = " << currentKoratCount << endl;
 
     cout << "==============================" << endl;
     for (int i = 0; i < currentKorat.size(); i ++)
@@ -120,7 +123,6 @@ void GameLogic::spawnKorat(float timePassed)
 
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-
             cout << currentKorat[i][j] -> getLane() << ' ';
             if (currentKorat[i][j] -> getLane() == 680)
             {
@@ -138,7 +140,7 @@ void GameLogic::spawnKorat(float timePassed)
     cout << "==============================" << endl;
 }
 
-int GameLogic::decideLane()
+int GameLogic::decideKoratLane()
 {
     double lane = Random() * 5;
     if (lane >= 0 && lane <= 1)
@@ -156,12 +158,129 @@ int GameLogic::decideLane()
     return lane;
 }
 
-int GameLogic::decideType(std::vector<int> enemyPool)
+int GameLogic::decideKoratType(std::vector<int> enemyPool)
 {
     double enemyType = Random() * enemyPool.size();
     enemyType = (int) enemyType;
     return enemyPool[enemyType];
 }
+
+//----------------------------------------------------------
+//Bullets generation and drawing
+
+bool GameLogic::bulletHitsKorat(Bullet selectedBullet, std::vector<shared_ptr<KoratEmpire>> currentLaneKorat)
+{
+    for (int i = 0; i < currentLaneKorat.size(); i ++)
+    {
+//        if (selectedBullet.getBullet().getGlobalBounds().intersects(currentLaneKorat[i].getKorat().getGlobalBounds()) == true)
+        {
+            return true;
+        }
+    }
+    return false;
+
+}
+
+void GameLogic::moveBullet(float timePassed)
+{
+    for (int i = 0; i < currentBullet.size(); i ++)
+    {
+        for (int j = 0; j < currentBullet[i].size(); j++)
+        {
+           // if (bulletHitsKorat(currentBullet[i][j], currentKorat[i]) == true)
+            {
+                currentBullet[i][j] -> moveCurrentBullet(timePassed);
+            }
+           // else
+            {
+           //     currentBullet[i].erase(currentBullet[i].begin() + j);
+            }
+        }
+    }
+}
+
+void GameLogic::drawBullet(sf::RenderWindow& window)
+{
+    for (int i = 0; i < currentBullet.size(); i ++)
+    {
+        for (int j = 0; j < currentBullet[i].size(); j++)
+        {
+                currentBullet[i][j] -> drawCurrentBullet(window);
+
+        }
+    }
+}
+
+void GameLogic::selectBullet(MajorTom majorTom, float timePassed)
+{
+    bulletSpawnLane = decideBulletLane(majorTom);
+
+    bulletSpawnType = decideBulletType(majorTom);
+
+    spawnBullet(timePassed);
+}
+
+void GameLogic::spawnBullet(float timePassed)
+{
+    Bullet* newBullet;
+
+    switch(bulletSpawnType)
+    {
+        case 1:
+            newBullet = new PlasmaBullet(bulletSpawnLane);
+            break;
+        case 2:
+//            newBullet = new LaserBullet(bulletSpawnLane);
+            break;
+        case 3:
+ //           newBullet = new ArcBullet(bulletSpawnLane);
+            break;
+        case 4:
+//            newBullet = new GaussBullet(bulletSpawnLane);
+            break;
+        //case 5:
+            //newBullet = new BFGBullet(bulletSpawnLane);
+        default:
+            newBullet = new PlasmaBullet(koratSpawnLane);
+            cout << "Break Case Activated" << endl;
+            break;
+
+    }
+    currentBullet[bulletSpawnLane - 1].emplace_back(newBullet);
+}
+
+int GameLogic::decideBulletLane(MajorTom majorTom)
+{
+    if (majorTom.getTomPosition() == lane1)
+        return 1;
+    else if (majorTom.getTomPosition() == lane2)
+        return 2;
+    else if (majorTom.getTomPosition() == lane3)
+        return 3;
+    else if (majorTom.getTomPosition() == lane4)
+        return 4;
+    else if (majorTom.getTomPosition() == lane5)
+        return 5;
+    else
+        cout << "bullet shit is broken" << endl;
+}
+
+int GameLogic::decideBulletType(MajorTom majorTom)
+{
+    if (majorTom.currentGun.bulletType = 1)
+        return 1;
+    else if (majorTom.currentGun.bulletType = 2)
+        return 2;
+    else if (majorTom.currentGun.bulletType = 3)
+        return 3;
+    else if (majorTom.currentGun.bulletType = 4)
+        return 4;
+    else if (majorTom.currentGun.bulletType = 5)
+        return 5;
+}
+
+
+//----------------------------------------------------------
 
 void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
 {

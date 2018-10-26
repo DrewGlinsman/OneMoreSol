@@ -75,6 +75,11 @@ void Elite::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(elite);
 }
 
+sf::RectangleShape Elite::getKorat()
+{
+    return elite;
+}
+
 bool Elite::checkDeath()
 {
     if (health <= 0)

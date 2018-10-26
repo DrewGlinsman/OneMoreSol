@@ -75,6 +75,11 @@ void Jackal::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(jackal);
 }
 
+sf::RectangleShape Jackal::getKorat()
+{
+    return jackal;
+}
+
 bool Jackal::checkDeath()
 {
     if (health <= 0)

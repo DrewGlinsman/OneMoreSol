@@ -20,6 +20,8 @@ public:
 
 	virtual void drawCurrentKorat(sf::RenderWindow& window);
 
+	sf::RectangleShape getKorat();
+
     int lane;
 
     int lane1 = 335;

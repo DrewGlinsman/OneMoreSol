@@ -4,6 +4,7 @@
 //instantiate all the basic values for a plasma pistol.
 PlasmaPistol::PlasmaPistol()
 {
+    bulletType = 1;
     fireRate = 0.5;
     clip = 10;
     damage = 5;
