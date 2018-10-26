@@ -77,7 +77,7 @@ void Grunt::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(grunt);
 }
 
-sf::RectangleShape Grunt::getKorat()
+sf::Sprite Grunt::getKorat()
 {
     return grunt;
 }
