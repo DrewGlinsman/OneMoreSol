@@ -20,8 +20,11 @@ class MajorTom {
         Gun currentGun;
 
     public:
-        sf::RectangleShape majorTom;
+        sf::Sprite majorTom;
         sf::Texture mtPlasmaPistol;
+        sf::Texture mtSpriteSheet;//this is a second load, loaded also on gameviewplayer. how to expand scope?
+
+        sf::Sprite mtStandPPistol;
 
         MajorTom();
 

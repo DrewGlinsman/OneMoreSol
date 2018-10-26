@@ -38,6 +38,7 @@ public:
     sf::Texture gameSky;
     sf::Texture lockIcon;
     sf::Texture pPistol;
+    sf::Texture mtSpriteSheet;
 
     int lane1 = 335;
     int lane2 = 422;

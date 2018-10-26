@@ -7,14 +7,18 @@ using namespace std;
 
 MajorTom::MajorTom()
 {
-    if(!mtPlasmaPistol.loadFromFile("assets/mtPlasmaPistol.png"))
-        cout << "Failed to load TomPP." << endl;
+    if(!mtSpriteSheet.loadFromFile("assets/mtSpriteSheet.png"))
+        cout << "Failed to load mtSpriteSheet for MajorTom." << endl;
+
     Gun* gun = new PlasmaPistol();
     setGun(*gun);
-    majorTom.setSize(sf::Vector2f(64,64));
-    mtPlasmaPistol.setSmooth(true);
-    majorTom.setTexture(&mtPlasmaPistol);
-    majorTom.setOrigin(majorTom.getSize().x / 2, majorTom.getSize().y / 2);
+
+    mtSpriteSheet.setSmooth(true);
+
+    majorTom.setTexture(mtSpriteSheet);
+    majorTom.setTextureRect(sf::IntRect(0,0,64,64));
+
+    majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);
     setHealth(100);
     //currentGun = PlasmaPistol;
