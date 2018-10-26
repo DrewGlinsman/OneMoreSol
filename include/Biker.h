@@ -4,13 +4,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "KoratEmpire.h"
+#include "TextureLoader.h"
 
 class Biker: public KoratEmpire {
 public:
-	sf::RectangleShape biker;
-	sf::Texture gruntPlasma;
+	sf::Sprite biker;
 
-	Biker(int startLane);
+	Biker(int, TextureLoader*);
 	virtual ~Biker();
 
 	int getLane();
@@ -25,7 +25,7 @@ public:
 
 	void drawCurrentKorat(sf::RenderWindow& window);
 
-	sf::RectangleShape getKorat();
+	sf::Sprite getKorat();
 
 private:
 

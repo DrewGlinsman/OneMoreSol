@@ -56,7 +56,7 @@ public:
 
     GameLogic* logic;
 
-    MajorTom majorTom;
+    MajorTom majorTom;//need to make new and non default constructor
 
     GameViewPlayer();
     bool playerViewIsOpen();

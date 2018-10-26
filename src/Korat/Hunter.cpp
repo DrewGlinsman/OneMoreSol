@@ -2,13 +2,12 @@
 #include "Hunter.h"
 #include <iostream>
 
-Hunter::Hunter(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Hunter::Hunter(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	hunter.setSize(sf::Vector2f(64,64));
-	hunter.setTexture(&gruntPlasma);
-	hunter.setOrigin(hunter.getSize().x / 2, hunter.getSize().y /2);
+
+	hunter.setTexture(loadedTextures->mtSpriteSheet);
+	hunter.setTextureRect(sf::IntRect(0,640,64,64));
+	hunter.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	hunter.setPosition(1500, lane);
 	std::cout << "I'm a hunter" << std::endl;
@@ -75,7 +74,7 @@ void Hunter::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(hunter);
 }
 
-sf::RectangleShape Hunter::getKorat()
+sf::Sprite Hunter::getKorat()
 {
     return hunter;
 }

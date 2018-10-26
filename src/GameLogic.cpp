@@ -91,22 +91,22 @@ void GameLogic::spawnKorat(float timePassed)
             newKorat = new Grunt(koratSpawnLane, loadedTextures);
             break;
         case 2:
-            newKorat = new Jackal(koratSpawnLane);
+            newKorat = new Jackal(koratSpawnLane, loadedTextures);
             break;
         case 3:
-            newKorat = new Elite(koratSpawnLane);
+            newKorat = new Elite(koratSpawnLane, loadedTextures);
             break;
         case 4:
-            newKorat = new Hunter(koratSpawnLane);
+            newKorat = new Hunter(koratSpawnLane, loadedTextures);
             break;
         case 5:
-            newKorat = new Brute(koratSpawnLane);
+            newKorat = new Brute(koratSpawnLane, loadedTextures);
             break;
         case 6:
-            newKorat = new Bomber(koratSpawnLane);
+            newKorat = new Bomber(koratSpawnLane, loadedTextures);
             break;
         case 7:
-            newKorat = new Biker(koratSpawnLane);
+            newKorat = new Biker(koratSpawnLane, loadedTextures);
             break;
         default:
             newKorat = new Grunt(koratSpawnLane, loadedTextures);

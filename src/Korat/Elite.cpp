@@ -2,13 +2,12 @@
 #include "Elite.h"
 #include <iostream>
 
-Elite::Elite(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Elite::Elite(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	elite.setSize(sf::Vector2f(64,64));
-	elite.setTexture(&gruntPlasma);
-	elite.setOrigin(elite.getSize().x / 2, elite.getSize().y /2);
+
+	elite.setTexture(loadedTextures->mtSpriteSheet);
+	elite.setTextureRect(sf::IntRect(0,512,64,64));
+	elite.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
 	elite.setPosition(1500, lane);
 	std::cout << "I'm a elite" << std::endl;
@@ -75,7 +74,7 @@ void Elite::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(elite);
 }
 
-sf::RectangleShape Elite::getKorat()
+sf::Sprite Elite::getKorat()
 {
     return elite;
 }

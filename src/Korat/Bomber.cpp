@@ -2,13 +2,13 @@
 #include "Bomber.h"
 #include <iostream>
 
-Bomber::Bomber(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Bomber::Bomber(int startLane, TextureLoader* loadedTextures){
+
     lane = 0;
-	bomber.setSize(sf::Vector2f(64,64));
-	bomber.setTexture(&gruntPlasma);
-	bomber.setOrigin(bomber.getSize().x / 2, bomber.getSize().y /2);
+
+	bomber.setTexture(loadedTextures->mtSpriteSheet);
+	bomber.setTextureRect(sf::IntRect(0,704,64,64));
+	bomber.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	bomber.setPosition(1500, lane);
 	std::cout << "I'm a bomber" << std::endl;
@@ -75,7 +75,7 @@ void Bomber::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(bomber);
 }
 
-sf::RectangleShape Bomber::getKorat()
+sf::Sprite Bomber::getKorat()
 {
     return bomber;
 }

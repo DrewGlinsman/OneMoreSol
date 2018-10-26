@@ -4,13 +4,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "KoratEmpire.h"
+#include "TextureLoader.h"
 
 class Bomber: public KoratEmpire {
 public:
-	sf::RectangleShape bomber;
-	sf::Texture gruntPlasma;
+	sf::Sprite bomber;
 
-	Bomber(int startLane);
+	Bomber(int, TextureLoader*);
 	virtual ~Bomber();
 
 	int getLane();
@@ -25,7 +25,7 @@ public:
 
 	void drawCurrentKorat(sf::RenderWindow& window);
 
-	sf::RectangleShape getKorat();
+	sf::Sprite getKorat();
 
 private:
 
