@@ -48,19 +48,25 @@ void PlasmaBullet::setLane(int givenLane)
 
 void PlasmaBullet::moveCurrentBullet(float timePassed)
 {
-        if(plasma.getPosition().x < 2000)
+        if(plasma.getPosition().x < 1000)
         {
             plasma.move(speed * timePassed, 0);
+            outOfBounds = false;
         }
         else
         {
-
+            outOfBounds = true;
         }
 }
 
 void PlasmaBullet::drawCurrentBullet(sf::RenderWindow& window)
 {
     window.draw(plasma);
+}
+
+bool PlasmaBullet::getOutOfBounds()
+{
+    return outOfBounds;
 }
 
 sf::RectangleShape PlasmaBullet::getBullet()

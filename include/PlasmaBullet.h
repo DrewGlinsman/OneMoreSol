@@ -22,6 +22,10 @@ public:
 
 	sf::RectangleShape getBullet();
 
+	bool getOutOfBounds();
+
+
+
 private:
 
 	int lane;
@@ -32,6 +36,8 @@ private:
     int lane3 = 508;
     int lane4 = 594;
     int lane5 = 680;
+
+    bool outOfBounds = false;
 };
 
 #endif

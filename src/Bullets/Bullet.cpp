@@ -68,6 +68,11 @@ void Bullet::doDamage()
 
 }
 
+bool Bullet::getOutOfBounds()
+{
+
+}
+
 sf::RectangleShape Bullet::getBullet()
 {
 

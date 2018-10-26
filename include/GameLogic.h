@@ -33,7 +33,7 @@ class GameLogic{
         std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
         int survivorCount;
-        int currentLevel = 19;
+        int currentLevel = 3;
 
         double spawnRate;
         int koratSpawnLane;

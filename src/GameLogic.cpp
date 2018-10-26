@@ -187,13 +187,20 @@ void GameLogic::moveBullet(float timePassed)
     {
         for (int j = 0; j < currentBullet[i].size(); j++)
         {
-           // if (bulletHitsKorat(currentBullet[i][j], currentKorat[i]) == true)
+            //if(bulletHitsKorat(currentBullet[i][j], currentBullet[i]) == false)
             {
-                currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                if (currentBullet[i][j] -> getOutOfBounds() == false)
+                {
+                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                }
+                else
+                {
+                    currentBullet[i].erase(currentBullet[i].begin() + j);
+                }
             }
-           // else
+            //else
             {
-           //     currentBullet[i].erase(currentBullet[i].begin() + j);
+               // currentBullet[i].erase(currentBullet[i].begin() + j);
             }
         }
     }

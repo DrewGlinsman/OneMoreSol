@@ -19,6 +19,7 @@ class Bullet
        virtual void moveCurrentBullet(float timePassed);
        virtual void drawCurrentBullet(sf::RenderWindow& window);
 
+       virtual bool getOutOfBounds();
        virtual sf::RectangleShape getBullet();
 
     protected:
@@ -33,6 +34,9 @@ class Bullet
         //location
         float positionX;
         float positionY;
+        bool outOfBounds;
+
+
 };
 
 #endif
