@@ -75,6 +75,11 @@ void Biker::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(biker);
 }
 
+sf::RectangleShape Biker::getKorat()
+{
+    return biker;
+}
+
 bool Biker::checkDeath()
 {
     if (health <= 0)

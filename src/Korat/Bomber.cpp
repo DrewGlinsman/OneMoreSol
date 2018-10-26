@@ -75,6 +75,11 @@ void Bomber::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(bomber);
 }
 
+sf::RectangleShape Bomber::getKorat()
+{
+    return bomber;
+}
+
 bool Bomber::checkDeath()
 {
     if (health <= 0)

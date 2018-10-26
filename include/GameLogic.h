@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "MajorTom.h"
+
 #include "KoratEmpire.h"
 #include "Grunt.h"
 #include "Jackal.h"
@@ -14,6 +15,13 @@
 #include "Brute.h"
 #include "Bomber.h"
 #include "Biker.h"
+
+#include "Bullet.h"
+#include "ArcBullet.h"
+#include "GaussBullet.h"
+#include "LaserBullet.h"
+#include "PlasmaBullet.h"
+
 #include "rngs.h"
 
 using namespace std;
@@ -23,12 +31,16 @@ class GameLogic{
     private:
         //wrap it in reference wrapper so that it passes references instead of copies
         std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
+        std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
         int survivorCount;
         int currentLevel = 19;
 
         double spawnRate;
-        int spawnLane;
-        int spawnType;
+        int koratSpawnLane;
+        int koratSpawnType;
+
+        int bulletSpawnLane;
+        int bulletSpawnType;
 
         std::vector <int> enemyPool1 {1};
         std::vector <int> enemyPool2 {1, 2};
@@ -59,8 +71,21 @@ class GameLogic{
         void selectKorat(float timePassed);
         void spawnKorat(float timePassed);
         bool checkEnd();
-        int decideLane();
-        int decideType(std::vector<int> enemyPool);
+        int decideKoratLane();
+        int decideKoratType(std::vector<int> enemyPool);
+
+        bool bulletHitsKorat(Bullet selectedBullet, std::vector<shared_ptr<KoratEmpire>> currentLaneKorat);
+
+        void moveBullet(float timePassed);
+        void drawBullet(sf::RenderWindow& window);
+
+        void selectBullet(MajorTom majorTom, float timePassed);
+        void spawnBullet(float timePassed);
+        int decideBulletLane(MajorTom majorTom);
+        int decideBulletType(MajorTom majorTom);
+
+
+
         void runLevel(sf::CircleShape& gameSky, float timePassed);
 };
 

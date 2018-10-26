@@ -75,6 +75,11 @@ void Grunt::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(grunt);
 }
 
+sf::RectangleShape Grunt::getKorat()
+{
+    return grunt;
+}
+
 bool Grunt::checkDeath()
 {
     if (health <= 0)

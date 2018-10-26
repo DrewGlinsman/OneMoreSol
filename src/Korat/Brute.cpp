@@ -75,6 +75,11 @@ void Brute::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(brute);
 }
 
+sf::RectangleShape Brute::getKorat()
+{
+    return brute;
+}
+
 bool Brute::checkDeath()
 {
     if (health <= 0)

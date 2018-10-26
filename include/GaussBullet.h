@@ -2,7 +2,9 @@
 #ifndef INCLUDE_GAUSBULLET_H_
 #define INCLUDE_GAUSSBULLET_H_
 
-class GaussBullet {
+#include "Bullet.h"
+
+class GaussBullet: public Bullet {
 public:
 	GaussBullet();
 	virtual ~GaussBullet();

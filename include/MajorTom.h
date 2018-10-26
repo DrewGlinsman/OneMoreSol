@@ -17,11 +17,12 @@ class MajorTom {
         float timePassed;
         int currentHealth;
         int newHealth;
-        Gun currentGun;
 
     public:
         sf::RectangleShape majorTom;
         sf::Texture mtPlasmaPistol;
+
+        Gun currentGun;
 
         MajorTom();
 

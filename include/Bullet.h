@@ -10,13 +10,16 @@ class Bullet
         Bullet();
         virtual ~Bullet();
 
-        float getVelocity();
-        void setVelocity(float);
-        float getPositionX();
-        float getPositionY();
-        float setPosition(sf::Vector2f newPos);
+       virtual float getVelocity();
+       virtual void setVelocity(float);
+       virtual float getPositionX();
+       virtual float getPositionY();
+       virtual float setPosition(sf::Vector2f newPos);
+       virtual void doDamage();
+       virtual void moveCurrentBullet(float timePassed);
+       virtual void drawCurrentBullet(sf::RenderWindow& window);
 
-        virtual doDamage();
+       virtual sf::RectangleShape getBullet();
 
     protected:
 
@@ -32,4 +35,4 @@ class Bullet
         float positionY;
 };
 
-#endif // BULLET_H
+#endif

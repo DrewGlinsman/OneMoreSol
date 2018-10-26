@@ -75,6 +75,11 @@ void Hunter::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(hunter);
 }
 
+sf::RectangleShape Hunter::getKorat()
+{
+    return hunter;
+}
+
 bool Hunter::checkDeath()
 {
     if (health <= 0)
