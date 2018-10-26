@@ -1,6 +1,4 @@
 #include "GameViewPlayer.h"
-#include <iostream>
-#include <typeinfo>
 
 using namespace std;
 
@@ -25,11 +23,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!pPistol.loadFromFile("assets/plasmaPistol.png"))
         cout << "Failed to Load plasma Pistol." << endl;
 
-    if (!mtSpriteSheet.loadFromFile("assets/mtSpriteSheet.png"))
-        cout << "Failed to Load mtSpriteSheet." << endl;
-
     pPistol.setSmooth(true);
-    mtSpriteSheet.setSmooth(true);
 
     sky.setRadius(894);
     sky.setOrigin(894,894);

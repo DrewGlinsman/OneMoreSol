@@ -4,6 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <iostream>
+#include <typeinfo>
 #include "Gun.h"
 #include "MajorTom.h"
 #include "GameLogic.h"
@@ -38,7 +40,6 @@ public:
     sf::Texture gameSky;
     sf::Texture lockIcon;
     sf::Texture pPistol;
-    sf::Texture mtSpriteSheet;
 
     int lane1 = 335;
     int lane2 = 422;
