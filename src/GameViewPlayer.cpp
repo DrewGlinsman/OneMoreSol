@@ -76,9 +76,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 bool GameViewPlayer::playerViewIsOpen()
 {
     sf::Clock gameClock;
-    sf::Clock koratClock;
     float delta;
-    float gamma;
 
     bool keepMovingUp = false;
     bool keepMovingDown = false;
@@ -91,24 +89,12 @@ bool GameViewPlayer::playerViewIsOpen()
         delta = gameClock.getElapsedTime().asSeconds();
         gameClock.restart();
 
-        gamma = koratClock.getElapsedTime().asSeconds();
-
-//        grunt1 -> moveGrunt(delta);
-//        grunt2 -> moveGrunt(delta);
-//        grunt3 -> moveGrunt(delta);
-//        grunt4 -> moveGrunt(delta);
-//        grunt5 -> moveGrunt(delta);
-
 //-----------------------------------------------------------------
 
-            //cout << gamma << endl;
-            if (gamma > 3)
-            {
-            logic -> selectKorat(delta);
-            koratClock.restart();
-            }
-            logic -> moveKorat(delta);
-            logic -> moveBullet(delta);
+        logic -> runLevel(sky, delta);
+
+        logic -> moveKorat(delta);
+        logic -> moveBullet(delta);
 
 //-----------------------------------------------------------------
         if(keepMovingUp == true)
@@ -179,7 +165,6 @@ bool GameViewPlayer::playerViewIsOpen()
                     }
                 }
             }
-         logic -> runLevel(sky, delta);
     }
     return false;
 }
@@ -202,12 +187,6 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
     gameWindow.draw(sky);
     gameWindow.draw(background);
     majorTom.drawTom(gameWindow);
-
-//    grunt1 -> drawGrunt(gameWindow);
-//    grunt2 -> drawGrunt(gameWindow);
-//    grunt3 -> drawGrunt(gameWindow);
-//    grunt4 -> drawGrunt(gameWindow);
-//    grunt5 -> drawGrunt(gameWindow);
 
     logic -> drawKorat(gameWindow);
     logic -> drawBullet(gameWindow);

@@ -12,6 +12,7 @@ GameLogic::GameLogic()
 {
     survivorCount = 20;
     loadedTextures = new TextureLoader();
+    sf::Clock spawnClock;
 }
 
 bool GameLogic::checkEnd()
@@ -62,7 +63,7 @@ void GameLogic::drawKorat(sf::RenderWindow& window)
     }
 }
 
-void GameLogic::selectKorat(float timePassed)
+void GameLogic::selectKorat()
 {
     koratSpawnLane = decideKoratLane();
 
@@ -87,10 +88,10 @@ void GameLogic::selectKorat(float timePassed)
     else if(currentLevel >= 15 && currentLevel < 20)
         koratSpawnType = decideKoratType(enemyPool7);
     //cout << "Type = " << koratSpawnType << " | Lane = " << koratSpawnLane << endl;
-    spawnKorat(timePassed);
+    spawnKorat();
 }
 
-void GameLogic::spawnKorat(float timePassed)
+void GameLogic::spawnKorat()
 {
     KoratEmpire* newKorat;
     bool print;
@@ -178,22 +179,6 @@ int GameLogic::decideKoratType(std::vector<int> enemyPool)
 
 //----------------------------------------------------------
 //Bullets generation and drawing
-/*
-bool GameLogic::bulletHitsKorat(int checkLane, Bullet *selectedBullet, std::vector<std::vector<shared_ptr<KoratEmpire>>> *currentLaneKorat)
-{
-    for (int i = 0; i < currentLaneKorat -> size(); i ++)
-    {
-        //cout << currentLaneKorat -> size() << endl;
-        sf::FloatRect test = currentLaneKorat[i].getKorat().getGlobalBounds();
-        if (selectedBullet -> getBullet().getGlobalBounds().intersects(currentLaneKorat[i].getKorat().getGlobalBounds()) == true)
-        {
-            return true;
-        }
-    }
-    return false;
-
-}
-*/
 
 void GameLogic::moveBullet(float timePassed)
 {
@@ -203,8 +188,6 @@ void GameLogic::moveBullet(float timePassed)
         {
             if (currentKorat[i].size() != 0)
             {
-                //cout << currentKorat[i].size() << endl;
-                //cout << currentBullet[i][j] -> getBullet().getPosition().x << " " << currentKorat[i][0] -> getPositionX() << endl;
                 if(currentBullet[i][j] -> getPositionX() < currentKorat[i][0] -> getPositionX())
                 {
                     currentBullet[i][j] -> moveCurrentBullet(timePassed);
@@ -316,23 +299,34 @@ int GameLogic::decideBulletType(MajorTom majorTom)
 
 void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
 {
-	float rotation = gameSky.getRotation();
-
-	//Chris, should we spawn first wave of Korat here?
-
-	//Yes we should Jack, but not the first wave, just start the spawning process, it will know what level it is spawn appropriately.
+	rotation = gameSky.getRotation();
+	spawnTime = spawnClock.getElapsedTime().asSeconds();
 
 	if (rotation >= sunSetOrientation) // if the sun has set
 	{
-		gameSky.rotate(-rotation); //rotate the sun back to the beginning
-		currentLevel += 1;
-		levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
+		if (currentKoratCount == 0)
+        {
+            gameSky.rotate(-rotation); //rotate the sun back to the beginning
+            currentLevel++;
+            levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
+            levelSpawnModifier = levelSpawnModifier * 15/16; //
 
-		//Chris, should we stop spawning Korat here, give a cool down time, then spawn them again?
+            cout << "Current Level = " << currentLevel << endl;
+        // start text adventure
 
-		//No from here we stop spawning the Korat, once all Korat are dead we transition to the Text adventure,
-		//afterwards we restart the process with the next level, with special checks for level 10 and 20 that
-		//disable the spawning process and only spawn the bosses.
+        // transition to boss 1 if current level = 10
+
+        // transition to boss 2 if current level = 20
+        }
 	}
-	gameSky.rotate(timePassed * levelSpeedModifier);
+	else
+    {
+        gameSky.rotate(timePassed * levelSpeedModifier);
+
+        if (spawnTime >= levelSpawnModifier)
+        {
+            selectKorat();
+            spawnClock.restart();
+        }
+    }
 }
