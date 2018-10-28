@@ -245,18 +245,18 @@ void GameLogic::spawnBullet(float timePassed)
             newBullet = new PlasmaBullet(bulletSpawnLane);
             break;
         case 2:
-//            newBullet = new LaserBullet(bulletSpawnLane);
+            newBullet = new LaserBullet(bulletSpawnLane);
             break;
         case 3:
- //           newBullet = new ArcBullet(bulletSpawnLane);
+            newBullet = new ArcBullet(bulletSpawnLane);
             break;
         case 4:
-//            newBullet = new GaussBullet(bulletSpawnLane);
+            newBullet = new GaussBullet(bulletSpawnLane);
             break;
         //case 5:
             //newBullet = new BFGBullet(bulletSpawnLane);
         default:
-            newBullet = new PlasmaBullet(koratSpawnLane);
+            newBullet = new PlasmaBullet(bulletSpawnLane);
             cout << "Break Case Activated" << endl;
             break;
 
@@ -282,15 +282,15 @@ int GameLogic::decideBulletLane(MajorTom majorTom)
 
 int GameLogic::decideBulletType(MajorTom majorTom)
 {
-    if (majorTom.currentGun.bulletType = 1)
+    if (majorTom.currentGun.bulletType == 1)
         return 1;
-    else if (majorTom.currentGun.bulletType = 2)
+    else if (majorTom.currentGun.bulletType == 2)
         return 2;
-    else if (majorTom.currentGun.bulletType = 3)
+    else if (majorTom.currentGun.bulletType == 3)
         return 3;
-    else if (majorTom.currentGun.bulletType = 4)
+    else if (majorTom.currentGun.bulletType == 4)
         return 4;
-    else if (majorTom.currentGun.bulletType = 5)
+    else if (majorTom.currentGun.bulletType == 5)
         return 5;
 }
 

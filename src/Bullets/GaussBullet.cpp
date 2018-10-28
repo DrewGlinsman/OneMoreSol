@@ -5,11 +5,13 @@
 GaussBullet::GaussBullet(int startLane) {
     //if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
         //std::cout << "Failed to load plasmaGrunt." << std::endl;
-    gauss.setSize(sf::Vector2f(16,16));
+    gauss.setSize(sf::Vector2f(128,16));
 	//gauss.setTexture(&gruntPlasma);
 	gauss.setOrigin(gauss.getSize().x / 2, gauss.getSize().y /2);
 	setLane(startLane);
 	gauss.setPosition(height, lane);
+	speed = 2000;
+	damage = 50;
 }
 
 GaussBullet::~GaussBullet() {

@@ -5,11 +5,13 @@
 ArcBullet::ArcBullet(int startLane) {
     //if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
         //std::cout << "Failed to load plasmaGrunt." << std::endl;
-    arc.setSize(sf::Vector2f(16,16));
+    arc.setSize(sf::Vector2f(64,64));
 	//arc.setTexture(&gruntPlasma);
 	arc.setOrigin(arc.getSize().x / 2, arc.getSize().y /2);
 	setLane(startLane);
 	arc.setPosition(height, lane);
+	speed = 100;
+	damage = 40;
 }
 
 ArcBullet::~ArcBullet() {

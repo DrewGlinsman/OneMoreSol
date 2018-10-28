@@ -5,11 +5,13 @@
 LaserBullet::LaserBullet(int startLane) {
     //if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
         //std::cout << "Failed to load plasmaGrunt." << std::endl;
-    laser.setSize(sf::Vector2f(16,16));
+    laser.setSize(sf::Vector2f(32,32));
 	//laser.setTexture(&gruntPlasma);
 	laser.setOrigin(laser.getSize().x / 2, laser.getSize().y /2);
 	setLane(startLane);
 	laser.setPosition(height, lane);
+	speed = 1000;
+	damage = 20;
 }
 
 LaserBullet::~LaserBullet() {

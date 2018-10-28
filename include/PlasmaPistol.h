@@ -5,15 +5,13 @@
 #include "Gun.h"
 #include "Bullet.h"
 
-class PlasmaPistol : public Gun
+class PlasmaPistol: public Gun
 {
     public:
         PlasmaPistol();
         virtual ~PlasmaPistol();
         void shoot();
         void reload();
-
-    protected:
 
     private:
         Bullet bullet;

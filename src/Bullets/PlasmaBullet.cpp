@@ -10,6 +10,8 @@ PlasmaBullet::PlasmaBullet(int startLane) {
 	plasma.setOrigin(plasma.getSize().x / 2, plasma.getSize().y /2);
 	setLane(startLane);
 	plasma.setPosition(height, lane);
+	speed = 500;
+	damage = 35;
 }
 
 PlasmaBullet::~PlasmaBullet() {

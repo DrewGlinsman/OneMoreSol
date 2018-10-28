@@ -10,8 +10,7 @@ MajorTom::MajorTom()
     if(!mtSpriteSheet.loadFromFile("assets/mtSpriteSheet.png"))
         cout << "Failed to load mtSpriteSheet for MajorTom." << endl;
 
-    Gun* gun = new PlasmaPistol();
-    setGun(*gun);
+    setGun(1);
 
     mtSpriteSheet.setSmooth(true);
 
@@ -21,7 +20,6 @@ MajorTom::MajorTom()
     majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);
     setHealth(100);
-    //currentGun = PlasmaPistol;
 
 }
 
@@ -249,92 +247,6 @@ bool MajorTom::keepMoving(float timePassed, string direction)
         }
 }
 
-void MajorTom::shoot(float timePassed)
-{
-    currentGun.shoot(timePassed);
-}
-/*
-void MajorTom::moveTomUp(float timePassed)
-{
-    if (majorTom.getPosition().y > 334 && majorTom.getPosition().y < 346)
-    {
-        // Do not move up - top lane
-    }
-    else if (majorTom.getPosition().y > 421 && majorTom.getPosition().y < 423)
-    {
-        while(majorTom.getPosition().y > 335)
-        {
-            majorTom.move(timePassed * .05, timePassed * -.1);
-        }
-        setTomPosition(335);
-    }
-    else if (majorTom.getPosition().y > 507 && majorTom.getPosition().y < 509)
-    {
-        while(majorTom.getPosition().y > 422)
-        {
-            majorTom.move(timePassed * .05, timePassed * -.1);
-        }
-        setTomPosition(422);
-    }
-    else if (majorTom.getPosition().y > 593 && majorTom.getPosition().y < 595)
-    {
-        while(majorTom.getPosition().y > 508)
-        {
-            majorTom.move(timePassed * .05, timePassed * -.1);
-        }
-        setTomPosition(508);
-    }
-    else if (majorTom.getPosition().y > 679 && majorTom.getPosition().y < 681)
-    {
-        while(majorTom.getPosition().y > 594)
-        {
-            majorTom.move(timePassed * .05, timePassed * -.1);
-        }
-        setTomPosition(594);
-    }
-}
-
-void MajorTom::moveTomDown(float timePassed)
-{
-    if (majorTom.getPosition().y > 334 && majorTom.getPosition().y < 336)
-    {
-        while(majorTom.getPosition().y < 422)
-        {
-            majorTom.move(timePassed * -.05, timePassed * .1);
-        }
-        setTomPosition(422);
-    }
-    else if (majorTom.getPosition().y > 421 && majorTom.getPosition().y < 423)
-    {
-        while(majorTom.getPosition().y < 508)
-        {
-            majorTom.move(timePassed * -.05, timePassed * .1);
-        }
-        setTomPosition(508);
-    }
-    else if (majorTom.getPosition().y > 507 && majorTom.getPosition().y < 509)
-    {
-        while(majorTom.getPosition().y < 594)
-        {
-            majorTom.move(timePassed * -.05, timePassed * .1);
-        }
-        setTomPosition(594);
-    }
-    else if (majorTom.getPosition().y > 593 && majorTom.getPosition().y < 595)
-    {
-        while(majorTom.getPosition().y < 680)
-        {
-            majorTom.move(timePassed * -.05, timePassed * .1);
-        }
-        setTomPosition(680);
-    }
-    else if (majorTom.getPosition().y > 679 && majorTom.getPosition().y < 681)
-    {
-        // Do not move down - bottom lane
-    }
-}
-*/
-
 int MajorTom::getHealth()
 {
     return currentHealth;
@@ -350,9 +262,36 @@ Gun MajorTom::getGun()
     return currentGun;
 }
 
-void MajorTom::setGun(Gun newGun)
+void MajorTom::setGun(int gunNumber)
 {
-    currentGun = newGun;
+    switch(gunNumber)
+    {
+        case 1:
+            currentGun = *pistol;
+            break;
+        case 2:
+            currentGun = *shotgun;
+            break;
+        case 3:
+            currentGun = *rifle;
+            break;
+        case 4:
+            currentGun = *minigun;
+            break;
+        case 5:
+            currentGun = *thrower;
+            break;
+        case 6:
+            currentGun = *sniper;
+            break;
+        case 7:
+            currentGun = *bigFunGun;
+            break;
+        default:
+            currentGun = *pistol;
+            break;
+
+    }
 }
 
 bool MajorTom::checkDeath()

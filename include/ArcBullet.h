@@ -33,7 +33,8 @@ private:
 
 	int lane;
 	int height;
-	int speed = 500;
+	int speed;
+	int damage;
 
     int lane1 = 335;
     int lane2 = 422;

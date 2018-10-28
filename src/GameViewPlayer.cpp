@@ -131,29 +131,24 @@ bool GameViewPlayer::playerViewIsOpen()
 
                     if(Event.key.code == sf::Keyboard::Up)
                     {
-                        //majorTom.moveTomUp(delta);
                         if(lockOutKeyboard == false)
                         keepMovingUp = majorTom.initMove(delta, "Up");
-                        //sky.rotate(delta);
                     }
 
                     if(Event.key.code == sf::Keyboard::Down)
                     {
-                        //majorTom.moveTomDown(delta);
                         if(lockOutKeyboard == false)
                         keepMovingDown = majorTom.initMove(delta, "Down");
                     }
 
                     if(Event.key.code == sf::Keyboard::W)
                     {
-                        //majorTom.moveTomUp(delta);
                         if(lockOutKeyboard == false)
                         keepMovingUp = majorTom.initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::S)
                     {
-                        //majorTom.moveTomDown(delta);
                         if(lockOutKeyboard == false)
                         keepMovingDown = majorTom.initMove(delta, "Down");
                     }
@@ -162,6 +157,56 @@ bool GameViewPlayer::playerViewIsOpen()
                     {
                         if(lockOutKeyboard == false)
                         logic -> selectBullet(majorTom, delta);
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num1)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom.setGun(1);
+                        cout << "selected plasma pistol" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num2)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom.setGun(2);
+                        cout << "selected plasma shotgun" << endl;
+
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num3)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom.setGun(3);
+                        cout << "selected laser rifle" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num4)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom.setGun(4);
+                        cout << "selected laser minigun" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num5)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom.setGun(5);
+                        cout << "selected arc thrower" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num6)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom.setGun(6);
+                        cout << "selected gauss rifle" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num7)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom.setGun(7);
+                        cout << "selected BFG" << endl;
                     }
                 }
             }

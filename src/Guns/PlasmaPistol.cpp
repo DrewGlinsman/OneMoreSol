@@ -2,8 +2,7 @@
 #include "PlasmaPistol.h"
 
 //instantiate all the basic values for a plasma pistol.
-PlasmaPistol::PlasmaPistol()
-{
+PlasmaPistol::PlasmaPistol(){
     bulletType = 1;
     fireRate = 0.5;
     clip = 10;
