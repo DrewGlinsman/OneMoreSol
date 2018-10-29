@@ -20,12 +20,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         cout << "Failed to Load Lock Icon." << endl;
 
-    if (!pPistol.loadFromFile("assets/plasmaPistol.png"))
-        cout << "Failed to Load plasma Pistol." << endl;
-
     loadedTextures = new TextureLoader();
-
-    pPistol.setSmooth(true);
     loadedTextures->mtSpriteSheet.setSmooth(true);
 
     sky.setRadius(894);
@@ -39,13 +34,13 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     background.setTexture(&gameImage);
 
 
-    weapon1.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon2.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon3.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon4.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon5.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon6.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon7.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon1.setTextureRect(sf::IntRect(256,0,32,32));
+    weapon2.setTextureRect(sf::IntRect(256,32,32,32));
+    weapon3.setTextureRect(sf::IntRect(288,0,32,32));
+    weapon4.setTextureRect(sf::IntRect(288,32,32,32));
+    weapon5.setTextureRect(sf::IntRect(320,0,32,32));
+    weapon6.setTextureRect(sf::IntRect(320,32,32,32));
+    weapon7.setTextureRect(sf::IntRect(352,0,32,32));
     weapon1.setPosition(295,790);
     weapon2.setPosition(423,790);
     weapon3.setPosition(551,790);
@@ -53,13 +48,20 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     weapon5.setPosition(807,790);
     weapon6.setPosition(935,790);
     weapon7.setPosition(1063,790);
-    weapon1.setTexture(&pPistol);
-    weapon2.setTexture(&lockIcon);
-    weapon3.setTexture(&lockIcon);
-    weapon4.setTexture(&lockIcon);
-    weapon5.setTexture(&lockIcon);
-    weapon6.setTexture(&lockIcon);
-    weapon7.setTexture(&lockIcon);
+    weapon1.setTexture(loadedTextures->mtSpriteSheet);
+    weapon2.setTexture(loadedTextures->mtSpriteSheet);
+    weapon3.setTexture(loadedTextures->mtSpriteSheet);
+    weapon4.setTexture(loadedTextures->mtSpriteSheet);
+    weapon5.setTexture(loadedTextures->mtSpriteSheet);
+    weapon6.setTexture(loadedTextures->mtSpriteSheet);
+    weapon7.setTexture(loadedTextures->mtSpriteSheet);
+    weapon1.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon2.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon3.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon4.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon5.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon6.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon7.setScale(sf::Vector2f(2.5f,2.5f));
 
     survivorCnt.setFont(gameFont);
     survivorCnt.setCharacterSize(22);
