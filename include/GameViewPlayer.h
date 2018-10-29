@@ -18,7 +18,6 @@ class GameViewPlayer
 
 private:
     float timePassed;
-    std::vector<Grunt*> grunts;
 
 public:
     sf::Font gameFont;
@@ -47,12 +46,10 @@ public:
     int lane4 = 594;
     int lane5 = 680;
 
-
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
     sf::Text survivorCnt;
     sf::Event Event;
-    float* currentPlayer;
 
     GameLogic* logic;
 
@@ -62,10 +59,7 @@ public:
 
     GameViewPlayer();
     bool playerViewIsOpen();
-    void movePlayer(float timePassed);
-    void moveEnemy(float timePassed);
     void updateGame(void);
-    void deleteObjects(void);
 
 };
 

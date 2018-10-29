@@ -220,16 +220,6 @@ bool GameViewPlayer::playerViewIsOpen()
     return false;
 }
 
-void GameViewPlayer::movePlayer(float timePassed)
-{
-
-}
-
-void GameViewPlayer::moveEnemy(float timePassed)
-{
-
-}
-
 void GameViewPlayer::updateGame(void) // Draws all elements of screen
 {
 
@@ -252,9 +242,4 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
     gameWindow.draw(weapon7);
 
     gameWindow.display();
-}
-
-void GameViewPlayer::deleteObjects(void)
-{
-    delete currentPlayer;
 }
