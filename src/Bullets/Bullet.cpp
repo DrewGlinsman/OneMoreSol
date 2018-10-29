@@ -63,7 +63,12 @@ void Bullet::drawCurrentBullet(sf::RenderWindow& window)
 
 }
 
-void Bullet::doDamage()
+int Bullet::getDamage()
+{
+
+}
+
+bool Bullet::getOutOfBounds()
 {
 
 }

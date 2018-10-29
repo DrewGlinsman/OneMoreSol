@@ -20,11 +20,7 @@ Jackal::~Jackal() {
 
 void Jackal::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger jackal death
-    }
+    health = health - damage;
 }
 
 int Jackal::getLane()
@@ -59,13 +55,13 @@ void Jackal::setLane(int givenLane)
 
 void Jackal::moveCurrentKorat(float timePassed)
 {
-        if(jackal.getPosition().x > 500)
+        if(jackal.getPosition().x > -100)
         {
             jackal.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -79,9 +75,19 @@ sf::Sprite Jackal::getKorat()
     return jackal;
 }
 
+float Jackal::getPositionX()
+{
+    return jackal.getPosition().x;
+}
+
 bool Jackal::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Jackal::checkSurvive()
+{
+    return survive;
 }

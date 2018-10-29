@@ -33,10 +33,15 @@ class GameLogic{
         //wrap it in reference wrapper so that it passes references instead of copies
         std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
-        int survivorCount;
-        int currentLevel = 19;
 
-        double spawnRate;
+        sf::Clock spawnClock;
+
+        int survivorCount = 20;
+
+        int currentKoratCount = 0;
+
+        int currentLevel = 1;
+
         int koratSpawnLane;
         int koratSpawnType;
 
@@ -57,12 +62,13 @@ class GameLogic{
         int lane4 = 594;
         int lane5 = 680;
 
-        int currentKoratCount = 0;
-
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
         int sunSetOrientation = 134;
-        float levelSpeedModifier = 20;
+        float levelSpeedModifier = 2.5;
+        float levelSpawnModifier = 3;
+        float rotation;
+        float spawnTime;
 
     public:
         GameLogic();
@@ -72,13 +78,11 @@ class GameLogic{
         void moveKorat(float timePassed);
         void drawKorat(sf::RenderWindow& window);
 
-        void selectKorat(float timePassed);
-        void spawnKorat(float timePassed);
+        void selectKorat();
+        void spawnKorat();
         bool checkEnd();
         int decideKoratLane();
         int decideKoratType(std::vector<int> enemyPool);
-
-        bool bulletHitsKorat(Bullet selectedBullet, std::vector<shared_ptr<KoratEmpire>> currentLaneKorat);
 
         void moveBullet(float timePassed);
         void drawBullet(sf::RenderWindow& window);
@@ -87,8 +91,6 @@ class GameLogic{
         void spawnBullet(float timePassed);
         int decideBulletLane(MajorTom majorTom);
         int decideBulletType(MajorTom majorTom);
-
-
 
         void runLevel(sf::CircleShape& gameSky, float timePassed);
 };

@@ -10,8 +10,7 @@ MajorTom::MajorTom()
     if(!mtSpriteSheet.loadFromFile("assets/mtSpriteSheet.png"))
         cout << "Failed to load mtSpriteSheet for MajorTom." << endl;
 
-    Gun* gun = new PlasmaPistol();
-    setGun(*gun);
+    setGun(1);
 
     mtSpriteSheet.setSmooth(true);
 
@@ -21,7 +20,6 @@ MajorTom::MajorTom()
     majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);
     setHealth(100);
-    //currentGun = PlasmaPistol;
 
 }
 
@@ -249,11 +247,14 @@ bool MajorTom::keepMoving(float timePassed, string direction)
         }
 }
 
+<<<<<<< HEAD
 void MajorTom::shoot(float timePassed)
 {
     currentGun.shoot(timePassed);
 }
 
+=======
+>>>>>>> master
 int MajorTom::getHealth()
 {
     return currentHealth;
@@ -269,9 +270,36 @@ Gun MajorTom::getGun()
     return currentGun;
 }
 
-void MajorTom::setGun(Gun newGun)
+void MajorTom::setGun(int gunNumber)
 {
-    currentGun = newGun;
+    switch(gunNumber)
+    {
+        case 1:
+            currentGun = *pistol;
+            break;
+        case 2:
+            currentGun = *shotgun;
+            break;
+        case 3:
+            currentGun = *rifle;
+            break;
+        case 4:
+            currentGun = *minigun;
+            break;
+        case 5:
+            currentGun = *thrower;
+            break;
+        case 6:
+            currentGun = *sniper;
+            break;
+        case 7:
+            currentGun = *bigFunGun;
+            break;
+        default:
+            currentGun = *pistol;
+            break;
+
+    }
 }
 
 bool MajorTom::checkDeath()

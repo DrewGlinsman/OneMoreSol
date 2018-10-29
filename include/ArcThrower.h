@@ -2,10 +2,19 @@
 #ifndef INCLUDE_ARCTHROWER_H_
 #define INCLUDE_ARCTHROWER_H_
 
-class ArcThrower {
-public:
-	ArcThrower();
-	virtual ~ArcThrower();
+#include "Gun.h"
+#include "Bullet.h"
+
+class ArcThrower: public Gun
+{
+    public:
+        ArcThrower();
+        virtual ~ArcThrower();
+        void shoot();
+        void reload();
+
+    private:
+        Bullet bullet;
 };
 
 #endif

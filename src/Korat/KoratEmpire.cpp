@@ -16,6 +16,10 @@ KoratEmpire::~KoratEmpire() {
 	// TODO Auto-generated destructor stub
 }
 
+void KoratEmpire::wasShot(int damage)
+{
+
+}
 
 void KoratEmpire::setLane(int givenLane)
 {
@@ -54,7 +58,7 @@ void KoratEmpire::moveCurrentKorat(float timepassed)
 
 void KoratEmpire::drawCurrentKorat(sf::RenderWindow& window)
 {
-   // std::cout << "not drawing empty function" << std::endl;
+
 }
 
 sf::RectangleShape KoratEmpire::getKorat()
@@ -62,9 +66,17 @@ sf::RectangleShape KoratEmpire::getKorat()
 
 }
 
+float KoratEmpire::getPositionX()
+{
+
+}
+
 bool KoratEmpire::checkDeath()
 {
-    if (health <= 0)
-        return true;
-    return false;
+
+}
+
+bool KoratEmpire::checkSurvive()
+{
+
 }

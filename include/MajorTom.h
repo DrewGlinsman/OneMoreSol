@@ -5,6 +5,12 @@
 #include <SFML/Graphics.hpp>
 #include "Gun.h"
 #include "PlasmaPistol.h"
+#include "PlasmaShotgun.h"
+#include "LaserRifle.h"
+#include "LaserMinigun.h"
+#include "ArcThrower.h"
+#include "GaussRifle.h"
+#include "BFG.h"
 
 using namespace std;
 
@@ -17,6 +23,14 @@ class MajorTom {
         float timePassed;
         int currentHealth;
         int newHealth;
+
+        Gun* pistol = new PlasmaPistol();
+        Gun* shotgun = new PlasmaShotgun();
+        Gun* rifle = new LaserRifle();
+        Gun* minigun = new LaserMinigun();
+        Gun* thrower = new ArcThrower();
+        Gun* sniper = new GaussRifle();
+        Gun* bigFunGun = new BFG();
 
     public:
         sf::Sprite majorTom;
@@ -41,19 +55,13 @@ class MajorTom {
 
         bool keepMoving(float timePassed, string direction);
 
-        void moveTomUp(float timePassed);
-
-        void moveTomDown(float timePassed);
-
-        void shoot(float timePassed);
-
         int getHealth();
 
         void setHealth(int newHealth);
 
         Gun getGun();
 
-        void setGun(Gun newGun);
+        void setGun(int gunNumber);
 
         bool checkDeath();
 

@@ -20,11 +20,7 @@ Brute::~Brute() {
 
 void Brute::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger brute death
-    }
+    health = health - damage;
 }
 
 int Brute::getLane()
@@ -59,13 +55,13 @@ void Brute::setLane(int givenLane)
 
 void Brute::moveCurrentKorat(float timePassed)
 {
-        if(brute.getPosition().x > 500)
+        if(brute.getPosition().x > -100)
         {
             brute.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -79,9 +75,19 @@ sf::Sprite Brute::getKorat()
     return brute;
 }
 
+float Brute::getPositionX()
+{
+    return brute.getPosition().x;
+}
+
 bool Brute::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Brute::checkSurvive()
+{
+    return survive;
 }

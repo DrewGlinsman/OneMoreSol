@@ -15,17 +15,18 @@ class Bullet
        virtual float getPositionX();
        virtual float getPositionY();
        virtual float setPosition(sf::Vector2f newPos);
-       virtual void doDamage();
+       virtual int getDamage();
        virtual void moveCurrentBullet(float timePassed);
        virtual void drawCurrentBullet(sf::RenderWindow& window);
 
+       virtual bool getOutOfBounds();
        virtual sf::RectangleShape getBullet();
 
     protected:
 
     private:
         //damage
-        float damage;
+        int damage;
 
         //speed
         float velocity;
@@ -33,6 +34,9 @@ class Bullet
         //location
         float positionX;
         float positionY;
+        bool outOfBounds;
+
+
 };
 
 #endif

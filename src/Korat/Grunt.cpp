@@ -20,11 +20,7 @@ Grunt::~Grunt() {
 
 void Grunt::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger grunt death
-    }
+	 health = health - damage;
 }
 
 int Grunt::getLane()
@@ -59,13 +55,13 @@ void Grunt::setLane(int givenLane)
 
 void Grunt::moveCurrentKorat(float timePassed)
 {
-        if(grunt.getPosition().x > 500)
+        if(grunt.getPosition().x > -100)
         {
             grunt.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -79,9 +75,19 @@ sf::Sprite Grunt::getKorat()
     return grunt;
 }
 
+float Grunt::getPositionX()
+{
+    return grunt.getPosition().x;
+}
+
 bool Grunt::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Grunt::checkSurvive()
+{
+    return survive;
 }

@@ -20,11 +20,7 @@ Hunter::~Hunter() {
 
 void Hunter::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger hunter death
-    }
+    health = health - damage;
 }
 
 int Hunter::getLane()
@@ -59,13 +55,13 @@ void Hunter::setLane(int givenLane)
 
 void Hunter::moveCurrentKorat(float timePassed)
 {
-        if(hunter.getPosition().x > 500)
+        if(hunter.getPosition().x > -100)
         {
             hunter.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -79,9 +75,19 @@ sf::Sprite Hunter::getKorat()
     return hunter;
 }
 
+float Hunter::getPositionX()
+{
+    return hunter.getPosition().x;
+}
+
 bool Hunter::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Hunter::checkSurvive()
+{
+    return survive;
 }

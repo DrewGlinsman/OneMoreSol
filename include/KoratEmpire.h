@@ -20,7 +20,13 @@ public:
 
 	virtual void drawCurrentKorat(sf::RenderWindow& window);
 
+	virtual float getPositionX();
+
+	virtual void wasShot(int damage);
+
 	sf::RectangleShape getKorat();
+
+	virtual bool checkSurvive();
 
     int lane;
 

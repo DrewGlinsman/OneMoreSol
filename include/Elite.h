@@ -27,11 +27,16 @@ public:
 
 	sf::Sprite getKorat();
 
+	float getPositionX();
+
+	bool checkSurvive();
+
 private:
 
 	int lane;
 	int speed = 100;
 	int health = 100;
+	bool survive = false;
 
     int lane1 = 335;
     int lane2 = 422;

@@ -20,11 +20,7 @@ Elite::~Elite() {
 
 void Elite::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger elite death
-    }
+    health = health - damage;
 }
 
 int Elite::getLane()
@@ -59,13 +55,13 @@ void Elite::setLane(int givenLane)
 
 void Elite::moveCurrentKorat(float timePassed)
 {
-        if(elite.getPosition().x > 500)
+        if(elite.getPosition().x > -100)
         {
             elite.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -79,9 +75,19 @@ sf::Sprite Elite::getKorat()
     return elite;
 }
 
+float Elite::getPositionX()
+{
+    return elite.getPosition().x;
+}
+
 bool Elite::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Elite::checkSurvive()
+{
+    return survive;
 }

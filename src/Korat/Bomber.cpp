@@ -21,11 +21,7 @@ Bomber::~Bomber() {
 
 void Bomber::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger bomber death
-    }
+    health = health - damage;
 }
 
 int Bomber::getLane()
@@ -60,13 +56,13 @@ void Bomber::setLane(int givenLane)
 
 void Bomber::moveCurrentKorat(float timePassed)
 {
-        if(bomber.getPosition().x > 500)
+        if(bomber.getPosition().x > -100)
         {
             bomber.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -80,9 +76,19 @@ sf::Sprite Bomber::getKorat()
     return bomber;
 }
 
+float Bomber::getPositionX()
+{
+    return bomber.getPosition().x;
+}
+
 bool Bomber::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Bomber::checkSurvive()
+{
+    return survive;
 }
