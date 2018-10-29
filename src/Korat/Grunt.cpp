@@ -14,6 +14,10 @@ Grunt::Grunt(int startLane, TextureLoader* loadedTextures){
 
 	if (!gruntHitSound.loadFromFile("assets/Grunt_Hit.ogg")) // Loads and initializes all sounds based on impact
 	    std::cout << "Could not load Grunt Hit Sound." << std::endl;
+    if (!koratDeathSound.loadFromFile("assets/Korat_Death.ogg")) // Loads and initializes all sounds based on impact
+		std::cout << "Could not load Korat Death Sound." << std::endl;
+    if (!koratLeftSound.loadFromFile("assets/Korat_Left.ogg")) // Loads and initializes all sounds based on impact
+		std::cout << "Could not load Korat Left Sound." << std::endl;
 }
 
 Grunt::~Grunt() {
@@ -89,11 +93,50 @@ float Grunt::getPositionX()
 bool Grunt::checkDeath()
 {
     if (health <= 0)
-        return true;
+    {
+		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
+		std::cout << postDeathTime << std::endl;
+		if (postDeathTime >= 5) //THIS CANNOT BE LESS THAN OR EQUAL TO A CERTAIN NUMBER THAT SEEMS TO CHANGE BETWEEN 2 AND 9 TRUST ME
+		{
+			postDeathClock.restart();
+			return true;
+		} else {
+			speed = 0;
+			if (koratDeathSoundPlayed == false)
+			{
+				postDeathClock.restart();
+				koratDied.setBuffer(koratDeathSound);
+				koratDied.setVolume(100);
+				koratDied.play();
+				koratDeathSoundPlayed = true;
+			}
+		}
+    }
     return false;
 }
 
 bool Grunt::checkSurvive()
 {
-    return survive;
+	if (survive == true)
+	{
+		postLeftTime = postLeftClock.getElapsedTime().asSeconds();
+		if (postDeathTime >= 5) //THIS CANNOT BE LESS THAN OR EQUAL TO A CERTAIN NUMBER THAT SEEMS TO CHANGE BETWEEN 2 AND 9 TRUST ME
+		{
+			postLeftClock.restart();
+			return true;
+		} else {
+			speed = 0;
+			if (koratLeftSoundPlayed == false)
+			{
+				postLeftClock.restart();
+				koratLeft.setBuffer(koratDeathSound);
+				koratLeft.setVolume(100);
+				koratLeft.play();
+				koratLeftSoundPlayed = true;
+			}
+		}
+	}
+
+    //return survive;
+	return false;
 }

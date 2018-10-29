@@ -13,6 +13,7 @@ GameLogic::GameLogic()
     survivorCount = 20;
     loadedTextures = new TextureLoader();
     sf::Clock spawnClock;
+    sf::Clock postDeathClock;
 
     if (!level1Music.loadFromFile("assets/Level_1_Cut.ogg")) // Loads and initializes all sounds based on impact
     std::cout << "Could not load Level 1 Music." << std::endl;
@@ -48,8 +49,8 @@ void GameLogic::moveKorat(float timePassed)
                 }
                 else
                 {
-                    currentKorat[i].erase(currentKorat[i].begin() + j);
-                    currentKoratCount--;
+                		currentKorat[i].erase(currentKorat[i].begin() + j);
+                		currentKoratCount--;
                 }
             }
             else

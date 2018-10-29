@@ -36,6 +36,7 @@ class GameLogic{
         std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
 
         sf::Clock spawnClock;
+//        sf::Clock postDeathClock;
 
         int survivorCount = 20;
 
@@ -70,6 +71,7 @@ class GameLogic{
         float levelSpawnModifier = 3;
         float rotation;
         float spawnTime;
+//        float postDeathTime;
 
          sf::SoundBuffer level1Music;
          sf::SoundBuffer level2Music;
