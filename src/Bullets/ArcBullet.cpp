@@ -4,8 +4,8 @@
 
 ArcBullet::ArcBullet(int startLane, TextureLoader* loadedTextures) {
     arc.setTexture(loadedTextures->mtSpriteSheet);
-    arc.setTextureRect(sf::IntRect(256,64,32,32));
-	arc.setOrigin(sf::Vector2f(32.f,32.f));
+    arc.setTextureRect(sf::IntRect(256,256,192,192));
+	arc.setOrigin(sf::Vector2f(96.f,96.f));
 	setLane(startLane);
 	arc.setPosition(height, lane);
 	speed = 100;
