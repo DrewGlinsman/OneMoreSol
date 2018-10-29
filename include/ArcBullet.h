@@ -3,14 +3,14 @@
 #define INCLUDE_ARCBULLET_H_
 
 #include "Bullet.h"
+#include "TextureLoader.h"
 
 class ArcBullet: public Bullet {
 
 public:
-	sf::RectangleShape arc;
-	sf::Texture gruntPlasma;
+	sf::Sprite arc;
 
-	ArcBullet(int startLane);
+	ArcBullet(int, TextureLoader*);
 	virtual ~ArcBullet();
 
 	int getDamage();
@@ -23,7 +23,7 @@ public:
 
 	void drawCurrentBullet(sf::RenderWindow& window);
 
-	sf::RectangleShape getBullet();
+	sf::Sprite getBullet();
 
 	bool getOutOfBounds();
 

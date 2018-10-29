@@ -3,14 +3,14 @@
 #define INCLUDE_GAUSSBULLET_H_
 
 #include "Bullet.h"
+#include "TextureLoader.h"
 
 class GaussBullet: public Bullet {
 
 public:
-	sf::RectangleShape gauss;
-	sf::Texture gruntPlasma;
+	sf::Sprite gauss;
 
-	GaussBullet(int startLane);
+	GaussBullet(int, TextureLoader*);
 	virtual ~GaussBullet();
 
 	int getDamage();
@@ -23,7 +23,7 @@ public:
 
 	void drawCurrentBullet(sf::RenderWindow& window);
 
-	sf::RectangleShape getBullet();
+	sf::Sprite getBullet();
 
 	bool getOutOfBounds();
 

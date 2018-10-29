@@ -2,12 +2,10 @@
 #include "ArcBullet.h"
 #include <iostream>
 
-ArcBullet::ArcBullet(int startLane) {
-    //if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        //std::cout << "Failed to load plasmaGrunt." << std::endl;
-    arc.setSize(sf::Vector2f(64,64));
-	//arc.setTexture(&gruntPlasma);
-	arc.setOrigin(arc.getSize().x / 2, arc.getSize().y /2);
+ArcBullet::ArcBullet(int startLane, TextureLoader* loadedTextures) {
+    arc.setTexture(loadedTextures->mtSpriteSheet);
+    arc.setTextureRect(sf::IntRect(256,64,32,32));
+	arc.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	arc.setPosition(height, lane);
 	speed = 100;
@@ -87,7 +85,7 @@ bool ArcBullet::getOutOfBounds()
     return outOfBounds;
 }
 
-sf::RectangleShape ArcBullet::getBullet()
+sf::Sprite ArcBullet::getBullet()
 {
     return arc;
 }

@@ -243,21 +243,21 @@ void GameLogic::spawnBullet(float timePassed)
     switch(bulletSpawnType)
     {
         case 1:
-            newBullet = new PlasmaBullet(bulletSpawnLane);
+            newBullet = new PlasmaBullet(bulletSpawnLane, loadedTextures);
             break;
         case 2:
-            newBullet = new LaserBullet(bulletSpawnLane);
+            newBullet = new LaserBullet(bulletSpawnLane, loadedTextures);
             break;
         case 3:
-            newBullet = new ArcBullet(bulletSpawnLane);
+            newBullet = new ArcBullet(bulletSpawnLane, loadedTextures);
             break;
         case 4:
-            newBullet = new GaussBullet(bulletSpawnLane);
+            newBullet = new GaussBullet(bulletSpawnLane, loadedTextures);
             break;
         //case 5:
             //newBullet = new BFGBullet(bulletSpawnLane);
         default:
-            newBullet = new PlasmaBullet(bulletSpawnLane);
+            newBullet = new PlasmaBullet(bulletSpawnLane, loadedTextures);
             cout << "Break Case Activated" << endl;
             break;
 
