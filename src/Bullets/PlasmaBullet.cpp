@@ -10,6 +10,13 @@ PlasmaBullet::PlasmaBullet(int startLane, TextureLoader* loadedTextures) {
 	plasma.setPosition(height, lane);
 	speed = 500;
 	damage = 35;
+
+	if (!plasmaPistolSound.loadFromFile("assets/Plasma_Pistol_Sound.ogg")) // Loads and initializes all sounds based on impact
+    std::cout << "Could not load Plasma Pistol Sound." << std::endl;
+
+    firePlasmaPistol.setBuffer(plasmaPistolSound);
+    firePlasmaPistol.setVolume(50);
+    firePlasmaPistol.play();
 }
 
 PlasmaBullet::~PlasmaBullet() {

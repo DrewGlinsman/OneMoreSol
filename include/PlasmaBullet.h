@@ -4,6 +4,7 @@
 
 #include "Bullet.h"
 #include "TextureLoader.h"
+#include <SFML/Audio.hpp>
 
 class PlasmaBullet: public Bullet {
 public:
@@ -48,6 +49,9 @@ private:
     int height5 = 102;
 
     bool outOfBounds = false;
+
+    sf::SoundBuffer plasmaPistolSound;
+    sf::Sound firePlasmaPistol;
 };
 
 #endif
