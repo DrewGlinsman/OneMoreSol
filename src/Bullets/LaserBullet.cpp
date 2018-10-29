@@ -10,6 +10,13 @@ LaserBullet::LaserBullet(int startLane, TextureLoader* loadedTextures) {
 	laser.setPosition(height, lane);
 	speed = 1000;
 	damage = 20;
+
+    if (!laserRifleSound.loadFromFile("assets/Laser_Rifle_Sound.ogg")) // Loads and initializes all sounds based on impact
+    std::cout << "Could not load Laser Rifle Sound." << std::endl;
+
+    fireLaserRifle.setBuffer(laserRifleSound);
+    fireLaserRifle.setVolume(50);
+    fireLaserRifle.play();
 }
 
 LaserBullet::~LaserBullet() {

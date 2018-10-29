@@ -13,6 +13,15 @@ GameLogic::GameLogic()
     survivorCount = 20;
     loadedTextures = new TextureLoader();
     sf::Clock spawnClock;
+
+    if (!level1Music.loadFromFile("assets/Level_1_Cut.ogg")) // Loads and initializes all sounds based on impact
+    std::cout << "Could not load Plasma Pistol Sound." << std::endl;
+
+    backgroundMusic.setBuffer(level1Music);
+    backgroundMusic.setVolume(50);
+    backgroundMusic.play();
+
+
 }
 
 bool GameLogic::checkEnd()

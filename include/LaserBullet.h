@@ -4,6 +4,7 @@
 
 #include "Bullet.h"
 #include "TextureLoader.h"
+#include <SFML/Audio.hpp>
 
 class LaserBullet: public Bullet {
 
@@ -49,6 +50,9 @@ private:
     int height5 = 102;
 
     bool outOfBounds = false;
+
+    sf::SoundBuffer laserRifleSound;
+    sf::Sound fireLaserRifle;
 };
 
 #endif

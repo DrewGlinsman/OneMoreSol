@@ -3,6 +3,7 @@
 #define GAMELOGIC_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <memory>
 
 #include "MajorTom.h"
@@ -69,6 +70,9 @@ class GameLogic{
         float levelSpawnModifier = 3;
         float rotation;
         float spawnTime;
+
+         sf::SoundBuffer level1Music;
+         sf::Sound backgroundMusic;
 
     public:
         GameLogic();
