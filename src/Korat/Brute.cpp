@@ -2,13 +2,12 @@
 #include "Brute.h"
 #include <iostream>
 
-Brute::Brute(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Brute::Brute(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	brute.setSize(sf::Vector2f(64,64));
-	brute.setTexture(&gruntPlasma);
-	brute.setOrigin(brute.getSize().x / 2, brute.getSize().y /2);
+
+	brute.setTexture(loadedTextures->mtSpriteSheet);
+	brute.setTextureRect(sf::IntRect(0,448,64,64));
+	brute.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	brute.setPosition(1500, lane);
 	std::cout << "I'm a brute" << std::endl;
@@ -71,7 +70,7 @@ void Brute::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(brute);
 }
 
-sf::RectangleShape Brute::getKorat()
+sf::Sprite Brute::getKorat()
 {
     return brute;
 }

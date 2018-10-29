@@ -11,6 +11,7 @@
 #include "ArcThrower.h"
 #include "GaussRifle.h"
 #include "BFG.h"
+#include "TextureLoader.h"
 
 using namespace std;
 
@@ -34,14 +35,14 @@ class MajorTom {
 
     public:
         sf::Sprite majorTom;
-        sf::Texture mtPlasmaPistol;
+
         sf::Texture mtSpriteSheet;//this is a second load, loaded also on gameviewplayer. how to expand scope?
 
         sf::Sprite mtStandPPistol;
 
         Gun currentGun;
 
-        MajorTom();
+        MajorTom(TextureLoader*);
 
         void drawTom(sf::RenderWindow& window);
 
@@ -56,6 +57,8 @@ class MajorTom {
         bool keepMoving(float timePassed, string direction);
 
         int getHealth();
+
+        void shoot(float);
 
         void setHealth(int newHealth);
 

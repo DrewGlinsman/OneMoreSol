@@ -2,13 +2,12 @@
 #include "Jackal.h"
 #include <iostream>
 
-Jackal::Jackal(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Jackal::Jackal(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	jackal.setSize(sf::Vector2f(64,64));
-	jackal.setTexture(&gruntPlasma);
-	jackal.setOrigin(jackal.getSize().x / 2, jackal.getSize().y /2);
+
+	jackal.setTexture(loadedTextures->mtSpriteSheet);
+	jackal.setTextureRect(sf::IntRect(0,576,64,64));
+	jackal.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	jackal.setPosition(1500, lane);
 	std::cout << "I'm a jackal" << std::endl;
@@ -71,7 +70,7 @@ void Jackal::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(jackal);
 }
 
-sf::RectangleShape Jackal::getKorat()
+sf::Sprite Jackal::getKorat()
 {
     return jackal;
 }

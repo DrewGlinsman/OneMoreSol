@@ -4,13 +4,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "KoratEmpire.h"
+#include "TextureLoader.h"
 
 class Jackal: public KoratEmpire {
 public:
-	sf::RectangleShape jackal;
-	sf::Texture gruntPlasma;
+	sf::Sprite jackal;
 
-	Jackal(int startLane);
+	Jackal(int, TextureLoader*);
 	virtual ~Jackal();
 
 	int getLane();
@@ -25,7 +25,7 @@ public:
 
 	void drawCurrentKorat(sf::RenderWindow& window);
 
-	sf::RectangleShape getKorat();
+	sf::Sprite getKorat();
 
 	float getPositionX();
 

@@ -9,6 +9,7 @@
 #include "Gun.h"
 #include "MajorTom.h"
 #include "GameLogic.h"
+#include "TextureLoader.h"
 
 using namespace std;
 
@@ -56,7 +57,9 @@ public:
 
     GameLogic* logic;
 
-    MajorTom majorTom;
+    MajorTom* majorTom;//need to make new and non default constructor
+
+    TextureLoader* loadedTextures;
 
     GameViewPlayer();
     bool playerViewIsOpen();

@@ -2,13 +2,12 @@
 #include "Biker.h"
 #include <iostream>
 
-Biker::Biker(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Biker::Biker(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	biker.setSize(sf::Vector2f(64,64));
-	biker.setTexture(&gruntPlasma);
-	biker.setOrigin(biker.getSize().x / 2, biker.getSize().y /2);
+
+	biker.setTexture(loadedTextures->mtSpriteSheet);
+	biker.setTextureRect(sf::IntRect(0,768,64,64));
+	biker.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	biker.setPosition(1500, lane);
 	std::cout << "I'm a biker" << std::endl;
@@ -71,7 +70,7 @@ void Biker::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(biker);
 }
 
-sf::RectangleShape Biker::getKorat()
+sf::Sprite Biker::getKorat()
 {
     return biker;
 }

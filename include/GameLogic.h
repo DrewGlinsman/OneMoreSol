@@ -87,10 +87,10 @@ class GameLogic{
         void moveBullet(float timePassed);
         void drawBullet(sf::RenderWindow& window);
 
-        void selectBullet(MajorTom majorTom, float timePassed);
+        void selectBullet(MajorTom* majorTom, float timePassed);
         void spawnBullet(float timePassed);
-        int decideBulletLane(MajorTom majorTom);
-        int decideBulletType(MajorTom majorTom);
+        int decideBulletLane(MajorTom* majorTom);
+        int decideBulletType(MajorTom* majorTom);
 
         void runLevel(sf::CircleShape& gameSky, float timePassed);
 };

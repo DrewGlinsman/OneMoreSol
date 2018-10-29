@@ -102,22 +102,22 @@ void GameLogic::spawnKorat()
             newKorat = new Grunt(koratSpawnLane, loadedTextures);
             break;
         case 2:
-            newKorat = new Jackal(koratSpawnLane);
+            newKorat = new Jackal(koratSpawnLane, loadedTextures);
             break;
         case 3:
-            newKorat = new Elite(koratSpawnLane);
+            newKorat = new Elite(koratSpawnLane, loadedTextures);
             break;
         case 4:
-            newKorat = new Hunter(koratSpawnLane);
+            newKorat = new Hunter(koratSpawnLane, loadedTextures);
             break;
         case 5:
-            newKorat = new Brute(koratSpawnLane);
+            newKorat = new Brute(koratSpawnLane, loadedTextures);
             break;
         case 6:
-            newKorat = new Bomber(koratSpawnLane);
+            newKorat = new Bomber(koratSpawnLane, loadedTextures);
             break;
         case 7:
-            newKorat = new Biker(koratSpawnLane);
+            newKorat = new Biker(koratSpawnLane, loadedTextures);
             break;
         default:
             newKorat = new Grunt(koratSpawnLane, loadedTextures);
@@ -226,7 +226,7 @@ void GameLogic::drawBullet(sf::RenderWindow& window)
     }
 }
 
-void GameLogic::selectBullet(MajorTom majorTom, float timePassed)
+void GameLogic::selectBullet(MajorTom* majorTom, float timePassed)
 {
     bulletSpawnLane = decideBulletLane(majorTom);
 
@@ -264,33 +264,33 @@ void GameLogic::spawnBullet(float timePassed)
     currentBullet[bulletSpawnLane - 1].emplace_back(newBullet);
 }
 
-int GameLogic::decideBulletLane(MajorTom majorTom)
+int GameLogic::decideBulletLane(MajorTom* majorTom)
 {
-    if (majorTom.getTomPosition() == lane1)
+    if (majorTom->getTomPosition() == lane1)
         return 1;
-    else if (majorTom.getTomPosition() == lane2)
+    else if (majorTom->getTomPosition() == lane2)
         return 2;
-    else if (majorTom.getTomPosition() == lane3)
+    else if (majorTom->getTomPosition() == lane3)
         return 3;
-    else if (majorTom.getTomPosition() == lane4)
+    else if (majorTom->getTomPosition() == lane4)
         return 4;
-    else if (majorTom.getTomPosition() == lane5)
+    else if (majorTom->getTomPosition() == lane5)
         return 5;
     else
         cout << "bullet shit is broken" << endl;
 }
 
-int GameLogic::decideBulletType(MajorTom majorTom)
+int GameLogic::decideBulletType(MajorTom* majorTom)
 {
-    if (majorTom.currentGun.bulletType == 1)
+    if (majorTom->currentGun.bulletType == 1)
         return 1;
-    else if (majorTom.currentGun.bulletType == 2)
+    else if (majorTom->currentGun.bulletType == 2)
         return 2;
-    else if (majorTom.currentGun.bulletType == 3)
+    else if (majorTom->currentGun.bulletType == 3)
         return 3;
-    else if (majorTom.currentGun.bulletType == 4)
+    else if (majorTom->currentGun.bulletType == 4)
         return 4;
-    else if (majorTom.currentGun.bulletType == 5)
+    else if (majorTom->currentGun.bulletType == 5)
         return 5;
 }
 
