@@ -11,6 +11,9 @@ Grunt::Grunt(int startLane, TextureLoader* loadedTextures){
 	setLane(startLane);
 	grunt.setPosition(1500, lane);
 	std::cout << "I'm a grunt" << std::endl;
+
+	if (!gruntHitSound.loadFromFile("assets/Grunt_Hit.ogg")) // Loads and initializes all sounds based on impact
+	    std::cout << "Could not load Grunt Hit Sound." << std::endl;
 }
 
 Grunt::~Grunt() {
@@ -20,7 +23,10 @@ Grunt::~Grunt() {
 
 void Grunt::wasShot(int damage)
 {
-	 health = health - damage;
+	health = health - damage;
+	gruntWasHit.setBuffer(gruntHitSound);
+	gruntWasHit.setVolume(75);
+	gruntWasHit.play();
 }
 
 int Grunt::getLane()

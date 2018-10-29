@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
+#include <SFML/Audio.hpp>
 
 class Grunt: public KoratEmpire {
 public:
@@ -43,6 +44,9 @@ private:
     int lane3 = 508;
     int lane4 = 594;
     int lane5 = 680;
+
+    sf::SoundBuffer gruntHitSound;
+    sf::Sound gruntWasHit;
 };
 
 #endif
