@@ -5,18 +5,12 @@
 
 using namespace std;
 
-MajorTom::MajorTom()
+MajorTom::MajorTom(TextureLoader* loadedTextures)
 {
-    if(!mtSpriteSheet.loadFromFile("assets/mtSpriteSheet.png"))
-        cout << "Failed to load mtSpriteSheet for MajorTom." << endl;
-
     setGun(1);
 
-    mtSpriteSheet.setSmooth(true);
-
-    majorTom.setTexture(mtSpriteSheet);
+    majorTom.setTexture(loadedTextures->mtSpriteSheet);
     majorTom.setTextureRect(sf::IntRect(0,0,64,64));
-
     majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);
     setHealth(100);
@@ -247,14 +241,11 @@ bool MajorTom::keepMoving(float timePassed, string direction)
         }
 }
 
-<<<<<<< HEAD
 void MajorTom::shoot(float timePassed)
 {
     currentGun.shoot(timePassed);
 }
 
-=======
->>>>>>> master
 int MajorTom::getHealth()
 {
     return currentHealth;

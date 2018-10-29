@@ -11,6 +11,7 @@
 #include "ArcThrower.h"
 #include "GaussRifle.h"
 #include "BFG.h"
+#include "TextureLoader.h"
 
 using namespace std;
 
@@ -41,7 +42,7 @@ class MajorTom {
 
         Gun currentGun;
 
-        MajorTom();
+        MajorTom(TextureLoader*);
 
         void drawTom(sf::RenderWindow& window);
 
@@ -56,6 +57,8 @@ class MajorTom {
         bool keepMoving(float timePassed, string direction);
 
         int getHealth();
+
+        void shoot(float);
 
         void setHealth(int newHealth);
 

@@ -23,7 +23,10 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!pPistol.loadFromFile("assets/plasmaPistol.png"))
         cout << "Failed to Load plasma Pistol." << endl;
 
+    loadedTextures = new TextureLoader();
+
     pPistol.setSmooth(true);
+    loadedTextures->mtSpriteSheet.setSmooth(true);
 
     sky.setRadius(894);
     sky.setOrigin(894,894);
@@ -65,6 +68,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setPosition(75,860);
 
     logic = new GameLogic();
+    majorTom = new MajorTom(loadedTextures);
 
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
@@ -99,12 +103,12 @@ bool GameViewPlayer::playerViewIsOpen()
 //-----------------------------------------------------------------
         if(keepMovingUp == true)
         {
-            keepMovingUp = majorTom.keepMoving(delta, "Up");
+            keepMovingUp = majorTom->keepMoving(delta, "Up");
             lockOutKeyboard = true;
         }
         else if(keepMovingDown == true)
         {
-            keepMovingDown = majorTom.keepMoving(delta, "Down");
+            keepMovingDown = majorTom->keepMoving(delta, "Down");
             lockOutKeyboard = true;
         }
         else
@@ -132,25 +136,25 @@ bool GameViewPlayer::playerViewIsOpen()
                     if(Event.key.code == sf::Keyboard::Up)
                     {
                         if(lockOutKeyboard == false)
-                        keepMovingUp = majorTom.initMove(delta, "Up");
+                        keepMovingUp = majorTom->initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::Down)
                     {
                         if(lockOutKeyboard == false)
-                        keepMovingDown = majorTom.initMove(delta, "Down");
+                        keepMovingDown = majorTom->initMove(delta, "Down");
                     }
 
                     if(Event.key.code == sf::Keyboard::W)
                     {
                         if(lockOutKeyboard == false)
-                        keepMovingUp = majorTom.initMove(delta, "Up");
+                        keepMovingUp = majorTom->initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::S)
                     {
                         if(lockOutKeyboard == false)
-                        keepMovingDown = majorTom.initMove(delta, "Down");
+                        keepMovingDown = majorTom->initMove(delta, "Down");
                     }
 
                     if(Event.key.code == sf::Keyboard::Space)
@@ -162,14 +166,14 @@ bool GameViewPlayer::playerViewIsOpen()
                     if(Event.key.code == sf::Keyboard::Num1)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom.setGun(1);
+                        majorTom->setGun(1);
                         cout << "selected plasma pistol" << endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num2)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom.setGun(2);
+                        majorTom->setGun(2);
                         cout << "selected plasma shotgun" << endl;
 
                     }
@@ -177,35 +181,35 @@ bool GameViewPlayer::playerViewIsOpen()
                     if(Event.key.code == sf::Keyboard::Num3)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom.setGun(3);
+                        majorTom->setGun(3);
                         cout << "selected laser rifle" << endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num4)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom.setGun(4);
+                        majorTom->setGun(4);
                         cout << "selected laser minigun" << endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num5)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom.setGun(5);
+                        majorTom->setGun(5);
                         cout << "selected arc thrower" << endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num6)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom.setGun(6);
+                        majorTom->setGun(6);
                         cout << "selected gauss rifle" << endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num7)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom.setGun(7);
+                        majorTom->setGun(7);
                         cout << "selected BFG" << endl;
                     }
                 }
@@ -231,7 +235,7 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 
     gameWindow.draw(sky);
     gameWindow.draw(background);
-    majorTom.drawTom(gameWindow);
+    majorTom->drawTom(gameWindow);
 
     logic -> drawKorat(gameWindow);
     logic -> drawBullet(gameWindow);
