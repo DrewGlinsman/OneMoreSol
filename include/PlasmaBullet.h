@@ -12,6 +12,8 @@ public:
 	PlasmaBullet(int startLane);
 	virtual ~PlasmaBullet();
 
+	int getDamage();
+
 	int getLane();
 
 	void setLane(int givenLane);
@@ -25,8 +27,6 @@ public:
 	bool getOutOfBounds();
 
 	float getPositionX();
-
-	int getDamage();
 
 private:
 

@@ -9,10 +9,7 @@
  */
 Bullet::Bullet()
 {
-    float positionX = 5;
-    float positionY = 10;
-    float damage = 100;
-    float velocity = 100;
+
 }
 
 /** \brief Getter for bullet velocity
@@ -23,7 +20,7 @@ Bullet::Bullet()
 
 float Bullet::getVelocity()
 {
-    return velocity;
+
 }
 
 /** \brief Setter for bullet velocity

@@ -18,6 +18,11 @@ LaserBullet::~LaserBullet() {
 	// TODO Auto-generated destructor stub
 }
 
+int LaserBullet::getDamage()
+{
+    return damage;
+}
+
 int LaserBullet::getLane()
 {
     return lane;

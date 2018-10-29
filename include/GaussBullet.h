@@ -13,6 +13,8 @@ public:
 	GaussBullet(int startLane);
 	virtual ~GaussBullet();
 
+	int getDamage();
+
 	int getLane();
 
 	void setLane(int givenLane);

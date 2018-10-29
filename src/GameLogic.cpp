@@ -194,6 +194,7 @@ void GameLogic::moveBullet(float timePassed)
                 }
                 else
                 {
+                    cout << currentBullet[i][j] -> getDamage() << endl;
                     currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
                     currentBullet[i].erase(currentBullet[i].begin() + j);
 

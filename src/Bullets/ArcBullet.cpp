@@ -18,6 +18,11 @@ ArcBullet::~ArcBullet() {
 	// TODO Auto-generated destructor stub
 }
 
+int ArcBullet::getDamage()
+{
+    return damage;
+}
+
 int ArcBullet::getLane()
 {
     return lane;

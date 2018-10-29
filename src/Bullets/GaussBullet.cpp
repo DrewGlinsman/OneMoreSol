@@ -18,6 +18,11 @@ GaussBullet::~GaussBullet() {
 	// TODO Auto-generated destructor stub
 }
 
+int GaussBullet::getDamage()
+{
+    return damage;
+}
+
 int GaussBullet::getLane()
 {
     return lane;

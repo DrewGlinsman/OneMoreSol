@@ -13,6 +13,8 @@ public:
 	ArcBullet(int startLane);
 	virtual ~ArcBullet();
 
+	int getDamage();
+
 	int getLane();
 
 	void setLane(int givenLane);

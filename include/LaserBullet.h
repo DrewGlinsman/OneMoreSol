@@ -13,6 +13,8 @@ public:
 	LaserBullet(int startLane);
 	virtual ~LaserBullet();
 
+	int getDamage();
+
 	int getLane();
 
 	void setLane(int givenLane);
