@@ -98,6 +98,9 @@ class GameLogic{
         int decideBulletType(MajorTom* majorTom);
 
         void runLevel(sf::CircleShape& gameSky, float timePassed);
+
+        void selectMusic();
+
 };
 
 

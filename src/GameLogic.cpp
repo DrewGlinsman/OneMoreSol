@@ -325,14 +325,14 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
             levelSpawnModifier = levelSpawnModifier * 15/16; //
 
             cout << "Current Level = " << currentLevel << endl;
-            backgroundMusic.setBuffer(level2Music);
-            backgroundMusic.setVolume(50);
-            backgroundMusic.play();
-        // start text adventure
 
-        // transition to boss 1 if current level = 10
+            selectMusic();
 
-        // transition to boss 2 if current level = 20
+            // start text adventure
+
+            // transition to boss 1 if current level = 10
+
+            // transition to boss 2 if current level = 20
         }
 	}
 	else
@@ -345,4 +345,74 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
             spawnClock.restart();
         }
     }
+}
+
+void GameLogic::selectMusic()
+{
+    switch(currentLevel)
+    {
+        case 2:
+            backgroundMusic.setBuffer(level2Music);
+            break;
+        /*
+        case 3:
+            backgroundMusic.setBuffer(level3Music);
+            break;
+        case 4:
+            backgroundMusic.setBuffer(level4Music);
+            break;
+        case 5:
+            backgroundMusic.setBuffer(level5Music);
+            break;
+        case 6:
+            backgroundMusic.setBuffer(level6Music);
+            break;
+        case 7:
+            backgroundMusic.setBuffer(level7Music);
+            break;
+        case 8:
+            backgroundMusic.setBuffer(level8Music);
+            break;
+        case 9:
+            backgroundMusic.setBuffer(level9Music);
+            break;
+        case 10:
+            backgroundMusic.setBuffer(level10Music);
+            break;
+        case 11:
+            backgroundMusic.setBuffer(level11Music);
+            break;
+        case 12:
+            backgroundMusic.setBuffer(level12Music);
+            break;
+        case 13:
+            backgroundMusic.setBuffer(level13Music);
+            break;
+        case 14:
+            backgroundMusic.setBuffer(level14Music);
+            break;
+        case 15:
+            backgroundMusic.setBuffer(level15Music);
+            break;
+        case 16:
+            backgroundMusic.setBuffer(level16Music);
+            break;
+        case 17:
+            backgroundMusic.setBuffer(level17Music);
+            break;
+        case 18:
+            backgroundMusic.setBuffer(level18Music);
+            break;
+        case 19:
+            backgroundMusic.setBuffer(level19Music);
+            break;
+        case 20:
+            backgroundMusic.setBuffer(level20Music);
+            break;
+        */
+        default:
+            cout << "Music selector broken" << endl;
+    }
+    backgroundMusic.setVolume(50);
+    backgroundMusic.play();
 }
