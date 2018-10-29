@@ -28,19 +28,18 @@ public:
     sf::RectangleShape background;
     sf::CircleShape sky;
 
-    sf::RectangleShape weapon1;
-    sf::RectangleShape weapon2;
-    sf::RectangleShape weapon3;
-    sf::RectangleShape weapon4;
-    sf::RectangleShape weapon5;
-    sf::RectangleShape weapon6;
-    sf::RectangleShape weapon7;
+    sf::Sprite weapon1;
+    sf::Sprite weapon2;
+    sf::Sprite weapon3;
+    sf::Sprite weapon4;
+    sf::Sprite weapon5;
+    sf::Sprite weapon6;
+    sf::Sprite weapon7;
 
     sf::Texture gameImage;
     sf::Texture playerImage;
     sf::Texture gameSky;
     sf::Texture lockIcon;
-    sf::Texture pPistol;
 
     int lane1 = 335;
     int lane2 = 422;
