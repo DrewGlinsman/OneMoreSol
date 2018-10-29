@@ -4,8 +4,8 @@
 
 GaussBullet::GaussBullet(int startLane, TextureLoader* loadedTextures) {
     gauss.setTexture(loadedTextures->mtSpriteSheet);
-    gauss.setTextureRect(sf::IntRect(256,64,32,32));
-	gauss.setOrigin(sf::Vector2f(32.f,32.f));
+    gauss.setTextureRect(sf::IntRect(320,128,1000,32));
+	gauss.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
 	gauss.setPosition(height, lane);
 	speed = 2000;

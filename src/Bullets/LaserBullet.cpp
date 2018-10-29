@@ -4,8 +4,8 @@
 
 LaserBullet::LaserBullet(int startLane, TextureLoader* loadedTextures) {
     laser.setTexture(loadedTextures->mtSpriteSheet);
-    laser.setTextureRect(sf::IntRect(256,64,32,32));
-	laser.setOrigin(sf::Vector2f(32.f,32.f));
+    laser.setTextureRect(sf::IntRect(256,96,32,32));
+	laser.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
 	laser.setPosition(height, lane);
 	speed = 1000;

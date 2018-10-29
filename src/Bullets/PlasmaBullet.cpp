@@ -5,7 +5,7 @@
 PlasmaBullet::PlasmaBullet(int startLane, TextureLoader* loadedTextures) {
     plasma.setTexture(loadedTextures->mtSpriteSheet);
     plasma.setTextureRect(sf::IntRect(256,64,32,32));
-	plasma.setOrigin(sf::Vector2f(32.f,32.f));
+	plasma.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
 	plasma.setPosition(height, lane);
 	speed = 500;
