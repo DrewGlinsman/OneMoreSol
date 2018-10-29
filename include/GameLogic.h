@@ -64,8 +64,8 @@ class GameLogic{
 
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
-        int sunSetOrientation = 134;
-        float levelSpeedModifier = 2.5;
+        int sunSetOrientation = 150;
+        float levelSpeedModifier = 12;
         float levelSpawnModifier = 3;
         float rotation;
         float spawnTime;
