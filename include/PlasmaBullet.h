@@ -3,13 +3,13 @@
 #define INCLUDE_PLASMABULLET_H_
 
 #include "Bullet.h"
+#include "TextureLoader.h"
 
 class PlasmaBullet: public Bullet {
 public:
-	sf::RectangleShape plasma;
-	sf::Texture gruntPlasma;
+	sf::Sprite plasma;
 
-	PlasmaBullet(int startLane);
+	PlasmaBullet(int, TextureLoader*);
 	virtual ~PlasmaBullet();
 
 	int getLane();
@@ -20,7 +20,7 @@ public:
 
 	void drawCurrentBullet(sf::RenderWindow& window);
 
-	sf::RectangleShape getBullet();
+	sf::Sprite getBullet();
 
 	bool getOutOfBounds();
 

@@ -73,7 +73,7 @@ bool Bullet::getOutOfBounds()
 
 }
 
-sf::RectangleShape Bullet::getBullet()
+sf::Sprite Bullet::getBullet()
 {
 
 }
