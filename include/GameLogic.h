@@ -72,6 +72,7 @@ class GameLogic{
         float spawnTime;
 
          sf::SoundBuffer level1Music;
+         sf::SoundBuffer level2Music;
          sf::Sound backgroundMusic;
 
     public:

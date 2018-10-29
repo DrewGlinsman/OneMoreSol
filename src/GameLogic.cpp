@@ -15,7 +15,10 @@ GameLogic::GameLogic()
     sf::Clock spawnClock;
 
     if (!level1Music.loadFromFile("assets/Level_1_Cut.ogg")) // Loads and initializes all sounds based on impact
-    std::cout << "Could not load Plasma Pistol Sound." << std::endl;
+    std::cout << "Could not load Level 1 Music." << std::endl;
+
+    if (!level2Music.loadFromFile("assets/Level_2_Cut.ogg")) // Loads and initializes all sounds based on impact
+    std::cout << "Could not load Level 2 Music." << std::endl;
 
     backgroundMusic.setBuffer(level1Music);
     backgroundMusic.setVolume(50);
@@ -322,6 +325,9 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
             levelSpawnModifier = levelSpawnModifier * 15/16; //
 
             cout << "Current Level = " << currentLevel << endl;
+            backgroundMusic.setBuffer(level2Music);
+            backgroundMusic.setVolume(50);
+            backgroundMusic.play();
         // start text adventure
 
         // transition to boss 1 if current level = 10
