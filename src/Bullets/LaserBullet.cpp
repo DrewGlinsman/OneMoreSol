@@ -2,12 +2,10 @@
 #include "LaserBullet.h"
 #include <iostream>
 
-LaserBullet::LaserBullet(int startLane) {
-    //if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        //std::cout << "Failed to load plasmaGrunt." << std::endl;
-    laser.setSize(sf::Vector2f(32,32));
-	//laser.setTexture(&gruntPlasma);
-	laser.setOrigin(laser.getSize().x / 2, laser.getSize().y /2);
+LaserBullet::LaserBullet(int startLane, TextureLoader* loadedTextures) {
+    laser.setTexture(loadedTextures->mtSpriteSheet);
+    laser.setTextureRect(sf::IntRect(256,64,32,32));
+	laser.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	laser.setPosition(height, lane);
 	speed = 1000;
@@ -87,7 +85,7 @@ bool LaserBullet::getOutOfBounds()
     return outOfBounds;
 }
 
-sf::RectangleShape LaserBullet::getBullet()
+sf::Sprite LaserBullet::getBullet()
 {
     return laser;
 }

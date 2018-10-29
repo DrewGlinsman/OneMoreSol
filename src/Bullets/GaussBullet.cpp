@@ -2,12 +2,10 @@
 #include "GaussBullet.h"
 #include <iostream>
 
-GaussBullet::GaussBullet(int startLane) {
-    //if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        //std::cout << "Failed to load plasmaGrunt." << std::endl;
-    gauss.setSize(sf::Vector2f(128,16));
-	//gauss.setTexture(&gruntPlasma);
-	gauss.setOrigin(gauss.getSize().x / 2, gauss.getSize().y /2);
+GaussBullet::GaussBullet(int startLane, TextureLoader* loadedTextures) {
+    gauss.setTexture(loadedTextures->mtSpriteSheet);
+    gauss.setTextureRect(sf::IntRect(256,64,32,32));
+	gauss.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	gauss.setPosition(height, lane);
 	speed = 2000;
@@ -87,7 +85,7 @@ bool GaussBullet::getOutOfBounds()
     return outOfBounds;
 }
 
-sf::RectangleShape GaussBullet::getBullet()
+sf::Sprite GaussBullet::getBullet()
 {
     return gauss;
 }

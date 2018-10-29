@@ -20,7 +20,7 @@ class Bullet
        virtual void drawCurrentBullet(sf::RenderWindow& window);
 
        virtual bool getOutOfBounds();
-       virtual sf::RectangleShape getBullet();
+       virtual sf::Sprite getBullet();
 
     protected:
 

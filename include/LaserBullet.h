@@ -3,14 +3,14 @@
 #define INCLUDE_LASERBULLET_H_
 
 #include "Bullet.h"
+#include "TextureLoader.h"
 
 class LaserBullet: public Bullet {
 
 public:
-	sf::RectangleShape laser;
-	sf::Texture gruntPlasma;
+	sf::Sprite laser;
 
-	LaserBullet(int startLane);
+	LaserBullet(int, TextureLoader*);
 	virtual ~LaserBullet();
 
 	int getDamage();
@@ -23,7 +23,7 @@ public:
 
 	void drawCurrentBullet(sf::RenderWindow& window);
 
-	sf::RectangleShape getBullet();
+	sf::Sprite getBullet();
 
 	bool getOutOfBounds();
 

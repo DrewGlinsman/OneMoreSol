@@ -21,7 +21,6 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
         cout << "Failed to Load Lock Icon." << endl;
 
     loadedTextures = new TextureLoader();
-    loadedTextures->mtSpriteSheet.setSmooth(true);
 
     sky.setRadius(894);
     sky.setOrigin(894,894);
