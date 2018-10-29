@@ -167,6 +167,7 @@ void GameLogic::spawnKorat()
 
 int GameLogic::decideKoratLane()
 {
+
     double lane = Random() * 5;
     if (lane >= 0 && lane <= 1)
         lane = 1;
@@ -315,6 +316,10 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
 {
 	rotation = gameSky.getRotation();
 	spawnTime = spawnClock.getElapsedTime().asSeconds();
+
+	long now;
+    now = ((unsigned long) time((time_t *) NULL)) % 255;
+    SelectStream((int) now);
 
 	if (rotation >= sunSetOrientation) // if the sun has set
 	{
