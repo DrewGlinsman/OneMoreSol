@@ -11,6 +11,7 @@ Bomber::Bomber(int startLane, TextureLoader* loadedTextures){
 	bomber.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	bomber.setPosition(1500, lane);
+	bomber.setScale(sf::Vector2f(1.2f,1.2f));
 	std::cout << "I'm a bomber" << std::endl;
 }
 

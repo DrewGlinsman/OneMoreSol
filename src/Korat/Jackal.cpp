@@ -10,6 +10,7 @@ Jackal::Jackal(int startLane, TextureLoader* loadedTextures){
 	jackal.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	jackal.setPosition(1500, lane);
+	jackal.setScale(sf::Vector2f(1.2f,1.2f));
 	std::cout << "I'm a jackal" << std::endl;
 }
 

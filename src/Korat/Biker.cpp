@@ -10,6 +10,7 @@ Biker::Biker(int startLane, TextureLoader* loadedTextures){
 	biker.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	biker.setPosition(1500, lane);
+	biker.setScale(sf::Vector2f(1.2f,1.2f));
 	std::cout << "I'm a biker" << std::endl;
 }
 

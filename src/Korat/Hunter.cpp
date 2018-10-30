@@ -10,6 +10,7 @@ Hunter::Hunter(int startLane, TextureLoader* loadedTextures){
 	hunter.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	hunter.setPosition(1500, lane);
+	hunter.setScale(sf::Vector2f(1.2f,1.2f));
 	std::cout << "I'm a hunter" << std::endl;
 }
 

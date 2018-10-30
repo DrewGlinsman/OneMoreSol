@@ -10,6 +10,7 @@ Grunt::Grunt(int startLane, TextureLoader* loadedTextures){
 	grunt.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
 	grunt.setPosition(1500, lane);
+	grunt.setScale(sf::Vector2f(1.2f,1.2f));
 	std::cout << "I'm a grunt" << std::endl;
 
 	if (!gruntHitSound.loadFromFile("assets/Grunt_Hit.ogg")) // Loads and initializes all sounds based on impact
