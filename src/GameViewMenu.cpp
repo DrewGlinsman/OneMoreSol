@@ -3,7 +3,8 @@
 #include "GameViewMenu.h"
 #include "GameViewPlayer.h"
 #include "Gun.h"
-#include <windows.h>
+//#include <windows.h> //THIS ONLY WORKS FOR WINDOWS 
+#include <time.h> //this works for linux
 
 using namespace std;
 
@@ -136,26 +137,29 @@ bool GameViewMenu::gameViewMenuIsOpen()
 					}
 				}
 
-				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
 				{
 					if(sf::Vector2f (0,0) == selector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900);
+                        //nanosleep(900);
 						menuWindow.close();
 						return false;
 					}
 					if(sf::Vector2f (0,1) == selector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900);
+                        //nanosleep(900);
 						menuWindow.close();
 						return false;
 					}
 					if(sf::Vector2f (0,2) == selector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900);
+                        //nanosleep(900);
 						menuWindow.close();
 						return true;
 					}
