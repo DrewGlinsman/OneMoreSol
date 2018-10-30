@@ -200,18 +200,45 @@ void GameLogic::moveBullet(float timePassed)
     {
         for (int j = 0; j < currentBullet[i].size(); j++)
         {
-            if (currentKorat[i].size() != 0)
+            if (currentKorat[i].size() != 0 && enemyBehindTom == false)
             {
-                if(currentBullet[i][j] -> getPositionX() < currentKorat[i][0] -> getPositionX())
+                if (currentBullet[i][j] -> getHeight() > currentKorat[i][0] -> getPositionX())
                 {
                     currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                    enemyBehindTom = true;
+                }
+                else if(currentBullet[i][j] -> getPositionX() < currentKorat[i][0] -> getPositionX())
+                {
+                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                    enemyBehindTom = false;
                 }
                 else
                 {
                     cout << currentBullet[i][j] -> getDamage() << endl;
                     currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
                     currentBullet[i].erase(currentBullet[i].begin() + j);
+                    enemyBehindTom = false;
 
+                }
+            }
+            else if (currentKorat[i].size() > 1 && enemyBehindTom == true)
+            {
+                 if (currentBullet[i][j] -> getHeight() > currentKorat[i][1] -> getPositionX())
+                {
+                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                    enemyBehindTom = true;
+                }
+                else if(currentBullet[i][j] -> getPositionX() < currentKorat[i][1] -> getPositionX())
+                {
+                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                    enemyBehindTom = false;
+                }
+                else
+                {
+                    cout << currentBullet[i][j] -> getDamage() << endl;
+                    currentKorat[i][1] -> wasShot(currentBullet[i][j] -> getDamage());
+                    currentBullet[i].erase(currentBullet[i].begin() + j);
+                    enemyBehindTom = false;
                 }
             }
             else
@@ -223,6 +250,7 @@ void GameLogic::moveBullet(float timePassed)
                 else
                 {
                     currentBullet[i].erase(currentBullet[i].begin() + j);
+                    enemyBehindTom = false;
                 }
             }
         }

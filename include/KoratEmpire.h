@@ -28,6 +28,7 @@ public:
 
 	virtual bool checkSurvive();
 
+
     int lane;
 
     int lane1 = 335;

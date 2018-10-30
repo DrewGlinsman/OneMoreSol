@@ -72,7 +72,7 @@ class GameLogic{
         float levelSpawnModifier = 3;
         float rotation;
         float spawnTime;
-//        float postDeathTime;
+        bool enemyBehindTom = false;
 
          sf::SoundBuffer level1Music;
          sf::SoundBuffer level2Music;

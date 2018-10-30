@@ -96,7 +96,7 @@ bool Grunt::checkDeath()
     {
 		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
 		std::cout << postDeathTime << std::endl;
-		if (postDeathTime >= 1)
+		if (postDeathTime >= .5)
 		{
 			postDeathClock.restart();
 			return true;
@@ -125,32 +125,5 @@ bool Grunt::checkDeath()
 
 bool Grunt::checkSurvive()
 {
-	if (survive == true)
-	{
-		postLeftTime = postLeftClock.getElapsedTime().asSeconds();
-		if (postDeathTime >= 1)
-		{
-			postLeftClock.restart();
-			return true;
-		} else {
-			speed = 0;
-			if (koratLeftSoundPlayed == false)
-			{
-				postLeftClock.restart();
-				koratLeft.setBuffer(koratDeathSound);
-				koratLeft.setVolume(100);
-				koratLeft.play();
-				koratLeftSoundPlayed = true;
-			}
-		}
-	}
-	else //added this
-	{
-		postLeftClock.restart();
-		return false;
-
-	}
-
-    //return survive;
-	return false;
+    return survive;
 }

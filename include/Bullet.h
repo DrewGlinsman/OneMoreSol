@@ -22,6 +22,8 @@ class Bullet
        virtual bool getOutOfBounds();
        virtual sf::Sprite getBullet();
 
+        virtual int getHeight();
+
     protected:
 
     private:

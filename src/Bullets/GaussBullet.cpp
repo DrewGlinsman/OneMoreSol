@@ -26,6 +26,11 @@ int GaussBullet::getLane()
     return lane;
 }
 
+int GaussBullet::getHeight()
+{
+    return height;
+}
+
 float GaussBullet::getPositionX()
 {
     return gauss.getPosition().x;

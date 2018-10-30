@@ -33,6 +33,11 @@ int LaserBullet::getLane()
     return lane;
 }
 
+int LaserBullet::getHeight()
+{
+    return height;
+}
+
 float LaserBullet::getPositionX()
 {
     return laser.getPosition().x;

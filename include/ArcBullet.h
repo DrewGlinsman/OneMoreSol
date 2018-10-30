@@ -29,6 +29,7 @@ public:
 
 	float getPositionX();
 
+	int getHeight();
 
 
 private:

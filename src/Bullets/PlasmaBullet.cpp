@@ -33,6 +33,11 @@ int PlasmaBullet::getLane()
     return lane;
 }
 
+int PlasmaBullet::getHeight()
+{
+    return height;
+}
+
 float PlasmaBullet::getPositionX()
 {
     return plasma.getPosition().x;

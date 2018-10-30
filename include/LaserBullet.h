@@ -30,6 +30,8 @@ public:
 
 	float getPositionX();
 
+	int getHeight();
+
 private:
 
 	int lane;

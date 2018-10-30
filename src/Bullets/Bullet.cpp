@@ -65,6 +65,11 @@ int Bullet::getDamage()
 
 }
 
+int Bullet::getHeight()
+{
+
+}
+
 bool Bullet::getOutOfBounds()
 {
 

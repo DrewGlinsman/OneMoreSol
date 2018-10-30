@@ -26,6 +26,11 @@ int ArcBullet::getLane()
     return lane;
 }
 
+int ArcBullet::getHeight()
+{
+    return height;
+}
+
 float ArcBullet::getPositionX()
 {
     return arc.getPosition().x;
