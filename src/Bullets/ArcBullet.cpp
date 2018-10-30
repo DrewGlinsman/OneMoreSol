@@ -1,18 +1,92 @@
-/*
- * ArcBullet.cpp
- *
- *  Created on: Oct 19, 2018
- *      Author: Bowden
- */
 
-#include <ArcBullet.h>
+#include "ArcBullet.h"
+#include <iostream>
 
-ArcBullet::ArcBullet() {
-	// TODO Auto-generated constructor stub
-
+ArcBullet::ArcBullet(int startLane, TextureLoader* loadedTextures) {
+    arc.setTexture(loadedTextures->mtSpriteSheet);
+    arc.setTextureRect(sf::IntRect(256,256,192,192));
+	arc.setOrigin(sf::Vector2f(96.f,96.f));
+	setLane(startLane);
+	arc.setPosition(height, lane);
+	speed = 100;
+	damage = 40;
 }
 
 ArcBullet::~ArcBullet() {
 	// TODO Auto-generated destructor stub
+}
+
+int ArcBullet::getDamage()
+{
+    return damage;
+}
+
+int ArcBullet::getLane()
+{
+    return lane;
+}
+
+float ArcBullet::getPositionX()
+{
+    return arc.getPosition().x;
+}
+
+void ArcBullet::setLane(int givenLane)
+{
+     switch(givenLane)
+	{
+		case 1:
+			lane = lane1;
+			height = height1;
+			break;
+		case 2:
+			lane = lane2;
+			height = height2;
+			break;
+		case 3:
+			lane = lane3;
+			height = height3;
+			break;
+		case 4:
+			lane = lane4;
+			height = height4;
+			break;
+		case 5:
+			lane = lane5;
+			height = height5;
+			break;
+		default:
+			lane = lane1;
+			height = height1;
+			break;
+	}
+}
+
+void ArcBullet::moveCurrentBullet(float timePassed)
+{
+        if(arc.getPosition().x < 1500)
+        {
+            arc.move(speed * timePassed, 0);
+            outOfBounds = false;
+        }
+        else
+        {
+            outOfBounds = true;
+        }
+}
+
+void ArcBullet::drawCurrentBullet(sf::RenderWindow& window)
+{
+    window.draw(arc);
+}
+
+bool ArcBullet::getOutOfBounds()
+{
+    return outOfBounds;
+}
+
+sf::Sprite ArcBullet::getBullet()
+{
+    return arc;
 }
 

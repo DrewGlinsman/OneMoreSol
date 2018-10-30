@@ -12,6 +12,8 @@ public:
 
     virtual void shoot(float timePassed);
 
+    int bulletType = 1;
+
     unsigned int damage;
     unsigned int clip;
     float reloadSpeed;

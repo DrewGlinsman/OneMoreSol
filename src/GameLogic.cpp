@@ -11,6 +11,21 @@ using namespace std;
 GameLogic::GameLogic()
 {
     survivorCount = 20;
+    loadedTextures = new TextureLoader();
+    sf::Clock spawnClock;
+    sf::Clock postDeathClock;
+
+    if (!level1Music.loadFromFile("assets/Level_1_Cut.ogg")) // Loads and initializes all sounds based on impact
+    std::cout << "Could not load Level 1 Music." << std::endl;
+
+    if (!level2Music.loadFromFile("assets/Level_2_Cut.ogg")) // Loads and initializes all sounds based on impact
+    std::cout << "Could not load Level 2 Music." << std::endl;
+
+    backgroundMusic.setBuffer(level1Music);
+    backgroundMusic.setVolume(50);
+    backgroundMusic.play();
+
+
 }
 
 bool GameLogic::checkEnd()
@@ -26,14 +41,24 @@ void GameLogic::moveKorat(float timePassed)
     {
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            if (currentKorat[i][j] -> checkDeath() == false)
+            if (currentKorat[i][j] -> checkSurvive() == false)
             {
-                currentKorat[i][j] -> moveCurrentKorat(timePassed);
+                if (currentKorat[i][j] -> checkDeath() == false)
+                {
+                    currentKorat[i][j] -> moveCurrentKorat(timePassed);
+                }
+                else
+                {
+                		currentKorat[i].erase(currentKorat[i].begin() + j);
+                		currentKoratCount--;
+                }
             }
             else
             {
                 currentKorat[i].erase(currentKorat[i].begin() + j);
                 currentKoratCount--;
+                survivorCount--;
+                cout << "survivor count = " << survivorCount << endl;
             }
         }
     }
@@ -51,9 +76,9 @@ void GameLogic::drawKorat(sf::RenderWindow& window)
     }
 }
 
-void GameLogic::selectKorat(float timePassed)
+void GameLogic::selectKorat()
 {
-    spawnLane = decideLane(timePassed);
+    koratSpawnLane = decideKoratLane();
 
     /*
         checks what level the player is on and
@@ -62,62 +87,62 @@ void GameLogic::selectKorat(float timePassed)
         because they are boss levels
     */
     if(currentLevel < 3)
-        spawnType = decideType(enemyPool1);
+        koratSpawnType = decideKoratType(enemyPool1);
     else if(currentLevel >= 3 && currentLevel < 6)
-        spawnType = decideType(enemyPool2);
+        koratSpawnType = decideKoratType(enemyPool2);
     else if(currentLevel >= 6 && currentLevel < 9)
-        spawnType = decideType(enemyPool3);
+        koratSpawnType = decideKoratType(enemyPool3);
     else if(currentLevel == 9)
-        spawnType = decideType(enemyPool4);
+        koratSpawnType = decideKoratType(enemyPool4);
     else if(currentLevel == 11)
-        spawnType = decideType(enemyPool5);
+        koratSpawnType = decideKoratType(enemyPool5);
     else if(currentLevel >= 12 && currentLevel < 15)
-        spawnType = decideType(enemyPool6);
+        koratSpawnType = decideKoratType(enemyPool6);
     else if(currentLevel >= 15 && currentLevel < 20)
-        spawnType = decideType(enemyPool7);
-    //cout << "Type = " << spawnType << " | Lane = " << spawnLane << endl;
-    spawnKorat(timePassed);
+        koratSpawnType = decideKoratType(enemyPool7);
+    //cout << "Type = " << koratSpawnType << " | Lane = " << koratSpawnLane << endl;
+    spawnKorat();
 }
 
-void GameLogic::spawnKorat(float timePassed)
+void GameLogic::spawnKorat()
 {
     KoratEmpire* newKorat;
     bool print;
 
-    switch(spawnType)
+    switch(koratSpawnType)
     {
         case 1:
-            newKorat = new Grunt(spawnLane);
+            newKorat = new Grunt(koratSpawnLane, loadedTextures);
             break;
         case 2:
-            newKorat = new Jackal(spawnLane);
+            newKorat = new Jackal(koratSpawnLane, loadedTextures);
             break;
         case 3:
-            newKorat = new Elite(spawnLane);
+            newKorat = new Elite(koratSpawnLane, loadedTextures);
             break;
         case 4:
-            newKorat = new Hunter(spawnLane);
+            newKorat = new Hunter(koratSpawnLane, loadedTextures);
             break;
         case 5:
-            newKorat = new Brute(spawnLane);
+            newKorat = new Brute(koratSpawnLane, loadedTextures);
             break;
         case 6:
-            newKorat = new Bomber(spawnLane);
+            newKorat = new Bomber(koratSpawnLane, loadedTextures);
             break;
         case 7:
-            newKorat = new Biker(spawnLane);
+            newKorat = new Biker(koratSpawnLane, loadedTextures);
             break;
         default:
-            newKorat = new Grunt(spawnLane);
-            cout << "Break Case Activated" << endl;
+            newKorat = new Grunt(koratSpawnLane, loadedTextures);
+            std::cout << "Break Case Activated" << std::endl;
             break;
 
     }
-    currentKorat[spawnLane - 1].emplace_back(newKorat);
+    currentKorat[koratSpawnLane - 1].emplace_back(newKorat);
     currentKoratCount++;
-    cout << "currentKoratCount = " << currentKoratCount << endl;
+    std::cout << "currentKoratCount = " << currentKoratCount << std::endl;
 
-    cout << "==============================" << endl;
+    std::cout << "==============================" << std::endl;
     for (int i = 0; i < currentKorat.size(); i ++)
     {
 
@@ -140,9 +165,9 @@ void GameLogic::spawnKorat(float timePassed)
     cout << "==============================" << endl;
 }
 
-int GameLogic::decideLane(float timePassed)
+int GameLogic::decideKoratLane()
 {
-    PutSeed(-5);
+
     double lane = Random() * 5;
     if (lane >= 0 && lane <= 1)
         lane = 1;
@@ -159,32 +184,241 @@ int GameLogic::decideLane(float timePassed)
     return lane;
 }
 
-int GameLogic::decideType(std::vector<int> enemyPool)
+int GameLogic::decideKoratType(std::vector<int> enemyPool)
 {
     double enemyType = Random() * enemyPool.size();
     enemyType = (int) enemyType;
     return enemyPool[enemyType];
 }
 
+//----------------------------------------------------------
+//Bullets generation and drawing
+
+void GameLogic::moveBullet(float timePassed)
+{
+    for (int i = 0; i < currentBullet.size(); i ++)
+    {
+        for (int j = 0; j < currentBullet[i].size(); j++)
+        {
+            if (currentKorat[i].size() != 0)
+            {
+                if(currentBullet[i][j] -> getPositionX() < currentKorat[i][0] -> getPositionX())
+                {
+                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                }
+                else
+                {
+                    cout << currentBullet[i][j] -> getDamage() << endl;
+                    currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
+                    currentBullet[i].erase(currentBullet[i].begin() + j);
+
+                }
+            }
+            else
+            {
+                if (currentBullet[i][j] -> getOutOfBounds() == false)
+                {
+                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                }
+                else
+                {
+                    currentBullet[i].erase(currentBullet[i].begin() + j);
+                }
+            }
+        }
+    }
+}
+
+void GameLogic::drawBullet(sf::RenderWindow& window)
+{
+    for (int i = 0; i < currentBullet.size(); i ++)
+    {
+        for (int j = 0; j < currentBullet[i].size(); j++)
+        {
+                currentBullet[i][j] -> drawCurrentBullet(window);
+
+        }
+    }
+}
+
+void GameLogic::selectBullet(MajorTom* majorTom, float timePassed)
+{
+    bulletSpawnLane = decideBulletLane(majorTom);
+
+    bulletSpawnType = decideBulletType(majorTom);
+
+    spawnBullet(timePassed);
+}
+
+void GameLogic::spawnBullet(float timePassed)
+{
+    Bullet* newBullet;
+
+    switch(bulletSpawnType)
+    {
+        case 1:
+            newBullet = new PlasmaBullet(bulletSpawnLane, loadedTextures);
+            break;
+        case 2:
+            newBullet = new LaserBullet(bulletSpawnLane, loadedTextures);
+            break;
+        case 3:
+            newBullet = new ArcBullet(bulletSpawnLane, loadedTextures);
+            break;
+        case 4:
+            newBullet = new GaussBullet(bulletSpawnLane, loadedTextures);
+            break;
+        //case 5:
+            //newBullet = new BFGBullet(bulletSpawnLane);
+        default:
+            newBullet = new PlasmaBullet(bulletSpawnLane, loadedTextures);
+            cout << "Break Case Activated" << endl;
+            break;
+
+    }
+    currentBullet[bulletSpawnLane - 1].emplace_back(newBullet);
+}
+
+int GameLogic::decideBulletLane(MajorTom* majorTom)
+{
+    if (majorTom->getTomPosition() == lane1)
+        return 1;
+    else if (majorTom->getTomPosition() == lane2)
+        return 2;
+    else if (majorTom->getTomPosition() == lane3)
+        return 3;
+    else if (majorTom->getTomPosition() == lane4)
+        return 4;
+    else if (majorTom->getTomPosition() == lane5)
+        return 5;
+    else
+        cout << "bullet shit is broken" << endl;
+}
+
+int GameLogic::decideBulletType(MajorTom* majorTom)
+{
+    if (majorTom->currentGun.bulletType == 1)
+        return 1;
+    else if (majorTom->currentGun.bulletType == 2)
+        return 2;
+    else if (majorTom->currentGun.bulletType == 3)
+        return 3;
+    else if (majorTom->currentGun.bulletType == 4)
+        return 4;
+    else if (majorTom->currentGun.bulletType == 5)
+        return 5;
+}
+
+
+//----------------------------------------------------------
+
 void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
 {
-	float rotation = gameSky.getRotation();
+	rotation = gameSky.getRotation();
+	spawnTime = spawnClock.getElapsedTime().asSeconds();
 
-	//Chris, should we spawn first wave of Korat here?
-
-	//Yes we should Jack, but not the first wave, just start the spawning process, it will know what level it is spawn appropriately.
+	long now;
+    now = ((unsigned long) time((time_t *) NULL)) % 255;
+    SelectStream((int) now);
 
 	if (rotation >= sunSetOrientation) // if the sun has set
 	{
-		gameSky.rotate(-rotation); //rotate the sun back to the beginning
-		currentLevel += 1;
-		levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
+		if (currentKoratCount == 0)
+        {
+            gameSky.rotate(-rotation); //rotate the sun back to the beginning
+            currentLevel++;
+            levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
+            levelSpawnModifier = levelSpawnModifier * 15/16; //
 
-		//Chris, should we stop spawning Korat here, give a cool down time, then spawn them again?
+            cout << "Current Level = " << currentLevel << endl;
 
-		//No from here we stop spawning the Korat, once all Korat are dead we transition to the Text adventure,
-		//afterwards we restart the process with the next level, with special checks for level 10 and 20 that
-		//disable the spawning process and only spawn the bosses.
+            selectMusic();
+
+            // start text adventure
+
+            // transition to boss 1 if current level = 10
+
+            // transition to boss 2 if current level = 20
+        }
 	}
-	gameSky.rotate(timePassed * levelSpeedModifier);
+	else
+    {
+        gameSky.rotate(timePassed * levelSpeedModifier);
+
+        if (spawnTime >= levelSpawnModifier)
+        {
+            selectKorat();
+            spawnClock.restart();
+        }
+    }
+}
+
+void GameLogic::selectMusic()
+{
+    switch(currentLevel)
+    {
+        case 2:
+            backgroundMusic.setBuffer(level2Music);
+            break;
+        /*
+        case 3:
+            backgroundMusic.setBuffer(level3Music);
+            break;
+        case 4:
+            backgroundMusic.setBuffer(level4Music);
+            break;
+        case 5:
+            backgroundMusic.setBuffer(level5Music);
+            break;
+        case 6:
+            backgroundMusic.setBuffer(level6Music);
+            break;
+        case 7:
+            backgroundMusic.setBuffer(level7Music);
+            break;
+        case 8:
+            backgroundMusic.setBuffer(level8Music);
+            break;
+        case 9:
+            backgroundMusic.setBuffer(level9Music);
+            break;
+        case 10:
+            backgroundMusic.setBuffer(level10Music);
+            break;
+        case 11:
+            backgroundMusic.setBuffer(level11Music);
+            break;
+        case 12:
+            backgroundMusic.setBuffer(level12Music);
+            break;
+        case 13:
+            backgroundMusic.setBuffer(level13Music);
+            break;
+        case 14:
+            backgroundMusic.setBuffer(level14Music);
+            break;
+        case 15:
+            backgroundMusic.setBuffer(level15Music);
+            break;
+        case 16:
+            backgroundMusic.setBuffer(level16Music);
+            break;
+        case 17:
+            backgroundMusic.setBuffer(level17Music);
+            break;
+        case 18:
+            backgroundMusic.setBuffer(level18Music);
+            break;
+        case 19:
+            backgroundMusic.setBuffer(level19Music);
+            break;
+        case 20:
+            backgroundMusic.setBuffer(level20Music);
+            break;
+        */
+        default:
+            cout << "Music selector broken" << endl;
+    }
+    backgroundMusic.setVolume(50);
+    backgroundMusic.play();
 }

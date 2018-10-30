@@ -2,13 +2,12 @@
 #include "Hunter.h"
 #include <iostream>
 
-Hunter::Hunter(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Hunter::Hunter(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	hunter.setSize(sf::Vector2f(64,64));
-	hunter.setTexture(&gruntPlasma);
-	hunter.setOrigin(hunter.getSize().x / 2, hunter.getSize().y /2);
+
+	hunter.setTexture(loadedTextures->mtSpriteSheet);
+	hunter.setTextureRect(sf::IntRect(0,640,64,64));
+	hunter.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	hunter.setPosition(1500, lane);
 	std::cout << "I'm a hunter" << std::endl;
@@ -21,11 +20,7 @@ Hunter::~Hunter() {
 
 void Hunter::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger hunter death
-    }
+    health = health - damage;
 }
 
 int Hunter::getLane()
@@ -60,13 +55,13 @@ void Hunter::setLane(int givenLane)
 
 void Hunter::moveCurrentKorat(float timePassed)
 {
-        if(hunter.getPosition().x > 500)
+        if(hunter.getPosition().x > -100)
         {
             hunter.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -75,9 +70,24 @@ void Hunter::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(hunter);
 }
 
+sf::Sprite Hunter::getKorat()
+{
+    return hunter;
+}
+
+float Hunter::getPositionX()
+{
+    return hunter.getPosition().x;
+}
+
 bool Hunter::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Hunter::checkSurvive()
+{
+    return survive;
 }

@@ -2,13 +2,12 @@
 #include "Brute.h"
 #include <iostream>
 
-Brute::Brute(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Brute::Brute(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	brute.setSize(sf::Vector2f(64,64));
-	brute.setTexture(&gruntPlasma);
-	brute.setOrigin(brute.getSize().x / 2, brute.getSize().y /2);
+
+	brute.setTexture(loadedTextures->mtSpriteSheet);
+	brute.setTextureRect(sf::IntRect(0,448,64,64));
+	brute.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	brute.setPosition(1500, lane);
 	std::cout << "I'm a brute" << std::endl;
@@ -21,11 +20,7 @@ Brute::~Brute() {
 
 void Brute::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger brute death
-    }
+    health = health - damage;
 }
 
 int Brute::getLane()
@@ -60,13 +55,13 @@ void Brute::setLane(int givenLane)
 
 void Brute::moveCurrentKorat(float timePassed)
 {
-        if(brute.getPosition().x > 500)
+        if(brute.getPosition().x > -100)
         {
             brute.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -75,9 +70,24 @@ void Brute::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(brute);
 }
 
+sf::Sprite Brute::getKorat()
+{
+    return brute;
+}
+
+float Brute::getPositionX()
+{
+    return brute.getPosition().x;
+}
+
 bool Brute::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Brute::checkSurvive()
+{
+    return survive;
 }

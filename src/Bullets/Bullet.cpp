@@ -9,10 +9,7 @@
  */
 Bullet::Bullet()
 {
-    float positionX = 5;
-    float positionY = 10;
-    float damage = 100;
-    float velocity = 100;
+
 }
 
 /** \brief Getter for bullet velocity
@@ -23,7 +20,7 @@ Bullet::Bullet()
 
 float Bullet::getVelocity()
 {
-    return velocity;
+
 }
 
 /** \brief Setter for bullet velocity
@@ -53,7 +50,27 @@ float Bullet::setPosition(sf::Vector2f newPos)
     positionY = newPos.y;
 }
 
-Bullet::doDamage()
+void Bullet::moveCurrentBullet(float timePassed)
+{
+
+}
+
+void Bullet::drawCurrentBullet(sf::RenderWindow& window)
+{
+
+}
+
+int Bullet::getDamage()
+{
+
+}
+
+bool Bullet::getOutOfBounds()
+{
+
+}
+
+sf::Sprite Bullet::getBullet()
 {
 
 }

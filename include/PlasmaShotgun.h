@@ -2,10 +2,19 @@
 #ifndef INCLUDE_PLASMASHOTGUN_H_
 #define INCLUDE_PLASMASHOTGUN_H_
 
-class PlasmaShotgun {
-public:
-	PlasmaShotgun();
-	virtual ~PlasmaShotgun();
+#include "Gun.h"
+#include "Bullet.h"
+
+class PlasmaShotgun: public Gun
+{
+    public:
+        PlasmaShotgun();
+        virtual ~PlasmaShotgun();
+        void shoot();
+        void reload();
+
+    private:
+        Bullet bullet;
 };
 
 #endif

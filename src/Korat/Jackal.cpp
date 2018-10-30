@@ -2,13 +2,12 @@
 #include "Jackal.h"
 #include <iostream>
 
-Jackal::Jackal(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Jackal::Jackal(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	jackal.setSize(sf::Vector2f(64,64));
-	jackal.setTexture(&gruntPlasma);
-	jackal.setOrigin(jackal.getSize().x / 2, jackal.getSize().y /2);
+
+	jackal.setTexture(loadedTextures->mtSpriteSheet);
+	jackal.setTextureRect(sf::IntRect(0,576,64,64));
+	jackal.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	jackal.setPosition(1500, lane);
 	std::cout << "I'm a jackal" << std::endl;
@@ -21,11 +20,7 @@ Jackal::~Jackal() {
 
 void Jackal::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger jackal death
-    }
+    health = health - damage;
 }
 
 int Jackal::getLane()
@@ -60,13 +55,13 @@ void Jackal::setLane(int givenLane)
 
 void Jackal::moveCurrentKorat(float timePassed)
 {
-        if(jackal.getPosition().x > 500)
+        if(jackal.getPosition().x > -100)
         {
             jackal.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -75,9 +70,24 @@ void Jackal::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(jackal);
 }
 
+sf::Sprite Jackal::getKorat()
+{
+    return jackal;
+}
+
+float Jackal::getPositionX()
+{
+    return jackal.getPosition().x;
+}
+
 bool Jackal::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Jackal::checkSurvive()
+{
+    return survive;
 }

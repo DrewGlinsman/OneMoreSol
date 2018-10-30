@@ -5,6 +5,13 @@
 #include <SFML/Graphics.hpp>
 #include "Gun.h"
 #include "PlasmaPistol.h"
+#include "PlasmaShotgun.h"
+#include "LaserRifle.h"
+#include "LaserMinigun.h"
+#include "ArcThrower.h"
+#include "GaussRifle.h"
+#include "BFG.h"
+#include "TextureLoader.h"
 
 using namespace std;
 
@@ -16,13 +23,26 @@ class MajorTom {
         float newPosition;
         float timePassed;
         int currentHealth;
-        Gun currentGun;
+        int newHealth;
+
+        Gun* pistol = new PlasmaPistol();
+        Gun* shotgun = new PlasmaShotgun();
+        Gun* rifle = new LaserRifle();
+        Gun* minigun = new LaserMinigun();
+        Gun* thrower = new ArcThrower();
+        Gun* sniper = new GaussRifle();
+        Gun* bigFunGun = new BFG();
 
     public:
-        sf::RectangleShape majorTom;
-        sf::Texture mtPlasmaPistol;
+        sf::Sprite majorTom;
 
-        MajorTom();
+        sf::Texture mtSpriteSheet;//this is a second load, loaded also on gameviewplayer. how to expand scope?
+
+        sf::Sprite mtStandPPistol;
+
+        Gun currentGun;
+
+        MajorTom(TextureLoader*);
 
         void drawTom(sf::RenderWindow& window);
 
@@ -36,19 +56,15 @@ class MajorTom {
 
         bool keepMoving(float timePassed, string direction);
 
-        void moveTomUp(float timePassed);
-
-        void moveTomDown(float timePassed);
-
-        void shoot(float timePassed);
-
         int getHealth();
+
+        void shoot(float);
 
         void setHealth(int newHealth);
 
         Gun getGun();
 
-        void setGun(Gun newGun);
+        void setGun(int gunNumber);
 
         bool checkDeath();
 

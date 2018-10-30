@@ -1,6 +1,4 @@
 #include "GameViewPlayer.h"
-#include <iostream>
-#include <typeinfo>
 
 using namespace std;
 
@@ -22,8 +20,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         cout << "Failed to Load Lock Icon." << endl;
 
-    if (!pPistol.loadFromFile("assets/plasmaPistol.png"))
-        cout << "Failed to Load plasma Pistol." << endl;
+    loadedTextures = new TextureLoader();
 
     sky.setRadius(894);
     sky.setOrigin(894,894);
@@ -36,13 +33,13 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     background.setTexture(&gameImage);
 
 
-    weapon1.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon2.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon3.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon4.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon5.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon6.setSize(sf::Vector2f(iconScale,iconScale));
-    weapon7.setSize(sf::Vector2f(iconScale,iconScale));
+    weapon1.setTextureRect(sf::IntRect(256,0,32,32));
+    weapon2.setTextureRect(sf::IntRect(256,32,32,32));
+    weapon3.setTextureRect(sf::IntRect(288,0,32,32));
+    weapon4.setTextureRect(sf::IntRect(288,32,32,32));
+    weapon5.setTextureRect(sf::IntRect(320,0,32,32));
+    weapon6.setTextureRect(sf::IntRect(320,32,32,32));
+    weapon7.setTextureRect(sf::IntRect(352,0,32,32));
     weapon1.setPosition(295,790);
     weapon2.setPosition(423,790);
     weapon3.setPosition(551,790);
@@ -50,13 +47,20 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     weapon5.setPosition(807,790);
     weapon6.setPosition(935,790);
     weapon7.setPosition(1063,790);
-    weapon1.setTexture(&pPistol);
-    weapon2.setTexture(&lockIcon);
-    weapon3.setTexture(&lockIcon);
-    weapon4.setTexture(&lockIcon);
-    weapon5.setTexture(&lockIcon);
-    weapon6.setTexture(&lockIcon);
-    weapon7.setTexture(&lockIcon);
+    weapon1.setTexture(loadedTextures->mtSpriteSheet);
+    weapon2.setTexture(loadedTextures->mtSpriteSheet);
+    weapon3.setTexture(loadedTextures->mtSpriteSheet);
+    weapon4.setTexture(loadedTextures->mtSpriteSheet);
+    weapon5.setTexture(loadedTextures->mtSpriteSheet);
+    weapon6.setTexture(loadedTextures->mtSpriteSheet);
+    weapon7.setTexture(loadedTextures->mtSpriteSheet);
+    weapon1.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon2.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon3.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon4.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon5.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon6.setScale(sf::Vector2f(2.5f,2.5f));
+    weapon7.setScale(sf::Vector2f(2.5f,2.5f));
 
     survivorCnt.setFont(gameFont);
     survivorCnt.setCharacterSize(22);
@@ -64,13 +68,8 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
-//    grunt1 = new Grunt(lane1);
-//    grunt2 = new Grunt(lane2);
-//    grunt3 = new Grunt(lane3);
-//    grunt4 = new Grunt(lane4);
-//    grunt5 = new Grunt(lane5);
-
     logic = new GameLogic();
+    majorTom = new MajorTom(loadedTextures);
 
     gameMusic.setBuffer(gameSound);
     gameMusic.play();
@@ -82,9 +81,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 bool GameViewPlayer::playerViewIsOpen()
 {
     sf::Clock gameClock;
-    sf::Clock koratClock;
     float delta;
-    float gamma;
 
     bool keepMovingUp = false;
     bool keepMovingDown = false;
@@ -97,33 +94,22 @@ bool GameViewPlayer::playerViewIsOpen()
         delta = gameClock.getElapsedTime().asSeconds();
         gameClock.restart();
 
-        gamma = koratClock.getElapsedTime().asSeconds();
-
-//        grunt1 -> moveGrunt(delta);
-//        grunt2 -> moveGrunt(delta);
-//        grunt3 -> moveGrunt(delta);
-//        grunt4 -> moveGrunt(delta);
-//        grunt5 -> moveGrunt(delta);
-
 //-----------------------------------------------------------------
 
-            //cout << gamma << endl;
-            if (gamma > 3)
-            {
-            logic -> selectKorat(delta);
-            koratClock.restart();
-            }
-            logic -> moveKorat(delta);
+        logic -> runLevel(sky, delta);
+
+        logic -> moveKorat(delta);
+        logic -> moveBullet(delta);
 
 //-----------------------------------------------------------------
         if(keepMovingUp == true)
         {
-            keepMovingUp = majorTom.keepMoving(delta, "Up");
+            keepMovingUp = majorTom->keepMoving(delta, "Up");
             lockOutKeyboard = true;
         }
         else if(keepMovingDown == true)
         {
-            keepMovingDown = majorTom.keepMoving(delta, "Down");
+            keepMovingDown = majorTom->keepMoving(delta, "Down");
             lockOutKeyboard = true;
         }
         else
@@ -150,52 +136,87 @@ bool GameViewPlayer::playerViewIsOpen()
 
                     if(Event.key.code == sf::Keyboard::Up)
                     {
-                        //majorTom.moveTomUp(delta);
                         if(lockOutKeyboard == false)
-                        keepMovingUp = majorTom.initMove(delta, "Up");
-                        //sky.rotate(delta);
+                        keepMovingUp = majorTom->initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::Down)
                     {
-                        //majorTom.moveTomDown(delta);
                         if(lockOutKeyboard == false)
-                        keepMovingDown = majorTom.initMove(delta, "Down");
+                        keepMovingDown = majorTom->initMove(delta, "Down");
                     }
 
                     if(Event.key.code == sf::Keyboard::W)
                     {
-                        //majorTom.moveTomUp(delta);
                         if(lockOutKeyboard == false)
-                        keepMovingUp = majorTom.initMove(delta, "Up");
+                        keepMovingUp = majorTom->initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::S)
                     {
-                        //majorTom.moveTomDown(delta);
                         if(lockOutKeyboard == false)
-                        keepMovingDown = majorTom.initMove(delta, "Down");
+                        keepMovingDown = majorTom->initMove(delta, "Down");
                     }
 
                     if(Event.key.code == sf::Keyboard::Space)
                     {
-                        majorTom.shoot(delta);
+                        if(lockOutKeyboard == false)
+                        logic -> selectBullet(majorTom, delta);
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num1)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom->setGun(1);
+                        cout << "selected plasma pistol" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num2)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom->setGun(2);
+                        cout << "selected plasma shotgun" << endl;
+
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num3)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom->setGun(3);
+                        cout << "selected laser rifle" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num4)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom->setGun(4);
+                        cout << "selected laser minigun" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num5)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom->setGun(5);
+                        cout << "selected arc thrower" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num6)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom->setGun(6);
+                        cout << "selected gauss rifle" << endl;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Num7)
+                    {
+                        if(lockOutKeyboard == false)
+                        majorTom->setGun(7);
+                        cout << "selected BFG" << endl;
                     }
                 }
             }
-         logic -> runLevel(sky, delta);
     }
     return false;
-}
-
-void GameViewPlayer::movePlayer(float timePassed)
-{
-
-}
-
-void GameViewPlayer::moveEnemy(float timePassed)
-{
-
 }
 
 void GameViewPlayer::updateGame(void) // Draws all elements of screen
@@ -205,15 +226,10 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
 
     gameWindow.draw(sky);
     gameWindow.draw(background);
-    majorTom.drawTom(gameWindow);
-
-//    grunt1 -> drawGrunt(gameWindow);
-//    grunt2 -> drawGrunt(gameWindow);
-//    grunt3 -> drawGrunt(gameWindow);
-//    grunt4 -> drawGrunt(gameWindow);
-//    grunt5 -> drawGrunt(gameWindow);
+    majorTom->drawTom(gameWindow);
 
     logic -> drawKorat(gameWindow);
+    logic -> drawBullet(gameWindow);
 
     gameWindow.draw(survivorCnt);
     gameWindow.draw(weapon1);
@@ -225,9 +241,4 @@ void GameViewPlayer::updateGame(void) // Draws all elements of screen
     gameWindow.draw(weapon7);
 
     gameWindow.display();
-}
-
-void GameViewPlayer::deleteObjects(void)
-{
-    delete currentPlayer;
 }

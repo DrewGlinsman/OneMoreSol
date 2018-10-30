@@ -2,13 +2,12 @@
 #include "Biker.h"
 #include <iostream>
 
-Biker::Biker(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Biker::Biker(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	biker.setSize(sf::Vector2f(64,64));
-	biker.setTexture(&gruntPlasma);
-	biker.setOrigin(biker.getSize().x / 2, biker.getSize().y /2);
+
+	biker.setTexture(loadedTextures->mtSpriteSheet);
+	biker.setTextureRect(sf::IntRect(0,768,64,64));
+	biker.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	biker.setPosition(1500, lane);
 	std::cout << "I'm a biker" << std::endl;
@@ -21,11 +20,7 @@ Biker::~Biker() {
 
 void Biker::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger biker death
-    }
+    health = health - damage;
 }
 
 int Biker::getLane()
@@ -60,13 +55,13 @@ void Biker::setLane(int givenLane)
 
 void Biker::moveCurrentKorat(float timePassed)
 {
-        if(biker.getPosition().x > 500)
+        if(biker.getPosition().x > -100)
         {
             biker.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -75,9 +70,24 @@ void Biker::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(biker);
 }
 
+sf::Sprite Biker::getKorat()
+{
+    return biker;
+}
+
+float Biker::getPositionX()
+{
+    return biker.getPosition().x;
+}
+
 bool Biker::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Biker::checkSurvive()
+{
+    return survive;
 }

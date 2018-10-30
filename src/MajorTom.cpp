@@ -5,18 +5,15 @@
 
 using namespace std;
 
-MajorTom::MajorTom()
+MajorTom::MajorTom(TextureLoader* loadedTextures)
 {
-    if(!mtPlasmaPistol.loadFromFile("assets/mtPlasmaPistol.png"))
-        cout << "Failed to load TomPP." << endl;
-    Gun* gun = new PlasmaPistol();
-    setGun(*gun);
-    majorTom.setSize(sf::Vector2f(64,64));
-    majorTom.setTexture(&mtPlasmaPistol);
-    majorTom.setOrigin(majorTom.getSize().x / 2, majorTom.getSize().y / 2);
+    setGun(1);
+
+    majorTom.setTexture(loadedTextures->mtSpriteSheet);
+    majorTom.setTextureRect(sf::IntRect(0,0,64,64));
+    majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);
     setHealth(100);
-    //currentGun = PlasmaPistol;
 
 }
 
@@ -264,9 +261,36 @@ Gun MajorTom::getGun()
     return currentGun;
 }
 
-void MajorTom::setGun(Gun newGun)
+void MajorTom::setGun(int gunNumber)
 {
-    currentGun = newGun;
+    switch(gunNumber)
+    {
+        case 1:
+            currentGun = *pistol;
+            break;
+        case 2:
+            currentGun = *shotgun;
+            break;
+        case 3:
+            currentGun = *rifle;
+            break;
+        case 4:
+            currentGun = *minigun;
+            break;
+        case 5:
+            currentGun = *thrower;
+            break;
+        case 6:
+            currentGun = *sniper;
+            break;
+        case 7:
+            currentGun = *bigFunGun;
+            break;
+        default:
+            currentGun = *pistol;
+            break;
+
+    }
 }
 
 bool MajorTom::checkDeath()

@@ -10,19 +10,23 @@ class Bullet
         Bullet();
         virtual ~Bullet();
 
-        float getVelocity();
-        void setVelocity(float);
-        float getPositionX();
-        float getPositionY();
-        float setPosition(sf::Vector2f newPos);
+       virtual float getVelocity();
+       virtual void setVelocity(float);
+       virtual float getPositionX();
+       virtual float getPositionY();
+       virtual float setPosition(sf::Vector2f newPos);
+       virtual int getDamage();
+       virtual void moveCurrentBullet(float timePassed);
+       virtual void drawCurrentBullet(sf::RenderWindow& window);
 
-        virtual doDamage();
+       virtual bool getOutOfBounds();
+       virtual sf::Sprite getBullet();
 
     protected:
 
     private:
         //damage
-        float damage;
+        int damage;
 
         //speed
         float velocity;
@@ -30,6 +34,9 @@ class Bullet
         //location
         float positionX;
         float positionY;
+        bool outOfBounds;
+
+
 };
 
-#endif // BULLET_H
+#endif

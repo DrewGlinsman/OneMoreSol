@@ -2,13 +2,12 @@
 #include "Elite.h"
 #include <iostream>
 
-Elite::Elite(int startLane){
-    if(!gruntPlasma.loadFromFile("assets/plasmaGrunt.png"))
-        std::cout << "Failed to load plasmaGrunt." << std::endl;
+Elite::Elite(int startLane, TextureLoader* loadedTextures){
     lane = 0;
-	elite.setSize(sf::Vector2f(64,64));
-	elite.setTexture(&gruntPlasma);
-	elite.setOrigin(elite.getSize().x / 2, elite.getSize().y /2);
+
+	elite.setTexture(loadedTextures->mtSpriteSheet);
+	elite.setTextureRect(sf::IntRect(0,512,64,64));
+	elite.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
 	elite.setPosition(1500, lane);
 	std::cout << "I'm a elite" << std::endl;
@@ -21,11 +20,7 @@ Elite::~Elite() {
 
 void Elite::wasShot(int damage)
 {
-	health - damage;
-	if(health < 0)
-    {
-        //trigger elite death
-    }
+    health = health - damage;
 }
 
 int Elite::getLane()
@@ -60,13 +55,13 @@ void Elite::setLane(int givenLane)
 
 void Elite::moveCurrentKorat(float timePassed)
 {
-        if(elite.getPosition().x > 500)
+        if(elite.getPosition().x > -100)
         {
             elite.move(-speed * timePassed, 0);
         }
         else
         {
-            health = 0;
+            survive = true;
         }
 }
 
@@ -75,9 +70,24 @@ void Elite::drawCurrentKorat(sf::RenderWindow& window)
     window.draw(elite);
 }
 
+sf::Sprite Elite::getKorat()
+{
+    return elite;
+}
+
+float Elite::getPositionX()
+{
+    return elite.getPosition().x;
+}
+
 bool Elite::checkDeath()
 {
     if (health <= 0)
         return true;
     return false;
+}
+
+bool Elite::checkSurvive()
+{
+    return survive;
 }

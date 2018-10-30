@@ -4,13 +4,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "KoratEmpire.h"
+#include "TextureLoader.h"
 
 class Elite: public KoratEmpire {
 public:
-	sf::RectangleShape elite;
-	sf::Texture gruntPlasma;
+	sf::Sprite elite;
 
-	Elite(int startLane);
+	Elite(int, TextureLoader*);
 	virtual ~Elite();
 
 	int getLane();
@@ -25,11 +25,18 @@ public:
 
 	void drawCurrentKorat(sf::RenderWindow& window);
 
+	sf::Sprite getKorat();
+
+	float getPositionX();
+
+	bool checkSurvive();
+
 private:
 
 	int lane;
 	int speed = 100;
 	int health = 100;
+	bool survive = false;
 
     int lane1 = 335;
     int lane2 = 422;
