@@ -10,7 +10,6 @@ using namespace std;
 
 GameLogic::GameLogic()
 {
-    survivorCount = 20;
     loadedTextures = new TextureLoader();
     sf::Clock spawnClock;
     sf::Clock postDeathClock;
