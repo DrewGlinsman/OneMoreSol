@@ -10,6 +10,11 @@ Elite::Elite(int startLane, TextureLoader* loadedTextures){
 	elite.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
 	elite.setPosition(1500, lane);
+<<<<<<< HEAD
+=======
+	elite.setScale(sf::Vector2f(1.2f,1.2f));
+	std::cout << "I'm a elite" << std::endl;
+>>>>>>> 5a5d335f77dd2b776ab3af07265272d24b30319a
 }
 
 Elite::~Elite() {

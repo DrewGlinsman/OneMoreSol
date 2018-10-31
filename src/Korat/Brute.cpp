@@ -10,6 +10,11 @@ Brute::Brute(int startLane, TextureLoader* loadedTextures){
 	brute.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	brute.setPosition(1500, lane);
+<<<<<<< HEAD
+=======
+	brute.setScale(sf::Vector2f(1.2f,1.2f));
+	std::cout << "I'm a brute" << std::endl;
+>>>>>>> 5a5d335f77dd2b776ab3af07265272d24b30319a
 }
 
 Brute::~Brute() {
