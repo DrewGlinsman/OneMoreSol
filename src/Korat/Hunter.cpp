@@ -10,7 +10,6 @@ Hunter::Hunter(int startLane, TextureLoader* loadedTextures){
 	hunter.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	hunter.setPosition(1500, lane);
-	std::cout << "I'm a hunter" << std::endl;
 }
 
 Hunter::~Hunter() {
@@ -26,6 +25,11 @@ void Hunter::wasShot(int damage)
 int Hunter::getLane()
 {
     return lane;
+}
+
+std::string Hunter::getName()
+{
+    return "Hunter";
 }
 
 void Hunter::setLane(int givenLane)
@@ -83,8 +87,32 @@ float Hunter::getPositionX()
 bool Hunter::checkDeath()
 {
     if (health <= 0)
-        return true;
-    return false;
+    {
+		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
+		if (postDeathTime >= .5)
+		{
+			postDeathClock.restart();
+			return true;
+		}
+		else
+        {
+			speed = 0;
+			if (koratDeathSoundPlayed == false)
+			{
+				postDeathClock.restart();
+				koratDied.setBuffer(koratDeathSound);
+				koratDied.setVolume(100);
+				koratDied.play();
+				koratDeathSoundPlayed = true;
+			}
+		}
+    }
+    else
+    {
+        postDeathClock.restart();
+        return false;
+
+    }
 }
 
 bool Hunter::checkSurvive()

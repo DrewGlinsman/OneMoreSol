@@ -10,7 +10,6 @@ Biker::Biker(int startLane, TextureLoader* loadedTextures){
 	biker.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	biker.setPosition(1500, lane);
-	std::cout << "I'm a biker" << std::endl;
 }
 
 Biker::~Biker() {
@@ -26,6 +25,11 @@ void Biker::wasShot(int damage)
 int Biker::getLane()
 {
     return lane;
+}
+
+std::string Biker::getName()
+{
+    return "Biker";
 }
 
 void Biker::setLane(int givenLane)
@@ -83,8 +87,32 @@ float Biker::getPositionX()
 bool Biker::checkDeath()
 {
     if (health <= 0)
-        return true;
-    return false;
+    {
+		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
+		if (postDeathTime >= .5)
+		{
+			postDeathClock.restart();
+			return true;
+		}
+		else
+        {
+			speed = 0;
+			if (koratDeathSoundPlayed == false)
+			{
+				postDeathClock.restart();
+				koratDied.setBuffer(koratDeathSound);
+				koratDied.setVolume(100);
+				koratDied.play();
+				koratDeathSoundPlayed = true;
+			}
+		}
+    }
+    else
+    {
+        postDeathClock.restart();
+        return false;
+
+    }
 }
 
 bool Biker::checkSurvive()

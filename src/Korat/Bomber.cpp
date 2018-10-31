@@ -11,7 +11,6 @@ Bomber::Bomber(int startLane, TextureLoader* loadedTextures){
 	bomber.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	bomber.setPosition(1500, lane);
-	std::cout << "I'm a bomber" << std::endl;
 }
 
 Bomber::~Bomber() {
@@ -27,6 +26,11 @@ void Bomber::wasShot(int damage)
 int Bomber::getLane()
 {
     return lane;
+}
+
+std::string Bomber::getName()
+{
+    return "Bomber";
 }
 
 void Bomber::setLane(int givenLane)
@@ -84,8 +88,32 @@ float Bomber::getPositionX()
 bool Bomber::checkDeath()
 {
     if (health <= 0)
-        return true;
-    return false;
+    {
+		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
+		if (postDeathTime >= .5)
+		{
+			postDeathClock.restart();
+			return true;
+		}
+		else
+        {
+			speed = 0;
+			if (koratDeathSoundPlayed == false)
+			{
+				postDeathClock.restart();
+				koratDied.setBuffer(koratDeathSound);
+				koratDied.setVolume(100);
+				koratDied.play();
+				koratDeathSoundPlayed = true;
+			}
+		}
+    }
+    else
+    {
+        postDeathClock.restart();
+        return false;
+
+    }
 }
 
 bool Bomber::checkSurvive()

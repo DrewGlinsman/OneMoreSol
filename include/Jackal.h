@@ -3,6 +3,7 @@
 #define INCLUDE_JACKAL_H_
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
 
@@ -14,6 +15,8 @@ public:
 	virtual ~Jackal();
 
 	int getLane();
+
+	std::string getName();
 
 	void setLane(int givenLane);
 
@@ -43,6 +46,20 @@ private:
     int lane3 = 508;
     int lane4 = 594;
     int lane5 = 680;
+
+    bool koratDeathSoundPlayed = false;
+	bool koratLeftSoundPlayed = false;
+    float postDeathTime;
+	sf::Clock postDeathClock;
+	sf::Clock postLeftClock;
+	float postLeftTime;
+
+	sf::SoundBuffer gruntHitSound;
+    sf::Sound gruntWasHit;
+    sf::SoundBuffer koratDeathSound;
+    sf::Sound koratDied;
+    sf::SoundBuffer koratLeftSound;
+	sf::Sound koratLeft;
 };
 
 #endif

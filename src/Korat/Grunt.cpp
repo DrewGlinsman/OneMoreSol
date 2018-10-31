@@ -10,7 +10,6 @@ Grunt::Grunt(int startLane, TextureLoader* loadedTextures){
 	grunt.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
 	grunt.setPosition(1500, lane);
-	std::cout << "I'm a grunt" << std::endl;
 
 	if (!gruntHitSound.loadFromFile("assets/Grunt_Hit.ogg")) // Loads and initializes all sounds based on impact
 	    std::cout << "Could not load Grunt Hit Sound." << std::endl;
@@ -36,6 +35,11 @@ void Grunt::wasShot(int damage)
 int Grunt::getLane()
 {
     return lane;
+}
+
+std::string Grunt::getName()
+{
+    return "Grunt";
 }
 
 void Grunt::setLane(int givenLane)
@@ -95,7 +99,6 @@ bool Grunt::checkDeath()
     if (health <= 0)
     {
 		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
-		std::cout << postDeathTime << std::endl;
 		if (postDeathTime >= .5)
 		{
 			postDeathClock.restart();
@@ -114,13 +117,12 @@ bool Grunt::checkDeath()
 			}
 		}
     }
-    else //added this
+    else
     {
         postDeathClock.restart();
         return false;
 
     }
-
 }
 
 bool Grunt::checkSurvive()

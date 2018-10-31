@@ -10,7 +10,6 @@ Elite::Elite(int startLane, TextureLoader* loadedTextures){
 	elite.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
 	elite.setPosition(1500, lane);
-	std::cout << "I'm a elite" << std::endl;
 }
 
 Elite::~Elite() {
@@ -26,6 +25,11 @@ void Elite::wasShot(int damage)
 int Elite::getLane()
 {
     return lane;
+}
+
+std::string Elite::getName()
+{
+    return "Elite";
 }
 
 void Elite::setLane(int givenLane)
@@ -83,8 +87,32 @@ float Elite::getPositionX()
 bool Elite::checkDeath()
 {
     if (health <= 0)
-        return true;
-    return false;
+    {
+		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
+		if (postDeathTime >= .5)
+		{
+			postDeathClock.restart();
+			return true;
+		}
+		else
+        {
+			speed = 0;
+			if (koratDeathSoundPlayed == false)
+			{
+				postDeathClock.restart();
+				koratDied.setBuffer(koratDeathSound);
+				koratDied.setVolume(100);
+				koratDied.play();
+				koratDeathSoundPlayed = true;
+			}
+		}
+    }
+    else
+    {
+        postDeathClock.restart();
+        return false;
+
+    }
 }
 
 bool Elite::checkSurvive()

@@ -16,6 +16,8 @@ public:
 
 	int getLane();
 
+	std::string getName();
+
 	void setLane(int givenLane);
 
 	void wasShot(int damage);
@@ -36,20 +38,21 @@ private:
 
 	int lane;
 	int speed = 100;
-int health = 100;
+    int health = 100;
 	bool survive = false;
-	bool koratDeathSoundPlayed = false;
-	bool koratLeftSoundPlayed = false;
-	float postDeathTime;
-	sf::Clock postDeathClock;
-	sf::Clock postLeftClock;
-	float postLeftTime;
 
     int lane1 = 335;
     int lane2 = 422;
     int lane3 = 508;
     int lane4 = 594;
     int lane5 = 680;
+
+    bool koratDeathSoundPlayed = false;
+	bool koratLeftSoundPlayed = false;
+	float postDeathTime;
+	sf::Clock postDeathClock;
+	sf::Clock postLeftClock;
+	float postLeftTime;
 
     sf::SoundBuffer gruntHitSound;
     sf::Sound gruntWasHit;

@@ -100,7 +100,6 @@ void GameLogic::selectKorat()
         koratSpawnType = decideKoratType(enemyPool6);
     else if(currentLevel >= 15 && currentLevel < 20)
         koratSpawnType = decideKoratType(enemyPool7);
-    //cout << "Type = " << koratSpawnType << " | Lane = " << koratSpawnLane << endl;
     spawnKorat();
 }
 
@@ -148,7 +147,7 @@ void GameLogic::spawnKorat()
 
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            cout << currentKorat[i][j] -> getLane() << ' ';
+            cout << currentKorat[i][j] -> getName() << ' ';
             if (currentKorat[i][j] -> getLane() == 680)
             {
                  print = false;
@@ -214,7 +213,6 @@ void GameLogic::moveBullet(float timePassed)
                 }
                 else
                 {
-                    cout << currentBullet[i][j] -> getDamage() << endl;
                     currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
                     currentBullet[i].erase(currentBullet[i].begin() + j);
                     enemyBehindTom = false;
@@ -235,7 +233,6 @@ void GameLogic::moveBullet(float timePassed)
                 }
                 else
                 {
-                    cout << currentBullet[i][j] -> getDamage() << endl;
                     currentKorat[i][1] -> wasShot(currentBullet[i][j] -> getDamage());
                     currentBullet[i].erase(currentBullet[i].begin() + j);
                     enemyBehindTom = false;

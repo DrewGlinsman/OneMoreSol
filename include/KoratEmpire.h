@@ -16,6 +16,8 @@ public:
 
 	virtual int getLane();
 
+	virtual std::string getName();
+
 	virtual void moveCurrentKorat(float timepassed);
 
 	virtual void drawCurrentKorat(sf::RenderWindow& window);

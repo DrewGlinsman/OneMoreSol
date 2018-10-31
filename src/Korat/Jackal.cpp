@@ -10,7 +10,6 @@ Jackal::Jackal(int startLane, TextureLoader* loadedTextures){
 	jackal.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	jackal.setPosition(1500, lane);
-	std::cout << "I'm a jackal" << std::endl;
 }
 
 Jackal::~Jackal() {
@@ -26,6 +25,11 @@ void Jackal::wasShot(int damage)
 int Jackal::getLane()
 {
     return lane;
+}
+
+std::string Jackal::getName()
+{
+    return "Jackal";
 }
 
 void Jackal::setLane(int givenLane)
@@ -83,8 +87,32 @@ float Jackal::getPositionX()
 bool Jackal::checkDeath()
 {
     if (health <= 0)
-        return true;
-    return false;
+    {
+		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
+		if (postDeathTime >= .5)
+		{
+			postDeathClock.restart();
+			return true;
+		}
+		else
+        {
+			speed = 0;
+			if (koratDeathSoundPlayed == false)
+			{
+				postDeathClock.restart();
+				koratDied.setBuffer(koratDeathSound);
+				koratDied.setVolume(100);
+				koratDied.play();
+				koratDeathSoundPlayed = true;
+			}
+		}
+    }
+    else
+    {
+        postDeathClock.restart();
+        return false;
+
+    }
 }
 
 bool Jackal::checkSurvive()
