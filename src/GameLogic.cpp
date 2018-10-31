@@ -34,6 +34,23 @@ bool GameLogic::checkEnd()
     return false;
 }
 
+void GameLogic::updateKoratOrder()
+{
+    for (int i = 0; i < currentKorat.size(); i ++)
+        {
+            for (int j = 0; j < currentKorat[i].size(); j++)
+            {
+                if (j + 1 < currentKorat[i].size())
+                {
+                    if(currentKorat[i][j] -> getPositionX() > currentKorat[i][j+1] -> getPositionX())
+                    {
+                        currentKorat[i][j].swap(currentKorat[i][j+1]);
+                    }
+                }
+            }
+        }
+}
+
 void GameLogic::moveKorat(float timePassed)
 {
     for (int i = 0; i < currentKorat.size(); i ++)
@@ -191,6 +208,23 @@ int GameLogic::decideKoratType(std::vector<int> enemyPool)
 
 //----------------------------------------------------------
 //Bullets generation and drawing
+
+void GameLogic::updateBulletOrder()
+{
+    for (int i = 0; i < currentBullet.size(); i ++)
+        {
+            for (int j = 0; j < currentBullet[i].size(); j++)
+            {
+                if (j - 1 >= 0)
+                {
+                    if(currentBullet[i][j] -> getPositionX() < currentBullet[i][j-1] -> getPositionX())
+                    {
+                        currentBullet[i][j].swap(currentBullet[i][j-1]);
+                    }
+                }
+            }
+        }
+}
 
 void GameLogic::moveBullet(float timePassed)
 {

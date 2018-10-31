@@ -8,7 +8,7 @@ LaserBullet::LaserBullet(int startLane, TextureLoader* loadedTextures) {
 	laser.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
 	laser.setPosition(height, lane);
-	speed = 1000;
+	speed = 3000;
 	damage = 20;
 
     if (!laserRifleSound.loadFromFile("assets/Laser_Rifle_Sound.ogg")) // Loads and initializes all sounds based on impact

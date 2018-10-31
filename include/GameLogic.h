@@ -43,7 +43,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 1;
+        int currentLevel = 3;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -69,7 +69,7 @@ class GameLogic{
         int sunRiseOrientation = 10;
         int sunSetOrientation = 150;
         float levelSpeedModifier = 2.5;
-        float levelSpawnModifier = 3;
+        float levelSpawnModifier = 1;
         float rotation;
         float spawnTime;
         bool enemyBehindTom = false;
@@ -85,6 +85,9 @@ class GameLogic{
 
         void moveKorat(float timePassed);
         void drawKorat(sf::RenderWindow& window);
+
+        void updateKoratOrder();
+        void updateBulletOrder();
 
         void selectKorat();
         void spawnKorat();

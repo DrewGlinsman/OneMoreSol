@@ -97,7 +97,8 @@ bool GameViewPlayer::playerViewIsOpen()
 //-----------------------------------------------------------------
 
         logic -> runLevel(sky, delta);
-
+        logic -> updateKoratOrder();
+        logic -> updateBulletOrder();
         logic -> moveKorat(delta);
         logic -> moveBullet(delta);
 
