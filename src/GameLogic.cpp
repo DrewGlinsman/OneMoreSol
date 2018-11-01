@@ -370,7 +370,7 @@ int GameLogic::decideBulletType(MajorTom* majorTom)
 
 //----------------------------------------------------------
 
-void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
+void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
 	rotation = gameSky.getRotation();
 	spawnTime = spawnClock.getElapsedTime().asSeconds();
@@ -379,14 +379,28 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, float timePassed)
     now = ((unsigned long) time((time_t *) NULL)) % 255;
     SelectStream((int) now);
 
+    //-------------------------------------------------------------
+    // lose game check
+    if (survivorCount == 0)
+    {
+        loseLevel(gameSky, majorTom);
+    }
+
+    //-------------------------------------------------------------
+
 	if (rotation >= sunSetOrientation) // if the sun has set
 	{
 		if (currentKoratCount == 0)
         {
             gameSky.rotate(-rotation); //rotate the sun back to the beginning
             currentLevel++;
+            survivorCountSaved = survivorCount;
             levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
             levelSpawnModifier = levelSpawnModifier * 15/16; //
+
+            majorTom ->  setTomPositionX(156);
+
+            majorTom -> setTomPositionY(508);
 
             cout << "Current Level = " << currentLevel << endl;
 
@@ -479,4 +493,29 @@ void GameLogic::selectMusic()
     }
     backgroundMusic.setVolume(50);
     backgroundMusic.play();
+}
+
+void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
+{
+
+        for (int i = 0; i < 5; i++)
+        {
+            currentBullet[i].clear();
+            currentKorat[i].clear();
+        }
+
+        majorTom ->  setTomPositionX(156);
+
+        majorTom -> setTomPositionY(508);
+
+        currentKoratCount = 0;
+
+        gameSky.rotate(-rotation); //rotate the sun back to the beginning
+
+        cout << "Current Level = " << currentLevel << endl;
+
+        selectMusic();
+
+        survivorCount = survivorCountSaved;
+
 }

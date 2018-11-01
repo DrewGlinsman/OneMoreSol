@@ -40,6 +40,7 @@ class GameLogic{
 //        sf::Clock postDeathClock;
 
         int survivorCount = 20;
+        int survivorCountSaved = 20;
 
         int currentKoratCount = 0;
 
@@ -104,10 +105,11 @@ class GameLogic{
         int decideBulletLane(MajorTom* majorTom);
         int decideBulletType(MajorTom* majorTom);
 
-        void runLevel(sf::CircleShape& gameSky, float timePassed);
+        void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
 
         void selectMusic();
 
+        void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
 };
 
 
