@@ -127,3 +127,8 @@ int Bomber::getHealth()
 {
     return health;
 }
+
+int Bomber::getSpeed()
+{
+    return speed;
+}

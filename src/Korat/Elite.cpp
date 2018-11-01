@@ -126,3 +126,8 @@ int Elite::getHealth()
 {
     return health;
 }
+
+int Elite::getSpeed()
+{
+    return speed;
+}

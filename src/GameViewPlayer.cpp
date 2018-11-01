@@ -80,6 +80,12 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 
 bool GameViewPlayer::playerViewIsOpen()
 {
+    sf::Clock fireRate1;
+    sf::Clock fireRate2;
+
+    float fireGun = fireRate1.getElapsedTime().asSeconds();
+
+
     sf::Clock gameClock;
     float delta;
 
@@ -99,6 +105,7 @@ bool GameViewPlayer::playerViewIsOpen()
         logic -> runLevel(sky, majorTom, delta);
         logic -> updateKoratOrder();
         logic -> updateBulletOrder();
+        logic -> updateDyingKorat();
         logic -> moveKorat(delta);
         logic -> moveBullet(delta);
 
@@ -162,7 +169,32 @@ bool GameViewPlayer::playerViewIsOpen()
                     if(Event.key.code == sf::Keyboard::Space)
                     {
                         if(lockOutKeyboard == false)
-                        logic -> selectBullet(majorTom, delta);
+                        {
+                             /*
+                             switch(majorTom -> currentGun.bulletType)
+                            {
+                                case 1:
+                                    logic -> selectBullet(majorTom, delta);
+
+                                    break;
+                                case 2:
+
+                                    break;
+                                case 3:
+
+                                    break;
+                                case 4:
+
+                                    break;
+                                case 5:
+
+                                    break;
+                                default:
+                                    break;
+                            }
+                            */
+                            logic -> selectBullet(majorTom, delta);
+                        }
                     }
 
                     if(Event.key.code == sf::Keyboard::Num1)

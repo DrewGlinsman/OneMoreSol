@@ -32,6 +32,8 @@ public:
 
 	virtual int getHealth();
 
+	virtual int getSpeed();
+
 
     int lane;
 
@@ -44,7 +46,7 @@ public:
 
 private:
 	unsigned int health;
-	float speed;
+
     int koratType;
 
 };

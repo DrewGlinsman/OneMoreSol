@@ -70,3 +70,8 @@ bool KoratEmpire::checkSurvive()
 {
 
 }
+
+int KoratEmpire::getSpeed()
+{
+
+}

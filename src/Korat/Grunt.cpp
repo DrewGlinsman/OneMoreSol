@@ -135,3 +135,8 @@ int Grunt::getHealth()
 {
     return health;
 }
+
+int Grunt::getSpeed()
+{
+    return speed;
+}

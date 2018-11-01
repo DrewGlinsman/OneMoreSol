@@ -125,3 +125,8 @@ int Hunter::getHealth()
 {
     return health;
 }
+
+int Hunter::getSpeed()
+{
+    return speed;
+}

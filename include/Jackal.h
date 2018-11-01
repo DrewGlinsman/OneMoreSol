@@ -36,6 +36,8 @@ public:
 
 	int getHealth();
 
+	int getSpeed();
+
 private:
 
 	int lane;

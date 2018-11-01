@@ -126,3 +126,8 @@ int Brute::getHealth()
 {
     return health;
 }
+
+int Brute::getSpeed()
+{
+    return speed;
+}

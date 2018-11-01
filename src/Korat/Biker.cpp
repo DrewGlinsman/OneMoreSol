@@ -126,3 +126,8 @@ int Biker::getHealth()
 {
     return health;
 }
+
+int Biker::getSpeed()
+{
+    return speed;
+}

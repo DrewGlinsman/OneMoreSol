@@ -125,3 +125,8 @@ int Jackal::getHealth()
 {
     return health;
 }
+
+int Jackal::getSpeed()
+{
+    return speed;
+}

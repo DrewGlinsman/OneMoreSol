@@ -36,6 +36,8 @@ class GameLogic{
         std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
 
+        std::vector<shared_ptr<KoratEmpire>> dyingKorat{};
+
         sf::Clock spawnClock;
 //        sf::Clock postDeathClock;
 
@@ -110,6 +112,8 @@ class GameLogic{
         void selectMusic();
 
         void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
+
+        void updateDyingKorat();
 };
 
 

@@ -61,7 +61,16 @@ void GameLogic::moveKorat(float timePassed)
             {
                 if (currentKorat[i][j] -> checkDeath() == false)
                 {
+                    if (currentKorat[i][j] -> getSpeed() == 0)
+                    {
+                        dyingKorat.emplace_back(move(currentKorat[i][j]));
+                        currentKorat[i].erase(currentKorat[i].begin() + j);
+                        currentKoratCount--;
+                    }
+                    else
+                    {
                     currentKorat[i][j] -> moveCurrentKorat(timePassed);
+                    }
                 }
                 else
                 {
@@ -80,6 +89,15 @@ void GameLogic::moveKorat(float timePassed)
     }
 }
 
+void GameLogic::updateDyingKorat()
+{
+    for (int i = 0; i < dyingKorat.size(); i++)
+    {
+        if (dyingKorat[i] -> checkDeath() == true)
+            dyingKorat.erase(dyingKorat.begin() + i);
+    }
+}
+
 void GameLogic::drawKorat(sf::RenderWindow& window)
 {
     for (int i = 0; i < currentKorat.size(); i ++)
@@ -87,8 +105,11 @@ void GameLogic::drawKorat(sf::RenderWindow& window)
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
                 currentKorat[i][j] -> drawCurrentKorat(window);
-
         }
+    }
+    for (int i = 0; i < dyingKorat.size(); i++)
+    {
+        dyingKorat[i] -> drawCurrentKorat(window);
     }
 }
 
@@ -247,15 +268,7 @@ void GameLogic::moveBullet(float timePassed)
                 else
                 {
                     currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
-                    if(currentKorat[i][0] -> getHealth() > 0)
-                    {
-                        currentBullet[i].erase(currentBullet[i].begin() + j);
-                    }
-                    else
-                    {
-                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
-                    }
-
+                    currentBullet[i].erase(currentBullet[i].begin() + j);
                     enemyBehindTom = false;
 
                 }
@@ -275,15 +288,7 @@ void GameLogic::moveBullet(float timePassed)
                 else
                 {
                     currentKorat[i][1] -> wasShot(currentBullet[i][j] -> getDamage());
-                    if(currentKorat[i][1] -> getHealth() > 0)
-                    {
-                        currentBullet[i].erase(currentBullet[i].begin() + j);
-                    }
-                    else
-                    {
-                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
-                    }
-
+                    currentBullet[i].erase(currentBullet[i].begin() + j);
                     enemyBehindTom = false;
                 }
             }
