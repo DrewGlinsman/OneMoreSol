@@ -122,3 +122,8 @@ bool Bomber::checkSurvive()
 {
     return survive;
 }
+
+int Bomber::getHealth()
+{
+    return health;
+}

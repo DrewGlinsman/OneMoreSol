@@ -30,6 +30,8 @@ public:
 
 	virtual bool checkSurvive();
 
+	virtual int getHealth();
+
 
     int lane;
 

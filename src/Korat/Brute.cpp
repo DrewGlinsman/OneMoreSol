@@ -121,3 +121,8 @@ bool Brute::checkSurvive()
 {
     return survive;
 }
+
+int Brute::getHealth()
+{
+    return health;
+}

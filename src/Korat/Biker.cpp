@@ -121,3 +121,8 @@ bool Biker::checkSurvive()
 {
     return survive;
 }
+
+int Biker::getHealth()
+{
+    return health;
+}

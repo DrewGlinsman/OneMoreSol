@@ -247,7 +247,15 @@ void GameLogic::moveBullet(float timePassed)
                 else
                 {
                     currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
-                    currentBullet[i].erase(currentBullet[i].begin() + j);
+                    if(currentKorat[i][0] -> getHealth() > 0)
+                    {
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                    }
+                    else
+                    {
+                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                    }
+
                     enemyBehindTom = false;
 
                 }
@@ -267,7 +275,15 @@ void GameLogic::moveBullet(float timePassed)
                 else
                 {
                     currentKorat[i][1] -> wasShot(currentBullet[i][j] -> getDamage());
-                    currentBullet[i].erase(currentBullet[i].begin() + j);
+                    if(currentKorat[i][1] -> getHealth() > 0)
+                    {
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                    }
+                    else
+                    {
+                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                    }
+
                     enemyBehindTom = false;
                 }
             }
@@ -498,24 +514,24 @@ void GameLogic::selectMusic()
 void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 {
 
-        for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
         {
             currentBullet[i].clear();
             currentKorat[i].clear();
         }
 
-        majorTom ->  setTomPositionX(156);
+    majorTom ->  setTomPositionX(156);
 
-        majorTom -> setTomPositionY(508);
+    majorTom -> setTomPositionY(508);
 
-        currentKoratCount = 0;
+    currentKoratCount = 0;
 
-        gameSky.rotate(-rotation); //rotate the sun back to the beginning
+    gameSky.rotate(-rotation); //rotate the sun back to the beginning
 
-        cout << "Current Level = " << currentLevel << endl;
+    cout << "Current Level = " << currentLevel << endl;
 
-        selectMusic();
+    selectMusic();
 
-        survivorCount = survivorCountSaved;
+    survivorCount = survivorCountSaved;
 
 }

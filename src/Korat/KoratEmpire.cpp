@@ -56,6 +56,11 @@ float KoratEmpire::getPositionX()
 
 }
 
+int KoratEmpire::getHealth()
+{
+
+}
+
 bool KoratEmpire::checkDeath()
 {
 

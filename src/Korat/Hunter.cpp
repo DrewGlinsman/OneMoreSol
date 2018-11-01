@@ -120,3 +120,8 @@ bool Hunter::checkSurvive()
 {
     return survive;
 }
+
+int Hunter::getHealth()
+{
+    return health;
+}

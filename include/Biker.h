@@ -34,6 +34,8 @@ public:
 
 	bool checkSurvive();
 
+	int getHealth();
+
 private:
 
 	int lane;

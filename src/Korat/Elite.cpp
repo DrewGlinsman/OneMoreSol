@@ -121,3 +121,8 @@ bool Elite::checkSurvive()
 {
     return survive;
 }
+
+int Elite::getHealth()
+{
+    return health;
+}

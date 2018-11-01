@@ -130,3 +130,8 @@ bool Grunt::checkSurvive()
 {
     return survive;
 }
+
+int Grunt::getHealth()
+{
+    return health;
+}

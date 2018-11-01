@@ -120,3 +120,8 @@ bool Jackal::checkSurvive()
 {
     return survive;
 }
+
+int Jackal::getHealth()
+{
+    return health;
+}
