@@ -3,7 +3,6 @@
 using namespace std;
 
 GameViewPlayer::GameViewPlayer() // Player window constructor
-    : gameWindow(sf::VideoMode(1440, 900, 32), "One More Sol",sf::Style::Titlebar | sf::Style::Close)
 {
     if(!gameFont.loadFromFile("assets/impact.ttf"))
         cout << "Could not load requested font." << endl;
@@ -78,7 +77,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 
 }
 
-bool GameViewPlayer::playerViewIsOpen()
+bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 {
     sf::Clock fireRate1;
     sf::Clock fireRate2;
@@ -93,9 +92,9 @@ bool GameViewPlayer::playerViewIsOpen()
     bool keepMovingDown = false;
     bool lockOutKeyboard = false;
 
-    while(gameWindow.isOpen())
+    while(window.isOpen())
     {
-        updateGame();
+        updateGame(window);
 
         delta = gameClock.getElapsedTime().asSeconds();
         gameClock.restart();
@@ -126,11 +125,11 @@ bool GameViewPlayer::playerViewIsOpen()
         //cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
        //cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
 
-         while(gameWindow.pollEvent(Event))
+         while(window.pollEvent(Event))
             {
                 if(Event.type == sf::Event::Closed)
                 {
-                    gameWindow.close(); // Quit game
+                    window.close(); // Quit game
                     return true;
                 }
 
@@ -138,7 +137,7 @@ bool GameViewPlayer::playerViewIsOpen()
                 {
                     if(Event.key.code == sf::Keyboard::Escape)
                     {
-                        gameWindow.close();
+                        window.close();
                         return true;
                     }
 
@@ -252,26 +251,26 @@ bool GameViewPlayer::playerViewIsOpen()
     return false;
 }
 
-void GameViewPlayer::updateGame(void) // Draws all elements of screen
+void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
 {
 
-    gameWindow.clear(sf::Color::Black);
+    window.clear(sf::Color::Black);
 
-    gameWindow.draw(sky);
-    gameWindow.draw(background);
-    majorTom->drawTom(gameWindow);
+    window.draw(sky);
+    window.draw(background);
+    majorTom -> drawTom(window);
 
-    logic -> drawKorat(gameWindow);
-    logic -> drawBullet(gameWindow);
+    logic -> drawKorat(window);
+    logic -> drawBullet(window);
 
-    gameWindow.draw(survivorCnt);
-    gameWindow.draw(weapon1);
-    gameWindow.draw(weapon2);
-    gameWindow.draw(weapon3);
-    gameWindow.draw(weapon4);
-    gameWindow.draw(weapon5);
-    gameWindow.draw(weapon6);
-    gameWindow.draw(weapon7);
+    window.draw(survivorCnt);
+    window.draw(weapon1);
+    window.draw(weapon2);
+    window.draw(weapon3);
+    window.draw(weapon4);
+    window.draw(weapon5);
+    window.draw(weapon6);
+    window.draw(weapon7);
 
-    gameWindow.display();
+    window.display();
 }

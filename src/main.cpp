@@ -2,6 +2,7 @@
 #include "GameViewPlayer.h"
 #include "GameViewMenu.h"
 #include "GameLogic.h"
+#include "GameStateManager.h"
 
 using namespace std;
 
@@ -17,29 +18,28 @@ int main(int argc, char** argv)
 
     while(!gameOver) // Start game loop
     {
-        GameViewMenu* currentMenu = new GameViewMenu(); //Create menu window for player
+        GameStateManager* currentGameWindow = new GameStateManager(); //Create menu window for player
 
-        quit = currentMenu -> gameViewMenuIsOpen();
+        currentGameWindow -> setState("Start");
+
+        quit = currentGameWindow -> gameViewIsOpen();
 
         if(quit == true)
         {
             return 0;
         }
 
-        delete currentMenu; // Contain any memory leaks
+        currentGameWindow -> setState("Play");
 
         // # of players has been determined and the game is starting
 
         //--------------------------------------------------------------------------------------
 
-        GameViewPlayer* currentGame = new GameViewPlayer(); // Create player window
-
         sf::Clock clock; // Game loop clock
 
         float delta; // Time between game loops
 
-
-        quit = currentGame -> playerViewIsOpen();
+        quit = currentGameWindow -> gameViewIsOpen();
 
         if (quit == true)
         {

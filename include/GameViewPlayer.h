@@ -23,7 +23,6 @@ public:
     sf::Font gameFont;
     const int iconScale = 64;
 
-    sf::RenderWindow gameWindow;
     sf::RectangleShape background;
     sf::CircleShape sky;
 
@@ -58,8 +57,8 @@ public:
     TextureLoader* loadedTextures;
 
     GameViewPlayer();
-    bool playerViewIsOpen();
-    void updateGame(void);
+    bool gameViewIsOpen(sf::RenderWindow& window);
+    void updateGame(sf::RenderWindow& window);
 
 };
 

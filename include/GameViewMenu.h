@@ -59,11 +59,10 @@ private:
     float playY5 = 245;
 
 public:
-    sf::RenderWindow menuWindow;
     GameViewMenu();
-    bool gameViewMenuIsOpen(void);
-    void updateMenu(void);
-    void selectButton(int, int);
+    bool gameViewIsOpen(sf::RenderWindow& window);
+    void updateMenu(sf::RenderWindow& window);
+    void selectButton(sf::RenderWindow& window, int, int);
 
 
 };
