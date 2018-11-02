@@ -11,6 +11,13 @@ Jackal::Jackal(int startLane, TextureLoader* loadedTextures){
 	setLane(startLane);
 	jackal.setPosition(1500, lane);
 	jackal.setScale(sf::Vector2f(1.2f,1.2f));
+
+    if (!jackalHitSound.loadFromFile("assets/Grunt_Hit.ogg")) // Loads and initializes all sounds based on impact
+	    std::cout << "Could not load Grunt Hit Sound." << std::endl;
+    if (!koratDeathSound.loadFromFile("assets/Korat_Death.ogg")) // Loads and initializes all sounds based on impact
+		std::cout << "Could not load Korat Death Sound." << std::endl;
+    if (!koratLeftSound.loadFromFile("assets/Korat_Left.ogg")) // Loads and initializes all sounds based on impact
+		std::cout << "Could not load Korat Left Sound." << std::endl;
 }
 
 Jackal::~Jackal() {
@@ -21,6 +28,10 @@ Jackal::~Jackal() {
 void Jackal::wasShot(int damage)
 {
     health = health - damage;
+    jackalWasHit.setBuffer(jackalHitSound);
+	jackalWasHit.setVolume(75);
+	jackalWasHit.play();
+
 }
 
 int Jackal::getLane()

@@ -74,8 +74,7 @@ void GameLogic::moveKorat(float timePassed)
                 }
                 else
                 {
-                		currentKorat[i].erase(currentKorat[i].begin() + j);
-                		currentKoratCount--;
+                    // This will never be true!
                 }
             }
             else

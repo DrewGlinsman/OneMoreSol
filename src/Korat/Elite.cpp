@@ -22,6 +22,9 @@ Elite::~Elite() {
 void Elite::wasShot(int damage)
 {
     health = health - damage;
+    eliteWasHit.setBuffer(eliteHitSound);
+	eliteWasHit.setVolume(75);
+	eliteWasHit.play();
 }
 
 int Elite::getLane()

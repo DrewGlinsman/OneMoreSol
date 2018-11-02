@@ -58,8 +58,8 @@ private:
 	sf::Clock postLeftClock;
 	float postLeftTime;
 
-	sf::SoundBuffer gruntHitSound;
-    sf::Sound gruntWasHit;
+	sf::SoundBuffer eliteHitSound;
+    sf::Sound eliteWasHit;
     sf::SoundBuffer koratDeathSound;
     sf::Sound koratDied;
     sf::SoundBuffer koratLeftSound;
