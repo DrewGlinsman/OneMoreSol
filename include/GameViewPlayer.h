@@ -60,6 +60,7 @@ public:
     GameViewPlayer();
     bool playerViewIsOpen();
     void updateGame(void);
+    void updateSurvivorCount();
 
 };
 
