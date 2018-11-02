@@ -2,7 +2,7 @@
 #include "GaussRifle.h"
 
 GaussRifle::GaussRifle() {
-    bulletType = 4;
+    bulletType = 6;
     fireRate = 0.5;
     clip = 10;
     damage = 5;

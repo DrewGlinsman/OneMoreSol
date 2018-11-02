@@ -1,18 +1,18 @@
 
-#ifndef INCLUDE_LASERBULLET_H_
-#define INCLUDE_LASERBULLET_H_
+#ifndef INCLUDE_LASERRIFLEBULLET_H_
+#define INCLUDE_LASERRIFLEBULLET_H_
 
 #include "Bullet.h"
 #include "TextureLoader.h"
 #include <SFML/Audio.hpp>
 
-class LaserBullet: public Bullet {
+class LaserRifleBullet: public Bullet {
 
 public:
 	sf::Sprite laser;
 
-	LaserBullet(int, TextureLoader*);
-	virtual ~LaserBullet();
+	LaserRifleBullet(int, TextureLoader*);
+	virtual ~LaserRifleBullet();
 
 	int getDamage();
 

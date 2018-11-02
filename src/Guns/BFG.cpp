@@ -2,7 +2,7 @@
 #include "BFG.h"
 
 BFG::BFG() {
-    bulletType = 5;
+    bulletType = 7;
     fireRate = 0.5;
     clip = 10;
     damage = 5;

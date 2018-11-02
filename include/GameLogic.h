@@ -21,8 +21,11 @@
 #include "Bullet.h"
 #include "ArcBullet.h"
 #include "GaussBullet.h"
-#include "LaserBullet.h"
-#include "PlasmaBullet.h"
+#include "LaserRifleBullet.h"
+#include "LaserMinigunBullet.h"
+#include "PlasmaPistolBullet.h"
+#include "PlasmaShotgunBullet.h"
+#include "BFGBullet.h"
 #include "TextureLoader.h"
 
 #include "rngs.h"
@@ -72,7 +75,7 @@ class GameLogic{
         int sunRiseOrientation = 10;
         int sunSetOrientation = 150;
         float levelSpeedModifier = 2.5;
-        float levelSpawnModifier = 1;
+        float levelSpawnModifier = .1;
         float rotation;
         float spawnTime;
         bool enemyBehindTom = false;
