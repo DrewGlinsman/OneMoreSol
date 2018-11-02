@@ -57,8 +57,11 @@ public:
     TextureLoader* loadedTextures;
 
     GameViewPlayer();
+
     bool gameViewIsOpen(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
+    void updateSurvivorCount();
+
 
 };
 

@@ -1,18 +1,18 @@
 
-#ifndef INCLUDE_BRUTE_H_
-#define INCLUDE_BRUTE_H_
+#ifndef INCLUDE_GRUNT_H_
+#define INCLUDE_GRUNT_H_
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
+#include <SFML/Audio.hpp>
 
-class Brute: public KoratEmpire {
+class Grunt: public KoratEmpire {
 public:
-	sf::Sprite brute;
+	sf::Sprite grunt;
 
-	Brute(int, TextureLoader*);
-	virtual ~Brute();
+	Grunt(int, TextureLoader*);
+	virtual ~Grunt();
 
 	int getLane();
 
@@ -22,13 +22,13 @@ public:
 
 	void wasShot(int damage);
 
-	bool checkDeath();
+    bool checkDeath();
 
 	void moveCurrentKorat(float timePassed);
 
 	void drawCurrentKorat(sf::RenderWindow& window);
 
-	sf::Sprite getKorat();
+    sf::Sprite getKorat();
 
 	float getPositionX();
 
@@ -42,7 +42,7 @@ private:
 
 	int lane;
 	int speed = 100;
-	int health = 100;
+    int health = 100;
 	bool survive = false;
 
     int lane1 = 335;
@@ -53,12 +53,12 @@ private:
 
     bool koratDeathSoundPlayed = false;
 	bool koratLeftSoundPlayed = false;
-    float postDeathTime;
+	float postDeathTime;
 	sf::Clock postDeathClock;
 	sf::Clock postLeftClock;
 	float postLeftTime;
 
-	sf::SoundBuffer gruntHitSound;
+    sf::SoundBuffer gruntHitSound;
     sf::Sound gruntWasHit;
     sf::SoundBuffer koratDeathSound;
     sf::Sound koratDied;

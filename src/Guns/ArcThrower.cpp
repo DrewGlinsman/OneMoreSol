@@ -8,6 +8,7 @@ ArcThrower::ArcThrower(){
     damage = 5;
     dmgMultiplier = 2;
     reloadSpeed = 1.5;
+
 }
 
 ArcThrower::~ArcThrower() {

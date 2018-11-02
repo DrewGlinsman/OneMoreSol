@@ -15,7 +15,7 @@ MajorTom::MajorTom(TextureLoader* loadedTextures)
     majorTom.setPosition(156,508);
     majorTom.setScale(sf::Vector2f(1.2f,1.2f));
     setHealth(100);
-
+    setSurvivors(20);
 }
 
 void MajorTom::drawTom (sf::RenderWindow& window)
@@ -292,6 +292,16 @@ void MajorTom::setGun(int gunNumber)
             break;
 
     }
+}
+
+int MajorTom::getSurvivors()
+{
+    return survivorCnt;
+}
+
+void MajorTom::setSurvivors(int num)
+{
+    survivorCnt = num;
 }
 
 bool MajorTom::checkDeath()

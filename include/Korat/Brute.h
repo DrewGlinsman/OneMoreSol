@@ -1,18 +1,18 @@
 
-#ifndef INCLUDE_ELITE_H_
-#define INCLUDE_ELITE_H_
+#ifndef INCLUDE_BRUTE_H_
+#define INCLUDE_BRUTE_H_
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
 
-class Elite: public KoratEmpire {
+class Brute: public KoratEmpire {
 public:
-	sf::Sprite elite;
+	sf::Sprite brute;
 
-	Elite(int, TextureLoader*);
-	virtual ~Elite();
+	Brute(int, TextureLoader*);
+	virtual ~Brute();
 
 	int getLane();
 
@@ -38,6 +38,8 @@ public:
 
 	int getSpeed();
 
+	void shootWeapon();
+
 private:
 
 	int lane;
@@ -58,8 +60,8 @@ private:
 	sf::Clock postLeftClock;
 	float postLeftTime;
 
-	sf::SoundBuffer eliteHitSound;
-    sf::Sound eliteWasHit;
+	sf::SoundBuffer gruntHitSound;
+    sf::Sound gruntWasHit;
     sf::SoundBuffer koratDeathSound;
     sf::Sound koratDied;
     sf::SoundBuffer koratLeftSound;

@@ -63,7 +63,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     //Survivor Count Display
     survivorCnt.setFont(gameFont);
     survivorCnt.setCharacterSize(22);
-    survivorCnt.setString("20/20 Survivors");
+    survivorCnt.setString("20/20 Survivors");//might be able to take this out after survivor count is looped in updater
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
@@ -105,7 +105,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         logic -> updateKoratOrder();
         logic -> updateBulletOrder();
         logic -> updateDyingKorat();
-        logic -> moveKorat(delta);
+        logic -> moveKorat(delta, majorTom);
         logic -> moveBullet(delta);
 
 //-----------------------------------------------------------------
@@ -272,5 +272,13 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.draw(weapon6);
     window.draw(weapon7);
 
+    updateSurvivorCount();
+
     window.display();
+}
+
+void GameViewPlayer::updateSurvivorCount()
+{
+    string cnt = std::to_string(majorTom->getSurvivors()) + "/20 Survivors";
+    survivorCnt.setString(cnt);
 }
