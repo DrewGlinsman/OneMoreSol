@@ -32,7 +32,6 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     background.setSize(sf::Vector2f(1440,724));
     background.setTexture(&gameImage);
 
-
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
     weapon3.setTextureRect(sf::IntRect(288,0,32,32));
@@ -62,6 +61,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     weapon6.setScale(sf::Vector2f(2.5f,2.5f));
     weapon7.setScale(sf::Vector2f(2.5f,2.5f));
 
+    //Survivor Count Display
     survivorCnt.setFont(gameFont);
     survivorCnt.setCharacterSize(22);
     survivorCnt.setString("20/20 Survivors");

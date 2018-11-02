@@ -53,7 +53,7 @@ public:
 
     GameLogic* logic;
 
-    MajorTom* majorTom;//need to make new and non default constructor
+    MajorTom* majorTom;
 
     TextureLoader* loadedTextures;
 
