@@ -130,3 +130,8 @@ int Hunter::getSpeed()
 {
     return speed;
 }
+
+void Hunter::shootWeapon()
+{
+	//Hunter will shot weapon
+}

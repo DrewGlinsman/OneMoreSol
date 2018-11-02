@@ -89,13 +89,15 @@ class GameLogic{
 
         TextureLoader* loadedTextures;
 
-        void moveKorat(float timePassed);
+        //needs survivor count
+        void moveKorat(float timePassed, MajorTom* majorTom);
         void drawKorat(sf::RenderWindow& window);
 
         void updateKoratOrder();
         void updateBulletOrder();
 
         void selectKorat();
+        //needs survivor count
         void spawnKorat();
         bool checkEnd();
 
@@ -110,6 +112,7 @@ class GameLogic{
         int decideBulletLane(MajorTom* majorTom);
         int decideBulletType(MajorTom* majorTom);
 
+        //changes survivor count
         void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
 
         void selectMusic();

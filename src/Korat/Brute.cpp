@@ -131,3 +131,8 @@ int Brute::getSpeed()
 {
     return speed;
 }
+
+void Brute::shootWeapon()
+{
+	//Brute will shot weapon
+}
