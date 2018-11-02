@@ -79,7 +79,7 @@ bool GameViewMenu::gameViewIsOpen(sf::RenderWindow& window)
 		{
 			if(Event.type == sf::Event::Closed)
 			{
-				menuWindow.close(); // Quit game
+				window.close(); // Quit game
 				return true;
 			}
 
