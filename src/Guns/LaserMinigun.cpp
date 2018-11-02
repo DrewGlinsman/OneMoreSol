@@ -2,7 +2,7 @@
 #include "LaserMinigun.h"
 
 LaserMinigun::LaserMinigun() {
-    bulletType = 2;
+    bulletType = 4;
     fireRate = 0.5;
     clip = 10;
     damage = 5;

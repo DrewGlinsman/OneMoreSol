@@ -2,7 +2,7 @@
 #include "PlasmaShotgun.h"
 
 PlasmaShotgun::PlasmaShotgun() {
-    bulletType = 1;
+    bulletType = 2;
     fireRate = 0.5;
     clip = 10;
     damage = 5;

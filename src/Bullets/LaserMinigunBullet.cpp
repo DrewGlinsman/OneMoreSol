@@ -1,8 +1,8 @@
 
-#include "LaserBullet.h"
+#include "LaserMinigunBullet.h"
 #include <iostream>
 
-LaserBullet::LaserBullet(int startLane, TextureLoader* loadedTextures) {
+LaserMinigunBullet::LaserMinigunBullet(int startLane, TextureLoader* loadedTextures) {
     laser.setTexture(loadedTextures->mtSpriteSheet);
     laser.setTextureRect(sf::IntRect(256,96,32,32));
 	laser.setOrigin(sf::Vector2f(16.f,16.f));
@@ -19,31 +19,31 @@ LaserBullet::LaserBullet(int startLane, TextureLoader* loadedTextures) {
     fireLaserRifle.play();
 }
 
-LaserBullet::~LaserBullet() {
+LaserMinigunBullet::~LaserMinigunBullet() {
 	// TODO Auto-generated destructor stub
 }
 
-int LaserBullet::getDamage()
+int LaserMinigunBullet::getDamage()
 {
     return damage;
 }
 
-int LaserBullet::getLane()
+int LaserMinigunBullet::getLane()
 {
     return lane;
 }
 
-int LaserBullet::getHeight()
+int LaserMinigunBullet::getHeight()
 {
     return height;
 }
 
-float LaserBullet::getPositionX()
+float LaserMinigunBullet::getPositionX()
 {
     return laser.getPosition().x;
 }
 
-void LaserBullet::setLane(int givenLane)
+void LaserMinigunBullet::setLane(int givenLane)
 {
      switch(givenLane)
 	{
@@ -74,7 +74,7 @@ void LaserBullet::setLane(int givenLane)
 	}
 }
 
-void LaserBullet::moveCurrentBullet(float timePassed)
+void LaserMinigunBullet::moveCurrentBullet(float timePassed)
 {
         if(laser.getPosition().x < 1500)
         {
@@ -87,17 +87,17 @@ void LaserBullet::moveCurrentBullet(float timePassed)
         }
 }
 
-void LaserBullet::drawCurrentBullet(sf::RenderWindow& window)
+void LaserMinigunBullet::drawCurrentBullet(sf::RenderWindow& window)
 {
     window.draw(laser);
 }
 
-bool LaserBullet::getOutOfBounds()
+bool LaserMinigunBullet::getOutOfBounds()
 {
     return outOfBounds;
 }
 
-sf::Sprite LaserBullet::getBullet()
+sf::Sprite LaserMinigunBullet::getBullet()
 {
     return laser;
 }

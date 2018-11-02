@@ -2,7 +2,7 @@
 #include "LaserRifle.h"
 
 LaserRifle::LaserRifle() {
-    bulletType = 2;
+    bulletType = 3;
     fireRate = 0.5;
     clip = 10;
     damage = 5;

@@ -1,17 +1,17 @@
 
-#ifndef INCLUDE_PLASMABULLET_H_
-#define INCLUDE_PLASMABULLET_H_
+#ifndef INCLUDE_BFGBULLET_H_
+#define INCLUDE_BFGBULLET_H_
 
 #include "Bullet.h"
 #include "TextureLoader.h"
-#include <SFML/Audio.hpp>
 
-class PlasmaBullet: public Bullet {
+class BFGBullet: public Bullet {
+
 public:
-	sf::Sprite plasma;
+	sf::Sprite blast;
 
-	PlasmaBullet(int, TextureLoader*);
-	virtual ~PlasmaBullet();
+	BFGBullet(int, TextureLoader*);
+	virtual ~BFGBullet();
 
 	int getDamage();
 
@@ -30,6 +30,7 @@ public:
 	float getPositionX();
 
 	int getHeight();
+
 
 private:
 
@@ -51,9 +52,6 @@ private:
     int height5 = 102;
 
     bool outOfBounds = false;
-
-    sf::SoundBuffer plasmaPistolSound;
-    sf::Sound firePlasmaPistol;
 };
 
 #endif
