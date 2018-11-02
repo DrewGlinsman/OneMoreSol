@@ -51,7 +51,7 @@ void GameLogic::updateKoratOrder()
         }
 }
 
-void GameLogic::moveKorat(float timePassed)
+void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
 {
     for (int i = 0; i < currentKorat.size(); i ++)
     {
@@ -81,8 +81,9 @@ void GameLogic::moveKorat(float timePassed)
             {
                 currentKorat[i].erase(currentKorat[i].begin() + j);
                 currentKoratCount--;
-                survivorCount--;
-                cout << "survivor count = " << survivorCount << endl;
+                //update the gameviewplayer to reflect decremented survivors
+                majorTom->setSurvivors(majorTom->getSurvivors()-1);
+                std::cout << "survivor count = " << majorTom->getSurvivors() << std::endl;
             }
         }
     }
@@ -401,7 +402,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
     //-------------------------------------------------------------
     // lose game check
-    if (survivorCount == 0)
+    if (majorTom->getSurvivors() == 0)
     {
         loseLevel(gameSky, majorTom);
     }
@@ -414,7 +415,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
         {
             gameSky.rotate(-rotation); //rotate the sun back to the beginning
             currentLevel++;
-            survivorCountSaved = survivorCount;
+            survivorCountSaved = majorTom->getSurvivors();
             levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
             levelSpawnModifier = levelSpawnModifier * 15/16; //
 
@@ -509,7 +510,7 @@ void GameLogic::selectMusic()
             break;
         */
         default:
-            cout << "Music selector broken" << endl;
+            std::cout << "Music selector broken" << std::endl;
     }
     backgroundMusic.setVolume(50);
     backgroundMusic.play();
@@ -532,10 +533,10 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     gameSky.rotate(-rotation); //rotate the sun back to the beginning
 
-    cout << "Current Level = " << currentLevel << endl;
+    std::cout << "Current Level = " << currentLevel << std::endl;
 
     selectMusic();
 
-    survivorCount = survivorCountSaved;
+    majorTom->setSurvivors(survivorCountSaved);
 
 }

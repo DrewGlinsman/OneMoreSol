@@ -24,6 +24,7 @@ class MajorTom {
         float timePassed;
         int currentHealth;
         int newHealth;
+        int survivorCnt;
 
         Gun* pistol = new PlasmaPistol();
         Gun* shotgun = new PlasmaShotgun();
@@ -47,24 +48,23 @@ class MajorTom {
         void drawTom(sf::RenderWindow& window);
 
         float getTomPosition();
+        void setTomPositionX(float);
+        void setTomPositionY(float);
 
-        void setTomPositionX(float positionPassed);
+        bool initMove(float, string);
 
-        void setTomPositionY(float positionPassed);
-
-        bool initMove(float timePassed, string direction);
-
-        bool keepMoving(float timePassed, string direction);
+        bool keepMoving(float, string);
 
         int getHealth();
+        void setHealth(int);
 
         void shoot(float);
 
-        void setHealth(int newHealth);
-
         Gun getGun();
+        void setGun(int);
 
-        void setGun(int gunNumber);
+        int getSurvivors();
+        void setSurvivors(int);
 
         bool checkDeath();
 
