@@ -38,6 +38,8 @@ public:
 
 	int getSpeed();
 
+	void shootWeapon();
+
 private:
 
 	int lane;
