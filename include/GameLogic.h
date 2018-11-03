@@ -113,12 +113,12 @@ class GameLogic{
         void moveBullet(float timePassed);
         void drawBullet(sf::RenderWindow& window);
 
-        void fireBullet(MajorTom* majorTom, float timePassed);
-        bool reloadCurrentGun(MajorTom* majorTom);
-        void selectBullet(MajorTom* majorTom, float timePassed);
+        void fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
+        bool reloadCurrentGun(MajorTom* majorTom, Gun* currentGun);
+        void selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
         void spawnBullet(float timePassed);
         int decideBulletLane(MajorTom* majorTom);
-        int decideBulletType(MajorTom* majorTom);
+        int decideBulletType(Gun* currentGun);
 
         //changes survivor count
         void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);

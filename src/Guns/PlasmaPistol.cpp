@@ -12,7 +12,6 @@ int PlasmaPistol::getBulletType()
     return bulletType;
 }
 
-
 int PlasmaPistol::getShotsFired()
 {
     return shotsFired;

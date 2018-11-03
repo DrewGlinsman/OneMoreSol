@@ -7,20 +7,22 @@
 
 class LaserRifle: public Gun
 {
-public:
-	LaserRifle();
-	virtual ~LaserRifle();
-    int getBulletType();
-    void shoot();
-    void reload();
+    public:
+        LaserRifle();
+        virtual ~LaserRifle();
+        int getBulletType();
+        int getShotsFired();
+        void shotsFiredPlusOne();
+        void resetShotsFired();
+        int getClipSize();
+        float getFireRate();
+        float getReloadSpeed();
 
-private:
+    private:
         int shotsFired = 0;
         int bulletType = 3;
         float fireRate = 0.5;
         int clip = 10;
-        int damage = 5;
-        int dmgMultiplier = 2;
         float reloadSpeed = 1.5;
 };
 

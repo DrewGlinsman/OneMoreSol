@@ -169,30 +169,35 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                             /*
-                             switch(majorTom -> currentGun.bulletType)
+
+                             switch(majorTom -> getGun())
                             {
                                 case 1:
-                                    logic -> selectBullet(majorTom, delta);
-
+                                    logic -> fireBullet(majorTom, majorTom -> pistol, delta);
                                     break;
                                 case 2:
-
+                                    logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
                                     break;
                                 case 3:
-
+                                    logic -> fireBullet(majorTom, majorTom -> rifle, delta);
                                     break;
                                 case 4:
-
+                                    logic -> fireBullet(majorTom, majorTom -> minigun, delta);
                                     break;
                                 case 5:
-
+                                    logic -> fireBullet(majorTom, majorTom -> thrower, delta);
+                                    break;
+                                case 6:
+                                    logic -> fireBullet(majorTom, majorTom -> sniper, delta);
+                                    break;
+                                case 7:
+                                    logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
                                     break;
                                 default:
+                                    logic -> fireBullet(majorTom, majorTom -> pistol, delta);
                                     break;
                             }
-                            */
-                            logic -> fireBullet(majorTom, delta);
+
                         }
                     }
 

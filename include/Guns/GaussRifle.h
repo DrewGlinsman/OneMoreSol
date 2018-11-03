@@ -12,16 +12,19 @@ class GaussRifle: public Gun
         GaussRifle();
         virtual ~GaussRifle();
         int getBulletType();
-        void shoot();
-        void reload();
+        int getShotsFired();
+        void shotsFiredPlusOne();
+        void resetShotsFired();
+        int getClipSize();
+        float getFireRate();
+        float getReloadSpeed();
 
     private:
         int shotsFired = 0;
         int bulletType = 6;
         float fireRate = 0.5;
         int clip = 10;
-        int damage = 5;
-        int dmgMultiplier = 2;
+
         float reloadSpeed = 1.5;
 };
 

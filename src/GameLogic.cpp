@@ -246,32 +246,32 @@ void GameLogic::updateBulletOrder()
         }
 }
 
-void GameLogic::fireBullet(MajorTom* majorTom, float timePassed)
+void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
 {
     lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
     cout << lastBulletFired << endl;
-    cout << majorTom -> currentGun -> getFireRate() << endl;
+    cout <<currentGun -> getFireRate() << endl;
 
-    if((lastBulletFired > majorTom -> currentGun -> getFireRate()) &&
-       (majorTom -> currentGun -> getShotsFired() != majorTom -> currentGun -> getClipSize()))
+    if((lastBulletFired > currentGun -> getFireRate()) &&
+       (currentGun -> getShotsFired() != currentGun -> getClipSize()))
     {
-           majorTom -> currentGun -> shotsFiredPlusOne();
-           selectBullet(majorTom, timePassed);
+           currentGun -> shotsFiredPlusOne();
+           selectBullet(majorTom, currentGun, timePassed);
            fireBulletClock.restart();
     }
-    else if(majorTom -> currentGun -> getShotsFired() == majorTom -> currentGun -> getClipSize())
+    else if(currentGun -> getShotsFired() == currentGun -> getClipSize())
     {
-        if (reloadCurrentGun(majorTom) == true)
+        if (reloadCurrentGun(majorTom, currentGun) == true)
         {
-                majorTom -> currentGun -> shotsFiredPlusOne();
-                selectBullet(majorTom, timePassed);
+                currentGun -> shotsFiredPlusOne();
+                selectBullet(majorTom, currentGun, timePassed);
                 fireBulletClock.restart();
         }
     }
 
 }
 
-bool GameLogic::reloadCurrentGun(MajorTom* majorTom)
+bool GameLogic::reloadCurrentGun(MajorTom* majorTom, Gun* currentGun)
 {
     if(reloadStarted == false)
     {
@@ -279,9 +279,9 @@ bool GameLogic::reloadCurrentGun(MajorTom* majorTom)
         reloadTime = reloadClock.getElapsedTime().asSeconds();
         reloadStarted = true;
     }
-    if(reloadTime > majorTom -> currentGun -> getReloadSpeed() && reloadStarted == true)
+    if(reloadTime > currentGun -> getReloadSpeed() && reloadStarted == true)
     {
-        majorTom -> currentGun -> resetShotsFired();
+        currentGun -> resetShotsFired();
         reloadClock.restart();
         reloadStarted = false;
         return true;
@@ -368,11 +368,11 @@ void GameLogic::drawBullet(sf::RenderWindow& window)
     }
 }
 
-void GameLogic::selectBullet(MajorTom* majorTom, float timePassed)
+void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
 {
     bulletSpawnLane = decideBulletLane(majorTom);
 
-    bulletSpawnType = decideBulletType(majorTom);
+    bulletSpawnType = decideBulletType(currentGun);
 
     spawnBullet(timePassed);
 }
@@ -429,21 +429,21 @@ int GameLogic::decideBulletLane(MajorTom* majorTom)
         cout << "bullet shit is broken" << endl;
 }
 
-int GameLogic::decideBulletType(MajorTom* majorTom)
+int GameLogic::decideBulletType(Gun* currentGun)
 {
-    if (majorTom -> currentGun -> getBulletType() == 1)
+    if (currentGun -> getBulletType() == 1)
         return 1;
-    else if (majorTom -> currentGun -> getBulletType() == 2)
+    else if (currentGun -> getBulletType() == 2)
         return 2;
-    else if (majorTom -> currentGun -> getBulletType() == 3)
+    else if (currentGun -> getBulletType() == 3)
         return 3;
-    else if (majorTom -> currentGun -> getBulletType() == 4)
+    else if (currentGun -> getBulletType() == 4)
         return 4;
-    else if (majorTom -> currentGun -> getBulletType() == 5)
+    else if (currentGun -> getBulletType() == 5)
         return 5;
-    else if (majorTom -> currentGun -> getBulletType() == 6)
+    else if (currentGun -> getBulletType() == 6)
         return 6;
-    else if (majorTom -> currentGun -> getBulletType() == 7)
+    else if (currentGun -> getBulletType() == 7)
         return 7;
 
 }
@@ -585,7 +585,7 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
             currentKorat[i].clear();
         }
 
-    majorTom ->  setTomPositionX(156);
+    majorTom -> setTomPositionX(156);
 
     majorTom -> setTomPositionY(508);
 
