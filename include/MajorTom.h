@@ -41,7 +41,7 @@ class MajorTom {
 
         sf::Sprite mtStandPPistol;
 
-        Gun* currentGun;
+        Gun* currentGun = new PlasmaPistol();
 
         MajorTom(TextureLoader*);
 

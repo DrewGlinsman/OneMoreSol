@@ -7,7 +7,7 @@ using namespace std;
 
 MajorTom::MajorTom(TextureLoader* loadedTextures)
 {
-    //setGun(1);
+    setGun(1);
 
     majorTom.setTexture(loadedTextures->mtSpriteSheet);
     majorTom.setTextureRect(sf::IntRect(0,0,64,64));

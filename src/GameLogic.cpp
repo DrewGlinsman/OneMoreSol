@@ -431,19 +431,19 @@ int GameLogic::decideBulletLane(MajorTom* majorTom)
 
 int GameLogic::decideBulletType(MajorTom* majorTom)
 {
-    if (majorTom->currentGun -> getBulletType() == 1)
+    if (majorTom -> currentGun -> getBulletType() == 1)
         return 1;
-    else if (majorTom->currentGun -> getBulletType() == 2)
+    else if (majorTom -> currentGun -> getBulletType() == 2)
         return 2;
-    else if (majorTom->currentGun -> getBulletType() == 3)
+    else if (majorTom -> currentGun -> getBulletType() == 3)
         return 3;
-    else if (majorTom->currentGun -> getBulletType() == 4)
+    else if (majorTom -> currentGun -> getBulletType() == 4)
         return 4;
-    else if (majorTom->currentGun -> getBulletType() == 5)
+    else if (majorTom -> currentGun -> getBulletType() == 5)
         return 5;
-    else if (majorTom->currentGun -> getBulletType() == 6)
+    else if (majorTom -> currentGun -> getBulletType() == 6)
         return 6;
-    else if (majorTom->currentGun -> getBulletType() == 7)
+    else if (majorTom -> currentGun -> getBulletType() == 7)
         return 7;
 
 }

@@ -16,7 +16,6 @@ int Gun::getBulletType()
 
 }
 
-
 int Gun::getShotsFired()
 {
 
