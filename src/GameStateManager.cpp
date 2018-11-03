@@ -10,13 +10,17 @@ GameStateManager::GameStateManager()
 
 bool GameStateManager::gameViewIsOpen()
 {
+    bool quit;
     if (currentState == "Start")
     {
-        menuView -> gameViewIsOpen(gameWindow);
+
+        quit = menuView -> gameViewIsOpen(gameWindow);
+        return quit;
     }
     if (currentState == "Play")
     {
-        playView -> gameViewIsOpen(gameWindow);
+        quit = playView -> gameViewIsOpen(gameWindow);
+        return quit;
     }
 }
 

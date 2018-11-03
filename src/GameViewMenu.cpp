@@ -36,10 +36,6 @@ GameViewMenu::GameViewMenu() // Menu window constructor
 
     menuMusic.setBuffer(Menu_Music);
 
-    menuMusic.play();
-
-    menuMusic.setLoop(true);
-
     menuTransition.setBuffer(Menu_Transition);
 
     menuSelection.setBuffer(Menu_Selection);
@@ -70,6 +66,8 @@ GameViewMenu::GameViewMenu() // Menu window constructor
 
 bool GameViewMenu::gameViewIsOpen(sf::RenderWindow& window)
 {
+    menuMusic.play();
+    menuMusic.setLoop(true);
     updateMenu(window);
     selector.setPosition(0,0);
     cout << "0,0" << endl;
@@ -141,12 +139,14 @@ bool GameViewMenu::gameViewIsOpen(sf::RenderWindow& window)
 					{
 						menuSelection.play();
 						Sleep(900);
+						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,1) == selector.getPosition())
 					{
 						menuSelection.play();
 						Sleep(900);
+						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,2) == selector.getPosition())
@@ -160,6 +160,8 @@ bool GameViewMenu::gameViewIsOpen(sf::RenderWindow& window)
 			}
 		}
 	}
+	return false;
+
 }
 
 void GameViewMenu::updateMenu(sf::RenderWindow& window) // Updates screen
