@@ -41,7 +41,7 @@ class MajorTom {
 
         sf::Sprite mtStandPPistol;
 
-        Gun currentGun;
+        Gun* currentGun;
 
         MajorTom(TextureLoader*);
 

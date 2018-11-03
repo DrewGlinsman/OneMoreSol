@@ -1,27 +1,46 @@
 
 #include "PlasmaPistol.h"
+#include "GameLogic.h"
 
 //instantiate all the basic values for a plasma pistol.
 PlasmaPistol::PlasmaPistol(){
-    bulletType = 1;
-    fireRate = 0.5;
-    clip = 10;
-    damage = 5;
-    dmgMultiplier = 2;
-    reloadSpeed = 1.5;
-    //TODO set the image to the PlasmaPistol sprite.
+
 }
 
-void PlasmaPistol::shoot()
+int PlasmaPistol::getBulletType()
 {
-
-    //TODO make shoot spawn a bullet object in the correct lane and communicate back
-    //the bullet to be drawn, also use fireRate to limit the shooting to a certain speed.
+    return bulletType;
 }
 
-void PlasmaPistol::reload()
+
+int PlasmaPistol::getShotsFired()
 {
-    //TODO make reload take the right amount of time and update the UI feedback.
+    return shotsFired;
+}
+
+void PlasmaPistol::shotsFiredPlusOne()
+{
+    shotsFired++;
+}
+
+void PlasmaPistol::resetShotsFired()
+{
+    shotsFired = 0;
+}
+
+int PlasmaPistol::getClipSize()
+{
+    return clip;
+}
+
+float PlasmaPistol::getFireRate()
+{
+    return fireRate;
+}
+
+float PlasmaPistol::getReloadSpeed()
+{
+    return reloadSpeed;
 }
 
 PlasmaPistol::~PlasmaPistol()

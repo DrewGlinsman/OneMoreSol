@@ -7,7 +7,7 @@ using namespace std;
 
 MajorTom::MajorTom(TextureLoader* loadedTextures)
 {
-    setGun(1);
+    //setGun(1);
 
     majorTom.setTexture(loadedTextures->mtSpriteSheet);
     majorTom.setTextureRect(sf::IntRect(0,0,64,64));
@@ -244,7 +244,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
 
 void MajorTom::shoot(float timePassed)
 {
-    currentGun.shoot(timePassed);
+
 }
 
 int MajorTom::getHealth()
@@ -259,7 +259,7 @@ void MajorTom::setHealth(int newHealth)
 
 Gun MajorTom::getGun()
 {
-    return currentGun;
+    return *currentGun;
 }
 
 void MajorTom::setGun(int gunNumber)
@@ -267,28 +267,28 @@ void MajorTom::setGun(int gunNumber)
     switch(gunNumber)
     {
         case 1:
-            currentGun = *pistol;
+            *currentGun = *pistol;
             break;
         case 2:
-            currentGun = *shotgun;
+            *currentGun = *shotgun;
             break;
         case 3:
-            currentGun = *rifle;
+            *currentGun = *rifle;
             break;
         case 4:
-            currentGun = *minigun;
+            *currentGun = *minigun;
             break;
         case 5:
-            currentGun = *thrower;
+            *currentGun = *thrower;
             break;
         case 6:
-            currentGun = *sniper;
+            *currentGun = *sniper;
             break;
         case 7:
-            currentGun = *bigFunGun;
+            *currentGun = *bigFunGun;
             break;
         default:
-            currentGun = *pistol;
+            *currentGun = *pistol;
             break;
 
     }

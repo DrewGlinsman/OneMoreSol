@@ -192,7 +192,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                                     break;
                             }
                             */
-                            logic -> selectBullet(majorTom, delta);
+                            logic -> fireBullet(majorTom, delta);
                         }
                     }
 

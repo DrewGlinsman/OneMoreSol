@@ -31,23 +31,22 @@ float Bullet::getVelocity()
 
 void Bullet::setVelocity(float newVelocity)
 {
-    velocity = newVelocity;
+
 }
 
 float Bullet::getPositionX()
 {
-    return positionX;
+
 }
 
 float Bullet::getPositionY()
 {
-    return positionY;
+
 }
 
 float Bullet::setPosition(sf::Vector2f newPos)
 {
-    positionX = newPos.x;
-    positionY = newPos.y;
+
 }
 
 void Bullet::moveCurrentBullet(float timePassed)

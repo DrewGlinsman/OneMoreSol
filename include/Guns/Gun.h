@@ -6,20 +6,19 @@
 
 class Gun
 {
-public:
-    Gun();
-    virtual ~Gun();
+    public:
+        Gun();
+        virtual ~Gun();
 
-    virtual void shoot(float timePassed);
+        virtual int getBulletType();
+        virtual int getShotsFired();
+        virtual void shotsFiredPlusOne();
+        virtual void resetShotsFired();
+        virtual int getClipSize();
+        virtual float getFireRate();
+        virtual float getReloadSpeed();
 
-    int bulletType = 1;
-
-    unsigned int damage;
-    unsigned int clip;
-    float reloadSpeed;
-    std::string dmgMultiplier;
-    float fireRate;
-    sf::Image image;
+        sf::Image image;
 
 };
 

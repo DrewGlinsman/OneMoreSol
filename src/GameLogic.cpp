@@ -11,8 +11,7 @@ using namespace std;
 GameLogic::GameLogic()
 {
     loadedTextures = new TextureLoader();
-    sf::Clock spawnClock;
-    sf::Clock postDeathClock;
+
 
     if (!level1Music.loadFromFile("assets/Level_1_Cut.ogg")) // Loads and initializes all sounds based on impact
     std::cout << "Could not load Level 1 Music." << std::endl;
@@ -247,6 +246,55 @@ void GameLogic::updateBulletOrder()
         }
 }
 
+void GameLogic::fireBullet(MajorTom* majorTom, float timePassed)
+{
+    lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+    cout << lastBulletFired << endl;
+    cout << majorTom -> currentGun -> getFireRate() << endl;
+
+    if((lastBulletFired > majorTom -> currentGun -> getFireRate()) &&
+       (majorTom -> currentGun -> getShotsFired() != majorTom -> currentGun -> getClipSize()))
+    {
+           majorTom -> currentGun -> shotsFiredPlusOne();
+           selectBullet(majorTom, timePassed);
+           fireBulletClock.restart();
+    }
+    else if(majorTom -> currentGun -> getShotsFired() == majorTom -> currentGun -> getClipSize())
+    {
+        if (reloadCurrentGun(majorTom) == true)
+        {
+                majorTom -> currentGun -> shotsFiredPlusOne();
+                selectBullet(majorTom, timePassed);
+                fireBulletClock.restart();
+        }
+    }
+
+}
+
+bool GameLogic::reloadCurrentGun(MajorTom* majorTom)
+{
+    if(reloadStarted == false)
+    {
+        reloadClock.restart();
+        reloadTime = reloadClock.getElapsedTime().asSeconds();
+        reloadStarted = true;
+    }
+    if(reloadTime > majorTom -> currentGun -> getReloadSpeed() && reloadStarted == true)
+    {
+        majorTom -> currentGun -> resetShotsFired();
+        reloadClock.restart();
+        reloadStarted = false;
+        return true;
+
+    }
+    else
+    {
+        reloadTime = reloadClock.getElapsedTime().asSeconds();
+        cout << reloadTime << endl;
+        return false;
+    }
+}
+
 void GameLogic::moveBullet(float timePassed)
 {
     for (int i = 0; i < currentBullet.size(); i ++)
@@ -383,16 +431,21 @@ int GameLogic::decideBulletLane(MajorTom* majorTom)
 
 int GameLogic::decideBulletType(MajorTom* majorTom)
 {
-    if (majorTom->currentGun.bulletType == 1)
+    if (majorTom->currentGun -> getBulletType() == 1)
         return 1;
-    else if (majorTom->currentGun.bulletType == 2)
+    else if (majorTom->currentGun -> getBulletType() == 2)
         return 2;
-    else if (majorTom->currentGun.bulletType == 3)
+    else if (majorTom->currentGun -> getBulletType() == 3)
         return 3;
-    else if (majorTom->currentGun.bulletType == 4)
+    else if (majorTom->currentGun -> getBulletType() == 4)
         return 4;
-    else if (majorTom->currentGun.bulletType == 5)
+    else if (majorTom->currentGun -> getBulletType() == 5)
         return 5;
+    else if (majorTom->currentGun -> getBulletType() == 6)
+        return 6;
+    else if (majorTom->currentGun -> getBulletType() == 7)
+        return 7;
+
 }
 
 

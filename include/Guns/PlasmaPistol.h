@@ -3,19 +3,29 @@
 #define PLASMAPISTOL_H
 
 #include "Gun.h"
-#include "Bullet.h"
 
 class PlasmaPistol: public Gun
 {
     public:
         PlasmaPistol();
         virtual ~PlasmaPistol();
-        void shoot();
-        void reload();
+        int getBulletType();
+        int getShotsFired();
+        void shotsFiredPlusOne();
+        void resetShotsFired();
+        int getClipSize();
+        float getFireRate();
+        float getReloadSpeed();
+
 
     private:
-        Bullet bullet;
-
+        int shotsFired = 0;
+        int bulletType = 1;
+        float fireRate = 0.5;
+        int clip = 10;
+        int damage = 5;
+        int dmgMultiplier = 2;
+        float reloadSpeed = 1.5;
 };
 
 #endif

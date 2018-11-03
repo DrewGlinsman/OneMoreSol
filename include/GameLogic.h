@@ -42,7 +42,8 @@ class GameLogic{
         std::vector<shared_ptr<KoratEmpire>> dyingKorat{};
 
         sf::Clock spawnClock;
-//        sf::Clock postDeathClock;
+        sf::Clock fireBulletClock;
+        sf::Clock reloadClock;
 
         int survivorCount = 20;
         int survivorCountSaved = 20;
@@ -80,6 +81,11 @@ class GameLogic{
         float spawnTime;
         bool enemyBehindTom = false;
 
+        bool reloadStarted = false;
+        float reloadTime;
+
+        float lastBulletFired;
+
          sf::SoundBuffer level1Music;
          sf::SoundBuffer level2Music;
          sf::Sound backgroundMusic;
@@ -107,6 +113,8 @@ class GameLogic{
         void moveBullet(float timePassed);
         void drawBullet(sf::RenderWindow& window);
 
+        void fireBullet(MajorTom* majorTom, float timePassed);
+        bool reloadCurrentGun(MajorTom* majorTom);
         void selectBullet(MajorTom* majorTom, float timePassed);
         void spawnBullet(float timePassed);
         int decideBulletLane(MajorTom* majorTom);
