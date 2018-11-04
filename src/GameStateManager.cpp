@@ -4,19 +4,23 @@ GameStateManager::GameStateManager()
 : gameWindow(sf::VideoMode(1440, 900, 32), "One More Sol",sf::Style::Titlebar | sf::Style::Close)
 
 {
-    menuView = new GameViewMenu();
-    playView = new GameViewPlayer();
+
 }
 
 bool GameStateManager::gameViewIsOpen()
 {
+    bool quit;
     if (currentState == "Start")
     {
-        menuView -> gameViewIsOpen(gameWindow);
+        menuView = new GameViewMenu();
+        quit = menuView -> gameViewIsOpen(gameWindow);
+        return quit;
     }
     if (currentState == "Play")
     {
-        playView -> gameViewIsOpen(gameWindow);
+        playView = new GameViewPlayer();
+        quit = playView -> gameViewIsOpen(gameWindow);
+        return quit;
     }
 }
 

@@ -71,14 +71,14 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     majorTom = new MajorTom(loadedTextures);
 
     gameMusic.setBuffer(gameSound);
-    gameMusic.play();
-    gameMusic.setLoop(true);
-
 
 }
 
 bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 {
+    gameMusic.play();
+    gameMusic.setLoop(true);
+
     sf::Clock fireRate1;
     sf::Clock fireRate2;
 
@@ -129,6 +129,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
             {
                 if(Event.type == sf::Event::Closed)
                 {
+                    gameMusic.stop();
                     window.close(); // Quit game
                     return true;
                 }
@@ -137,6 +138,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                 {
                     if(Event.key.code == sf::Keyboard::Escape)
                     {
+                        gameMusic.stop();
                         window.close();
                         return true;
                     }
@@ -253,6 +255,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                 }
             }
     }
+
     return false;
 }
 

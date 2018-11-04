@@ -23,7 +23,6 @@ GameLogic::GameLogic()
     backgroundMusic.setVolume(50);
     backgroundMusic.play();
 
-
 }
 
 bool GameLogic::checkEnd()
