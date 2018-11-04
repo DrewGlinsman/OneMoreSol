@@ -21,8 +21,8 @@ class LaserRifle: public Gun
     private:
         int shotsFired = 0;
         int bulletType = 3;
-        float fireRate = 0.5;
-        int clip = 10;
+        float fireRate = 0.1;
+        int clip = 25;
         float reloadSpeed = 1.5;
 };
 

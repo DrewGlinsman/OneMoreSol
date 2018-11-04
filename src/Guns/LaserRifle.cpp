@@ -6,7 +6,7 @@ LaserRifle::LaserRifle() {
 }
 
 LaserRifle::~LaserRifle() {
-	// TODO Auto-generated destructor stub
+
 }
 
 int LaserRifle::getBulletType()

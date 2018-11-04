@@ -1,9 +1,11 @@
 
 #include "PlasmaPistol.h"
-#include "GameLogic.h"
 
-//instantiate all the basic values for a plasma pistol.
-PlasmaPistol::PlasmaPistol(){
+PlasmaPistol::PlasmaPistol() {
+
+}
+
+PlasmaPistol::~PlasmaPistol() {
 
 }
 
@@ -40,9 +42,4 @@ float PlasmaPistol::getFireRate()
 float PlasmaPistol::getReloadSpeed()
 {
     return reloadSpeed;
-}
-
-PlasmaPistol::~PlasmaPistol()
-{
-    //TODO implement destructor
 }
