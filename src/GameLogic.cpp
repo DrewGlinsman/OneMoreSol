@@ -356,6 +356,8 @@ void GameLogic::moveBullet(float timePassed)
             }
         }
     }
+    //on level 10 first boss checks for intersection with the boss, instead of using old collision
+    //plug in sfml collision with rects
     else if (currentLevel == 10)
     {
         for (int i = 0; i < currentBullet.size(); i ++)
