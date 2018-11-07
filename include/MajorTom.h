@@ -26,6 +26,13 @@ class MajorTom {
         int newHealth;
         int survivorCnt;
 
+    public:
+        sf::Sprite majorTom;
+
+        sf::Texture mtSpriteSheet;//this is a second load, loaded also on gameviewplayer. how to expand scope?
+
+        sf::Sprite mtStandPPistol;
+
         Gun* pistol = new PlasmaPistol();
         Gun* shotgun = new PlasmaShotgun();
         Gun* rifle = new LaserRifle();
@@ -34,14 +41,7 @@ class MajorTom {
         Gun* sniper = new GaussRifle();
         Gun* bigFunGun = new BFG();
 
-    public:
-        sf::Sprite majorTom;
-
-        sf::Texture mtSpriteSheet;//this is a second load, loaded also on gameviewplayer. how to expand scope?
-
-        sf::Sprite mtStandPPistol;
-
-        Gun currentGun;
+        int currentGun = 1;
 
         MajorTom(TextureLoader*);
 
@@ -60,7 +60,7 @@ class MajorTom {
 
         void shoot(float);
 
-        Gun getGun();
+        int getGun();
         void setGun(int);
 
         int getSurvivors();

@@ -8,7 +8,6 @@
 using namespace std;
 
 GameViewMenu::GameViewMenu() // Menu window constructor
-    : menuWindow(sf::VideoMode(1440, 900, 32), "One More Sol",sf::Style::Titlebar | sf::Style::Close)
 {
     if (!menuImage.loadFromFile("assets/menuScreen.png"))
         cout << "Could not load requested image." << endl;
@@ -36,11 +35,8 @@ GameViewMenu::GameViewMenu() // Menu window constructor
     //cout << "0,0" << endl;
 
     menuMusic.setBuffer(Menu_Music);
-
     menuMusic.play();
-
     menuMusic.setLoop(true);
-
     menuTransition.setBuffer(Menu_Transition);
 
     menuSelection.setBuffer(Menu_Selection);
@@ -69,18 +65,18 @@ GameViewMenu::GameViewMenu() // Menu window constructor
 
 }
 
-bool GameViewMenu::gameViewMenuIsOpen()
+bool GameViewMenu::gameViewIsOpen(sf::RenderWindow& window)
 {
-    updateMenu();
+    updateMenu(window);
     selector.setPosition(0,0);
     cout << "0,0" << endl;
-    while(menuWindow.isOpen()) // Menu loop
+    while(window.isOpen()) // Menu loop
 	{
-		while(menuWindow.pollEvent(Event))
+		while(window.pollEvent(Event))
 		{
 			if(Event.type == sf::Event::Closed)
 			{
-				menuWindow.close(); // Quit game
+				window.close(); // Quit game
 				return true;
 			}
 
@@ -91,21 +87,21 @@ bool GameViewMenu::gameViewMenuIsOpen()
 					if(sf::Vector2f (0,0) == selector.getPosition())
 					{
 						selector.setPosition(0,2);
-						selectButton(0,2);
+						selectButton(window,0,2);
 						menuTransition.play();
 						cout << "0,2" << endl;
 					}
 					else if(sf::Vector2f (0,1) == selector.getPosition())
 					{
 						selector.setPosition(0,0);
-						selectButton(0,0);
+						selectButton(window,0,0);
 						menuTransition.play();
 						cout << "0,0" << endl;
 					}
 					else if(sf::Vector2f (0,2) == selector.getPosition())
 					{
 						selector.setPosition(0,1);
-						selectButton(0,1);
+						selectButton(window,0,1);
 						menuTransition.play();
 						cout << "0,1" << endl;
 					}
@@ -116,21 +112,21 @@ bool GameViewMenu::gameViewMenuIsOpen()
 					if(sf::Vector2f (0,0) == selector.getPosition())
 					{
 						selector.setPosition(0,1);
-						selectButton(0,1);
+						selectButton(window,0,1);
 						menuTransition.play();
 						cout << "0,1" << endl;
 					}
 					else if(sf::Vector2f (0,1) == selector.getPosition())
 					{
 						selector.setPosition(0,2);
-						selectButton(0,2);
+						selectButton(window,0,2);
 						menuTransition.play();
 						cout << "0,2" << endl;
 					}
 					else if(sf::Vector2f (0,2) == selector.getPosition())
 					{
 						selector.setPosition(0,0);
-						selectButton(0,0);
+						selectButton(window,0,0);
 						menuTransition.play();
 						cout << "0,0" << endl;
 					}
@@ -142,48 +138,50 @@ bool GameViewMenu::gameViewMenuIsOpen()
 					{
 						menuSelection.play();
 						Sleep(900);
-						menuWindow.close();
+						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,1) == selector.getPosition())
 					{
 						menuSelection.play();
 						Sleep(900);
-						menuWindow.close();
+						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,2) == selector.getPosition())
 					{
 						menuSelection.play();
 						Sleep(900);
-						menuWindow.close();
+						window.close();
 						return true;
 					}
 				}
 			}
 		}
 	}
+	return false;
+
 }
 
-void GameViewMenu::updateMenu(void) // Updates screen
+void GameViewMenu::updateMenu(sf::RenderWindow& window) // Updates screen
 {
 
-    menuWindow.clear(sf::Color::Black);
+    window.clear(sf::Color::Black);
 
-    menuWindow.draw(background);
-    menuWindow.draw(playBtnRec);
-    menuWindow.draw(storyBtnRec);
-    menuWindow.draw(exitBtnRec);
+    window.draw(background);
+    window.draw(playBtnRec);
+    window.draw(storyBtnRec);
+    window.draw(exitBtnRec);
 
     // display
-    menuWindow.display();
+    window.display();
 }
 
 /*
 * Accepts the coordinates of the selection
 * and changes the shape textures to respond.
 */
-void GameViewMenu::selectButton(int x, int y)
+void GameViewMenu::selectButton(sf::RenderWindow& window, int x, int y)
 {
     if(y == 0)
     {
@@ -203,5 +201,5 @@ void GameViewMenu::selectButton(int x, int y)
         storyBtnRec.setTexture(&storyBtnImg);
         exitBtnRec.setTexture(&exitBtnHImg);
     }
-    updateMenu();//could this be more optimally placed?
+    updateMenu(window);//could this be more optimally placed?
 }

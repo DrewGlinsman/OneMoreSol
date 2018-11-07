@@ -2,15 +2,45 @@
 #include "LaserMinigun.h"
 
 LaserMinigun::LaserMinigun() {
-    bulletType = 2;
-    fireRate = 0.5;
-    clip = 10;
-    damage = 5;
-    dmgMultiplier = 2;
-    reloadSpeed = 1.5;
+
 }
 
 LaserMinigun::~LaserMinigun() {
-	// TODO Auto-generated destructor stub
+
+}
+
+int LaserMinigun::getBulletType()
+{
+    return bulletType;
+}
+
+int LaserMinigun::getShotsFired()
+{
+    return shotsFired;
+}
+
+void LaserMinigun::shotsFiredPlusOne()
+{
+    shotsFired++;
+}
+
+void LaserMinigun::resetShotsFired()
+{
+    shotsFired = 0;
+}
+
+int LaserMinigun::getClipSize()
+{
+    return clip;
+}
+
+float LaserMinigun::getFireRate()
+{
+    return fireRate;
+}
+
+float LaserMinigun::getReloadSpeed()
+{
+    return reloadSpeed;
 }
 

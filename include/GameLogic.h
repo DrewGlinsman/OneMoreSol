@@ -21,8 +21,11 @@
 #include "Bullet.h"
 #include "ArcBullet.h"
 #include "GaussBullet.h"
-#include "LaserBullet.h"
-#include "PlasmaBullet.h"
+#include "LaserRifleBullet.h"
+#include "LaserMinigunBullet.h"
+#include "PlasmaPistolBullet.h"
+#include "PlasmaShotgunBullet.h"
+#include "BFGBullet.h"
 #include "TextureLoader.h"
 
 #include "rngs.h"
@@ -39,7 +42,8 @@ class GameLogic{
         std::vector<shared_ptr<KoratEmpire>> dyingKorat{};
 
         sf::Clock spawnClock;
-//        sf::Clock postDeathClock;
+        sf::Clock fireBulletClock;
+        sf::Clock reloadClock;
 
         int survivorCount = 20;
         int survivorCountSaved = 20;
@@ -77,6 +81,11 @@ class GameLogic{
         float spawnTime;
         bool enemyBehindTom = false;
 
+        bool reloadStarted = false;
+        float reloadTime;
+
+        float lastBulletFired;
+
          sf::SoundBuffer level1Music;
          sf::SoundBuffer level2Music;
          sf::Sound backgroundMusic;
@@ -104,10 +113,12 @@ class GameLogic{
         void moveBullet(float timePassed);
         void drawBullet(sf::RenderWindow& window);
 
-        void selectBullet(MajorTom* majorTom, float timePassed);
+        void fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
+        bool reloadCurrentGun(MajorTom* majorTom, Gun* currentGun);
+        void selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
         void spawnBullet(float timePassed);
         int decideBulletLane(MajorTom* majorTom);
-        int decideBulletType(MajorTom* majorTom);
+        int decideBulletType(Gun* currentGun);
 
         //changes survivor count
         void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);

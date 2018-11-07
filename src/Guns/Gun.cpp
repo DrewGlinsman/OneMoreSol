@@ -11,7 +11,38 @@ Gun::~Gun()
     //dtor
 }
 
-void Gun::shoot(float timePassed)
+int Gun::getBulletType()
 {
 
 }
+
+int Gun::getShotsFired()
+{
+
+}
+
+void Gun::shotsFiredPlusOne()
+{
+
+}
+
+void Gun::resetShotsFired()
+{
+
+}
+
+int Gun::getClipSize()
+{
+
+}
+
+float Gun::getFireRate()
+{
+
+}
+
+float Gun::getReloadSpeed()
+{
+
+}
+

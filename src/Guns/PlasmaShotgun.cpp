@@ -2,15 +2,44 @@
 #include "PlasmaShotgun.h"
 
 PlasmaShotgun::PlasmaShotgun() {
-    bulletType = 1;
-    fireRate = 0.5;
-    clip = 10;
-    damage = 5;
-    dmgMultiplier = 2;
-    reloadSpeed = 1.5;
+
 }
 
 PlasmaShotgun::~PlasmaShotgun() {
-	// TODO Auto-generated destructor stub
+
 }
 
+int PlasmaShotgun::getBulletType()
+{
+    return bulletType;
+}
+
+int PlasmaShotgun::getShotsFired()
+{
+    return shotsFired;
+}
+
+void PlasmaShotgun::shotsFiredPlusOne()
+{
+    shotsFired++;
+}
+
+void PlasmaShotgun::resetShotsFired()
+{
+    shotsFired = 0;
+}
+
+int PlasmaShotgun::getClipSize()
+{
+    return clip;
+}
+
+float PlasmaShotgun::getFireRate()
+{
+    return fireRate;
+}
+
+float PlasmaShotgun::getReloadSpeed()
+{
+    return reloadSpeed;
+}

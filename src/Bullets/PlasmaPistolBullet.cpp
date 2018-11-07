@@ -1,8 +1,8 @@
 
-#include "PlasmaBullet.h"
+#include "PlasmaPistolBullet.h"
 #include <iostream>
 
-PlasmaBullet::PlasmaBullet(int startLane, TextureLoader* loadedTextures) {
+PlasmaPistolBullet::PlasmaPistolBullet(int startLane, TextureLoader* loadedTextures) {
     plasma.setTexture(loadedTextures->mtSpriteSheet);
     plasma.setTextureRect(sf::IntRect(256,64,32,32));
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
@@ -19,31 +19,31 @@ PlasmaBullet::PlasmaBullet(int startLane, TextureLoader* loadedTextures) {
     firePlasmaPistol.play();
 }
 
-PlasmaBullet::~PlasmaBullet() {
+PlasmaPistolBullet::~PlasmaPistolBullet() {
 	// TODO Auto-generated destructor stub
 }
 
-int PlasmaBullet::getDamage()
+int PlasmaPistolBullet::getDamage()
 {
     return damage;
 }
 
-int PlasmaBullet::getLane()
+int PlasmaPistolBullet::getLane()
 {
     return lane;
 }
 
-int PlasmaBullet::getHeight()
+int PlasmaPistolBullet::getHeight()
 {
     return height;
 }
 
-float PlasmaBullet::getPositionX()
+float PlasmaPistolBullet::getPositionX()
 {
     return plasma.getPosition().x;
 }
 
-void PlasmaBullet::setLane(int givenLane)
+void PlasmaPistolBullet::setLane(int givenLane)
 {
      switch(givenLane)
 	{
@@ -74,7 +74,7 @@ void PlasmaBullet::setLane(int givenLane)
 	}
 }
 
-void PlasmaBullet::moveCurrentBullet(float timePassed)
+void PlasmaPistolBullet::moveCurrentBullet(float timePassed)
 {
         if(plasma.getPosition().x < 1500)
         {
@@ -87,17 +87,17 @@ void PlasmaBullet::moveCurrentBullet(float timePassed)
         }
 }
 
-void PlasmaBullet::drawCurrentBullet(sf::RenderWindow& window)
+void PlasmaPistolBullet::drawCurrentBullet(sf::RenderWindow& window)
 {
     window.draw(plasma);
 }
 
-bool PlasmaBullet::getOutOfBounds()
+bool PlasmaPistolBullet::getOutOfBounds()
 {
     return outOfBounds;
 }
 
-sf::Sprite PlasmaBullet::getBullet()
+sf::Sprite PlasmaPistolBullet::getBullet()
 {
     return plasma;
 }

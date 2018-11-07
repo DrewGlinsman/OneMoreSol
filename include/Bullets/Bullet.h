@@ -28,15 +28,6 @@ class Bullet
 
     private:
         //damage
-        int damage;
-
-        //speed
-        float velocity;
-
-        //location
-        float positionX;
-        float positionY;
-        bool outOfBounds;
 
 
 };

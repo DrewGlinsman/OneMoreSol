@@ -2,15 +2,45 @@
 #include "BFG.h"
 
 BFG::BFG() {
-    bulletType = 5;
-    fireRate = 0.5;
-    clip = 10;
-    damage = 5;
-    dmgMultiplier = 2;
-    reloadSpeed = 1.5;
+
 }
 
 BFG::~BFG() {
-	// TODO Auto-generated destructor stub
+
+}
+
+int BFG::getBulletType()
+{
+    return bulletType;
+}
+
+int BFG::getShotsFired()
+{
+    return shotsFired;
+}
+
+void BFG::shotsFiredPlusOne()
+{
+    shotsFired++;
+}
+
+void BFG::resetShotsFired()
+{
+    shotsFired = 0;
+}
+
+int BFG::getClipSize()
+{
+    return clip;
+}
+
+float BFG::getFireRate()
+{
+    return fireRate;
+}
+
+float BFG::getReloadSpeed()
+{
+    return reloadSpeed;
 }
 

@@ -11,8 +11,7 @@ using namespace std;
 GameLogic::GameLogic()
 {
     loadedTextures = new TextureLoader();
-    sf::Clock spawnClock;
-    sf::Clock postDeathClock;
+
 
     if (!level1Music.loadFromFile("assets/Level_1_Cut.ogg")) // Loads and initializes all sounds based on impact
     std::cout << "Could not load Level 1 Music." << std::endl;
@@ -23,7 +22,6 @@ GameLogic::GameLogic()
     backgroundMusic.setBuffer(level1Music);
     backgroundMusic.setVolume(50);
     backgroundMusic.play();
-
 
 }
 
@@ -247,61 +245,165 @@ void GameLogic::updateBulletOrder()
         }
 }
 
+void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
+{
+    lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+    cout << lastBulletFired << endl;
+    cout <<currentGun -> getFireRate() << endl;
+
+    if((lastBulletFired > currentGun -> getFireRate()) &&
+       (currentGun -> getShotsFired() != currentGun -> getClipSize()))
+    {
+           currentGun -> shotsFiredPlusOne();
+           selectBullet(majorTom, currentGun, timePassed);
+           fireBulletClock.restart();
+    }
+    else if(currentGun -> getShotsFired() == currentGun -> getClipSize())
+    {
+        if (reloadCurrentGun(majorTom, currentGun) == true)
+        {
+                currentGun -> shotsFiredPlusOne();
+                selectBullet(majorTom, currentGun, timePassed);
+                fireBulletClock.restart();
+        }
+    }
+
+}
+
+bool GameLogic::reloadCurrentGun(MajorTom* majorTom, Gun* currentGun)
+{
+    if(reloadStarted == false)
+    {
+        reloadClock.restart();
+        reloadTime = reloadClock.getElapsedTime().asSeconds();
+        reloadStarted = true;
+    }
+    if(reloadTime > currentGun -> getReloadSpeed() && reloadStarted == true)
+    {
+        currentGun -> resetShotsFired();
+        reloadClock.restart();
+        reloadStarted = false;
+        return true;
+
+    }
+    else
+    {
+        reloadTime = reloadClock.getElapsedTime().asSeconds();
+        cout << reloadTime << endl;
+        return false;
+    }
+}
+
 void GameLogic::moveBullet(float timePassed)
 {
-    for (int i = 0; i < currentBullet.size(); i ++)
+    if(currentLevel != 10 && currentLevel != 20)
     {
-        for (int j = 0; j < currentBullet[i].size(); j++)
+        for (int i = 0; i < currentBullet.size(); i ++)
         {
-            if (currentKorat[i].size() != 0 && enemyBehindTom == false)
+            for (int j = 0; j < currentBullet[i].size(); j++)
             {
-                if (currentBullet[i][j] -> getHeight() > currentKorat[i][0] -> getPositionX())
+                if (currentKorat[i].size() != 0 && enemyBehindTom == false)
                 {
-                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
-                    enemyBehindTom = true;
-                }
-                else if(currentBullet[i][j] -> getPositionX() < currentKorat[i][0] -> getPositionX())
-                {
-                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
-                    enemyBehindTom = false;
-                }
-                else
-                {
-                    currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
-                    currentBullet[i].erase(currentBullet[i].begin() + j);
-                    enemyBehindTom = false;
+                    if (currentBullet[i][j] -> getHeight() > currentKorat[i][0] -> getPositionX())
+                    {
+                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        enemyBehindTom = true;
+                    }
+                    else if(currentBullet[i][j] -> getPositionX() < currentKorat[i][0] -> getPositionX())
+                    {
+                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        enemyBehindTom = false;
+                    }
+                    else
+                    {
+                        currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                        enemyBehindTom = false;
 
+                    }
                 }
-            }
-            else if (currentKorat[i].size() > 1 && enemyBehindTom == true)
-            {
-                 if (currentBullet[i][j] -> getHeight() > currentKorat[i][1] -> getPositionX())
+                else if (currentKorat[i].size() > 1 && enemyBehindTom == true)
                 {
-                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
-                    enemyBehindTom = true;
-                }
-                else if(currentBullet[i][j] -> getPositionX() < currentKorat[i][1] -> getPositionX())
-                {
-                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
-                    enemyBehindTom = false;
-                }
-                else
-                {
-                    currentKorat[i][1] -> wasShot(currentBullet[i][j] -> getDamage());
-                    currentBullet[i].erase(currentBullet[i].begin() + j);
-                    enemyBehindTom = false;
-                }
-            }
-            else
-            {
-                if (currentBullet[i][j] -> getOutOfBounds() == false)
-                {
-                    currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                     if (currentBullet[i][j] -> getHeight() > currentKorat[i][1] -> getPositionX())
+                    {
+                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        enemyBehindTom = true;
+                    }
+                    else if(currentBullet[i][j] -> getPositionX() < currentKorat[i][1] -> getPositionX())
+                    {
+                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        enemyBehindTom = false;
+                    }
+                    else
+                    {
+                        currentKorat[i][1] -> wasShot(currentBullet[i][j] -> getDamage());
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                        enemyBehindTom = false;
+                    }
                 }
                 else
                 {
+                    if (currentBullet[i][j] -> getOutOfBounds() == false)
+                    {
+                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                    }
+                    else
+                    {
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                        enemyBehindTom = false;
+                    }
+                }
+            }
+        }
+    }
+    //on level 10 first boss checks for intersection with the boss, instead of using old collision
+    //plug in sfml collision with rects
+    else if (currentLevel == 10)
+    {
+        for (int i = 0; i < currentBullet.size(); i ++)
+        {
+            for (int j = 0; j < currentBullet[i].size(); j++)
+            {
+                //if(currentBullet[i][j].getGlobalBounds().intersects(bikeBoss.getGlobalBounds()))
+                {
+                    //bikeBoss -> wasShot(currentBullet[i][j] -> getDamage());
                     currentBullet[i].erase(currentBullet[i].begin() + j);
-                    enemyBehindTom = false;
+                }
+//                else
+                {
+                    if (currentBullet[i][j] -> getOutOfBounds() == false)
+                    {
+                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                    }
+                    else
+                    {
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                    }
+                }
+            }
+        }
+    }
+    else if (currentLevel == 20)
+    {
+        for (int i = 0; i < currentBullet.size(); i ++)
+        {
+            for (int j = 0; j < currentBullet[i].size(); j++)
+            {
+                //if(currentBullet[i][j].getGlobalBounds().intersects(tankBoss.getGlobalBounds()))
+                {
+                    //tankBoss -> wasShot(currentBullet[i][j] -> getDamage());
+                    currentBullet[i].erase(currentBullet[i].begin() + j);
+                }
+//                else
+                {
+                    if (currentBullet[i][j] -> getOutOfBounds() == false)
+                    {
+                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                    }
+                    else
+                    {
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                    }
                 }
             }
         }
@@ -320,11 +422,11 @@ void GameLogic::drawBullet(sf::RenderWindow& window)
     }
 }
 
-void GameLogic::selectBullet(MajorTom* majorTom, float timePassed)
+void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
 {
     bulletSpawnLane = decideBulletLane(majorTom);
 
-    bulletSpawnType = decideBulletType(majorTom);
+    bulletSpawnType = decideBulletType(currentGun);
 
     spawnBullet(timePassed);
 }
@@ -336,21 +438,28 @@ void GameLogic::spawnBullet(float timePassed)
     switch(bulletSpawnType)
     {
         case 1:
-            newBullet = new PlasmaBullet(bulletSpawnLane, loadedTextures);
+            newBullet = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
             break;
         case 2:
-            newBullet = new LaserBullet(bulletSpawnLane, loadedTextures);
+            newBullet = new PlasmaShotgunBullet(bulletSpawnLane, loadedTextures);
             break;
         case 3:
-            newBullet = new ArcBullet(bulletSpawnLane, loadedTextures);
+            newBullet = new LaserRifleBullet(bulletSpawnLane, loadedTextures);
             break;
         case 4:
-            newBullet = new GaussBullet(bulletSpawnLane, loadedTextures);
+            newBullet = new LaserMinigunBullet(bulletSpawnLane, loadedTextures);
             break;
-        //case 5:
-            //newBullet = new BFGBullet(bulletSpawnLane);
+        case 5:
+            newBullet = new ArcBullet(bulletSpawnLane, loadedTextures);
+            break;
+        case 6:
+            newBullet = new GaussBullet (bulletSpawnLane, loadedTextures);
+            break;
+        case 7:
+            newBullet = new BFGBullet (bulletSpawnLane, loadedTextures);
+            break;
         default:
-            newBullet = new PlasmaBullet(bulletSpawnLane, loadedTextures);
+            newBullet = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
             cout << "Break Case Activated" << endl;
             break;
 
@@ -374,18 +483,23 @@ int GameLogic::decideBulletLane(MajorTom* majorTom)
         cout << "bullet shit is broken" << endl;
 }
 
-int GameLogic::decideBulletType(MajorTom* majorTom)
+int GameLogic::decideBulletType(Gun* currentGun)
 {
-    if (majorTom->currentGun.bulletType == 1)
+    if (currentGun -> getBulletType() == 1)
         return 1;
-    else if (majorTom->currentGun.bulletType == 2)
+    else if (currentGun -> getBulletType() == 2)
         return 2;
-    else if (majorTom->currentGun.bulletType == 3)
+    else if (currentGun -> getBulletType() == 3)
         return 3;
-    else if (majorTom->currentGun.bulletType == 4)
+    else if (currentGun -> getBulletType() == 4)
         return 4;
-    else if (majorTom->currentGun.bulletType == 5)
+    else if (currentGun -> getBulletType() == 5)
         return 5;
+    else if (currentGun -> getBulletType() == 6)
+        return 6;
+    else if (currentGun -> getBulletType() == 7)
+        return 7;
+
 }
 
 
@@ -525,7 +639,7 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
             currentKorat[i].clear();
         }
 
-    majorTom ->  setTomPositionX(156);
+    majorTom -> setTomPositionX(156);
 
     majorTom -> setTomPositionY(508);
 

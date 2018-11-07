@@ -134,3 +134,8 @@ int Elite::getSpeed()
 {
     return speed;
 }
+
+void Elite::shootWeapon()
+{
+	//Brute will shot weapon
+}

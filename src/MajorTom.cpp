@@ -244,7 +244,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
 
 void MajorTom::shoot(float timePassed)
 {
-    currentGun.shoot(timePassed);
+
 }
 
 int MajorTom::getHealth()
@@ -257,7 +257,7 @@ void MajorTom::setHealth(int newHealth)
     currentHealth = newHealth;
 }
 
-Gun MajorTom::getGun()
+int MajorTom::getGun()
 {
     return currentGun;
 }
@@ -267,32 +267,33 @@ void MajorTom::setGun(int gunNumber)
     switch(gunNumber)
     {
         case 1:
-            currentGun = *pistol;
+            currentGun = 1;
             break;
         case 2:
-            currentGun = *shotgun;
+            currentGun = 2;
             break;
         case 3:
-            currentGun = *rifle;
+            currentGun = 3;
             break;
         case 4:
-            currentGun = *minigun;
+            currentGun = 4;
             break;
         case 5:
-            currentGun = *thrower;
+            currentGun = 5;
             break;
         case 6:
-            currentGun = *sniper;
+            currentGun = 6;
             break;
         case 7:
-            currentGun = *bigFunGun;
+            currentGun = 7;
             break;
         default:
-            currentGun = *pistol;
+            currentGun = 1;
             break;
 
     }
 }
+
 
 int MajorTom::getSurvivors()
 {

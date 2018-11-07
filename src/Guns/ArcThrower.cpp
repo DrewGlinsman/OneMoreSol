@@ -2,15 +2,46 @@
 #include "ArcThrower.h"
 
 ArcThrower::ArcThrower(){
-    bulletType = 3;
-    fireRate = 0.5;
-    clip = 10;
-    damage = 5;
-    dmgMultiplier = 2;
-    reloadSpeed = 1.5;
+
 }
 
 ArcThrower::~ArcThrower() {
-	// TODO Auto-generated destructor stub
+
 }
+
+int ArcThrower::getBulletType()
+{
+    return bulletType;
+}
+
+int ArcThrower::getShotsFired()
+{
+    return shotsFired;
+}
+
+void ArcThrower::shotsFiredPlusOne()
+{
+    shotsFired++;
+}
+
+void ArcThrower::resetShotsFired()
+{
+    shotsFired = 0;
+}
+
+int ArcThrower::getClipSize()
+{
+    return clip;
+}
+
+float ArcThrower::getFireRate()
+{
+    return fireRate;
+}
+
+float ArcThrower::getReloadSpeed()
+{
+    return reloadSpeed;
+}
+
 

@@ -3,7 +3,6 @@
 using namespace std;
 
 GameViewPlayer::GameViewPlayer() // Player window constructor
-    : gameWindow(sf::VideoMode(1440, 900, 32), "One More Sol",sf::Style::Titlebar | sf::Style::Close)
 {
     if(!gameFont.loadFromFile("assets/impact.ttf"))
         std::cout << "Could not load requested font." << std::endl;
@@ -72,14 +71,14 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     majorTom = new MajorTom(loadedTextures);
 
     gameMusic.setBuffer(gameSound);
-    gameMusic.play();
-    gameMusic.setLoop(true);
-
 
 }
 
-bool GameViewPlayer::playerViewIsOpen()
+bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 {
+    gameMusic.play();
+    gameMusic.setLoop(true);
+
     sf::Clock fireRate1;
     sf::Clock fireRate2;
 
@@ -93,9 +92,9 @@ bool GameViewPlayer::playerViewIsOpen()
     bool keepMovingDown = false;
     bool lockOutKeyboard = false;
 
-    while(gameWindow.isOpen())
+    while(window.isOpen())
     {
-        updateGame();
+        updateGame(window);
 
         delta = gameClock.getElapsedTime().asSeconds();
         gameClock.restart();
@@ -126,11 +125,12 @@ bool GameViewPlayer::playerViewIsOpen()
         //cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
        //cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
 
-         while(gameWindow.pollEvent(Event))
+         while(window.pollEvent(Event))
             {
                 if(Event.type == sf::Event::Closed)
                 {
-                    gameWindow.close(); // Quit game
+                    gameMusic.stop();
+                    window.close(); // Quit game
                     return true;
                 }
 
@@ -138,7 +138,8 @@ bool GameViewPlayer::playerViewIsOpen()
                 {
                     if(Event.key.code == sf::Keyboard::Escape)
                     {
-                        gameWindow.close();
+                        gameMusic.stop();
+                        window.close();
                         return true;
                     }
 
@@ -170,30 +171,35 @@ bool GameViewPlayer::playerViewIsOpen()
                     {
                         if(lockOutKeyboard == false)
                         {
-                             /*
-                             switch(majorTom -> currentGun.bulletType)
+
+                             switch(majorTom -> getGun())
                             {
                                 case 1:
-                                    logic -> selectBullet(majorTom, delta);
-
+                                    logic -> fireBullet(majorTom, majorTom -> pistol, delta);
                                     break;
                                 case 2:
-
+                                    logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
                                     break;
                                 case 3:
-
+                                    logic -> fireBullet(majorTom, majorTom -> rifle, delta);
                                     break;
                                 case 4:
-
+                                    logic -> fireBullet(majorTom, majorTom -> minigun, delta);
                                     break;
                                 case 5:
-
+                                    logic -> fireBullet(majorTom, majorTom -> thrower, delta);
+                                    break;
+                                case 6:
+                                    logic -> fireBullet(majorTom, majorTom -> sniper, delta);
+                                    break;
+                                case 7:
+                                    logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
                                     break;
                                 default:
+                                    logic -> fireBullet(majorTom, majorTom -> pistol, delta);
                                     break;
                             }
-                            */
-                            logic -> selectBullet(majorTom, delta);
+
                         }
                     }
 
@@ -249,33 +255,34 @@ bool GameViewPlayer::playerViewIsOpen()
                 }
             }
     }
+
     return false;
 }
 
-void GameViewPlayer::updateGame(void) // Draws all elements of screen
+void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
 {
 
-    gameWindow.clear(sf::Color::Black);
+    window.clear(sf::Color::Black);
 
-    gameWindow.draw(sky);
-    gameWindow.draw(background);
-    majorTom->drawTom(gameWindow);
+    window.draw(sky);
+    window.draw(background);
+    majorTom -> drawTom(window);
 
-    logic -> drawKorat(gameWindow);
-    logic -> drawBullet(gameWindow);
+    logic -> drawKorat(window);
+    logic -> drawBullet(window);
+
+    window.draw(survivorCnt);
+    window.draw(weapon1);
+    window.draw(weapon2);
+    window.draw(weapon3);
+    window.draw(weapon4);
+    window.draw(weapon5);
+    window.draw(weapon6);
+    window.draw(weapon7);
 
     updateSurvivorCount();
 
-    gameWindow.draw(survivorCnt);
-    gameWindow.draw(weapon1);
-    gameWindow.draw(weapon2);
-    gameWindow.draw(weapon3);
-    gameWindow.draw(weapon4);
-    gameWindow.draw(weapon5);
-    gameWindow.draw(weapon6);
-    gameWindow.draw(weapon7);
-
-    gameWindow.display();
+    window.display();
 }
 
 void GameViewPlayer::updateSurvivorCount()
