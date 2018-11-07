@@ -66,11 +66,11 @@ class GameLogic{
         std::vector <int> enemyPool6 {1, 2, 3, 4, 5, 6};
         std::vector <int> enemyPool7 {1, 2, 3, 4, 5, 6, 7};
 
-        int lane1 = 335;
-        int lane2 = 422;
-        int lane3 = 508;
-        int lane4 = 594;
-        int lane5 = 680;
+        const int lane1 = 335;
+        const int lane2 = 422;
+        const int lane3 = 508;
+        const int lane4 = 594;
+        const int lane5 = 680;
 
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
