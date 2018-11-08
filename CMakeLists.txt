@@ -28,16 +28,31 @@ endif()
 
 # Set include directories
 include_directories(${csci437_SOURCE_DIR}/include)
+include_directories(${csci437_SOURCE_DIR}/include/Guns)
+include_directories(${csci437_SOURCE_DIR}/include/Korat)
+include_directories(${csci437_SOURCE_DIR}/include/Bullets)
+
+
 
 # Get CPP files
-file(GLOB SRC src/*cpp)
+
+#file(GLOB SRC src/*.cpp)
+#file(GLOB_RECURSE SRC src/*.cpp)
+
+#file(GLOB_RECURSE SRC ${csci437_SOURCE_DIR}/**/*.cpp)
+
+file(GLOB SRC "src/Bullets/*.cpp" "src/Korat/*.cpp" "src/Guns/*.cpp" "src/*.cpp")
+#file(GLOB SRC src/Guns/*cpp)
+#file(GLOB SRC src/Bullets*cpp)
+#file(GLOB SRC src/Korat/*cpp)
+#file(GLOB SRC src/*cpp)
 
 # Get executable files
-file(GLOB EXECLIST bin/*cpp)
+file(GLOB EXECLIST src/main.cpp)
 
-file(COPY ${csci437_SOURCE_DIR}/src/Korat DESTINATION ${csci437_SOURCE_DIR}/src)
-file(COPY ${csci437_SOURCE_DIR}/src/Guns DESTINATION ${csci437_SOURCE_DIR}/src)
-file(COPY ${csci437_SOURCE_DIR}/src/Bullets DESTINATION ${csci437_SOURCE_DIR}/src)
+#file(COPY ${csci437_SOURCE_DIR}/src/Korat DESTINATION ${csci437_SOURCE_DIR}/src)
+#file(COPY ${csci437_SOURCE_DIR}/src/Guns DESTINATION ${csci437_SOURCE_DIR}/src)
+#file(COPY ${csci437_SOURCE_DIR}/src/Bullets DESTINATION ${csci437_SOURCE_DIR}/src)
 
 
 #################################################
@@ -49,6 +64,20 @@ file(COPY ${csci437_SOURCE_DIR}/src/Bullets DESTINATION ${csci437_SOURCE_DIR}/sr
 #  include_directories(${Boost_INCLUDE_DIRS})   #
 #  link_libraries(${Boost_LIBRARIES})           #
 #################################################
+
+
+#find_package(Guns REQUIRED)                 
+#include_directories(${Guns_INCLUDE_DIRS})   
+#link_libraries(${Guns_LIBRARIES}) 
+
+#find_package(Guns REQUIRED)
+#include_directories(${csci437_SOURCE_DIR}/include/Guns)
+#link_directories(${csci437_SOURCE_DIR}/src/Guns)
+
+#include_directories(${csci437_SOURCE_DIR}/include/Bullets)
+#link_directories(${csci437_SOURCE_DIR}/src/Bullets)
+#include_directories(${csci437_SOURCE_DIR}/include/Korat)
+#link_directories(${csci437_SOURCE_DIR}/src/Korat)
 
 
 
@@ -124,4 +153,4 @@ foreach(EXEC ${EXECLIST})
   message("-- Adding executable: ${EXECNAME}")
 endforeach(EXEC)
 
-file(COPY ${csci437_SOURCE_DIR}/assets DESTINATION ${csci437_SOURCE_DIR}/Debug)
+file(COPY ${csci437_SOURCE_DIR}/assets DESTINATION .)
