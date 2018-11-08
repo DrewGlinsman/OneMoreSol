@@ -86,9 +86,11 @@ class GameLogic{
 
         float lastBulletFired;
 
-         sf::SoundBuffer level1Music;
-         sf::SoundBuffer level2Music;
-         sf::Sound backgroundMusic;
+        sf::SoundBuffer level1Music;
+        sf::SoundBuffer level2Music;
+        sf::Sound backgroundMusic;
+
+        bool lostGame;
 
     public:
         GameLogic();
@@ -128,6 +130,8 @@ class GameLogic{
         void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
 
         void updateDyingKorat();
+
+
 };
 
 

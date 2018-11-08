@@ -584,6 +584,8 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
             currentKorat[i].clear();
         }
 
+
+
     majorTom -> setTomPositionX(156);
 
     majorTom -> setTomPositionY(508);
