@@ -9,3 +9,8 @@ TankBoss::TankBoss(TextureLoader* loadedTextures)
 {
 
 }
+
+void TankBoss::drawBoss(sf::RenderWindow& window)
+{
+    window.draw(tankBoss);
+}

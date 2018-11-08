@@ -8,6 +8,8 @@
 #include <time.h>
 
 #include "MajorTom.h"
+#include "BikeBoss.h"
+#include "TankBoss.h"
 
 #include "KoratEmpire.h"
 #include "Grunt.h"
@@ -26,8 +28,8 @@
 #include "PlasmaPistolBullet.h"
 #include "PlasmaShotgunBullet.h"
 #include "BFGBullet.h"
-#include "TextureLoader.h"
 
+#include "TextureLoader.h"
 #include "rngs.h"
 
 using namespace std;
@@ -40,6 +42,9 @@ class GameLogic{
         std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
 
         std::vector<shared_ptr<KoratEmpire>> dyingKorat{};
+
+        BikeBoss* bikeBoss;
+        TankBoss* tankBoss;
 
         sf::Clock spawnClock;
         sf::Clock fireBulletClock;
@@ -128,6 +133,16 @@ class GameLogic{
         void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
 
         void updateDyingKorat();
+
+        void startBikeBoss();
+
+        void drawBikeBoss(sf::RenderWindow& window);
+
+        void startTankBoss();
+
+        void drawTankBoss(sf::RenderWindow& window);
+
+        int getLevel();
 };
 
 

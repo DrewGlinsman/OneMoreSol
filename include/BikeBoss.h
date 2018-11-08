@@ -17,6 +17,8 @@ class BikeBoss {
         sf::Texture mtSpriteSheet;//this is a second load, loaded also on gameviewplayer. how to expand scope?
 
         BikeBoss(TextureLoader*);
+
+        void drawBoss(sf::RenderWindow& window);
 };
 
 #endif

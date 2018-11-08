@@ -10,3 +10,7 @@ BikeBoss::BikeBoss(TextureLoader* loadedTextures)
 
 }
 
+void BikeBoss::drawBoss(sf::RenderWindow& window)
+{
+    window.draw(bikeBoss);
+}

@@ -543,11 +543,22 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
             // start text adventure
 
-            // transition to boss 1 if current level = 10
+            if(currentLevel == 10)
+            {
+                startBikeBoss();
+            }
 
-            // transition to boss 2 if current level = 20
+            if(currentLevel == 20)
+            {
+                startTankBoss();
+            }
+
         }
 	}
+	else if(currentLevel == 10 | currentLevel == 20)
+    {
+        gameSky.rotate(timePassed * levelSpeedModifier);
+    }
 	else
     {
         gameSky.rotate(timePassed * levelSpeedModifier);
@@ -653,4 +664,29 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     majorTom->setSurvivors(survivorCountSaved);
 
+}
+
+void GameLogic::startBikeBoss()
+{
+    bikeBoss = new BikeBoss(loadedTextures);
+}
+
+void GameLogic::drawBikeBoss(sf::RenderWindow& window)
+{
+    bikeBoss -> drawBoss(window);
+}
+
+void GameLogic::startTankBoss()
+{
+    tankBoss = new TankBoss(loadedTextures);
+}
+
+void GameLogic::drawTankBoss(sf::RenderWindow& window)
+{
+    tankBoss -> drawBoss(window);
+}
+
+int GameLogic::getLevel()
+{
+    return currentLevel;
 }
