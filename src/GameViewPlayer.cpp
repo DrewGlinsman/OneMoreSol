@@ -25,6 +25,8 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     background.setSize(sf::Vector2f(1440,724));
     background.setTexture(&(loadedTextures->textureArray[1]));
 
+    lossScreen.setTexture(&(loadedTextures->textureArray[11]));
+
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
     weapon3.setTextureRect(sf::IntRect(288,0,32,32));
@@ -362,13 +364,13 @@ void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
 {
     if(y == 0)
     {
-        //retryBtnRec.setTexture(&(loadedTextures->textureArray[12]));
-        //exitBtnRec.setTexture(&(loadedTextures->textureArray[15]));
+        retryBtnRec.setTexture(&(loadedTextures->textureArray[12]));
+        exitBtnRec.setTexture(&(loadedTextures->textureArray[15]));
     }
     else if(y == 1)
     {
-        //retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
-        //exitBtnRec.setTexture(&(loadedTextures->textureArray[14]));
+        retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
+        exitBtnRec.setTexture(&(loadedTextures->textureArray[14]));
     }
     updateGame(window);//could this be more optimally placed?
 }

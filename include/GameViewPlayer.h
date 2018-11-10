@@ -24,6 +24,7 @@ public:
     const int iconScale = 64;
 
     sf::RectangleShape background;
+    sf::RectangleShape lossScreen;
     sf::CircleShape sky;
 
     sf::Sprite weapon1;
