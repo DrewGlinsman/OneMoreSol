@@ -25,7 +25,7 @@ GameLogic::GameLogic()
 
     if(currentLevel == 10)
     {
-        startBikeBoss();
+        startBikeBoss(loadedTextures);
     }
 
 }
@@ -550,7 +550,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
             if(currentLevel == 10)
             {
-                startBikeBoss();
+                startBikeBoss(loadedTextures);
             }
 
             if(currentLevel == 20)
@@ -671,7 +671,7 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     if(currentLevel == 10)
     {
-        startBikeBoss(); // boss size 192
+        startBikeBoss(loadedTextures); // boss size 192
     }
 
     if(currentLevel == 20)
@@ -683,9 +683,9 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
 }
 
-void GameLogic::startBikeBoss()
+void GameLogic::startBikeBoss(TextureLoader* loadedTextures)
 {
-    bikeBoss = new BikeBoss();
+    bikeBoss = new BikeBoss(loadedTextures);
     currentKoratCount = 1;
 }
 

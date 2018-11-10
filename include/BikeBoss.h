@@ -10,11 +10,9 @@ using namespace std;
 class BikeBoss {
 
     public:
-        sf::RectangleShape bikeBoss;
+        sf::Sprite bikeBoss;
 
-        sf::Texture mtSpriteSheet;//this is a second load, loaded also on gameviewplayer. how to expand scope?
-
-        BikeBoss();
+        BikeBoss(TextureLoader* loadedTextures);
 
         float getBossPosition();
 

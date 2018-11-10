@@ -5,19 +5,19 @@ using namespace std;
 GameViewPlayer::GameViewPlayer() // Player window constructor
 {
     if(!gameFont.loadFromFile("assets/impact.ttf"))
-        cout << "Could not load requested font." << endl;
+        std::cout << "Could not load requested font." << std::endl;
 
     if (!gameSound.loadFromFile("assets/Gamex_Music.ogg"))
-        cout << "Could not load request music." << endl;
+        std::cout << "Could not load request music." << std::endl;
 
     if (!gameImage.loadFromFile("assets/playField.png"))
-        cout << "Could not load requested image." << endl;
+        std::cout << "Could not load requested image." << std::endl;
 
     if (!gameSky.loadFromFile("assets/skyBox.png"))
-        cout << "Failed to Load Skybox." << endl;
+        std::cout << "Failed to Load Skybox." << std::endl;
 
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
-        cout << "Failed to Load Lock Icon." << endl;
+        std::cout << "Failed to Load Lock Icon." << std::endl;
 
     loadedTextures = new TextureLoader();
 

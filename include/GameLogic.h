@@ -136,7 +136,7 @@ class GameLogic{
 
         void updateDyingKorat();
 
-        void startBikeBoss();
+        void startBikeBoss(TextureLoader*);
 
         void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
 

@@ -14,8 +14,6 @@ class TankBoss {
     public:
         sf::Sprite tankBoss;
 
-        sf::Texture mtSpriteSheet;//this is a second load, loaded also on gameviewplayer. how to expand scope?
-
         TankBoss(TextureLoader*);
 
         void drawBoss(sf::RenderWindow& window);
