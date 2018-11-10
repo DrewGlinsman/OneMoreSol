@@ -34,7 +34,7 @@ public:
     sf::Sprite weapon6;
     sf::Sprite weapon7;
 
-    sf::Vector2 selector;
+    sf::Vector2f selector;
     sf::RectangleShape retryBtnRec;
     sf::RectangleShape exitBtnRec;
     sf::Texture retryBtnImg;
