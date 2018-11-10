@@ -180,7 +180,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
                              switch(majorTom -> getGun())
                             {
-                                case 1:
+                                case 1: //getting this ready
                                     logic -> fireBullet(majorTom, majorTom -> pistol, delta);
                                     break;
                                 case 2:
