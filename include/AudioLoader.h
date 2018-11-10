@@ -1,13 +1,14 @@
 #ifndef AUDIOLOADER_H
 #define AUDIOLOADER_H
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 class AudioLoader
 {
 private:
 
 public:
     AudioLoader();
-    sf::Texture mtSpriteSheet;
+    void load();
+    std::array<sf::SoundBuffer, 20> soundTrack;
 };
 #endif

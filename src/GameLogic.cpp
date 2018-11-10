@@ -11,6 +11,7 @@ using namespace std;
 GameLogic::GameLogic()
 {
     loadedTextures = new TextureLoader();
+    loadedAudio = new AudioLoader();
 
 
     if (!level1Music.loadFromFile("assets/Level_1_Cut.ogg")) // Loads and initializes all sounds based on impact
@@ -19,7 +20,7 @@ GameLogic::GameLogic()
     if (!level2Music.loadFromFile("assets/Level_2_Cut.ogg")) // Loads and initializes all sounds based on impact
     std::cout << "Could not load Level 2 Music." << std::endl;
 
-    backgroundMusic.setBuffer(level1Music);
+    backgroundMusic.setBuffer(loadedAudio->soundTrack[1]);
     backgroundMusic.setVolume(50);
     backgroundMusic.play();
 
