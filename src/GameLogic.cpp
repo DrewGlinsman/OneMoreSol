@@ -23,6 +23,11 @@ GameLogic::GameLogic()
     backgroundMusic.setVolume(50);
     backgroundMusic.play();
 
+    if(currentLevel == 10)
+    {
+        startBikeBoss();
+    }
+
 }
 
 bool GameLogic::checkEnd()
@@ -662,13 +667,24 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     selectMusic();
 
+    if(currentLevel == 10)
+    {
+        startBikeBoss(); // boss size 192
+    }
+
+    if(currentLevel == 20)
+    {
+        startTankBoss();
+    }
+
     majorTom->setSurvivors(survivorCountSaved);
 
 }
 
 void GameLogic::startBikeBoss()
 {
-    bikeBoss = new BikeBoss(loadedTextures);
+    bikeBoss = new BikeBoss();
+    currentKoratCount = 1;
 }
 
 void GameLogic::drawBikeBoss(sf::RenderWindow& window)
@@ -676,14 +692,85 @@ void GameLogic::drawBikeBoss(sf::RenderWindow& window)
     bikeBoss -> drawBoss(window);
 }
 
+void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
+{
+    if (bikeBoss -> checkSurvive() == false)
+    {
+        if (bikeBoss -> checkDeath() == false)
+        {
+            if (movingUp == false && movingDown == false)
+            {
+                double directMove = Random() * 5;
+                cout << directMove << endl;
+
+                if (directMove < 3)
+                {
+                    bikeBoss -> moveBoss(timePassed);
+                    cout << "less than 3" << endl;
+
+                }
+                else if (directMove >= 3 && directMove < 4)
+                {
+                    bikeBoss -> initBossUp();
+                    bikeBoss -> moveBossUp(timePassed);
+                    bikeBoss -> moveBoss(timePassed);
+                    movingUp = true;
+                    movingDown = false;
+                }
+                else if (directMove >= 4)
+                {
+                    bikeBoss -> initBossDown();
+                    bikeBoss -> moveBossDown(timePassed);
+                    bikeBoss -> moveBoss(timePassed);
+                    movingUp = false;
+                    movingDown = true;
+                }
+            }
+            else if(movingUp == true)
+            {
+                if (bikeBoss -> moveBossUp(timePassed) == true)
+                {
+                    movingUp = false;
+                    movingDown = false;
+                }
+                bikeBoss -> moveBoss(timePassed);
+            }
+            else if(movingDown == true)
+            {
+                if (bikeBoss -> moveBossDown(timePassed) == true)
+                {
+                    movingUp = false;
+                    movingDown = false;
+                }
+                bikeBoss -> moveBoss(timePassed);
+            }
+        }
+        else
+        {
+            currentKoratCount--;
+        }
+    }
+    else
+    {
+        loseLevel(gameSky, majorTom);
+    }
+}
+
+
 void GameLogic::startTankBoss()
 {
     tankBoss = new TankBoss(loadedTextures);
+    currentKoratCount = 1;
 }
 
 void GameLogic::drawTankBoss(sf::RenderWindow& window)
 {
     tankBoss -> drawBoss(window);
+}
+
+void GameLogic::moveTankBoss()
+{
+
 }
 
 int GameLogic::getLevel()

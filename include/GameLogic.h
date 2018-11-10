@@ -55,7 +55,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 3;
+        int currentLevel = 10;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -94,6 +94,9 @@ class GameLogic{
          sf::SoundBuffer level1Music;
          sf::SoundBuffer level2Music;
          sf::Sound backgroundMusic;
+
+        bool movingUp = false;
+        bool movingDown = false;
 
     public:
         GameLogic();
@@ -136,9 +139,13 @@ class GameLogic{
 
         void startBikeBoss();
 
+        void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
+
         void drawBikeBoss(sf::RenderWindow& window);
 
         void startTankBoss();
+
+        void moveTankBoss();
 
         void drawTankBoss(sf::RenderWindow& window);
 

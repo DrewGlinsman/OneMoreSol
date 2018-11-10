@@ -242,11 +242,6 @@ bool MajorTom::keepMoving(float timePassed, string direction)
         }
 }
 
-void MajorTom::shoot(float timePassed)
-{
-
-}
-
 int MajorTom::getHealth()
 {
     return currentHealth;
@@ -293,7 +288,6 @@ void MajorTom::setGun(int gunNumber)
 
     }
 }
-
 
 int MajorTom::getSurvivors()
 {

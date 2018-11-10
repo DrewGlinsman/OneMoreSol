@@ -106,6 +106,16 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         logic -> updateBulletOrder();
         logic -> updateDyingKorat();
         logic -> moveKorat(delta, majorTom);
+
+        if (logic -> getLevel() == 10)
+        {
+            logic -> moveBikeBoss(sky, majorTom, delta);
+        }
+        if (logic -> getLevel() == 20)
+        {
+            //logic -> moveTankBoss(delta);
+        }
+
         logic -> moveBullet(delta);
 
 //-----------------------------------------------------------------
@@ -270,6 +280,15 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
     logic -> drawKorat(window);
     logic -> drawBullet(window);
+
+    if (logic -> getLevel() == 10)
+    {
+        logic -> drawBikeBoss(window);
+    }
+    if (logic -> getLevel() == 20)
+    {
+        logic -> drawTankBoss(window);
+    }
 
     window.draw(survivorCnt);
     window.draw(weapon1);
