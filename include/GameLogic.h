@@ -30,6 +30,7 @@
 #include "BFGBullet.h"
 
 #include "TextureLoader.h"
+#include "AudioLoader.h"
 #include "rngs.h"
 
 using namespace std;
@@ -102,6 +103,7 @@ class GameLogic{
         GameLogic();
 
         TextureLoader* loadedTextures;
+        AudioLoader* loadedAudio;
 
         //needs survivor count
         void moveKorat(float timePassed, MajorTom* majorTom);
@@ -136,7 +138,7 @@ class GameLogic{
 
         void updateDyingKorat();
 
-        void startBikeBoss();
+        void startBikeBoss(TextureLoader*);
 
         void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
 

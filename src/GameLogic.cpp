@@ -11,21 +11,15 @@ using namespace std;
 GameLogic::GameLogic()
 {
     loadedTextures = new TextureLoader();
+    loadedAudio = new AudioLoader();
 
-
-    if (!level1Music.loadFromFile("assets/Level_1_Cut.ogg")) // Loads and initializes all sounds based on impact
-    std::cout << "Could not load Level 1 Music." << std::endl;
-
-    if (!level2Music.loadFromFile("assets/Level_2_Cut.ogg")) // Loads and initializes all sounds based on impact
-    std::cout << "Could not load Level 2 Music." << std::endl;
-
-    backgroundMusic.setBuffer(level1Music);
+    backgroundMusic.setBuffer(loadedAudio->soundTrack[1]);
     backgroundMusic.setVolume(50);
     backgroundMusic.play();
 
     if(currentLevel == 10)
     {
-        startBikeBoss();
+        startBikeBoss(loadedTextures);
     }
 
 }
@@ -550,7 +544,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
             if(currentLevel == 10)
             {
-                startBikeBoss();
+                startBikeBoss(loadedTextures);
             }
 
             if(currentLevel == 20)
@@ -671,7 +665,7 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     if(currentLevel == 10)
     {
-        startBikeBoss(); // boss size 192
+        startBikeBoss(loadedTextures); // boss size 192
     }
 
     if(currentLevel == 20)
@@ -683,9 +677,9 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
 }
 
-void GameLogic::startBikeBoss()
+void GameLogic::startBikeBoss(TextureLoader* loadedTextures)
 {
-    bikeBoss = new BikeBoss();
+    bikeBoss = new BikeBoss(loadedTextures);
     currentKoratCount = 1;
 }
 

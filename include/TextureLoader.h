@@ -9,5 +9,6 @@ private:
 public:
     TextureLoader();
     sf::Texture mtSpriteSheet;
+    void load();
 };
 #endif
