@@ -3,7 +3,7 @@
 #include <iostream>
 
 ArcBullet::ArcBullet(int startLane, TextureLoader* loadedTextures) {
-    arc.setTexture(loadedTextures->mtSpriteSheet);
+    arc.setTexture(loadedTextures->textureArray[0]);
     arc.setTextureRect(sf::IntRect(256,256,192,192));
 	arc.setOrigin(sf::Vector2f(96.f,96.f));
 	setLane(startLane);

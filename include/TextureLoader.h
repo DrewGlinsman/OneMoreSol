@@ -8,7 +8,6 @@ private:
 
 public:
     TextureLoader();
-    sf::Texture mtSpriteSheet;
     void load();
     std::array<sf::Texture, 16> textureArray;
 };

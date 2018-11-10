@@ -5,7 +5,7 @@
 Jackal::Jackal(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
-	jackal.setTexture(loadedTextures->mtSpriteSheet);
+	jackal.setTexture(loadedTextures->textureArray[0]);
 	jackal.setTextureRect(sf::IntRect(0,576,64,64));
 	jackal.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);

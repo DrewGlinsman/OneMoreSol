@@ -5,7 +5,7 @@
 Biker::Biker(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
-	biker.setTexture(loadedTextures->mtSpriteSheet);
+	biker.setTexture(loadedTextures->textureArray[0]);
 	biker.setTextureRect(sf::IntRect(0,768,64,64));
 	biker.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);

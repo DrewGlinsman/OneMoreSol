@@ -5,7 +5,7 @@
 Hunter::Hunter(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
-	hunter.setTexture(loadedTextures->mtSpriteSheet);
+	hunter.setTexture(loadedTextures->textureArray[0]);
 	hunter.setTextureRect(sf::IntRect(0,640,64,64));
 	hunter.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);

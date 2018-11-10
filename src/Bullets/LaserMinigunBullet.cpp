@@ -3,7 +3,7 @@
 #include <iostream>
 
 LaserMinigunBullet::LaserMinigunBullet(int startLane, TextureLoader* loadedTextures) {
-    laser.setTexture(loadedTextures->mtSpriteSheet);
+    laser.setTexture(loadedTextures->textureArray[0]);
     laser.setTextureRect(sf::IntRect(256,96,32,32));
 	laser.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);

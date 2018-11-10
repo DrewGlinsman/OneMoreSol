@@ -6,7 +6,7 @@ Bomber::Bomber(int startLane, TextureLoader* loadedTextures){
 
     lane = 0;
 
-	bomber.setTexture(loadedTextures->mtSpriteSheet);
+	bomber.setTexture(loadedTextures->textureArray[0]);
 	bomber.setTextureRect(sf::IntRect(0,704,64,64));
 	bomber.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);

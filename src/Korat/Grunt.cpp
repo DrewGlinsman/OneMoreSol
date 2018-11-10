@@ -5,7 +5,7 @@
 Grunt::Grunt(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
-	grunt.setTexture(loadedTextures->mtSpriteSheet);
+	grunt.setTexture(loadedTextures->textureArray[0]);
 	grunt.setTextureRect(sf::IntRect(0,448,64,64));
 	grunt.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);

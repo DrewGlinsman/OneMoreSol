@@ -1,15 +1,25 @@
 #include "TextureLoader.h"
 #include <iostream>
 
+/** \brief Constructor for TextureLoader calls load() function.
+ *
+ * \param accepts no parameters
+ * \return returns nothing
+ *
+ */
 TextureLoader::TextureLoader()//shouldn't do the loading as can't allow failure
 {
     load();
 }
 
+/** \brief Loads the game textures into an array of textures.
+ *
+ * \param accepts no parameters
+ * \return returns nothing
+ *
+ */
 void TextureLoader::load()
 {
-    if (!mtSpriteSheet.loadFromFile("assets/mtSpriteSheet.png"))
-        std::cout << "Failed to Load mtSpriteSheet." << std::endl;
     if (!textureArray[0].loadFromFile("assets/mtSpriteSheet.png"))
         std::cout << "Failed to Load mtSpriteSheet." << std::endl;
 
@@ -58,8 +68,7 @@ void TextureLoader::load()
     if (!textureArray[15].loadFromFile("assets/endButtonH.png"))
         std::cout << "Failed to Load endButtonH." << std::endl;
 
-    mtSpriteSheet.setSmooth(true);
-
+    //goes through the textureArray and "anti-alias"es them.
     for(int i = 0; i < textureArray.size(); ++i)
     {
         textureArray[i].setSmooth(true);

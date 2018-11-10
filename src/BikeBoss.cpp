@@ -7,7 +7,7 @@ using namespace std;
 
 BikeBoss::BikeBoss(TextureLoader* loadedTextures)
 {
-	bikeBoss.setTexture(loadedTextures->mtSpriteSheet);
+	bikeBoss.setTexture(loadedTextures->textureArray[0]);
     bikeBoss.setTextureRect(sf::IntRect(832,256,192,192));
     bikeBoss.setOrigin(sf::Vector2f(96.f,96.f));
     bikeBoss.setScale(1.2f,1.2f);

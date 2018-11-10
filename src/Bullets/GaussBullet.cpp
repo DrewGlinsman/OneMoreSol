@@ -3,7 +3,7 @@
 #include <iostream>
 
 GaussBullet::GaussBullet(int startLane, TextureLoader* loadedTextures) {
-    gauss.setTexture(loadedTextures->mtSpriteSheet);
+    gauss.setTexture(loadedTextures->textureArray[0]);
     gauss.setTextureRect(sf::IntRect(320,128,1000,32));
 	gauss.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
