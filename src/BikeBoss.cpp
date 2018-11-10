@@ -5,10 +5,12 @@
 
 using namespace std;
 
-BikeBoss::BikeBoss()
+BikeBoss::BikeBoss(TextureLoader* loadedTextures)
 {
-	bikeBoss.setSize(sf::Vector2f(192.f,192.f));
-	bikeBoss.setOrigin(bikeBoss.getSize().x /2, bikeBoss.getSize().y /2);
+	bikeBoss.setTexture(loadedTextures->mtSpriteSheet);
+    bikeBoss.setTextureRect(sf::IntRect(832,256,192,192));
+    bikeBoss.setOrigin(sf::Vector2f(96.f,96.f));
+    bikeBoss.setScale(1.2f,1.2f);
 	bikeBoss.setPosition(1500, lane3);
 }
 
