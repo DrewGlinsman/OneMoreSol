@@ -281,6 +281,12 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     logic -> drawKorat(window);
     logic -> drawBullet(window);
 
+    if (logic -> CheckEnd())
+    {
+        drawLossScreen();
+        //draw retry screen
+    }
+
     if (logic -> getLevel() == 10)
     {
         logic -> drawBikeBoss(window);
@@ -303,6 +309,77 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
     window.display();
 }
+
+void GameViewPlayer::drawLossScreen(sf:RenderWindow &window)
+{
+        //window.draw(lossScreen) #need a loss screen to implement
+        bool retry = false;
+        while(window.isOpen() && !retry)
+        {
+            while(window.pollEvent())
+            {
+                if(Event.type == sf::Event::Closed)
+                {
+                    gameMusic.stop();
+                    window.close(); // Quit game
+                    return true;
+                }
+
+                if(Event.type == sf::Event::KeyPressed)
+                {
+                    if(Event.key.code == sf::Keyboard::Escape)
+                    {
+                        gameMusic.stop();
+                        window.close();
+                        return true;
+                    }
+
+                   if(Event.key.code == sf::Keyboard::Up || Event.key.code == sf::Keyboard::Down)
+                   {
+                       if (selector.y == 1)
+                       {
+                           selector.y = 0;
+                           //selectButton(window, 0, 0);
+
+                       }
+                       else
+                       {
+                           selector.y = 1;
+                           //selectButton(window, 0, 1);
+                       }
+                   }
+
+                   if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+                    {
+                        if (selector.y == 0)
+                        {
+                            retry = true;
+                        }
+                        else if (selector.y == 1)
+                        {
+                            gameMusic.stop();
+                            window.close();
+                        }
+                    }
+            }
+        }
+}
+
+void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
+{
+    if(y == 0)
+    {
+        //retryBtnRec.setTexture(&playBtnHImg);
+        //exitBtnRec.setTexture(&exitBtnImg);
+    }
+    else if(y == 1)
+    {
+        //retryBtnRec.setTexture(&playBtnImg);
+        //exitBtnRec.setTexture(&exitBtnImg);
+    }
+    updateMenu(window);//could this be more optimally placed?
+}
+
 
 void GameViewPlayer::updateSurvivorCount()
 {

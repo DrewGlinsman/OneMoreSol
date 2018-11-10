@@ -661,6 +661,8 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     currentKoratCount = 0;
 
+
+
     gameSky.rotate(-rotation); //rotate the sun back to the beginning
 
     std::cout << "Current Level = " << currentLevel << std::endl;

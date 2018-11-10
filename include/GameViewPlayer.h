@@ -34,6 +34,14 @@ public:
     sf::Sprite weapon6;
     sf::Sprite weapon7;
 
+    sf::Vector2 selector;
+    sf::RectangleShape retryBtnRec;
+    sf::RectangleShape exitBtnRec;
+    sf::Texture retryBtnImg;
+    sf::Texture retryBtnHImg;
+    sf::Texture exitBtnImg;
+    sf::Texture exitBtnHImg;
+
     sf::Texture gameImage;
     sf::Texture playerImage;
     sf::Texture gameSky;
@@ -50,6 +58,8 @@ public:
     sf::Text survivorCnt;
     sf::Event Event;
 
+    bool lost;
+
     GameLogic* logic;
 
     MajorTom* majorTom;
@@ -61,6 +71,8 @@ public:
     bool gameViewIsOpen(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();
+    void drawLossScreen(sf::RenderWindow &window);
+    void selectButton(sf::RenderWindow &window, int y);
 
 
 };
