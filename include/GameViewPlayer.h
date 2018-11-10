@@ -37,14 +37,9 @@ public:
     sf::Vector2f selector;
     sf::RectangleShape retryBtnRec;
     sf::RectangleShape exitBtnRec;
-    sf::Texture retryBtnImg;
-    sf::Texture retryBtnHImg;
-    sf::Texture exitBtnImg;
-    sf::Texture exitBtnHImg;
 
     sf::Texture gameImage;
     sf::Texture playerImage;
-    sf::Texture gameSky;
     sf::Texture lockIcon;
 
     int lane1 = 335;
