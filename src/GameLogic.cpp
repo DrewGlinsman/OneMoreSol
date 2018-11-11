@@ -21,6 +21,10 @@ GameLogic::GameLogic()
     {
         startBikeBoss(loadedTextures);
     }
+    if(currentLevel == 20)
+    {
+        startTankBoss(loadedTextures);
+    }
 
 }
 
@@ -405,25 +409,39 @@ void GameLogic::moveBullet(float timePassed)
     }
     else if (currentLevel == 20)
     {
-        for (int i = 0; i < currentBullet.size(); i ++)
+        for (int i = 0; i < currentBullet.size(); i++)
         {
             for (int j = 0; j < currentBullet[i].size(); j++)
             {
-                //if(currentBullet[i][j].getGlobalBounds().intersects(tankBoss.getGlobalBounds()))
+                for (int z = 0; z < currentTankBoss.size(); z++)
                 {
-                    //tankBoss -> wasShot(currentBullet[i][j] -> getDamage());
-                    currentBullet[i].erase(currentBullet[i].begin() + j);
-                }
-//                else
-                {
-                    if (currentBullet[i][j] -> getOutOfBounds() == false)
+                    if(currentBullet[i][j] -> getBullet().getGlobalBounds().intersects(currentTankBoss[z] -> getBoss().getGlobalBounds()))
                     {
-                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        currentTankBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
                     }
                     else
                     {
-                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                        if (currentBullet[i][j] -> getOutOfBounds() == false)
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
+                        else
+                        {
+                            currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
                     }
+                }
+                if(currentTankBoss.size() == 0)
+                {
+                    if (currentBullet[i][j] -> getOutOfBounds() == false)
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
+                        else
+                        {
+                            currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
                 }
             }
         }
@@ -570,7 +588,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
             if(currentLevel == 20)
             {
-                startTankBoss();
+                startTankBoss(loadedTextures);
             }
 
         }
@@ -619,7 +637,7 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     if(currentLevel == 20)
     {
-        startTankBoss();
+        startTankBoss(loadedTextures);
     }
 
     majorTom->setSurvivors(survivorCountSaved);
@@ -678,6 +696,9 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                 {
                         dyingBikeBoss.emplace_back(move(currentBikeBoss[i]));
                         currentBikeBoss.erase(currentBikeBoss.begin() + i);
+                        movingUp = false;
+                        movingDown = false;
+                        directMove = 1;
                 }
                 else if (movingUp == false && movingDown == false)
                 {
@@ -735,20 +756,69 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
 }
 
 
-void GameLogic::startTankBoss()
+void GameLogic::startTankBoss(TextureLoader* loadedTextures)
 {
-//    tankBoss = new TankBoss(loadedTextures);
+    TankBoss* tankBoss = new TankBoss(loadedTextures);
+    currentTankBoss.emplace_back(tankBoss);
     currentKoratCount = 1;
 }
 
 void GameLogic::drawTankBoss(sf::RenderWindow& window)
 {
- //   tankBoss -> drawBoss(window);
+     for(int i = 0; i < currentTankBoss.size(); i++)
+    {
+        currentTankBoss[i] -> drawBoss(window);
+    }
+    for(int j = 0; j < dyingTankBoss.size(); j++)
+    {
+        dyingTankBoss[j] -> drawBoss(window);
+    }
 }
 
-void GameLogic::moveTankBoss()
+void GameLogic::updateDyingTankBoss()
 {
+    for (int i = 0; i < dyingTankBoss.size(); i++)
+    {
+        if (dyingTankBoss[i] -> checkDeath() == true)
+        {
+            dyingTankBoss.erase(dyingTankBoss.begin() + i);
+            currentKoratCount--;
 
+        }
+    }
+}
+
+void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
+{
+    for(int i = 0; i < currentTankBoss.size(); i++)
+    {
+        if (currentTankBoss[i] -> checkSurvive() == false)
+        {
+            if (currentTankBoss[i] -> checkDeath() == false)
+            {
+                if (currentTankBoss[i] -> getSpeed() == 0)
+                {
+                        dyingTankBoss.emplace_back(move(currentTankBoss[i]));
+                        currentTankBoss.erase(currentTankBoss.begin() + i);
+
+                }
+                else
+                {
+                    currentTankBoss[i] -> moveBoss(timePassed);
+                }
+            }
+            else
+            {
+                // nothing happens will never trigger
+            }
+        }
+        else
+        {
+            currentBikeBoss.erase(currentBikeBoss.begin() + i);
+            currentKoratCount--;
+            loseLevel(gameSky, majorTom);
+        }
+    }
 }
 
 int GameLogic::getLevel()

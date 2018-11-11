@@ -42,7 +42,6 @@ class BikeBoss {
 
 
     private:
-        int lane;
         int speed = 40;
         int health = 500;
         bool survive = false;

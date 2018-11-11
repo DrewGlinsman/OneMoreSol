@@ -7,9 +7,6 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if(!gameFont.loadFromFile("assets/impact.ttf"))
         std::cout << "Could not load requested font." << std::endl;
 
-    if (!gameSound.loadFromFile("assets/Gamex_Music.ogg"))
-        std::cout << "Could not load request music." << std::endl;
-
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
 
@@ -66,8 +63,6 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     logic = new GameLogic();
     majorTom = new MajorTom(loadedTextures);
 
-    gameMusic.setBuffer(gameSound);
-
 }
 
 bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
@@ -110,7 +105,8 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         }
         if (logic -> getLevel() == 20)
         {
-            //logic -> moveTankBoss(delta);
+            logic -> moveTankBoss(sky, majorTom, delta);
+            logic -> updateDyingTankBoss();
         }
 
         logic -> moveBullet(delta);

@@ -9,14 +9,38 @@ using namespace std;
 
 class TankBoss {
 
-    private:
-
     public:
-        sf::Sprite tankBoss;
+        sf::RectangleShape tankBoss;
 
-        TankBoss(TextureLoader*);
+        TankBoss(TextureLoader* loadedTextures);
+
+        float getBossPosition();
+
+        void setBossPosition(float positionPassed);
+
+        void moveBoss(float timePassed);
 
         void drawBoss(sf::RenderWindow& window);
+
+        bool checkDeath();
+
+        bool checkSurvive();
+
+        void wasShot(int damage);
+
+        int getSpeed();
+
+        sf::RectangleShape getBoss();
+
+    private:
+        int speed = 10;
+        int health = 500;
+        bool survive = false;
+
+        float postDeathTime;
+        sf::Clock postDeathClock;
+
+        int lane3 = 508;
 };
 
 #endif
