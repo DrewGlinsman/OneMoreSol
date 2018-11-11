@@ -10,6 +10,7 @@
 class Biker: public KoratEmpire {
 public:
 	sf::Sprite biker;
+	sf::IntRect spriteFrame;
 
 	Biker(int, TextureLoader*);
 	virtual ~Biker();

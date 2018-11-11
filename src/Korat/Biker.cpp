@@ -3,6 +3,7 @@
 #include <iostream>
 
 Biker::Biker(int startLane, TextureLoader* loadedTextures){
+
     lane = 0;
 
 	biker.setTexture(loadedTextures->textureArray[0]);

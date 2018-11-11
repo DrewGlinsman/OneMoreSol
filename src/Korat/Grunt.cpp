@@ -13,7 +13,7 @@ Grunt::Grunt(int startLane, TextureLoader* loadedTextures){
 	grunt.setTextureRect(spriteFrame);
 
 	grunt.setOrigin(sf::Vector2f(32.f, 32.f));
-	setLane(startLane);
+	KoratEmpire::setLane(startLane);
 	grunt.setPosition(1500, lane);
 	grunt.setScale(sf::Vector2f(1.2f,1.2f));
 
@@ -38,45 +38,9 @@ void Grunt::wasShot(int damage)
 	gruntWasHit.play();
 }
 
-int Grunt::getLane()
-{
-    return lane;
-}
-
 std::string Grunt::getName()
 {
     return "Grunt";
-}
-
-void Grunt::incrementRunFrame(sf::IntRect* sF, sf::Sprite* baddie)
-{
-    sF->left = (sF->left+64)%192;
-    baddie->setTextureRect(*sF);
-}
-
-void Grunt::setLane(int givenLane)
-{
-     switch(givenLane)
-	{
-		case 1:
-			lane = lane1;
-			break;
-		case 2:
-			lane = lane2;
-			break;
-		case 3:
-			lane = lane3;
-			break;
-		case 4:
-			lane = lane4;
-			break;
-		case 5:
-			lane = lane5;
-			break;
-		default:
-			lane = lane1;
-			break;
-	}
 }
 
 void Grunt::moveCurrentKorat(float timePassed)
@@ -90,21 +54,6 @@ void Grunt::moveCurrentKorat(float timePassed)
         {
             survive = true;
         }
-}
-
-void Grunt::drawCurrentKorat(sf::RenderWindow& window)
-{
-    window.draw(grunt);
-}
-
-sf::Sprite Grunt::getKorat()
-{
-    return grunt;
-}
-
-float Grunt::getPositionX()
-{
-    return grunt.getPosition().x;
 }
 
 bool Grunt::checkDeath()
@@ -138,18 +87,68 @@ bool Grunt::checkDeath()
 
     }
 }
+    //should be in korat empire as nothing changes between classes
+    void Grunt::setLane (int givenLane)
+    {
+        switch(givenLane)
+        {
+            case 1:
+                lane = lane1;
+                break;
+            case 2:
+                lane = lane2;
+                break;
+            case 3:
+                lane = lane3;
+                break;
+            case 4:
+                lane = lane4;
+                break;
+            case 5:
+                lane = lane5;
+                break;
+            default:
+                lane = lane1;
+                break;
+        }
+    }
 
-bool Grunt::checkSurvive()
-{
-    return survive;
-}
+    int Grunt::getLane()
+    {
+        return lane;
+    }
 
-int Grunt::getHealth()
-{
-    return health;
-}
+    void Grunt::incrementRunFrame(sf::IntRect* sF, sf::Sprite* baddie)
+    {
+        sF->left = (sF->left+64)%192;
+        baddie->setTextureRect(*sF);
+    }
 
-int Grunt::getSpeed()
-{
-    return speed;
-}
+    void Grunt::drawCurrentKorat(sf::RenderWindow& window)
+    {
+        window.draw(korat);
+    }
+
+    sf::Sprite Grunt::getKorat()
+    {
+        return korat;
+    }
+
+    float Grunt::getPositionX()
+    {
+        return korat.getPosition().x;
+    }
+
+    int Grunt::getHealth()
+    {
+        return health;
+    }
+    bool Grunt::checkSurvive()
+    {
+        return survive;
+    }
+
+    int Grunt::getSpeed()
+    {
+        return speed;
+    }

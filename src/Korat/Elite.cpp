@@ -3,6 +3,7 @@
 #include <iostream>
 
 Elite::Elite(int startLane, TextureLoader* loadedTextures){
+
     lane = 0;
 
 	elite.setTexture(loadedTextures->textureArray[0]);
