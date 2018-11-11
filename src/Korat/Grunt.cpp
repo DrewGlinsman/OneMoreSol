@@ -140,3 +140,10 @@ int Grunt::getSpeed()
 {
     return speed;
 }
+
+int Grunt::queryToFire()
+{
+	bool readyToFire = true;
+
+	return readyToFire;
+}

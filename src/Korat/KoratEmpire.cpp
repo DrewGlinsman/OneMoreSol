@@ -75,3 +75,8 @@ int KoratEmpire::getSpeed()
 {
 
 }
+
+int KoratEmpire::queryToFire()
+{
+
+}

@@ -38,6 +38,8 @@ public:
 
 	int getSpeed();
 
+	int queryToFire();
+
 private:
 
 	int lane;

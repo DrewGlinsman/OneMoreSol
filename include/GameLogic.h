@@ -151,6 +151,8 @@ class GameLogic{
         void drawTankBoss(sf::RenderWindow& window);
 
         int getLevel();
+
+        void queryKoratFiring();
 };
 
 

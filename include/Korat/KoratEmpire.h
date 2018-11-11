@@ -34,6 +34,8 @@ public:
 
 	virtual int getSpeed();
 
+	virtual int queryToFire();
+
 
     int lane;
 
