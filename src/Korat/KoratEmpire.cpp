@@ -81,7 +81,7 @@ float KoratEmpire::getFireRate()
 
 }
 
-int KoratEmpire::queryToFire()
+bool KoratEmpire::queryToFire()
 {
 
 }

@@ -36,7 +36,7 @@ public:
 
 	virtual float getFireRate();
 
-	virtual int queryToFire();
+	virtual bool queryToFire();
 
 
     int lane;
