@@ -10,6 +10,7 @@
 class Grunt: public KoratEmpire {
 public:
 	sf::Sprite grunt;
+	sf::IntRect spriteFrame;
 
 	Grunt(int, TextureLoader*);
 	virtual ~Grunt();
@@ -17,6 +18,8 @@ public:
 	int getLane();
 
 	std::string getName();
+
+	void incrementRunFrame(sf::IntRect*, sf::Sprite*);
 
 	void setLane(int givenLane);
 

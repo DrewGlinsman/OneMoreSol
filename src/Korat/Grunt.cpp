@@ -6,7 +6,12 @@ Grunt::Grunt(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
 	grunt.setTexture(loadedTextures->textureArray[0]);
-	grunt.setTextureRect(sf::IntRect(0,448,64,64));
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 448;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	grunt.setTextureRect(spriteFrame);
+
 	grunt.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
 	grunt.setPosition(1500, lane);
@@ -43,6 +48,12 @@ std::string Grunt::getName()
     return "Grunt";
 }
 
+void Grunt::incrementRunFrame(sf::IntRect* sF, sf::Sprite* baddie)
+{
+    sF->left = (sF->left+64)%192;
+    baddie->setTextureRect(*sF);
+}
+
 void Grunt::setLane(int givenLane)
 {
      switch(givenLane)
@@ -73,6 +84,7 @@ void Grunt::moveCurrentKorat(float timePassed)
         if(grunt.getPosition().x > -100)
         {
             grunt.move(-speed * timePassed, 0);
+            incrementRunFrame(&spriteFrame, &grunt);
         }
         else
         {
