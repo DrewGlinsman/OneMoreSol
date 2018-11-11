@@ -34,10 +34,17 @@ class BikeBoss {
 
         bool checkSurvive();
 
+        void wasShot(int damage);
+
+        int getSpeed();
+
+        sf::Sprite getBoss();
+
+
     private:
         int lane;
-        int speed = 100;
-        int health = 100;
+        int speed = 40;
+        int health = 500;
         bool survive = false;
 
         float postDeathTime;

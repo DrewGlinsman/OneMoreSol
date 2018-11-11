@@ -39,13 +39,16 @@ class GameLogic{
 
     private:
         //wrap it in reference wrapper so that it passes references instead of copies
-        std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
 
+        std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         std::vector<shared_ptr<KoratEmpire>> dyingKorat{};
 
-        BikeBoss* bikeBoss;
-        TankBoss* tankBoss;
+        std::vector<shared_ptr<BikeBoss>> currentBikeBoss{};
+        std::vector<shared_ptr<BikeBoss>> dyingBikeBoss{};
+
+        std::vector<shared_ptr<TankBoss>> currentTankBoss{};
+        std::vector<shared_ptr<TankBoss>> dyingTankBoss{};
 
         sf::Clock spawnClock;
         sf::Clock fireBulletClock;
@@ -56,7 +59,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 1;
+        int currentLevel = 10;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -98,6 +101,8 @@ class GameLogic{
 
         bool movingUp = false;
         bool movingDown = false;
+
+        double directMove = 1;
 
     public:
         GameLogic();
@@ -141,6 +146,7 @@ class GameLogic{
         void startBikeBoss(TextureLoader*);
         void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
         void drawBikeBoss(sf::RenderWindow& window);
+        void updateDyingBikeBoss();
 
         void startTankBoss();
         void moveTankBoss();

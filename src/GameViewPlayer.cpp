@@ -106,6 +106,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logic -> getLevel() == 10)
         {
             logic -> moveBikeBoss(sky, majorTom, delta);
+            logic -> updateDyingBikeBoss();
         }
         if (logic -> getLevel() == 20)
         {

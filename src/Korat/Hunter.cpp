@@ -106,6 +106,7 @@ bool Hunter::checkDeath()
 				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
+			return false;
 		}
     }
     else

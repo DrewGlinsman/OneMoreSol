@@ -108,6 +108,7 @@ bool Bomber::checkDeath()
 				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
+			return false;
 		}
     }
     else
