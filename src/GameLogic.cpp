@@ -419,13 +419,14 @@ void GameLogic::moveBullet(float timePassed)
 void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 {
 	//! KORAT BULLETS
-
 	for (int i = 0; i < currentKoratBullet.size(); i ++)
 	{
 		for (int j = 0; j < currentKoratBullet[i].size(); j++)
 		{
+			std::cout << j << std::endl;
 			if (currentKoratBullet[i][j] -> getHeight() > majorTom -> getTomPositionX())
 			{
+				std::cout << "MOVING BULLET" << std::endl;
 				currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
 			} /*else if (currentKoratBullet[i][j] -> getHeight() == majorTom -> getTomPositionX()) {
 				currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);

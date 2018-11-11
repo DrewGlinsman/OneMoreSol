@@ -114,6 +114,7 @@ void KoratBullet::moveCurrentBullet(float timePassed)
 {
         if(plasma.getPosition().x > -100)
         {
+        	std::cout << "ABOUT TO MOVE BULLET" << std::endl;
             plasma.move(-speed * timePassed, 0);
             outOfBounds = false;
         }

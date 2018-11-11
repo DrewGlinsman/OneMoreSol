@@ -40,7 +40,7 @@ public:
 
 	float getFireRate();
 
-	int queryToFire();
+	bool queryToFire();
 
 private:
 
