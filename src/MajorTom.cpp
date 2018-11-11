@@ -9,7 +9,7 @@ MajorTom::MajorTom(TextureLoader* loadedTextures)
 {
     setGun(1);
 
-    majorTom.setTexture(loadedTextures->mtSpriteSheet);
+    majorTom.setTexture(loadedTextures->textureArray[0]);
     majorTom.setTextureRect(sf::IntRect(0,0,64,64));
     majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);

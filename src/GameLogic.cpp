@@ -13,13 +13,17 @@ GameLogic::GameLogic()
     loadedTextures = new TextureLoader();
     loadedAudio = new AudioLoader();
 
-    backgroundMusic.setBuffer(loadedAudio->soundTrack[1]);
+    backgroundMusic.setBuffer(loadedAudio->soundTrack[currentLevel - 1]);
     backgroundMusic.setVolume(50);
     backgroundMusic.play();
 
     if(currentLevel == 10)
     {
         startBikeBoss(loadedTextures);
+    }
+    if(currentLevel == 20)
+    {
+        startTankBoss(loadedTextures);
     }
 
 }
@@ -62,7 +66,6 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                     {
                         dyingKorat.emplace_back(move(currentKorat[i][j]));
                         currentKorat[i].erase(currentKorat[i].begin() + j);
-                        currentKoratCount--;
                     }
                     else
                     {
@@ -91,7 +94,10 @@ void GameLogic::updateDyingKorat()
     for (int i = 0; i < dyingKorat.size(); i++)
     {
         if (dyingKorat[i] -> checkDeath() == true)
+        {
             dyingKorat.erase(dyingKorat.begin() + i);
+            currentKoratCount--;
+        }
     }
 }
 
@@ -247,8 +253,6 @@ void GameLogic::updateBulletOrder()
 void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
 {
     lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
-    cout << lastBulletFired << endl;
-    cout <<currentGun -> getFireRate() << endl;
 
     if((lastBulletFired > currentGun -> getFireRate()) &&
        (currentGun -> getShotsFired() != currentGun -> getClipSize()))
@@ -288,6 +292,13 @@ bool GameLogic::reloadCurrentGun(MajorTom* majorTom, Gun* currentGun)
     else
     {
         reloadTime = reloadClock.getElapsedTime().asSeconds();
+        if(reloadTime > currentGun -> getReloadSpeed() && reloadStarted == true)
+        {
+            currentGun -> resetShotsFired();
+            reloadClock.restart();
+            reloadStarted = false;
+            return true;
+        }
         cout << reloadTime << endl;
         return false;
     }
@@ -359,50 +370,78 @@ void GameLogic::moveBullet(float timePassed)
     //plug in sfml collision with rects
     else if (currentLevel == 10)
     {
-        for (int i = 0; i < currentBullet.size(); i ++)
+        for (int i = 0; i < currentBullet.size(); i++)
         {
             for (int j = 0; j < currentBullet[i].size(); j++)
             {
-                //if(currentBullet[i][j].getGlobalBounds().intersects(bikeBoss.getGlobalBounds()))
+                for (int z = 0; z < currentBikeBoss.size(); z++)
                 {
-                    //bikeBoss -> wasShot(currentBullet[i][j] -> getDamage());
-                    currentBullet[i].erase(currentBullet[i].begin() + j);
-                }
-//                else
-                {
-                    if (currentBullet[i][j] -> getOutOfBounds() == false)
+                    if(currentBullet[i][j] -> getBullet().getGlobalBounds().intersects(currentBikeBoss[z] -> getBoss().getGlobalBounds()))
                     {
-                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        currentBikeBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
                     }
                     else
                     {
-                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                        if (currentBullet[i][j] -> getOutOfBounds() == false)
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
+                        else
+                        {
+                            currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
                     }
+                }
+                if(currentBikeBoss.size() == 0)
+                {
+                    if (currentBullet[i][j] -> getOutOfBounds() == false)
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
+                        else
+                        {
+                            currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
                 }
             }
         }
     }
     else if (currentLevel == 20)
     {
-        for (int i = 0; i < currentBullet.size(); i ++)
+        for (int i = 0; i < currentBullet.size(); i++)
         {
             for (int j = 0; j < currentBullet[i].size(); j++)
             {
-                //if(currentBullet[i][j].getGlobalBounds().intersects(tankBoss.getGlobalBounds()))
+                for (int z = 0; z < currentTankBoss.size(); z++)
                 {
-                    //tankBoss -> wasShot(currentBullet[i][j] -> getDamage());
-                    currentBullet[i].erase(currentBullet[i].begin() + j);
-                }
-//                else
-                {
-                    if (currentBullet[i][j] -> getOutOfBounds() == false)
+                    if(currentBullet[i][j] -> getBullet().getGlobalBounds().intersects(currentTankBoss[z] -> getBoss().getGlobalBounds()))
                     {
-                        currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        currentTankBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
                     }
                     else
                     {
-                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                        if (currentBullet[i][j] -> getOutOfBounds() == false)
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
+                        else
+                        {
+                            currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
                     }
+                }
+                if(currentTankBoss.size() == 0)
+                {
+                    if (currentBullet[i][j] -> getOutOfBounds() == false)
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
+                        else
+                        {
+                            currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
                 }
             }
         }
@@ -549,7 +588,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
             if(currentLevel == 20)
             {
-                startTankBoss();
+                startTankBoss(loadedTextures);
             }
 
         }
@@ -570,76 +609,6 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
     }
 }
 
-void GameLogic::selectMusic()
-{
-    switch(currentLevel)
-    {
-        case 2:
-            backgroundMusic.setBuffer(level2Music);
-            break;
-        /*
-        case 3:
-            backgroundMusic.setBuffer(level3Music);
-            break;
-        case 4:
-            backgroundMusic.setBuffer(level4Music);
-            break;
-        case 5:
-            backgroundMusic.setBuffer(level5Music);
-            break;
-        case 6:
-            backgroundMusic.setBuffer(level6Music);
-            break;
-        case 7:
-            backgroundMusic.setBuffer(level7Music);
-            break;
-        case 8:
-            backgroundMusic.setBuffer(level8Music);
-            break;
-        case 9:
-            backgroundMusic.setBuffer(level9Music);
-            break;
-        case 10:
-            backgroundMusic.setBuffer(level10Music);
-            break;
-        case 11:
-            backgroundMusic.setBuffer(level11Music);
-            break;
-        case 12:
-            backgroundMusic.setBuffer(level12Music);
-            break;
-        case 13:
-            backgroundMusic.setBuffer(level13Music);
-            break;
-        case 14:
-            backgroundMusic.setBuffer(level14Music);
-            break;
-        case 15:
-            backgroundMusic.setBuffer(level15Music);
-            break;
-        case 16:
-            backgroundMusic.setBuffer(level16Music);
-            break;
-        case 17:
-            backgroundMusic.setBuffer(level17Music);
-            break;
-        case 18:
-            backgroundMusic.setBuffer(level18Music);
-            break;
-        case 19:
-            backgroundMusic.setBuffer(level19Music);
-            break;
-        case 20:
-            backgroundMusic.setBuffer(level20Music);
-            break;
-        */
-        default:
-            std::cout << "Music selector broken" << std::endl;
-    }
-    backgroundMusic.setVolume(50);
-    backgroundMusic.play();
-}
-
 void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 {
 
@@ -655,8 +624,6 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     currentKoratCount = 0;
 
-
-
     gameSky.rotate(-rotation); //rotate the sun back to the beginning
 
     std::cout << "Current Level = " << currentLevel << std::endl;
@@ -665,108 +632,193 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     if(currentLevel == 10)
     {
-        startBikeBoss(loadedTextures); // boss size 192
+        startBikeBoss(loadedTextures);
     }
 
     if(currentLevel == 20)
     {
-        startTankBoss();
+        startTankBoss(loadedTextures);
     }
 
     majorTom->setSurvivors(survivorCountSaved);
 
 }
 
+void GameLogic::selectMusic()
+{
+
+    backgroundMusic.setBuffer(loadedAudio -> soundTrack[currentLevel - 1]);
+    backgroundMusic.setVolume(50);
+    backgroundMusic.play();
+}
+
 void GameLogic::startBikeBoss(TextureLoader* loadedTextures)
 {
-    bikeBoss = new BikeBoss(loadedTextures);
+    BikeBoss* bikeBoss = new BikeBoss(loadedTextures);
+    currentBikeBoss.emplace_back(bikeBoss);
     currentKoratCount = 1;
 }
 
 void GameLogic::drawBikeBoss(sf::RenderWindow& window)
 {
-    bikeBoss -> drawBoss(window);
+    for(int i = 0; i < currentBikeBoss.size(); i++)
+    {
+        currentBikeBoss[i] -> drawBoss(window);
+    }
+    for(int j = 0; j < dyingBikeBoss.size(); j++)
+    {
+        dyingBikeBoss[j] -> drawBoss(window);
+    }
+}
+
+void GameLogic::updateDyingBikeBoss()
+{
+    for (int i = 0; i < dyingBikeBoss.size(); i++)
+    {
+        if (dyingBikeBoss[i] -> checkDeath() == true)
+        {
+            dyingBikeBoss.erase(dyingBikeBoss.begin() + i);
+            currentKoratCount--;
+
+        }
+    }
 }
 
 void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
-    if (bikeBoss -> checkSurvive() == false)
+    for(int i = 0; i < currentBikeBoss.size(); i++)
     {
-        if (bikeBoss -> checkDeath() == false)
+        if (currentBikeBoss[i] -> checkSurvive() == false)
         {
-            if (movingUp == false && movingDown == false)
+            if (currentBikeBoss[i] -> checkDeath() == false)
             {
-                double directMove = Random() * 5;
-                cout << directMove << endl;
-
-                if (directMove < 3)
+                if (currentBikeBoss[i] -> getSpeed() == 0)
                 {
-                    bikeBoss -> moveBoss(timePassed);
-                    cout << "less than 3" << endl;
-
+                        dyingBikeBoss.emplace_back(move(currentBikeBoss[i]));
+                        currentBikeBoss.erase(currentBikeBoss.begin() + i);
+                        movingUp = false;
+                        movingDown = false;
+                        directMove = 1;
                 }
-                else if (directMove >= 3 && directMove < 4)
+                else if (movingUp == false && movingDown == false)
                 {
-                    bikeBoss -> initBossUp();
-                    bikeBoss -> moveBossUp(timePassed);
-                    bikeBoss -> moveBoss(timePassed);
-                    movingUp = true;
-                    movingDown = false;
+                    if (directMove < 1998)
+                    {
+                        directMove = Random() * 2000;
+                        currentBikeBoss[i] -> moveBoss(timePassed);
+                    }
+                    else if (directMove >= 1998 && directMove < 1999)
+                    {
+                        directMove = Random() * 2000;
+                        currentBikeBoss[i] -> initBossUp();
+                        movingUp = true;
+                        movingDown = false;
+                    }
+                    else if (directMove >= 1999)
+                    {
+                        directMove = Random() * 2000;
+                        currentBikeBoss[i] -> initBossDown();
+                        movingUp = false;
+                        movingDown = true;
+                    }
                 }
-                else if (directMove >= 4)
+                else if(movingUp == true)
                 {
-                    bikeBoss -> initBossDown();
-                    bikeBoss -> moveBossDown(timePassed);
-                    bikeBoss -> moveBoss(timePassed);
-                    movingUp = false;
-                    movingDown = true;
+                    if (currentBikeBoss[i] -> moveBossUp(timePassed) == true)
+                    {
+                        movingUp = false;
+                        movingDown = false;
+                    }
+                    currentBikeBoss[i] -> moveBoss(timePassed);
+                }
+                else if(movingDown == true)
+                {
+                    if (currentBikeBoss[i] -> moveBossDown(timePassed) == true)
+                    {
+                        movingUp = false;
+                        movingDown = false;
+                    }
+                    currentBikeBoss[i] -> moveBoss(timePassed);
                 }
             }
-            else if(movingUp == true)
+            else
             {
-                if (bikeBoss -> moveBossUp(timePassed) == true)
-                {
-                    movingUp = false;
-                    movingDown = false;
-                }
-                bikeBoss -> moveBoss(timePassed);
-            }
-            else if(movingDown == true)
-            {
-                if (bikeBoss -> moveBossDown(timePassed) == true)
-                {
-                    movingUp = false;
-                    movingDown = false;
-                }
-                bikeBoss -> moveBoss(timePassed);
+                // nothing happens will never trigger
             }
         }
         else
         {
+            currentBikeBoss.erase(currentBikeBoss.begin() + i);
             currentKoratCount--;
+            loseLevel(gameSky, majorTom);
         }
-    }
-    else
-    {
-        loseLevel(gameSky, majorTom);
     }
 }
 
 
-void GameLogic::startTankBoss()
+void GameLogic::startTankBoss(TextureLoader* loadedTextures)
 {
-    tankBoss = new TankBoss(loadedTextures);
+    TankBoss* tankBoss = new TankBoss(loadedTextures);
+    currentTankBoss.emplace_back(tankBoss);
     currentKoratCount = 1;
 }
 
 void GameLogic::drawTankBoss(sf::RenderWindow& window)
 {
-    tankBoss -> drawBoss(window);
+     for(int i = 0; i < currentTankBoss.size(); i++)
+    {
+        currentTankBoss[i] -> drawBoss(window);
+    }
+    for(int j = 0; j < dyingTankBoss.size(); j++)
+    {
+        dyingTankBoss[j] -> drawBoss(window);
+    }
 }
 
-void GameLogic::moveTankBoss()
+void GameLogic::updateDyingTankBoss()
 {
+    for (int i = 0; i < dyingTankBoss.size(); i++)
+    {
+        if (dyingTankBoss[i] -> checkDeath() == true)
+        {
+            dyingTankBoss.erase(dyingTankBoss.begin() + i);
+            currentKoratCount--;
 
+        }
+    }
+}
+
+void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
+{
+    for(int i = 0; i < currentTankBoss.size(); i++)
+    {
+        if (currentTankBoss[i] -> checkSurvive() == false)
+        {
+            if (currentTankBoss[i] -> checkDeath() == false)
+            {
+                if (currentTankBoss[i] -> getSpeed() == 0)
+                {
+                        dyingTankBoss.emplace_back(move(currentTankBoss[i]));
+                        currentTankBoss.erase(currentTankBoss.begin() + i);
+
+                }
+                else
+                {
+                    currentTankBoss[i] -> moveBoss(timePassed);
+                }
+            }
+            else
+            {
+                // nothing happens will never trigger
+            }
+        }
+        else
+        {
+            currentBikeBoss.erase(currentBikeBoss.begin() + i);
+            currentKoratCount--;
+            loseLevel(gameSky, majorTom);
+        }
+    }
 }
 
 int GameLogic::getLevel()

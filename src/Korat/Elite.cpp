@@ -5,7 +5,7 @@
 Elite::Elite(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
-	elite.setTexture(loadedTextures->mtSpriteSheet);
+	elite.setTexture(loadedTextures->textureArray[0]);
 	elite.setTextureRect(sf::IntRect(0,512,64,64));
 	elite.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
@@ -110,6 +110,7 @@ bool Elite::checkDeath()
 				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
+			return false;
 		}
     }
     else

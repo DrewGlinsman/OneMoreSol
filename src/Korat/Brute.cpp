@@ -5,7 +5,7 @@
 Brute::Brute(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
-	brute.setTexture(loadedTextures->mtSpriteSheet);
+	brute.setTexture(loadedTextures->textureArray[0]);
 	brute.setTextureRect(sf::IntRect(0,448,64,64));
 	brute.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
@@ -107,6 +107,7 @@ bool Brute::checkDeath()
 				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
+			return false;
 		}
     }
     else

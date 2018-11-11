@@ -24,6 +24,7 @@ public:
     const int iconScale = 64;
 
     sf::RectangleShape background;
+    sf::RectangleShape lossScreen;
     sf::CircleShape sky;
 
     sf::Sprite weapon1;
@@ -37,14 +38,9 @@ public:
     sf::Vector2f selector;
     sf::RectangleShape retryBtnRec;
     sf::RectangleShape exitBtnRec;
-    sf::Texture retryBtnImg;
-    sf::Texture retryBtnHImg;
-    sf::Texture exitBtnImg;
-    sf::Texture exitBtnHImg;
 
     sf::Texture gameImage;
     sf::Texture playerImage;
-    sf::Texture gameSky;
     sf::Texture lockIcon;
 
     int lane1 = 335;

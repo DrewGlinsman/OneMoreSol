@@ -7,15 +7,6 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     if(!gameFont.loadFromFile("assets/impact.ttf"))
         std::cout << "Could not load requested font." << std::endl;
 
-    if (!gameSound.loadFromFile("assets/Gamex_Music.ogg"))
-        std::cout << "Could not load request music." << std::endl;
-
-    if (!gameImage.loadFromFile("assets/playField.png"))
-        std::cout << "Could not load requested image." << std::endl;
-
-    if (!gameSky.loadFromFile("assets/skyBox.png"))
-        std::cout << "Failed to Load Skybox." << std::endl;
-
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
 
@@ -24,12 +15,14 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     sky.setRadius(894);
     sky.setOrigin(894,894);
     sky.setPosition(720, 450);
-    sky.setTexture(&gameSky);
+    sky.setTexture(&(loadedTextures->textureArray[2]));
 
     background.setOrigin(0,724);
     background.setPosition(0,900);
     background.setSize(sf::Vector2f(1440,724));
-    background.setTexture(&gameImage);
+    background.setTexture(&(loadedTextures->textureArray[1]));
+
+    lossScreen.setTexture(&(loadedTextures->textureArray[11]));
 
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
@@ -45,13 +38,13 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     weapon5.setPosition(807,790);
     weapon6.setPosition(935,790);
     weapon7.setPosition(1063,790);
-    weapon1.setTexture(loadedTextures->mtSpriteSheet);
-    weapon2.setTexture(loadedTextures->mtSpriteSheet);
-    weapon3.setTexture(loadedTextures->mtSpriteSheet);
-    weapon4.setTexture(loadedTextures->mtSpriteSheet);
-    weapon5.setTexture(loadedTextures->mtSpriteSheet);
-    weapon6.setTexture(loadedTextures->mtSpriteSheet);
-    weapon7.setTexture(loadedTextures->mtSpriteSheet);
+    weapon1.setTexture(loadedTextures->textureArray[0]);
+    weapon2.setTexture(loadedTextures->textureArray[0]);
+    weapon3.setTexture(loadedTextures->textureArray[0]);
+    weapon4.setTexture(loadedTextures->textureArray[0]);
+    weapon5.setTexture(loadedTextures->textureArray[0]);
+    weapon6.setTexture(loadedTextures->textureArray[0]);
+    weapon7.setTexture(loadedTextures->textureArray[0]);
     weapon1.setScale(sf::Vector2f(2.5f,2.5f));
     weapon2.setScale(sf::Vector2f(2.5f,2.5f));
     weapon3.setScale(sf::Vector2f(2.5f,2.5f));
@@ -69,8 +62,6 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 
     logic = new GameLogic();
     majorTom = new MajorTom(loadedTextures);
-
-    gameMusic.setBuffer(gameSound);
 
 }
 
@@ -110,10 +101,12 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logic -> getLevel() == 10)
         {
             logic -> moveBikeBoss(sky, majorTom, delta);
+            logic -> updateDyingBikeBoss();
         }
         if (logic -> getLevel() == 20)
         {
-            //logic -> moveTankBoss(delta);
+            logic -> moveTankBoss(sky, majorTom, delta);
+            logic -> updateDyingTankBoss();
         }
 
         logic -> moveBullet(delta);
@@ -368,13 +361,13 @@ void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
 {
     if(y == 0)
     {
-        //retryBtnRec.setTexture(&playBtnHImg);
-        //exitBtnRec.setTexture(&exitBtnImg);
+        retryBtnRec.setTexture(&(loadedTextures->textureArray[12]));
+        exitBtnRec.setTexture(&(loadedTextures->textureArray[15]));
     }
     else if(y == 1)
     {
-        //retryBtnRec.setTexture(&playBtnImg);
-        //exitBtnRec.setTexture(&exitBtnImg);
+        retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
+        exitBtnRec.setTexture(&(loadedTextures->textureArray[14]));
     }
     updateGame(window);//could this be more optimally placed?
 }
