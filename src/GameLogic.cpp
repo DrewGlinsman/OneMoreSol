@@ -427,9 +427,9 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 			if (currentKoratBullet[i][j] -> getHeight() > majorTom -> getTomPositionX())
 			{
 				currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
-			} else if (currentKoratBullet[i][j] -> getHeight() == majorTom -> getTomPositionX()) {
+			} /*else if (currentKoratBullet[i][j] -> getHeight() == majorTom -> getTomPositionX()) {
 				currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
-			} else {
+			}*/ else {
 				if (currentKoratBullet[i][j] -> getOutOfBounds() == false)
 				{
 					currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);

@@ -112,7 +112,7 @@ void KoratBullet::setLane(int givenLane, int givenHeight)
 
 void KoratBullet::moveCurrentBullet(float timePassed)
 {
-        if(plasma.getPosition().x < 1500)
+        if(plasma.getPosition().x > -100)
         {
             plasma.move(-speed * timePassed, 0);
             outOfBounds = false;
