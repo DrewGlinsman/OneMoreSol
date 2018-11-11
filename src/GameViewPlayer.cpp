@@ -281,9 +281,9 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     logic -> drawKorat(window);
     logic -> drawBullet(window);
 
-    if (logic -> CheckEnd())
+    if (logic -> checkEnd())
     {
-        drawLossScreen();
+        drawLossScreen(window);
         //draw retry screen
     }
 
@@ -310,19 +310,18 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.display();
 }
 
-void GameViewPlayer::drawLossScreen(sf:RenderWindow &window)
+void GameViewPlayer::drawLossScreen(sf::RenderWindow &window)
 {
         //window.draw(lossScreen) #need a loss screen to implement
         bool retry = false;
         while(window.isOpen() && !retry)
         {
-            while(window.pollEvent())
+            while(window.pollEvent(Event))
             {
                 if(Event.type == sf::Event::Closed)
                 {
                     gameMusic.stop();
                     window.close(); // Quit game
-                    return true;
                 }
 
                 if(Event.type == sf::Event::KeyPressed)
@@ -331,7 +330,6 @@ void GameViewPlayer::drawLossScreen(sf:RenderWindow &window)
                     {
                         gameMusic.stop();
                         window.close();
-                        return true;
                     }
 
                    if(Event.key.code == sf::Keyboard::Up || Event.key.code == sf::Keyboard::Down)
@@ -363,6 +361,7 @@ void GameViewPlayer::drawLossScreen(sf:RenderWindow &window)
                     }
             }
         }
+    }
 }
 
 void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
@@ -377,7 +376,7 @@ void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
         //retryBtnRec.setTexture(&playBtnImg);
         //exitBtnRec.setTexture(&exitBtnImg);
     }
-    updateMenu(window);//could this be more optimally placed?
+    updateGame(window);//could this be more optimally placed?
 }
 
 
