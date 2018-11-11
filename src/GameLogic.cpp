@@ -416,6 +416,33 @@ void GameLogic::moveBullet(float timePassed)
     }
 }
 
+void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
+{
+	//! KORAT BULLETS
+
+	for (int i = 0; i < currentKoratBullet.size(); i ++)
+	{
+		for (int j = 0; j < currentKoratBullet[i].size(); j++)
+		{
+			if (currentKoratBullet[i][j] -> getHeight() > majorTom -> getTomPositionX())
+			{
+				currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
+			} else if (currentKoratBullet[i][j] -> getHeight() == majorTom -> getTomPositionX()) {
+				currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
+			} else {
+				if (currentKoratBullet[i][j] -> getOutOfBounds() == false)
+				{
+					currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
+				}
+				else
+				{
+					currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
+				}
+			}
+		}
+	}
+}
+
 void GameLogic::drawBullet(sf::RenderWindow& window)
 {
     for (int i = 0; i < currentBullet.size(); i ++)
@@ -426,6 +453,15 @@ void GameLogic::drawBullet(sf::RenderWindow& window)
 
         }
     }
+
+    for (int i = 0; i < currentKoratBullet.size(); i ++)
+	{
+		for (int j = 0; j < currentKoratBullet[i].size(); j++)
+		{
+				currentKoratBullet[i][j] -> drawCurrentBullet(window);
+
+		}
+	}
 }
 
 void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
@@ -799,7 +835,7 @@ void GameLogic::queryKoratFiring()
 
 					newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(),  loadedTextures);
 
-					currentBullet[currentKorat[i][j] -> getLane() - 1].emplace_back(newBullet);
+					currentKoratBullet[currentKorat[i][j] -> getLane() - 1].emplace_back(newBullet);
 				} else {
 					//pass? basically ask again later
 				}

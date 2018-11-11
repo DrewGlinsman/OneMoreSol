@@ -48,6 +48,7 @@ class MajorTom {
         void drawTom(sf::RenderWindow& window);
 
         float getTomPosition();
+        float getTomPositionX();
         void setTomPositionX(float);
         void setTomPositionY(float);
 

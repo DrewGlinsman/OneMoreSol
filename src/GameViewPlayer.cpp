@@ -104,6 +104,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         logic -> moveKorat(delta, majorTom);
         logic -> queryKoratFiring();
 
+
         if (logic -> getLevel() == 10)
         {
             logic -> moveBikeBoss(sky, majorTom, delta);
@@ -114,6 +115,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         }
 
         logic -> moveBullet(delta);
+        logic -> moveKoratBullet(delta, majorTom);
 
 //-----------------------------------------------------------------
         if(keepMovingUp == true)

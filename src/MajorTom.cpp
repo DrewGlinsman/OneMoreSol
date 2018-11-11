@@ -28,6 +28,11 @@ float MajorTom::getTomPosition()
     return majorTom.getPosition().y;
 }
 
+float MajorTom::getTomPositionX()
+{
+    return majorTom.getPosition().x;
+}
+
 void MajorTom::setTomPositionX(float positionPassed)
 {
     majorTom.setPosition(positionPassed ,majorTom.getPosition().y);
