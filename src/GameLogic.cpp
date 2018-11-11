@@ -3,6 +3,7 @@ GameLogic.cpp
 
 */
 #include "GameLogic.h"
+#include "KoratBullet.h"
 #include <iostream>
 #include <typeinfo>
 
@@ -443,7 +444,7 @@ void GameLogic::spawnBullet(float timePassed)
     switch(bulletSpawnType)
     {
         case 1:
-            newBullet = new PlasmaPistolBullet(bulletSpawnLane, -1, loadedTextures);
+            newBullet = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
             break;
         case 2:
             newBullet = new PlasmaShotgunBullet(bulletSpawnLane, loadedTextures);
@@ -464,7 +465,7 @@ void GameLogic::spawnBullet(float timePassed)
             newBullet = new BFGBullet (bulletSpawnLane, loadedTextures);
             break;
         default:
-            newBullet = new PlasmaPistolBullet(bulletSpawnLane, -1, loadedTextures);
+            newBullet = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
             cout << "Break Case Activated" << endl;
             break;
 
@@ -796,7 +797,7 @@ void GameLogic::queryKoratFiring()
 
 					Bullet* newBullet;
 
-					newBullet = new PlasmaPistolBullet(-1, currentKorat[i][j] -> getPositionX(), loadedTextures);
+					newBullet = new KoratBullet(-1, currentKorat[i][j] -> getPositionX(), loadedTextures);
 
 				} else {
 					//pass? basically ask again later
