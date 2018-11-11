@@ -794,10 +794,10 @@ void GameLogic::queryKoratFiring()
 				if (currentKorat[i][j] -> queryToFire()) //if the Korat is ready to Fire
 				{
 					//implement stuff to make Korat fire here
-
+					std::cout << "BULLET FIRING" << std::endl;
 					Bullet* newBullet;
 
-					newBullet = new KoratBullet(currentKorat[i][j] -> getPositionX(), currentKorat[i][j] -> getLane(),  loadedTextures);
+					newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(),  loadedTextures);
 
 					currentBullet[currentKorat[i][j] -> getLane() - 1].emplace_back(newBullet);
 				} else {
