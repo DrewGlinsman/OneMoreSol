@@ -60,9 +60,19 @@ void KoratEmpire::incrementRunFrame(sf::IntRect* sF, sf::Sprite* baddie)
     baddie->setTextureRect(*sF);
 }
 
-void KoratEmpire::moveCurrentKorat(float timepassed)
+//NOTE: DOESNT WORK it references it's own korat sprite, which is blank.
+//need to implement xml reading to give it a specific coordinate to
+//assign sprites by type. otherwise korat would only be 1 type if
+//implemented here.
+void KoratEmpire::moveCurrentKorat(float timePassed)
 {
-    //incrementRunFrame(&spriteFrame, &korat);
+    if(korat.getPosition().x > -100)
+    {
+        korat.move(-speed * timePassed, 0);
+        incrementRunFrame(&spriteFrame, &korat);
+    }
+    else
+        survive = true;
 }
 
 void KoratEmpire::drawCurrentKorat(sf::RenderWindow& window)

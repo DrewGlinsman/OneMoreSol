@@ -10,6 +10,7 @@
 class Hunter: public KoratEmpire {
 public:
 	sf::Sprite hunter;
+	sf::IntRect spriteFrame;
 
 	Hunter(int, TextureLoader*);
 	virtual ~Hunter();

@@ -6,7 +6,11 @@ Hunter::Hunter(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
 	hunter.setTexture(loadedTextures->textureArray[0]);
-	hunter.setTextureRect(sf::IntRect(0,640,64,64));
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 640;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	hunter.setTextureRect(spriteFrame);
 	hunter.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	hunter.setPosition(1500, lane);
@@ -63,6 +67,7 @@ void Hunter::moveCurrentKorat(float timePassed)
         if(hunter.getPosition().x > -100)
         {
             hunter.move(-speed * timePassed, 0);
+            KoratEmpire::incrementRunFrame(&spriteFrame, &hunter);
         }
         else
         {

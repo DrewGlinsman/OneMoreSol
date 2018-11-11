@@ -10,6 +10,7 @@
 class Bomber: public KoratEmpire {
 public:
 	sf::Sprite bomber;
+	sf::IntRect spriteFrame;
 
 	Bomber(int, TextureLoader*);
 	virtual ~Bomber();

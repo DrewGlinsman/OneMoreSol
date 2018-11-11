@@ -19,8 +19,6 @@ public:
 
 	std::string getName();
 
-	void incrementRunFrame(sf::IntRect*, sf::Sprite*);
-
 	void setLane(int givenLane);
 
 	void wasShot(int damage);

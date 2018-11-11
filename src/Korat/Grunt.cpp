@@ -13,7 +13,7 @@ Grunt::Grunt(int startLane, TextureLoader* loadedTextures){
 	grunt.setTextureRect(spriteFrame);
 
 	grunt.setOrigin(sf::Vector2f(32.f, 32.f));
-	KoratEmpire::setLane(startLane);
+	setLane(startLane);
 	grunt.setPosition(1500, lane);
 	grunt.setScale(sf::Vector2f(1.2f,1.2f));
 
@@ -48,7 +48,7 @@ void Grunt::moveCurrentKorat(float timePassed)
         if(grunt.getPosition().x > -100)
         {
             grunt.move(-speed * timePassed, 0);
-            incrementRunFrame(&spriteFrame, &grunt);
+            KoratEmpire::incrementRunFrame(&spriteFrame, &grunt);
         }
         else
         {
@@ -118,25 +118,19 @@ bool Grunt::checkDeath()
         return lane;
     }
 
-    void Grunt::incrementRunFrame(sf::IntRect* sF, sf::Sprite* baddie)
-    {
-        sF->left = (sF->left+64)%192;
-        baddie->setTextureRect(*sF);
-    }
-
     void Grunt::drawCurrentKorat(sf::RenderWindow& window)
     {
-        window.draw(korat);
+        window.draw(grunt);
     }
 
     sf::Sprite Grunt::getKorat()
     {
-        return korat;
+        return grunt;
     }
 
     float Grunt::getPositionX()
     {
-        return korat.getPosition().x;
+        return grunt.getPosition().x;
     }
 
     int Grunt::getHealth()

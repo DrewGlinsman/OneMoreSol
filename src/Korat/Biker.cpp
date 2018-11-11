@@ -7,7 +7,11 @@ Biker::Biker(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
 	biker.setTexture(loadedTextures->textureArray[0]);
-	biker.setTextureRect(sf::IntRect(0,768,64,64));
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 768;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	biker.setTextureRect(spriteFrame);
 	biker.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	biker.setPosition(1500, lane);
@@ -65,6 +69,7 @@ void Biker::moveCurrentKorat(float timePassed)
         if(biker.getPosition().x > -100)
         {
             biker.move(-speed * timePassed, 0);
+            KoratEmpire::incrementRunFrame(&spriteFrame, &biker);
         }
         else
         {

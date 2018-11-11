@@ -6,7 +6,11 @@ Jackal::Jackal(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
 	jackal.setTexture(loadedTextures->textureArray[0]);
-	jackal.setTextureRect(sf::IntRect(0,576,64,64));
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 576;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	jackal.setTextureRect(spriteFrame);
 	jackal.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	jackal.setPosition(1500, lane);
@@ -74,6 +78,7 @@ void Jackal::moveCurrentKorat(float timePassed)
         if(jackal.getPosition().x > -100)
         {
             jackal.move(-speed * timePassed, 0);
+            KoratEmpire::incrementRunFrame(&spriteFrame, &jackal);
         }
         else
         {

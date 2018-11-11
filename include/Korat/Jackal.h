@@ -10,6 +10,7 @@
 class Jackal: public KoratEmpire {
 public:
 	sf::Sprite jackal;
+	sf::IntRect spriteFrame;
 
 	Jackal(int, TextureLoader*);
 	virtual ~Jackal();
