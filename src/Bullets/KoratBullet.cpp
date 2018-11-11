@@ -64,19 +64,19 @@ void KoratBullet::setLane(int givenLane)
 {
 	switch(givenLane)
 	{
-		case 1:
+		case 335:
 			lane = lane1;
 			break;
-		case 2:
+		case 422:
 			lane = lane2;
 			break;
-		case 3:
+		case 508:
 			lane = lane3;
 			break;
-		case 4:
+		case 594:
 			lane = lane4;
 			break;
-		case 5:
+		case 680:
 			lane = lane5;
 			break;
 		default:
