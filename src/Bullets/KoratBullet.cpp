@@ -9,12 +9,20 @@
 #include "KoratBullet.h"
 #include <iostream>
 
+using namespace std;
+
 KoratBullet::KoratBullet(int givenLane, int givenHeight, TextureLoader* loadedTextures) {
     plasma.setTexture(loadedTextures->textureArray[0]);
+    cout << "stage 1" << endl;
     plasma.setTextureRect(sf::IntRect(256,64,32,32));
+    cout << "stage 2" << endl;
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
+	cout << "stage 3" << endl;
 	setLane(givenLane, givenHeight);
+	cout << "lane = " << lane << endl;
+	cout << "stage 4" << endl;
 	plasma.setPosition(height, lane);
+	cout << "stage 5" << endl;
 	speed = 500;
 	damage = 35;
 

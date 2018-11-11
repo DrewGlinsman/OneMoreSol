@@ -828,7 +828,7 @@ void GameLogic::queryKoratFiring()
 
 			if (currentKorat[i][j] -> getName() == "Jackal") //this only works for Jackals right now
 			{
-				if (currentKorat[i][j] -> queryToFire()) //if the Korat is ready to Fire
+				if (currentKorat[i][j] -> queryToFire() == true) //if the Korat is ready to Fire
 				{
 					//implement stuff to make Korat fire here
 					std::cout << "BULLET FIRING" << std::endl;
