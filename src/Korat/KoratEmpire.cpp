@@ -76,6 +76,11 @@ int KoratEmpire::getSpeed()
 
 }
 
+float KoratEmpire::getFireRate()
+{
+
+}
+
 int KoratEmpire::queryToFire()
 {
 

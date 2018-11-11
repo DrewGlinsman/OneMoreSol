@@ -9,11 +9,11 @@
 #include "KoratBullet.h"
 #include <iostream>
 
-KoratBullet::KoratBullet(int startLane, int givenHeight, TextureLoader* loadedTextures) {
+KoratBullet::KoratBullet(int givenLane, int givenHeight, TextureLoader* loadedTextures) {
     plasma.setTexture(loadedTextures->textureArray[0]);
     plasma.setTextureRect(sf::IntRect(256,64,32,32));
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
-	setLane(startLane, givenHeight);
+	setLane(givenLane, givenHeight);
 	plasma.setPosition(height, lane);
 	speed = 500;
 	damage = 35;
@@ -114,7 +114,7 @@ void KoratBullet::moveCurrentBullet(float timePassed)
 {
         if(plasma.getPosition().x < 1500)
         {
-            plasma.move(speed * timePassed, 0);
+            plasma.move(-speed * timePassed, 0);
             outOfBounds = false;
         }
         else

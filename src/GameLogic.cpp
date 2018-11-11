@@ -789,7 +789,7 @@ void GameLogic::queryKoratFiring()
 		for (int j = 0; j < currentKorat[i].size(); j++)
 		{
 
-			if (currentKorat[i][j] -> getName() == "Grunt") //this only works for Grunts right now
+			if (currentKorat[i][j] -> getName() == "Jackal") //this only works for Jackals right now
 			{
 				if (currentKorat[i][j] -> queryToFire()) //if the Korat is ready to Fire
 				{
@@ -797,8 +797,9 @@ void GameLogic::queryKoratFiring()
 
 					Bullet* newBullet;
 
-					newBullet = new KoratBullet(-1, currentKorat[i][j] -> getPositionX(), loadedTextures);
+					newBullet = new KoratBullet(currentKorat[i][j] -> getPositionX(), currentKorat[i][j] -> getLane(),  loadedTextures);
 
+					currentBullet[currentKorat[i][j] -> getLane() - 1].emplace_back(newBullet);
 				} else {
 					//pass? basically ask again later
 				}

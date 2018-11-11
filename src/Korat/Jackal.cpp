@@ -141,3 +141,23 @@ int Jackal::getSpeed()
 {
     return speed;
 }
+
+float Jackal::getFireRate()
+{
+	return fireRate;
+}
+
+int Jackal::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
+}

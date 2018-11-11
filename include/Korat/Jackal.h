@@ -38,6 +38,10 @@ public:
 
 	int getSpeed();
 
+	float getFireRate();
+
+	int queryToFire();
+
 private:
 
 	int lane;
@@ -50,6 +54,10 @@ private:
     int lane3 = 508;
     int lane4 = 594;
     int lane5 = 680;
+
+    float fireRate = 1;
+    float lastBulletFired;
+    sf::Clock fireBulletClock;
 
     bool koratDeathSoundPlayed = false;
 	bool koratLeftSoundPlayed = false;
