@@ -56,7 +56,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 1;
+        int currentLevel = 11;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -81,8 +81,8 @@ class GameLogic{
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
         int sunSetOrientation = 150;
-        float levelSpeedModifier = 2.5;
-        float levelSpawnModifier = 1;
+        float levelSpeedModifier = 10;
+        float levelSpawnModifier = 3;
         float rotation;
         float spawnTime;
         bool enemyBehindTom = false;
