@@ -39,13 +39,16 @@ class GameLogic{
 
     private:
         //wrap it in reference wrapper so that it passes references instead of copies
-        std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
 
+        std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         std::vector<shared_ptr<KoratEmpire>> dyingKorat{};
 
-        BikeBoss* bikeBoss;
-        TankBoss* tankBoss;
+        std::vector<shared_ptr<BikeBoss>> currentBikeBoss{};
+        std::vector<shared_ptr<BikeBoss>> dyingBikeBoss{};
+
+        std::vector<shared_ptr<TankBoss>> currentTankBoss{};
+        std::vector<shared_ptr<TankBoss>> dyingTankBoss{};
 
         sf::Clock spawnClock;
         sf::Clock fireBulletClock;
@@ -56,7 +59,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 1;
+        int currentLevel = 20;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -81,8 +84,8 @@ class GameLogic{
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
         int sunSetOrientation = 150;
-        float levelSpeedModifier = 2.5;
-        float levelSpawnModifier = 1;
+        float levelSpeedModifier = 10;
+        float levelSpawnModifier = 3;
         float rotation;
         float spawnTime;
         bool enemyBehindTom = false;
@@ -98,6 +101,8 @@ class GameLogic{
 
         bool movingUp = false;
         bool movingDown = false;
+
+        double directMove = 1;
 
     public:
         GameLogic();
@@ -139,16 +144,14 @@ class GameLogic{
         void updateDyingKorat();
 
         void startBikeBoss(TextureLoader*);
-
         void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
-
         void drawBikeBoss(sf::RenderWindow& window);
+        void updateDyingBikeBoss();
 
-        void startTankBoss();
-
-        void moveTankBoss();
-
+        void startTankBoss(TextureLoader*);
+        void moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
         void drawTankBoss(sf::RenderWindow& window);
+        void updateDyingTankBoss();
 
         int getLevel();
 };

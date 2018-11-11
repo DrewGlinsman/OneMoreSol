@@ -32,23 +32,21 @@ void BikeBoss::initBossUp()
     }
     else if (getBossPosition() == lane3)
     {
-        setBossPosition(lane3 - 5);
+        setBossPosition(lane3 - 2);
     }
     else if (getBossPosition() == lane4)
     {
-        setBossPosition(lane4 - 5);
+        setBossPosition(lane4 - 2);
     }
 }
 
 bool BikeBoss::moveBossUp(float timePassed)
 {
-        std::cout << getBossPosition() << std::endl;
     if (getBossPosition() > lane2)
     {
-        if (getBossPosition() < lane3 - 4 | getBossPosition() > lane3 + 4)
+        if (getBossPosition() < lane3 - 1 | getBossPosition() > lane3 + 1)
         {
-            bikeBoss.move(0, -speed * timePassed);
-            std::cout << "moving up" << std::endl;
+            bikeBoss.move(0, -speed * timePassed * 2);
             return false;
         }
         else
@@ -68,11 +66,11 @@ void BikeBoss::initBossDown()
 {
     if (getBossPosition() == lane2)
     {
-       setBossPosition(lane2 + 5);
+       setBossPosition(lane2 + 2);
     }
     else if (getBossPosition() == lane3)
     {
-       setBossPosition(lane3 + 5);
+       setBossPosition(lane3 + 2);
     }
     else if (getBossPosition() == lane4)
     {
@@ -84,9 +82,9 @@ bool BikeBoss::moveBossDown(float timePassed)
 {
     if (getBossPosition() < lane4)
     {
-        if (getBossPosition() < lane3 - 4 | getBossPosition() > lane3 + 4)
+        if (getBossPosition() < lane3 - 1 | getBossPosition() > lane3 + 1)
         {
-            bikeBoss.move(0, speed * timePassed);
+            bikeBoss.move(0, speed * timePassed * 2);
             return false;
         }
         else
@@ -119,7 +117,8 @@ bool BikeBoss::checkDeath()
     if (health <= 0)
     {
 		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
-		if (postDeathTime >= .5)
+		cout << postDeathTime << endl;
+		if (postDeathTime >= 3)
 		{
 			postDeathClock.restart();
 			return true;
@@ -127,6 +126,7 @@ bool BikeBoss::checkDeath()
 		else
         {
 			speed = 0;
+			return false;
 		}
     }
     else
@@ -141,6 +141,22 @@ bool BikeBoss::checkSurvive()
 {
     return survive;
 }
+
+sf::Sprite BikeBoss::getBoss()
+{
+    return bikeBoss;
+}
+
+void BikeBoss::wasShot(int damage)
+{
+    health = health - damage;
+}
+
+int BikeBoss::getSpeed()
+{
+    return speed;
+}
+
 
 void BikeBoss::drawBoss(sf::RenderWindow& window)
 {

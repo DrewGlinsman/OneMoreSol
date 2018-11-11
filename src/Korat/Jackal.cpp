@@ -117,6 +117,7 @@ bool Jackal::checkDeath()
 				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
+			return false;
 		}
     }
     else
