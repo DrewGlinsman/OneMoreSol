@@ -247,8 +247,6 @@ void GameLogic::updateBulletOrder()
 void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
 {
     lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
-    cout << lastBulletFired << endl;
-    cout <<currentGun -> getFireRate() << endl;
 
     if((lastBulletFired > currentGun -> getFireRate()) &&
        (currentGun -> getShotsFired() != currentGun -> getClipSize()))
@@ -288,6 +286,13 @@ bool GameLogic::reloadCurrentGun(MajorTom* majorTom, Gun* currentGun)
     else
     {
         reloadTime = reloadClock.getElapsedTime().asSeconds();
+        if(reloadTime > currentGun -> getReloadSpeed() && reloadStarted == true)
+        {
+            currentGun -> resetShotsFired();
+            reloadClock.restart();
+            reloadStarted = false;
+            return true;
+        }
         cout << reloadTime << endl;
         return false;
     }

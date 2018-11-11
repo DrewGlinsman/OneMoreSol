@@ -56,7 +56,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 11;
+        int currentLevel = 1;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -139,15 +139,11 @@ class GameLogic{
         void updateDyingKorat();
 
         void startBikeBoss(TextureLoader*);
-
         void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
-
         void drawBikeBoss(sf::RenderWindow& window);
 
         void startTankBoss();
-
         void moveTankBoss();
-
         void drawTankBoss(sf::RenderWindow& window);
 
         int getLevel();
