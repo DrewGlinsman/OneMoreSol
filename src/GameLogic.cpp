@@ -443,7 +443,7 @@ void GameLogic::spawnBullet(float timePassed)
     switch(bulletSpawnType)
     {
         case 1:
-            newBullet = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
+            newBullet = new PlasmaPistolBullet(bulletSpawnLane, -1, loadedTextures);
             break;
         case 2:
             newBullet = new PlasmaShotgunBullet(bulletSpawnLane, loadedTextures);
@@ -464,7 +464,7 @@ void GameLogic::spawnBullet(float timePassed)
             newBullet = new BFGBullet (bulletSpawnLane, loadedTextures);
             break;
         default:
-            newBullet = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
+            newBullet = new PlasmaPistolBullet(bulletSpawnLane, -1, loadedTextures);
             cout << "Break Case Activated" << endl;
             break;
 
@@ -793,6 +793,11 @@ void GameLogic::queryKoratFiring()
 				if (currentKorat[i][j] -> queryToFire()) //if the Korat is ready to Fire
 				{
 					//implement stuff to make Korat fire here
+
+					Bullet* newBullet;
+
+					newBullet = new PlasmaPistolBullet(-1, currentKorat[i][j] -> getPositionX(), loadedTextures);
+
 				} else {
 					//pass? basically ask again later
 				}

@@ -10,14 +10,14 @@ class PlasmaPistolBullet: public Bullet {
 public:
 	sf::Sprite plasma;
 
-	PlasmaPistolBullet(int, TextureLoader*);
+	PlasmaPistolBullet(int, int, TextureLoader*);
 	virtual ~PlasmaPistolBullet();
 
 	int getDamage();
 
 	int getLane();
 
-	void setLane(int givenLane);
+	void setLane(int givenLane, int height);
 
 	void moveCurrentBullet(float timePassed);
 
@@ -37,6 +37,7 @@ private:
 	int height;
 	int speed;
 	int damage;
+	int givenHeight;
 
     int lane1 = 335;
     int lane2 = 422;
