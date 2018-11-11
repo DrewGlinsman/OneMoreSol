@@ -24,7 +24,7 @@ public:
 
 	int getLane();
 
-	void setLane(int givenLane, int height);
+	void setLane(int givenLane);
 
 	void moveCurrentBullet(float timePassed);
 
