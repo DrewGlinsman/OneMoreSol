@@ -130,6 +130,7 @@ class GameLogic{
         void selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
         void spawnBullet(float timePassed);
         int decideBulletLane(MajorTom* majorTom);
+        int decideBulletLaneKorat(int givenLane);
         int decideBulletType(Gun* currentGun);
 
         //changes survivor count

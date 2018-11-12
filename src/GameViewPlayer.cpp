@@ -115,7 +115,10 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         }
 
         logic -> moveBullet(delta);
+        std::cout << "before MKB called" << std::endl;
         logic -> moveKoratBullet(delta, majorTom);
+        std::cout << "after MKB called" << std::endl;
+
 
 //-----------------------------------------------------------------
         if(keepMovingUp == true)

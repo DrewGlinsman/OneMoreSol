@@ -526,6 +526,22 @@ int GameLogic::decideBulletLane(MajorTom* majorTom)
         cout << "bullet shit is broken" << endl;
 }
 
+int GameLogic::decideBulletLaneKorat(int givenLane)
+{
+    if (givenLane == lane1)
+        return 1;
+    else if (givenLane == lane2)
+        return 2;
+    else if (givenLane == lane3)
+        return 3;
+    else if (givenLane == lane4)
+        return 4;
+    else if (givenLane == lane5)
+        return 5;
+    else
+        cout << "bullet shit is broken 2" << endl;
+}
+
 int GameLogic::decideBulletType(Gun* currentGun)
 {
     if (currentGun -> getBulletType() == 1)
@@ -836,7 +852,8 @@ void GameLogic::queryKoratFiring()
                     cout << currentKorat[i][j] -> getLane() << " <- current Korat Lane" << endl;
 					newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
 
-					currentKoratBullet[currentKorat[i][j] -> getLane() - 1].emplace_back(newBullet);
+					int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane()) - 1;
+					currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
 				} else {
 					//pass? basically ask again later
 				}
