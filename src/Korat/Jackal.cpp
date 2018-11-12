@@ -147,7 +147,7 @@ float Jackal::getFireRate()
 	return fireRate;
 }
 
-void Jackal::setFireRate(float givenFireRate)
+void Jackal::setFireRate(double givenFireRate)
 {
 	fireRate = givenFireRate;
 }

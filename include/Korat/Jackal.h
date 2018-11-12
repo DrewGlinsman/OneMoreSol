@@ -41,7 +41,7 @@ public:
 
 	float getFireRate();
 
-	void setFireRate(float);
+	void setFireRate(double);
 
 	bool queryToFire();
 
@@ -58,7 +58,7 @@ private:
     int lane4 = 594;
     int lane5 = 680;
 
-    float fireRate = 1;
+    double fireRate = 1;
     float lastBulletFired;
     sf::Clock fireBulletClock;
 
