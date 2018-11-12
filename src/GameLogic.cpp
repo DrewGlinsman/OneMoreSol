@@ -427,6 +427,7 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 			{
 			//	currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
 			}
+			cout << currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()) << endl;
 			if (currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
 			{
 				currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
@@ -849,9 +850,7 @@ void GameLogic::queryKoratFiring()
 				if (currentKorat[i][j] -> queryToFire() == true) //if the Korat is ready to Fire
 				{
 					//implement stuff to make Korat fire here
-					std::cout << "BULLET FIRING" << std::endl;
 					Bullet* newBullet;
-                    cout << currentKorat[i][j] -> getLane() << " <- current Korat Lane" << endl;
 					newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
 
 					int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());

@@ -12,20 +12,12 @@
 using namespace std;
 
 KoratBullet::KoratBullet(int givenLane, int givenHeight, TextureLoader* loadedTextures) {
-    //plasma.setTexture(loadedTextures->textureArray[0]);
-    cout << "stage 1" << endl;
-    //plasma.setTextureRect(sf::IntRect(256,64,32,32));
-    cout << "stage 2" << endl;
-	plasma.setSize(sf::Vector2f(16.f,16.f));
-	plasma.setOrigin(sf::Vector2f(16.f/2,16.f/2));
-	cout << "stage 3" << endl;
-	cout << "given lane is: " << givenLane << std::endl;
+    plasma.setTexture(loadedTextures->textureArray[0]);
+    plasma.setTextureRect(sf::IntRect(256,64,32,32));
+	//plasma.setSize(sf::Vector2f(16.f,16.f));
+	plasma.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(givenLane);
-	cout << "lane = " << lane << endl;
-	cout << "height = " << givenHeight << endl;
-	cout << "stage 4" << endl;
 	plasma.setPosition(givenHeight, lane);
-	cout << "stage 5" << endl;
 	speed = 500;
 	damage = 35;
 
@@ -90,7 +82,6 @@ void KoratBullet::moveCurrentBullet(float timePassed)
 {
         if(plasma.getPosition().x > -100)
         {
-        	std::cout << "ABOUT TO MOVE BULLET" << std::endl;
             plasma.move(-speed * timePassed, 0);
             outOfBounds = false;
         }
@@ -112,6 +103,6 @@ bool KoratBullet::getOutOfBounds()
 
 sf::Sprite KoratBullet::getBullet()
 {
-//    return plasma;
+    return plasma;
 }
 

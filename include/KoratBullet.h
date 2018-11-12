@@ -15,7 +15,7 @@
 
 class KoratBullet: public Bullet {
 public:
-	sf::RectangleShape plasma;
+	sf::Sprite plasma;
 
 	KoratBullet(int, int, TextureLoader*);
 	virtual ~KoratBullet();
