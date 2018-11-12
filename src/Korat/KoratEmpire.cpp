@@ -76,7 +76,12 @@ int KoratEmpire::getSpeed()
 
 }
 
-float KoratEmpire::getFireRate()
+void KoratEmpire::setFireRate()
+{
+
+}
+
+double KoratEmpire::getFireRate()
 {
 
 }

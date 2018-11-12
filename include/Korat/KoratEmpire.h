@@ -34,7 +34,9 @@ public:
 
 	virtual int getSpeed();
 
-	virtual float getFireRate();
+	virtual void setFireRate();
+
+	virtual double getFireRate();
 
 	virtual bool queryToFire();
 
