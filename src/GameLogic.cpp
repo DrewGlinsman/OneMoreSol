@@ -423,13 +423,16 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 	{
 		for (int j = 0; j < currentKoratBullet[i].size(); j++)
 		{
-			if (currentKoratBullet[i][j] -> getHeight() > majorTom -> getTomPositionX())
+			//if (currentKoratBullet[i][j] -> getHeight() > majorTom -> getTomPositionX())
 			{
-				currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
-			} else if (currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
+			//	currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
+			}
+			if (currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
 			{
 				currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
-			} else {
+			}
+			else
+            {
 				if (currentKoratBullet[i][j] -> getOutOfBounds() == false)
 				{
 					currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
