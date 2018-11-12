@@ -6,6 +6,7 @@
 #include <SFML/Audio.hpp>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
+#include "rngs.h"
 
 class Jackal: public KoratEmpire {
 public:
@@ -39,6 +40,8 @@ public:
 	int getSpeed();
 
 	float getFireRate();
+
+	void setFireRate(float);
 
 	bool queryToFire();
 

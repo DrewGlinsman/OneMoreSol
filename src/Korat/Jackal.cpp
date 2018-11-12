@@ -147,6 +147,11 @@ float Jackal::getFireRate()
 	return fireRate;
 }
 
+void Jackal::setFireRate(float givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
 bool Jackal::queryToFire()
 {
 	bool readyToFire = false;
@@ -155,6 +160,7 @@ bool Jackal::queryToFire()
 	if(lastBulletFired > getFireRate())
 	{
 	   readyToFire = true;
+	   setFireRate(Random() * 3);
 	   fireBulletClock.restart();
 	}
 
