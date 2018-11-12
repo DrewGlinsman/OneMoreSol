@@ -160,7 +160,15 @@ bool Jackal::queryToFire()
 	if(lastBulletFired > getFireRate())
 	{
 	   readyToFire = true;
-	   setFireRate(Random() * 3);
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
 	   fireBulletClock.restart();
 	}
 
