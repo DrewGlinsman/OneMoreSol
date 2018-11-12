@@ -39,7 +39,7 @@ public:
 
 	int getSpeed();
 
-	float getFireRate();
+	double getFireRate();
 
 	void setFireRate(double);
 

@@ -142,7 +142,7 @@ int Jackal::getSpeed()
     return speed;
 }
 
-float Jackal::getFireRate()
+double Jackal::getFireRate()
 {
 	return fireRate;
 }
