@@ -430,7 +430,7 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 			cout << currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()) << endl;
 			if (currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
 			{
-                majorTom -> wasShot(currentBullet[i][j] -> getDamage());
+                majorTom -> wasShot(currentKoratBullet[i][j] -> getDamage());
 				currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
 			}
 			else
