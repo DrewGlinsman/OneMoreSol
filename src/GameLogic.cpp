@@ -852,7 +852,7 @@ void GameLogic::queryKoratFiring()
                     cout << currentKorat[i][j] -> getLane() << " <- current Korat Lane" << endl;
 					newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
 
-					int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane()) - 1;
+					int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
 					currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
 				} else {
 					//pass? basically ask again later
