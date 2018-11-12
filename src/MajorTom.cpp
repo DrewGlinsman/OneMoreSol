@@ -252,6 +252,12 @@ sf::Sprite MajorTom::getTom()
     return majorTom;
 }
 
+void MajorTom::wasShot(int damage)
+{
+    setHealth(getHealth() - damage);
+
+}
+
 int MajorTom::getHealth()
 {
     return currentHealth;

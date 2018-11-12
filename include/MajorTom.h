@@ -60,6 +60,7 @@ class MajorTom {
 
         int getHealth();
         void setHealth(int);
+        void wasShot(int);
 
         void shoot(float);
 
