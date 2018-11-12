@@ -247,6 +247,11 @@ bool MajorTom::keepMoving(float timePassed, string direction)
         }
 }
 
+sf::Sprite MajorTom::getTom()
+{
+    return majorTom;
+}
+
 int MajorTom::getHealth()
 {
     return currentHealth;

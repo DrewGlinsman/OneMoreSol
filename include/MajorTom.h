@@ -52,6 +52,8 @@ class MajorTom {
         void setTomPositionX(float);
         void setTomPositionY(float);
 
+        sf::Sprite getTom();
+
         bool initMove(float, string);
 
         bool keepMoving(float, string);
