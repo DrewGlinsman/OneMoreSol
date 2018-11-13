@@ -52,6 +52,7 @@ public:
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
     sf::Text survivorCnt;
+    sf::Text majorTomHealth;
     sf::Event Event;
 
     bool lost;
@@ -67,6 +68,7 @@ public:
     bool gameViewIsOpen(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();
+    void updateMajorTomHealth();
     void drawLossScreen(sf::RenderWindow &window);
     void selectButton(sf::RenderWindow &window, int y);
 

@@ -60,6 +60,13 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
+    //Major Tom Health Display
+	majorTomHealth.setFont(gameFont);
+	majorTomHealth.setCharacterSize(22);
+	majorTomHealth.setString("100/100 Health");//might be able to take this out after survivor count is looped in updater
+	majorTomHealth.setFillColor(sf::Color(0,0,0,255));
+	majorTomHealth.setPosition(75,770);
+
     logic = new GameLogic();
     majorTom = new MajorTom(loadedTextures);
 
@@ -294,6 +301,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     }
 
     window.draw(survivorCnt);
+    window.draw(majorTomHealth);
     window.draw(weapon1);
     window.draw(weapon2);
     window.draw(weapon3);
@@ -303,6 +311,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.draw(weapon7);
 
     updateSurvivorCount();
+    updateMajorTomHealth();
 
     window.display();
 }
@@ -381,4 +390,10 @@ void GameViewPlayer::updateSurvivorCount()
 {
     string cnt = std::to_string(majorTom->getSurvivors()) + "/20 Survivors";
     survivorCnt.setString(cnt);
+}
+
+void GameViewPlayer::updateMajorTomHealth()
+{
+	string cnt = std::to_string(majorTom->getHealth()) + "/100 Health";
+	majorTomHealth.setString(cnt);
 }

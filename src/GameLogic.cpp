@@ -621,6 +621,8 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
     if (majorTom->getSurvivors() == 0)
     {
         loseLevel(gameSky, majorTom);
+    } else if (majorTom->getHealth() <= 0) {
+    	loseLevel(gameSky, majorTom);
     }
 
     //-------------------------------------------------------------
@@ -705,6 +707,7 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
     }
 
     majorTom->setSurvivors(survivorCountSaved);
+    majorTom->setHealth(100);
 
 }
 
