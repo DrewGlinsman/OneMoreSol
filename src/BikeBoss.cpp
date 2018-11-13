@@ -109,7 +109,7 @@ void BikeBoss::moveBoss(float timePassed)
     if(bikeBoss.getPosition().x > -100)
     {
         bikeBoss.move(-speed * timePassed, 0);
-        if(!((int)bikeBoss.getPosition().x % 5))//slows down the switching of frames
+        if(!((int)bikeBoss.getPosition().x % 33))//slows down the switching of frames
         {
             incrementRunFrameBoss(&spriteFrame, &bikeBoss);
         }
@@ -122,7 +122,7 @@ void BikeBoss::moveBoss(float timePassed)
 
 void BikeBoss::incrementRunFrameBoss(sf::IntRect* sF, sf::Sprite* baddie)
 {
-    sF->left = ((sF->left+192)%576)+832;
+    sF->left = ((sF->left)%192);//+832;
     baddie->setTextureRect(*sF);
 }
 

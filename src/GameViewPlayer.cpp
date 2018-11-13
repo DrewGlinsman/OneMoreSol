@@ -60,6 +60,13 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
+    //Score count display
+    scoreCnt.setFont(gameFont);
+    scoreCnt.setCharacterSize(22);
+    scoreCnt.setString("0 Score");//might be able to take out due to updater code redundancy
+    scoreCnt.setFillColor(sf::Color(0,0,0,255));
+    scoreCnt.setPosition(1350,20);
+
     logic = new GameLogic();
     majorTom = new MajorTom(loadedTextures);
 
@@ -293,6 +300,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
         logic -> drawTankBoss(window);
     }
 
+    window.draw(scoreCnt);
     window.draw(survivorCnt);
     window.draw(weapon1);
     window.draw(weapon2);

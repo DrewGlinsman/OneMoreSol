@@ -52,6 +52,7 @@ public:
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
     sf::Text survivorCnt;
+    sf::Text scoreCnt;
     sf::Event Event;
 
     bool lost;
