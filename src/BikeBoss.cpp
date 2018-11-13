@@ -109,7 +109,7 @@ void BikeBoss::moveBoss(float timePassed)
     if(bikeBoss.getPosition().x > -100)
     {
         bikeBoss.move(-speed * timePassed, 0);
-        if(!((int)bikeBoss.getPosition().x % 5))
+        if(!((int)bikeBoss.getPosition().x % 5))//slows down the switching of frames
         {
             incrementRunFrameBoss(&spriteFrame, &bikeBoss);
         }

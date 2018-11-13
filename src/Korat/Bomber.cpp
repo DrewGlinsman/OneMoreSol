@@ -69,7 +69,10 @@ void Bomber::moveCurrentKorat(float timePassed)
         if(bomber.getPosition().x > -100)
         {
             bomber.move(-speed * timePassed, 0);
-            KoratEmpire::incrementRunFrame5(&spriteFrame, &bomber);
+            if(!((int)bomber.getPosition().x % 7))
+            {
+                KoratEmpire::incrementRunFrame5(&spriteFrame, &bomber);
+            }
         }
         else
         {
