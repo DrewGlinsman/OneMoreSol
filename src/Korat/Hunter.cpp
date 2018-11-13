@@ -67,7 +67,7 @@ void Hunter::moveCurrentKorat(float timePassed)
         if(hunter.getPosition().x > -100)
         {
             hunter.move(-speed * timePassed, 0);
-            if(!((int)hunter.getPosition().x % 7))
+            if(!((int)hunter.getPosition().x % 10))
                 KoratEmpire::incrementRunFrame(&spriteFrame, &hunter);
         }
         else

@@ -48,7 +48,7 @@ void Grunt::moveCurrentKorat(float timePassed)
         if(grunt.getPosition().x > -100)
         {
             grunt.move(-speed * timePassed, 0);
-            if(!((int)grunt.getPosition().x % 7))
+            if(!((int)grunt.getPosition().x % 10))
                 KoratEmpire::incrementRunFrame(&spriteFrame, &grunt);
         }
         else

@@ -69,7 +69,7 @@ void Biker::moveCurrentKorat(float timePassed)
         if(biker.getPosition().x > -100)
         {
             biker.move(-speed * timePassed, 0);
-            if(!((int)biker.getPosition().x % 7))
+            if(!((int)biker.getPosition().x % 10))
                 KoratEmpire::incrementRunFrame(&spriteFrame, &biker);
         }
         else

@@ -68,7 +68,7 @@ void Brute::moveCurrentKorat(float timePassed)
         if(brute.getPosition().x > -100)
         {
             brute.move(-speed * timePassed, 0);
-            if(!((int)brute.getPosition().x % 7))
+            if(!((int)brute.getPosition().x % 10))
                 KoratEmpire::incrementRunFrame(&spriteFrame, &brute);
         }
         else
