@@ -385,8 +385,15 @@ void GameLogic::moveBullet(float timePassed)
                 {
                     if(currentBullet[i][j] -> getBullet().getGlobalBounds().intersects(currentBikeBoss[z] -> getBoss().getGlobalBounds()))
                     {
-                        currentBikeBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
-                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                        if(currentBullet[i][j] -> getBullet().getPosition().x > currentBikeBoss[z] -> getBoss().getPosition().x - 50)
+                        {
+                            currentBikeBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
+                            currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
+                        else
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
                     }
                     else
                     {
@@ -424,8 +431,15 @@ void GameLogic::moveBullet(float timePassed)
                 {
                     if(currentBullet[i][j] -> getBullet().getGlobalBounds().intersects(currentTankBoss[z] -> getBoss().getGlobalBounds()))
                     {
+                        if(currentBullet[i][j] -> getBullet().getPosition().x > (currentTankBoss[z] -> getBoss().getPosition().x))
+                        {
                         currentTankBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
                         currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
+                        else
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
                     }
                     else
                     {
@@ -462,15 +476,17 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 	{
 		for (int j = 0; j < currentKoratBullet[i].size(); j++)
 		{
-			//if (currentKoratBullet[i][j] -> getHeight() > majorTom -> getTomPositionX())
-			{
-			//	currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
-			}
-			cout << currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()) << endl;
 			if (currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
 			{
-                majorTom -> wasShot(currentKoratBullet[i][j] -> getDamage());
-				currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
+			    if(currentKoratBullet[i][j] -> getBullet().getPosition().x < majorTom -> getTomPositionX())
+                {
+                    majorTom -> wasShot(currentKoratBullet[i][j] -> getDamage());
+                    currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
+                }
+                else
+                {
+                    currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
+                }
 			}
 			else
             {
@@ -867,7 +883,6 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                 {
                         dyingTankBoss.emplace_back(move(currentTankBoss[i]));
                         currentTankBoss.erase(currentTankBoss.begin() + i);
-
                 }
                 else
                 {

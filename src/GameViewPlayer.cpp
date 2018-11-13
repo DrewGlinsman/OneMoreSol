@@ -283,7 +283,6 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     majorTom -> drawTom(window);
 
     logic -> drawKorat(window);
-    logic -> drawBullet(window);
 
     if (logic -> checkEnd())
     {
@@ -299,6 +298,8 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     {
         logic -> drawTankBoss(window);
     }
+
+    logic -> drawBullet(window);
 
     window.draw(survivorCnt);
     window.draw(majorTomHealth);
