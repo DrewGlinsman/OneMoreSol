@@ -10,6 +10,7 @@
 class Grunt: public KoratEmpire {
 public:
 	sf::Sprite grunt;
+	sf::IntRect spriteFrame;
 
 	Grunt(int, TextureLoader*);
 	virtual ~Grunt();
@@ -32,11 +33,10 @@ public:
 
 	float getPositionX();
 
-	bool checkSurvive();
-
+	//should be in koratempire as same for all classes
 	int getHealth();
-
 	int getSpeed();
+	bool checkSurvive();
 
 private:
 

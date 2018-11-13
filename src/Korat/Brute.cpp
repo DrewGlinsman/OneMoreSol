@@ -5,8 +5,12 @@
 Brute::Brute(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
-	brute.setTexture(loadedTextures->mtSpriteSheet);
-	brute.setTextureRect(sf::IntRect(0,448,64,64));
+	brute.setTexture(loadedTextures->textureArray[0]);
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 640;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	brute.setTextureRect(spriteFrame);
 	brute.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	brute.setPosition(1500, lane);
@@ -64,6 +68,8 @@ void Brute::moveCurrentKorat(float timePassed)
         if(brute.getPosition().x > -100)
         {
             brute.move(-speed * timePassed, 0);
+            if(!((int)brute.getPosition().x % 10))
+                KoratEmpire::incrementRunFrame(&spriteFrame, &brute);
         }
         else
         {
@@ -107,6 +113,7 @@ bool Brute::checkDeath()
 				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
+			return false;
 		}
     }
     else

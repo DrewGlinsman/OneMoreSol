@@ -3,7 +3,7 @@
 #include <iostream>
 
 PlasmaPistolBullet::PlasmaPistolBullet(int startLane, TextureLoader* loadedTextures) {
-    plasma.setTexture(loadedTextures->mtSpriteSheet);
+    plasma.setTexture(loadedTextures->textureArray[0]);
     plasma.setTextureRect(sf::IntRect(256,64,32,32));
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
@@ -101,4 +101,3 @@ sf::Sprite PlasmaPistolBullet::getBullet()
 {
     return plasma;
 }
-

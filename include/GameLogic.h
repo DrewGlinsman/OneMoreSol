@@ -8,6 +8,8 @@
 #include <time.h>
 
 #include "MajorTom.h"
+#include "BikeBoss.h"
+#include "TankBoss.h"
 
 #include "KoratEmpire.h"
 #include "Grunt.h"
@@ -26,8 +28,9 @@
 #include "PlasmaPistolBullet.h"
 #include "PlasmaShotgunBullet.h"
 #include "BFGBullet.h"
-#include "TextureLoader.h"
 
+#include "TextureLoader.h"
+#include "AudioLoader.h"
 #include "rngs.h"
 
 using namespace std;
@@ -38,8 +41,16 @@ class GameLogic{
         //wrap it in reference wrapper so that it passes references instead of copies
         std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
+        std::vector<std::vector<shared_ptr<Bullet>>> currentKoratBullet {{},{},{},{},{}};
+
 
         std::vector<shared_ptr<KoratEmpire>> dyingKorat{};
+
+        std::vector<shared_ptr<BikeBoss>> currentBikeBoss{};
+        std::vector<shared_ptr<BikeBoss>> dyingBikeBoss{};
+
+        std::vector<shared_ptr<TankBoss>> currentTankBoss{};
+        std::vector<shared_ptr<TankBoss>> dyingTankBoss{};
 
         sf::Clock spawnClock;
         sf::Clock fireBulletClock;
@@ -50,7 +61,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 3;
+        int currentLevel = 10;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -75,8 +86,8 @@ class GameLogic{
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
         int sunSetOrientation = 150;
-        float levelSpeedModifier = 2.5;
-        float levelSpawnModifier = 1;
+        float levelSpeedModifier = 10;
+        float levelSpawnModifier = 3;
         float rotation;
         float spawnTime;
         bool enemyBehindTom = false;
@@ -92,10 +103,16 @@ class GameLogic{
 
         bool lostGame;
 
+        bool movingUp = false;
+        bool movingDown = false;
+
+        double directMove = 1;
+
     public:
         GameLogic();
 
         TextureLoader* loadedTextures;
+        AudioLoader* loadedAudio;
 
         //needs survivor count
         void moveKorat(float timePassed, MajorTom* majorTom);
@@ -108,11 +125,11 @@ class GameLogic{
         //needs survivor count
         void spawnKorat();
         bool checkEnd();
-
         int decideKoratLane();
         int decideKoratType(std::vector<int> enemyPool);
 
         void moveBullet(float timePassed);
+        void moveKoratBullet(float timePassed, MajorTom* majorTom);
         void drawBullet(sf::RenderWindow& window);
 
         void fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
@@ -120,6 +137,7 @@ class GameLogic{
         void selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
         void spawnBullet(float timePassed);
         int decideBulletLane(MajorTom* majorTom);
+        int decideBulletLaneKorat(int givenLane);
         int decideBulletType(Gun* currentGun);
 
         //changes survivor count
@@ -131,6 +149,18 @@ class GameLogic{
 
         void updateDyingKorat();
 
+        void startBikeBoss(TextureLoader*);
+        void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
+        void drawBikeBoss(sf::RenderWindow& window);
+        void updateDyingBikeBoss();
+
+        void startTankBoss(TextureLoader*);
+        void moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
+        void drawTankBoss(sf::RenderWindow& window);
+        void updateDyingTankBoss();
+
+        int getLevel();
+        void queryKoratFiring();
 
 };
 

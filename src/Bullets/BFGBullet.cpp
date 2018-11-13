@@ -3,7 +3,7 @@
 #include <iostream>
 
 BFGBullet::BFGBullet(int startLane, TextureLoader* loadedTextures) {
-    blast.setTexture(loadedTextures->mtSpriteSheet);
+    blast.setTexture(loadedTextures->textureArray[0]);
     blast.setTextureRect(sf::IntRect(256,256,192,192));
 	blast.setOrigin(sf::Vector2f(96.f,96.f));
 	setLane(startLane);

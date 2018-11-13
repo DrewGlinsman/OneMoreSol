@@ -9,7 +9,7 @@ MajorTom::MajorTom(TextureLoader* loadedTextures)
 {
     setGun(1);
 
-    majorTom.setTexture(loadedTextures->mtSpriteSheet);
+    majorTom.setTexture(loadedTextures->textureArray[0]);
     majorTom.setTextureRect(sf::IntRect(0,0,64,64));
     majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);
@@ -26,6 +26,11 @@ void MajorTom::drawTom (sf::RenderWindow& window)
 float MajorTom::getTomPosition()
 {
     return majorTom.getPosition().y;
+}
+
+float MajorTom::getTomPositionX()
+{
+    return majorTom.getPosition().x;
 }
 
 void MajorTom::setTomPositionX(float positionPassed)
@@ -242,8 +247,14 @@ bool MajorTom::keepMoving(float timePassed, string direction)
         }
 }
 
-void MajorTom::shoot(float timePassed)
+sf::Sprite MajorTom::getTom()
 {
+    return majorTom;
+}
+
+void MajorTom::wasShot(int damage)
+{
+    currentHealth = currentHealth - damage;
 
 }
 
@@ -293,7 +304,6 @@ void MajorTom::setGun(int gunNumber)
 
     }
 }
-
 
 int MajorTom::getSurvivors()
 {

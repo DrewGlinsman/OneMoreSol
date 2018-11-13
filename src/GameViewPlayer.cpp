@@ -5,31 +5,24 @@ using namespace std;
 GameViewPlayer::GameViewPlayer() // Player window constructor
 {
     if(!gameFont.loadFromFile("assets/impact.ttf"))
-        cout << "Could not load requested font." << endl;
-
-    if (!gameSound.loadFromFile("assets/Gamex_Music.ogg"))
-        cout << "Could not load request music." << endl;
-
-    if (!gameImage.loadFromFile("assets/playField.png"))
-        cout << "Could not load requested image." << endl;
-
-    if (!gameSky.loadFromFile("assets/skyBox.png"))
-        cout << "Failed to Load Skybox." << endl;
+        std::cout << "Could not load requested font." << std::endl;
 
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
-        cout << "Failed to Load Lock Icon." << endl;
+        std::cout << "Failed to Load Lock Icon." << std::endl;
 
     loadedTextures = new TextureLoader();
 
     sky.setRadius(894);
     sky.setOrigin(894,894);
     sky.setPosition(720, 450);
-    sky.setTexture(&gameSky);
+    sky.setTexture(&(loadedTextures->textureArray[2]));
 
     background.setOrigin(0,724);
     background.setPosition(0,900);
     background.setSize(sf::Vector2f(1440,724));
-    background.setTexture(&gameImage);
+    background.setTexture(&(loadedTextures->textureArray[1]));
+
+    lossScreen.setTexture(&(loadedTextures->textureArray[11]));
 
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
@@ -45,13 +38,13 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     weapon5.setPosition(807,790);
     weapon6.setPosition(935,790);
     weapon7.setPosition(1063,790);
-    weapon1.setTexture(loadedTextures->mtSpriteSheet);
-    weapon2.setTexture(loadedTextures->mtSpriteSheet);
-    weapon3.setTexture(loadedTextures->mtSpriteSheet);
-    weapon4.setTexture(loadedTextures->mtSpriteSheet);
-    weapon5.setTexture(loadedTextures->mtSpriteSheet);
-    weapon6.setTexture(loadedTextures->mtSpriteSheet);
-    weapon7.setTexture(loadedTextures->mtSpriteSheet);
+    weapon1.setTexture(loadedTextures->textureArray[0]);
+    weapon2.setTexture(loadedTextures->textureArray[0]);
+    weapon3.setTexture(loadedTextures->textureArray[0]);
+    weapon4.setTexture(loadedTextures->textureArray[0]);
+    weapon5.setTexture(loadedTextures->textureArray[0]);
+    weapon6.setTexture(loadedTextures->textureArray[0]);
+    weapon7.setTexture(loadedTextures->textureArray[0]);
     weapon1.setScale(sf::Vector2f(2.5f,2.5f));
     weapon2.setScale(sf::Vector2f(2.5f,2.5f));
     weapon3.setScale(sf::Vector2f(2.5f,2.5f));
@@ -67,10 +60,15 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
+    //Major Tom Health Display
+	majorTomHealth.setFont(gameFont);
+	majorTomHealth.setCharacterSize(22);
+	majorTomHealth.setString("100/100 Health");//might be able to take this out after survivor count is looped in updater
+	majorTomHealth.setFillColor(sf::Color(0,0,0,255));
+	majorTomHealth.setPosition(75,770);
+
     logic = new GameLogic();
     majorTom = new MajorTom(loadedTextures);
-
-    gameMusic.setBuffer(gameSound);
 
 }
 
@@ -103,10 +101,26 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         logic -> runLevel(sky, majorTom, delta);
         logic -> updateKoratOrder();
-        logic -> updateBulletOrder();
+        logic -> updateBulletOrder(); //Bullets generation and drawing
         logic -> updateDyingKorat();
         logic -> moveKorat(delta, majorTom);
+        logic -> queryKoratFiring();
+
+
+        if (logic -> getLevel() == 10)
+        {
+            logic -> moveBikeBoss(sky, majorTom, delta);
+            logic -> updateDyingBikeBoss();
+        }
+        if (logic -> getLevel() == 20)
+        {
+            logic -> moveTankBoss(sky, majorTom, delta);
+            logic -> updateDyingTankBoss();
+        }
+
         logic -> moveBullet(delta);
+        logic -> moveKoratBullet(delta, majorTom);
+
 
 //-----------------------------------------------------------------
         if(keepMovingUp == true)
@@ -269,9 +283,26 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     majorTom -> drawTom(window);
 
     logic -> drawKorat(window);
+
+    if (logic -> checkEnd())
+    {
+        drawLossScreen(window);
+        //draw retry screen
+    }
+
+    if (logic -> getLevel() == 10)
+    {
+        logic -> drawBikeBoss(window);
+    }
+    if (logic -> getLevel() == 20)
+    {
+        logic -> drawTankBoss(window);
+    }
+
     logic -> drawBullet(window);
 
     window.draw(survivorCnt);
+    window.draw(majorTomHealth);
     window.draw(weapon1);
     window.draw(weapon2);
     window.draw(weapon3);
@@ -281,12 +312,89 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.draw(weapon7);
 
     updateSurvivorCount();
+    updateMajorTomHealth();
 
     window.display();
 }
+
+void GameViewPlayer::drawLossScreen(sf::RenderWindow &window)
+{
+        //window.draw(lossScreen) #need a loss screen to implement
+        bool retry = false;
+        while(window.isOpen() && !retry)
+        {
+            while(window.pollEvent(Event))
+            {
+                if(Event.type == sf::Event::Closed)
+                {
+                    gameMusic.stop();
+                    window.close(); // Quit game
+                }
+
+                if(Event.type == sf::Event::KeyPressed)
+                {
+                    if(Event.key.code == sf::Keyboard::Escape)
+                    {
+                        gameMusic.stop();
+                        window.close();
+                    }
+
+                   if(Event.key.code == sf::Keyboard::Up || Event.key.code == sf::Keyboard::Down)
+                   {
+                       if (selector.y == 1)
+                       {
+                           selector.y = 0;
+                           //selectButton(window, 0, 0);
+
+                       }
+                       else
+                       {
+                           selector.y = 1;
+                           //selectButton(window, 0, 1);
+                       }
+                   }
+
+                   if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+                    {
+                        if (selector.y == 0)
+                        {
+                            retry = true;
+                        }
+                        else if (selector.y == 1)
+                        {
+                            gameMusic.stop();
+                            window.close();
+                        }
+                    }
+            }
+        }
+    }
+}
+
+void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
+{
+    if(y == 0)
+    {
+        retryBtnRec.setTexture(&(loadedTextures->textureArray[12]));
+        exitBtnRec.setTexture(&(loadedTextures->textureArray[15]));
+    }
+    else if(y == 1)
+    {
+        retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
+        exitBtnRec.setTexture(&(loadedTextures->textureArray[14]));
+    }
+    updateGame(window);//could this be more optimally placed?
+}
+
 
 void GameViewPlayer::updateSurvivorCount()
 {
     string cnt = std::to_string(majorTom->getSurvivors()) + "/20 Survivors";
     survivorCnt.setString(cnt);
+}
+
+void GameViewPlayer::updateMajorTomHealth()
+{
+	string cnt = std::to_string(majorTom->getHealth()) + "/100 Health";
+	majorTomHealth.setString(cnt);
 }

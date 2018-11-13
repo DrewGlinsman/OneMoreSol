@@ -10,6 +10,7 @@
 class Brute: public KoratEmpire {
 public:
 	sf::Sprite brute;
+	sf::IntRect spriteFrame;
 
 	Brute(int, TextureLoader*);
 	virtual ~Brute();

@@ -3,10 +3,15 @@
 #include <iostream>
 
 Elite::Elite(int startLane, TextureLoader* loadedTextures){
+
     lane = 0;
 
-	elite.setTexture(loadedTextures->mtSpriteSheet);
-	elite.setTextureRect(sf::IntRect(0,512,64,64));
+	elite.setTexture(loadedTextures->textureArray[0]);
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 512;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	elite.setTextureRect(spriteFrame);
 	elite.setOrigin(sf::Vector2f(32.f, 32.f));
 	setLane(startLane);
 	elite.setPosition(1500, lane);
@@ -67,6 +72,8 @@ void Elite::moveCurrentKorat(float timePassed)
         if(elite.getPosition().x > -100)
         {
             elite.move(-speed * timePassed, 0);
+            if(!((int)elite.getPosition().x % 10))
+                KoratEmpire::incrementRunFrame(&spriteFrame, &elite);
         }
         else
         {
@@ -110,6 +117,7 @@ bool Elite::checkDeath()
 				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
+			return false;
 		}
     }
     else

@@ -10,6 +10,7 @@
 class Elite: public KoratEmpire {
 public:
 	sf::Sprite elite;
+	sf::IntRect spriteFrame;
 
 	Elite(int, TextureLoader*);
 	virtual ~Elite();

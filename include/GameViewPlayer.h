@@ -24,6 +24,7 @@ public:
     const int iconScale = 64;
 
     sf::RectangleShape background;
+    sf::RectangleShape lossScreen;
     sf::CircleShape sky;
 
     sf::Sprite weapon1;
@@ -34,9 +35,12 @@ public:
     sf::Sprite weapon6;
     sf::Sprite weapon7;
 
+    sf::Vector2f selector;
+    sf::RectangleShape retryBtnRec;
+    sf::RectangleShape exitBtnRec;
+
     sf::Texture gameImage;
     sf::Texture playerImage;
-    sf::Texture gameSky;
     sf::Texture lockIcon;
 
     int lane1 = 335;
@@ -48,7 +52,10 @@ public:
     sf::SoundBuffer gameSound;
     sf::Sound gameMusic;
     sf::Text survivorCnt;
+    sf::Text majorTomHealth;
     sf::Event Event;
+
+    bool lost;
 
     GameLogic* logic;
 
@@ -61,6 +68,9 @@ public:
     bool gameViewIsOpen(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();
+    void updateMajorTomHealth();
+    void drawLossScreen(sf::RenderWindow &window);
+    void selectButton(sf::RenderWindow &window, int y);
 
 
 };

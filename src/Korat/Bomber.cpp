@@ -6,8 +6,12 @@ Bomber::Bomber(int startLane, TextureLoader* loadedTextures){
 
     lane = 0;
 
-	bomber.setTexture(loadedTextures->mtSpriteSheet);
-	bomber.setTextureRect(sf::IntRect(0,704,64,64));
+	bomber.setTexture(loadedTextures->textureArray[0]);
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 704;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	bomber.setTextureRect(spriteFrame);
 	bomber.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	bomber.setPosition(1500, lane);
@@ -65,6 +69,10 @@ void Bomber::moveCurrentKorat(float timePassed)
         if(bomber.getPosition().x > -100)
         {
             bomber.move(-speed * timePassed, 0);
+            if(!((int)bomber.getPosition().x % 10))
+            {
+                KoratEmpire::incrementRunFrame5(&spriteFrame, &bomber);
+            }
         }
         else
         {
@@ -108,6 +116,7 @@ bool Bomber::checkDeath()
 				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
+			return false;
 		}
     }
     else
