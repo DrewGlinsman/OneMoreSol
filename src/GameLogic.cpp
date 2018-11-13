@@ -29,9 +29,9 @@ GameLogic::GameLogic()
 
 }
 
-bool GameLogic::checkEnd()
+bool GameLogic::checkEnd(MajorTom &tom)
 {
-    if(survivorCount == 0)
+    if(tom.getSurvivors() == 0 || tom.getHealth() <= 0)
         return true;
     return false;
 }
@@ -634,13 +634,18 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
     //-------------------------------------------------------------
     // lose game check
+    if (checkEnd(*majorTom))
+    {
+        loseLevel(gameSky, majorTom);
+    }
+    /*
     if (majorTom->getSurvivors() == 0)
     {
         loseLevel(gameSky, majorTom);
     } else if (majorTom->getHealth() <= 0) {
     	loseLevel(gameSky, majorTom);
     }
-
+    */
     //-------------------------------------------------------------
 
 	if (rotation >= sunSetOrientation) // if the sun has set

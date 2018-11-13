@@ -61,7 +61,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 10;
+        int currentLevel = 15;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -124,7 +124,7 @@ class GameLogic{
         void selectKorat();
         //needs survivor count
         void spawnKorat();
-        bool checkEnd();
+        bool checkEnd(MajorTom &tom);
         int decideKoratLane();
         int decideKoratType(std::vector<int> enemyPool);
 

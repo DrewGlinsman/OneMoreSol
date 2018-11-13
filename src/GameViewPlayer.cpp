@@ -98,6 +98,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         gameClock.restart();
 
 //-----------------------------------------------------------------
+        if (logic -> checkEnd(*majorTom))
+        {
+            drawLossScreen(window);
+                //draw retry screen
+        }
 
         logic -> runLevel(sky, majorTom, delta);
         logic -> updateKoratOrder();
@@ -284,11 +289,6 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
     logic -> drawKorat(window);
 
-    if (logic -> checkEnd())
-    {
-        drawLossScreen(window);
-        //draw retry screen
-    }
 
     if (logic -> getLevel() == 10)
     {
@@ -319,7 +319,8 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
 void GameViewPlayer::drawLossScreen(sf::RenderWindow &window)
 {
-        //window.draw(lossScreen) #need a loss screen to implement
+        lossScreen.setTexture(&(loadedTextures->textureArray[11]));
+        window.draw(lossScreen);
         bool retry = false;
         while(window.isOpen() && !retry)
         {
@@ -344,13 +345,13 @@ void GameViewPlayer::drawLossScreen(sf::RenderWindow &window)
                        if (selector.y == 1)
                        {
                            selector.y = 0;
-                           //selectButton(window, 0, 0);
+                           selectButton(window, selector.y);
 
                        }
                        else
                        {
                            selector.y = 1;
-                           //selectButton(window, 0, 1);
+                           selectButton(window, selector.y);
                        }
                    }
 
@@ -383,7 +384,7 @@ void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
         retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
         exitBtnRec.setTexture(&(loadedTextures->textureArray[14]));
     }
-    updateGame(window);//could this be more optimally placed?
+    updateGame(window);
 }
 
 
