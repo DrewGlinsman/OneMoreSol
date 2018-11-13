@@ -39,9 +39,11 @@ class GameLogic{
 
     private:
         //wrap it in reference wrapper so that it passes references instead of copies
-        std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
-
         std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
+        std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
+        std::vector<std::vector<shared_ptr<Bullet>>> currentKoratBullet {{},{},{},{},{}};
+
+
         std::vector<shared_ptr<KoratEmpire>> dyingKorat{};
 
         std::vector<shared_ptr<BikeBoss>> currentBikeBoss{};
@@ -125,6 +127,7 @@ class GameLogic{
         int decideKoratType(std::vector<int> enemyPool);
 
         void moveBullet(float timePassed);
+        void moveKoratBullet(float timePassed, MajorTom* majorTom);
         void drawBullet(sf::RenderWindow& window);
 
         void fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
@@ -132,6 +135,7 @@ class GameLogic{
         void selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
         void spawnBullet(float timePassed);
         int decideBulletLane(MajorTom* majorTom);
+        int decideBulletLaneKorat(int givenLane);
         int decideBulletType(Gun* currentGun);
 
         //changes survivor count
@@ -154,6 +158,7 @@ class GameLogic{
         void updateDyingTankBoss();
 
         int getLevel();
+        void queryKoratFiring();
 };
 
 

@@ -47,6 +47,12 @@ public:
 
 	virtual int getSpeed();
 
+	virtual void setFireRate();
+
+	virtual double getFireRate();
+
+	virtual bool queryToFire();
+
 
     int lane;
 

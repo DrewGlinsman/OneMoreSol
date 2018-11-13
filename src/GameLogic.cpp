@@ -3,6 +3,7 @@ GameLogic.cpp
 
 */
 #include "GameLogic.h"
+#include "KoratBullet.h"
 #include <iostream>
 #include <typeinfo>
 
@@ -314,26 +315,32 @@ void GameLogic::moveBullet(float timePassed)
             {
                 if (currentKorat[i].size() != 0 && enemyBehindTom == false)
                 {
-                    if (currentBullet[i][j] -> getHeight() > currentKorat[i][0] -> getPositionX())
+                    if (currentBullet[i][j] -> getHeight() > currentKorat[i][0] -> getPositionX()) //If the bullet's X position is greater than X position of front facing Korat...
                     {
+                    	//the bullet is past the korat that its supposed to be colliding with -- this means the korat is past tom
+                    	//move the bullet anyways, but set "enemybehindtom" to true
                         currentBullet[i][j] -> moveCurrentBullet(timePassed);
                         enemyBehindTom = true;
                     }
-                    else if(currentBullet[i][j] -> getPositionX() < currentKorat[i][0] -> getPositionX())
+                    else if(currentBullet[i][j] -> getPositionX() < currentKorat[i][0] -> getPositionX()) //if the bullet is not past the korat it's supposed to collide with
                     {
+                    	//move the bullet closer to the korat
+                    	//enemybehindtom is false because the bullet is still enroute to the enemy korat in the lane
                         currentBullet[i][j] -> moveCurrentBullet(timePassed);
                         enemyBehindTom = false;
                     }
                     else
                     {
+                    	//the bullet has reached the korat -- start doing things that happen due to collision
                         currentKorat[i][0] -> wasShot(currentBullet[i][j] -> getDamage());
                         currentBullet[i].erase(currentBullet[i].begin() + j);
                         enemyBehindTom = false;
 
                     }
                 }
-                else if (currentKorat[i].size() > 1 && enemyBehindTom == true)
+                else if (currentKorat[i].size() > 1 && enemyBehindTom == true) //if there's more than one Korat and the latest Korat is behind tom
                 {
+                	//then we know to not look at the latest Korat but the one behind that Korat, which is hopefully also not behind Tom
                      if (currentBullet[i][j] -> getHeight() > currentKorat[i][1] -> getPositionX())
                     {
                         currentBullet[i][j] -> moveCurrentBullet(timePassed);
@@ -351,7 +358,7 @@ void GameLogic::moveBullet(float timePassed)
                         enemyBehindTom = false;
                     }
                 }
-                else
+                else //check and see if the bullet is out of bounds
                 {
                     if (currentBullet[i][j] -> getOutOfBounds() == false)
                     {
@@ -448,6 +455,38 @@ void GameLogic::moveBullet(float timePassed)
     }
 }
 
+void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
+{
+	//! KORAT BULLETS
+	for (int i = 0; i < currentKoratBullet.size(); i ++)
+	{
+		for (int j = 0; j < currentKoratBullet[i].size(); j++)
+		{
+			//if (currentKoratBullet[i][j] -> getHeight() > majorTom -> getTomPositionX())
+			{
+			//	currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
+			}
+			cout << currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()) << endl;
+			if (currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
+			{
+                majorTom -> wasShot(currentKoratBullet[i][j] -> getDamage());
+				currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
+			}
+			else
+            {
+				if (currentKoratBullet[i][j] -> getOutOfBounds() == false)
+				{
+					currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
+				}
+				else
+				{
+					currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
+				}
+			}
+		}
+	}
+}
+
 void GameLogic::drawBullet(sf::RenderWindow& window)
 {
     for (int i = 0; i < currentBullet.size(); i ++)
@@ -458,6 +497,15 @@ void GameLogic::drawBullet(sf::RenderWindow& window)
 
         }
     }
+
+    for (int i = 0; i < currentKoratBullet.size(); i ++)
+	{
+		for (int j = 0; j < currentKoratBullet[i].size(); j++)
+		{
+				currentKoratBullet[i][j] -> drawCurrentBullet(window);
+
+		}
+	}
 }
 
 void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
@@ -519,6 +567,22 @@ int GameLogic::decideBulletLane(MajorTom* majorTom)
         return 5;
     else
         cout << "bullet shit is broken" << endl;
+}
+
+int GameLogic::decideBulletLaneKorat(int givenLane)
+{
+    if (givenLane == lane1)
+        return 1;
+    else if (givenLane == lane2)
+        return 2;
+    else if (givenLane == lane3)
+        return 3;
+    else if (givenLane == lane4)
+        return 4;
+    else if (givenLane == lane5)
+        return 5;
+    else
+        cout << "bullet shit is broken 2" << endl;
 }
 
 int GameLogic::decideBulletType(Gun* currentGun)
@@ -824,4 +888,30 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
 int GameLogic::getLevel()
 {
     return currentLevel;
+}
+
+
+void GameLogic::queryKoratFiring()
+{
+	for (int i = 0; i < currentKorat.size(); i ++)
+	{
+		for (int j = 0; j < currentKorat[i].size(); j++)
+		{
+
+			if (currentKorat[i][j] -> getName() == "Jackal") //this only works for Jackals right now
+			{
+				if (currentKorat[i][j] -> queryToFire() == true) //if the Korat is ready to Fire
+				{
+					//implement stuff to make Korat fire here
+					Bullet* newBullet;
+					newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+
+					int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
+					currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
+				} else {
+					//pass? basically ask again later
+				}
+			}
+		}
+	}
 }
