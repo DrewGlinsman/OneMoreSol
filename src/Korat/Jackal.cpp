@@ -78,7 +78,8 @@ void Jackal::moveCurrentKorat(float timePassed)
         if(jackal.getPosition().x > -100)
         {
             jackal.move(-speed * timePassed, 0);
-            KoratEmpire::incrementRunFrame(&spriteFrame, &jackal);
+            if(!((int)jackal.getPosition().x % 10))
+                KoratEmpire::incrementRunFrame(&spriteFrame, &jackal);
         }
         else
         {

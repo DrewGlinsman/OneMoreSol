@@ -8,7 +8,11 @@ using namespace std;
 BikeBoss::BikeBoss(TextureLoader* loadedTextures)
 {
 	bikeBoss.setTexture(loadedTextures->textureArray[0]);
-    bikeBoss.setTextureRect(sf::IntRect(832,256,192,192));
+	spriteFrame.left = 832;//x
+	spriteFrame.top = 256;//y
+	spriteFrame.width = 192;
+	spriteFrame.height = 192;
+    bikeBoss.setTextureRect(spriteFrame);
     bikeBoss.setOrigin(sf::Vector2f(96.f,96.f));
     bikeBoss.setScale(1.2f,1.2f);
 	bikeBoss.setPosition(1500, lane3);
@@ -105,11 +109,21 @@ void BikeBoss::moveBoss(float timePassed)
     if(bikeBoss.getPosition().x > -100)
     {
         bikeBoss.move(-speed * timePassed, 0);
+        if(!((int)bikeBoss.getPosition().x % 5))//slows down the switching of frames
+        {
+            incrementRunFrameBoss(&spriteFrame, &bikeBoss);
+        }
     }
     else
     {
         survive = true;
     }
+}
+
+void BikeBoss::incrementRunFrameBoss(sf::IntRect* sF, sf::Sprite* baddie)
+{
+    sF->left = ((sF->left+192)%576)+832;
+    baddie->setTextureRect(*sF);
 }
 
 bool BikeBoss::checkDeath()

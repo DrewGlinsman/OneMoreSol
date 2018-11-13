@@ -27,6 +27,7 @@ public:
 
 	//was non virtual
 	virtual void incrementRunFrame(sf::IntRect*, sf::Sprite*);
+	virtual void incrementRunFrame5(sf::IntRect*, sf::Sprite*);
 
 	virtual void moveCurrentKorat(float timepassed);
 

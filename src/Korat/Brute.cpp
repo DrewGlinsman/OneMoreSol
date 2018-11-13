@@ -7,7 +7,7 @@ Brute::Brute(int startLane, TextureLoader* loadedTextures){
 
 	brute.setTexture(loadedTextures->textureArray[0]);
 	spriteFrame.left = 0;//x
-	spriteFrame.top = 448;//y
+	spriteFrame.top = 640;//y
 	spriteFrame.width = 64;
 	spriteFrame.height = 64;
 	brute.setTextureRect(spriteFrame);
@@ -68,7 +68,8 @@ void Brute::moveCurrentKorat(float timePassed)
         if(brute.getPosition().x > -100)
         {
             brute.move(-speed * timePassed, 0);
-            KoratEmpire::incrementRunFrame(&spriteFrame, &brute);
+            if(!((int)brute.getPosition().x % 10))
+                KoratEmpire::incrementRunFrame(&spriteFrame, &brute);
         }
         else
         {

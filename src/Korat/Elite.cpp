@@ -72,7 +72,8 @@ void Elite::moveCurrentKorat(float timePassed)
         if(elite.getPosition().x > -100)
         {
             elite.move(-speed * timePassed, 0);
-            KoratEmpire::incrementRunFrame(&spriteFrame, &elite);
+            if(!((int)elite.getPosition().x % 10))
+                KoratEmpire::incrementRunFrame(&spriteFrame, &elite);
         }
         else
         {

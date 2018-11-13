@@ -60,6 +60,12 @@ void KoratEmpire::incrementRunFrame(sf::IntRect* sF, sf::Sprite* baddie)
     baddie->setTextureRect(*sF);
 }
 
+void KoratEmpire::incrementRunFrame5(sf::IntRect* sF, sf::Sprite* baddie)
+{
+    sF->left = (sF->left+64)%320;
+    baddie->setTextureRect(*sF);
+}
+
 //NOTE: DOESNT WORK it references it's own korat sprite, which is blank.
 //need to implement xml reading to give it a specific coordinate to
 //assign sprites by type. otherwise korat would only be 1 type if
