@@ -48,8 +48,11 @@ class MajorTom {
         void drawTom(sf::RenderWindow& window);
 
         float getTomPosition();
+        float getTomPositionX();
         void setTomPositionX(float);
         void setTomPositionY(float);
+
+        sf::Sprite getTom();
 
         bool initMove(float, string);
 
@@ -57,6 +60,7 @@ class MajorTom {
 
         int getHealth();
         void setHealth(int);
+        void wasShot(int);
 
         void shoot(float);
 

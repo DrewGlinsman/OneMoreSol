@@ -147,3 +147,37 @@ int Jackal::getSpeed()
 {
     return speed;
 }
+
+double Jackal::getFireRate()
+{
+	return fireRate;
+}
+
+void Jackal::setFireRate(double givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
+bool Jackal::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
+}

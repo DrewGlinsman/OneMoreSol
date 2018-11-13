@@ -28,6 +28,11 @@ float MajorTom::getTomPosition()
     return majorTom.getPosition().y;
 }
 
+float MajorTom::getTomPositionX()
+{
+    return majorTom.getPosition().x;
+}
+
 void MajorTom::setTomPositionX(float positionPassed)
 {
     majorTom.setPosition(positionPassed ,majorTom.getPosition().y);
@@ -240,6 +245,17 @@ bool MajorTom::keepMoving(float timePassed, string direction)
                 return false;
             }
         }
+}
+
+sf::Sprite MajorTom::getTom()
+{
+    return majorTom;
+}
+
+void MajorTom::wasShot(int damage)
+{
+    currentHealth = currentHealth - damage;
+
 }
 
 int MajorTom::getHealth()

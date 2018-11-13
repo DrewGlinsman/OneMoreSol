@@ -109,3 +109,18 @@ int KoratEmpire::getSpeed()
 {
     return speed;
 }
+
+void KoratEmpire::setFireRate()
+{
+
+}
+
+double KoratEmpire::getFireRate()
+{
+
+}
+
+bool KoratEmpire::queryToFire()
+{
+
+}

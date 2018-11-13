@@ -94,9 +94,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         logic -> runLevel(sky, majorTom, delta);
         logic -> updateKoratOrder();
-        logic -> updateBulletOrder();
+        logic -> updateBulletOrder(); //Bullets generation and drawing
         logic -> updateDyingKorat();
         logic -> moveKorat(delta, majorTom);
+        logic -> queryKoratFiring();
+
 
         if (logic -> getLevel() == 10)
         {
@@ -110,6 +112,8 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         }
 
         logic -> moveBullet(delta);
+        logic -> moveKoratBullet(delta, majorTom);
+
 
 //-----------------------------------------------------------------
         if(keepMovingUp == true)
