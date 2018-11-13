@@ -104,6 +104,8 @@ class GameLogic{
         bool movingUp = false;
         bool movingDown = false;
 
+        double directMove = 1;
+
     public:
         GameLogic();
 
@@ -156,6 +158,7 @@ class GameLogic{
         void updateDyingTankBoss();
 
         int getLevel();
+        void queryKoratFiring();
 };
 
 
