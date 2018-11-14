@@ -5,14 +5,22 @@ using namespace std;
 
 GameViewPlayer::GameViewPlayer() // Player window constructor
 {
-    //initializeMenuState();
-    initializePlayState();
+    if(!initialized)
+    {
+        initializeMenuState();
+        initializePlayState();
+    }
+    initialized = true;
     logic = new GameLogic();
     majorTom = new MajorTom(loadedTextures);
 }
 
 void GameViewPlayer::initializeMenuState()
 {
+
+    loadedTextures = new TextureLoader();
+
+    /*
     if (!menuImage.loadFromFile("assets/menuScreen.png"))
         cout << "Could not load requested image." << endl;
     if (!playBtnImg.loadFromFile("assets/playButton.png"))
@@ -27,6 +35,7 @@ void GameViewPlayer::initializeMenuState()
         cout << "Could not load requested image." << endl;
     if (!exitBtnHImg.loadFromFile("assets/exitButtonH.png"))
         cout << "Could not load requested image." << endl;
+    */
 
     if (!Menu_Music.loadFromFile("assets/Menu_Music.ogg"))
         cout << "Could not load request music." << endl;
@@ -50,22 +59,22 @@ void GameViewPlayer::initializeMenuState()
 
     menuBackground.setPosition(0,0);
     menuBackground.setSize(sf::Vector2f(1440,900));
-    menuBackground.setTexture(&menuImage);
+    menuBackground.setTexture(&(loadedTextures -> textureArray[4]);
 
     playBtnRec.setOrigin((1308/2),0);
     playBtnRec.setPosition(1440,400);
     playBtnRec.setSize(sf::Vector2f((1308/2),(224/2)));
-    playBtnRec.setTexture(&playBtnHImg);
+    playBtnRec.setTexture(&(loadedTextures -> textureArray[5]));
 
     storyBtnRec.setOrigin((1050/2),0);
     storyBtnRec.setPosition(1440,530);
     storyBtnRec.setSize(sf::Vector2f((1050/2),(117/2)));
-    storyBtnRec.setTexture(&storyBtnImg);
+    storyBtnRec.setTexture(&(loadedTextures -> textureArray[7]));
 
     exitBtnRec.setOrigin((444),0);
     exitBtnRec.setPosition(1440,605);
     exitBtnRec.setSize(sf::Vector2f(444,(117/2)));
-    exitBtnRec.setTexture(&exitBtnImg);
+    exitBtnRec.setTexture(&(loadedTextures -> textureArray[9]));
 }
 
 void GameViewPlayer::initializePlayState()
@@ -75,8 +84,6 @@ void GameViewPlayer::initializePlayState()
 
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
-
-    loadedTextures = new TextureLoader();
 
     sky.setRadius(894);
     sky.setOrigin(894,894);
@@ -88,7 +95,12 @@ void GameViewPlayer::initializePlayState()
     background.setSize(sf::Vector2f(1440,724));
     background.setTexture(&(loadedTextures -> textureArray[1]));
 
+    lossScreen.setOrigin(0,900);
+    lossScreen.setPosition(0,900);
+    lossScreen.setSize(sf::Vector2f(1440,900));
     lossScreen.setTexture(&(loadedTextures -> textureArray[11]));
+
+    retryBtnRec.setOrigin()
 
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
@@ -553,8 +565,6 @@ void GameViewPlayer::updateLossScreen(sf::RenderWindow &window)
 {
         window.clear(sf::Color::Black);
         window.draw(lossScreen);
-        //window.draw(retryBtnRec);
-        //window.draw(giveUpBtnRec);
         window.display();
 }
 

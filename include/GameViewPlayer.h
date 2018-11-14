@@ -17,6 +17,7 @@ class GameViewPlayer
 {
 
 private:
+    bool initialized;
     float timePassed;
 
     sf::Font menuFont;

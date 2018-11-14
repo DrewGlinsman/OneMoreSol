@@ -15,19 +15,25 @@ int main(int argc, char** argv)
 
     bool gameOver = false; // Never gets set to true
     bool quit = false; // Checks to see if player quit
+    bool gameStarted = false;
 
     while(!gameOver) // Start game loop
     {
         GameStateManager* currentGameWindow = new GameStateManager(); //Create menu window for player
 
-        currentGameWindow -> setState("Start");
-
-        quit = currentGameWindow -> gameViewIsOpen();
-
-        if(quit == true)
+        if(!gameStarted)
         {
-            return 0;
+            currentGameWindow -> setState("Start");
+
+            quit = currentGameWindow -> gameViewIsOpen();
+
+            if(quit == true)
+            {
+                return 0;
+            }
         }
+
+        gameStarted = true;
 
         currentGameWindow -> setState("Play");
 
