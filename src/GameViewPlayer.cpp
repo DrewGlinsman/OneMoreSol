@@ -7,6 +7,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
 {
     if(!initialized)
     {
+        cout << "initializing" << endl;
         initializeMenuState();
         initializePlayState();
     }
@@ -19,52 +20,22 @@ void GameViewPlayer::initializeMenuState()
 {
 
     loadedTextures = new TextureLoader();
+    loadedAudio = new AudioLoader();
 
-    /*
-    if (!menuImage.loadFromFile("assets/menuScreen.png"))
-        cout << "Could not load requested image." << endl;
-    if (!playBtnImg.loadFromFile("assets/playButton.png"))
-        cout << "Could not load requested image." << endl;
-    if (!playBtnHImg.loadFromFile("assets/playButtonH.png"))
-        cout << "Could not load requested image." << endl;
-    if (!storyBtnImg.loadFromFile("assets/storyButton.png"))
-        cout << "Could not load requested image." << endl;
-    if (!storyBtnHImg.loadFromFile("assets/storyButtonH.png"))
-        cout << "Could not load requested image." << endl;
-    if (!exitBtnImg.loadFromFile("assets/exitButton.png"))
-        cout << "Could not load requested image." << endl;
-    if (!exitBtnHImg.loadFromFile("assets/exitButtonH.png"))
-        cout << "Could not load requested image." << endl;
-    */
-
-    if (!Menu_Music.loadFromFile("assets/Menu_Music.ogg"))
-        cout << "Could not load request music." << endl;
-    if (!Menu_Transition.loadFromFile("assets/Menu_Transition.ogg"))
-        cout << "Could not load request music." << endl;
-    if (!Menu_Selection.loadFromFile("assets/Menu_Selection.ogg"))
-        cout << "Could not load request music." << endl;
-
-    //selector.setPosition(0,0);
-    //cout << "0,0" << endl;
-
-    menuMusic.setBuffer(Menu_Music);
-    menuMusic.play();
-    menuMusic.setLoop(true);
-    menuTransition.setBuffer(Menu_Transition);
-
-    menuSelection.setBuffer(Menu_Selection);
-
+    menuMusic.setBuffer(loadedAudio -> soundTrack[20]);
+    menuTransition.setBuffer(loadedAudio -> soundTrack[21]);
+    menuSelection.setBuffer(loadedAudio -> soundTrack[22]);
 
     menuBackground.setSize(sf::Vector2f(1,1));
 
     menuBackground.setPosition(0,0);
     menuBackground.setSize(sf::Vector2f(1440,900));
-    menuBackground.setTexture(&(loadedTextures -> textureArray[4]);
+    menuBackground.setTexture(&(loadedTextures -> textureArray[4]));
 
     playBtnRec.setOrigin((1308/2),0);
     playBtnRec.setPosition(1440,400);
     playBtnRec.setSize(sf::Vector2f((1308/2),(224/2)));
-    playBtnRec.setTexture(&(loadedTextures -> textureArray[5]));
+    playBtnRec.setTexture(&(loadedTextures -> textureArray[6]));
 
     storyBtnRec.setOrigin((1050/2),0);
     storyBtnRec.setPosition(1440,530);
@@ -100,7 +71,13 @@ void GameViewPlayer::initializePlayState()
     lossScreen.setSize(sf::Vector2f(1440,900));
     lossScreen.setTexture(&(loadedTextures -> textureArray[11]));
 
-    retryBtnRec.setOrigin()
+    retryBtnRec.setPosition(200, 600);
+    retryBtnRec.setSize(sf::Vector2f(366, 79));
+    retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
+
+    giveUpBtnRec.setPosition(900, 600);
+    giveUpBtnRec.setSize(sf::Vector2f(366,79));
+    giveUpBtnRec.setTexture(&(loadedTextures->textureArray[14]));
 
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
@@ -148,6 +125,8 @@ void GameViewPlayer::initializePlayState()
 
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 {
+    menuMusic.play();
+    menuMusic.setLoop(true);
     updateMenu(window);
     menuSelector.setPosition(0,0);
     cout << "0,0" << endl;
@@ -220,7 +199,6 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelection.play();
 						Sleep(900);
 						menuMusic.stop();
-						cleanUpMenuState();
 						return false;
 					}
 					if(sf::Vector2f (0,1) == menuSelector.getPosition())
@@ -246,7 +224,6 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 
 void GameViewPlayer::updateMenu(sf::RenderWindow& window) // Updates screen
 {
-
     window.clear(sf::Color::Black);
     window.draw(menuBackground);
     window.draw(playBtnRec);
@@ -257,15 +234,9 @@ void GameViewPlayer::updateMenu(sf::RenderWindow& window) // Updates screen
     window.display();
 }
 
-void GameViewPlayer::cleanUpMenuState()
-{
-
-}
-
 bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 {
-    gameMusic.play();
-    gameMusic.setLoop(true);
+    currentLevel = logic -> getLevel() - 1;
 
     sf::Clock fireRate1;
     sf::Clock fireRate2;
@@ -282,6 +253,14 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
     while(window.isOpen())
     {
+        if(currentLevel < logic -> getLevel())
+        {
+            gameMusic.stop();
+            gameMusic.setBuffer(loadedAudio->soundTrack[currentLevel]);
+            gameMusic.play();
+            gameMusic.setLoop(true);
+        }
+        currentLevel = logic -> getLevel();
         updateGame(window);
 
         delta = gameClock.getElapsedTime().asSeconds();
@@ -471,6 +450,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
 bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 {
+    gameMusic.stop();
+    gameMusic.setBuffer(loadedAudio -> soundTrack[23]);
+    gameMusic.play();
+    gameMusic.setLoop(true);
+
     bool retry = false;
     updateLossScreen(window);
     while(window.isOpen() && !retry)
@@ -497,7 +481,6 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     {
                         selector.y = 0;
                         selectButton(window, selector.y);
-
                     }
                     else
                     {
@@ -511,16 +494,19 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     if (selector.y == 0)
                     {
                         retry = true;
+                        logic -> loseLevel(sky, majorTom);
                     }
                     else if (selector.y == 1)
                     {
                         gameMusic.stop();
                         window.close();
+                        return true;
                     }
                 }
             }
         }
     }
+    return false;
 }
 
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
@@ -565,6 +551,8 @@ void GameViewPlayer::updateLossScreen(sf::RenderWindow &window)
 {
         window.clear(sf::Color::Black);
         window.draw(lossScreen);
+        window.draw(retryBtnRec);
+        window.draw(giveUpBtnRec);
         window.display();
 }
 
@@ -572,21 +560,21 @@ void GameViewPlayer::selectMenuButton(sf::RenderWindow& window, int y)
 {
     if(y == 0)
     {
-        playBtnRec.setTexture(&playBtnHImg);
-        storyBtnRec.setTexture(&storyBtnImg);
-        exitBtnRec.setTexture(&exitBtnImg);
+        playBtnRec.setTexture(&(loadedTextures -> textureArray[6]));
+        storyBtnRec.setTexture(&(loadedTextures -> textureArray[7]));
+        exitBtnRec.setTexture(&(loadedTextures -> textureArray[9]));
     }
     else if(y == 1)
     {
-        playBtnRec.setTexture(&playBtnImg);
-        storyBtnRec.setTexture(&storyBtnHImg);
-        exitBtnRec.setTexture(&exitBtnImg);
+        playBtnRec.setTexture(&(loadedTextures -> textureArray[5]));
+        storyBtnRec.setTexture(&(loadedTextures -> textureArray[8]));
+        exitBtnRec.setTexture(&(loadedTextures -> textureArray[9]));
     }
     else if(y == 2)
     {
-        playBtnRec.setTexture(&playBtnImg);
-        storyBtnRec.setTexture(&storyBtnImg);
-        exitBtnRec.setTexture(&exitBtnHImg);
+        playBtnRec.setTexture(&(loadedTextures -> textureArray[5]));
+        storyBtnRec.setTexture(&(loadedTextures -> textureArray[7]));
+        exitBtnRec.setTexture(&(loadedTextures -> textureArray[10]));
     }
     updateMenu(window);//could this be more optimally placed?
 }
@@ -595,15 +583,15 @@ void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
 {
     if(y == 0)
     {
-        retryBtnRec.setTexture(&(loadedTextures->textureArray[12]));
-        giveUpBtnRec.setTexture(&(loadedTextures->textureArray[15]));
-    }
-    else if(y == 1)
-    {
         retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
         giveUpBtnRec.setTexture(&(loadedTextures->textureArray[14]));
     }
-    updateGame(window);
+    else if(y == 1)
+    {
+        retryBtnRec.setTexture(&(loadedTextures->textureArray[12]));
+        giveUpBtnRec.setTexture(&(loadedTextures->textureArray[15]));
+    }
+    updateLossScreen(window);
 }
 
 

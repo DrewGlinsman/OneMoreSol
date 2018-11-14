@@ -68,6 +68,7 @@ private:
 public:
     sf::Font gameFont;
     const int iconScale = 64;
+    int currentLevel;
 
     sf::RectangleShape background;
     sf::RectangleShape lossScreen;
@@ -108,6 +109,7 @@ public:
     MajorTom* majorTom;
 
     TextureLoader* loadedTextures;
+    AudioLoader* loadedAudio;
 
     GameViewPlayer();
 

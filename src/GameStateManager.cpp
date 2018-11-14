@@ -15,15 +15,17 @@ void GameStateManager::initialize()
 bool GameStateManager::gameViewIsOpen()
 {
     bool quit;
-    menuView = new GameViewMenu();
+
     if (currentState == "Start")
     {
-        quit = menuView -> gameViewIsOpen(gameWindow);
+        quit = playView -> menuViewIsOpen(gameWindow);
         return quit;
     }
     if (currentState == "Play")
     {
         quit = playView -> gameViewIsOpen(gameWindow);
+        cout << "Game View Left" << endl;
+        cout << "Quit = " << quit << endl;
         return quit;
     }
 

@@ -17,9 +17,11 @@ int main(int argc, char** argv)
     bool quit = false; // Checks to see if player quit
     bool gameStarted = false;
 
+    GameStateManager* currentGameWindow = new GameStateManager();
+
     while(!gameOver) // Start game loop
     {
-        GameStateManager* currentGameWindow = new GameStateManager(); //Create menu window for player
+         //Create menu window for player
 
         if(!gameStarted)
         {
@@ -57,6 +59,8 @@ int main(int argc, char** argv)
         currentGameWindow -> setState("Lost");
 
         quit == currentGameWindow -> gameViewIsOpen();
+
+        gameOver = quit;
 
         if (quit == true)
         {

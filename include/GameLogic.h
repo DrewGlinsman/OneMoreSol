@@ -153,8 +153,6 @@ class GameLogic{
         //changes survivor count
         void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
 
-        void selectMusic();
-
         void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
 
         void updateDyingKorat();

@@ -14,10 +14,6 @@ GameLogic::GameLogic()
     loadedTextures = new TextureLoader();
     loadedAudio = new AudioLoader();
 
-    backgroundMusic.setBuffer(loadedAudio->soundTrack[currentLevel - 1]);
-    backgroundMusic.setVolume(50);
-    backgroundMusic.play();
-
     if(currentLevel == 10)
     {
         startBikeBoss(loadedTextures);
@@ -624,14 +620,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
     {
         loseLevel(gameSky, majorTom);
     }
-    /*
-    if (majorTom->getSurvivors() == 0)
-    {
-        loseLevel(gameSky, majorTom);
-    } else if (majorTom->getHealth() <= 0) {
-    	loseLevel(gameSky, majorTom);
-    }
-    */
+
     //-------------------------------------------------------------
 
 	if (rotation >= sunSetOrientation) // if the sun has set
@@ -649,8 +638,6 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
             majorTom -> setTomPositionY(508);
 
             cout << "Current Level = " << currentLevel << endl;
-
-            selectMusic();
 
             // start text adventure
 
@@ -688,6 +675,7 @@ void GameLogic::clearAssets()
         {
             currentBullet[i].clear();
             currentKorat[i].clear();
+            currentKoratBullet[i].clear();
         }
 }
 
@@ -720,14 +708,6 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
     majorTom->setSurvivors(survivorCountSaved);
     majorTom->setHealth(100);
 
-}
-
-void GameLogic::selectMusic()
-{
-
-    backgroundMusic.setBuffer(loadedAudio -> soundTrack[currentLevel - 1]);
-    backgroundMusic.setVolume(50);
-    backgroundMusic.play();
 }
 
 void GameLogic::startBikeBoss(TextureLoader* loadedTextures)
