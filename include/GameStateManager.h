@@ -11,8 +11,8 @@ class GameStateManager
 {
 public:
     sf::RenderWindow gameWindow;
-    GameViewPlayer* playView;
     GameViewMenu* menuView;
+    GameViewPlayer* playView;
     std::string currentState;
     GameStateManager();
     virtual bool gameViewIsOpen();

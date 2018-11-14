@@ -172,6 +172,8 @@ class GameLogic{
         int getLevel();
         void queryKoratFiring();
 
+        void clearAssets();
+
 };
 
 

@@ -48,6 +48,15 @@ int main(int argc, char** argv)
 
         delta = clock.getElapsedTime().asSeconds(); // Gets clock time between loops
 
+        currentGameWindow -> setState("Lost");
+
+        quit == currentGameWindow -> gameViewIsOpen();
+
+        if (quit == true)
+        {
+            return 0;
+        }
+
         clock.restart();  // Resets game clock between loops
 
     }

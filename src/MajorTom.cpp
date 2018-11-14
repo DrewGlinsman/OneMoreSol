@@ -14,7 +14,7 @@ MajorTom::MajorTom(TextureLoader* loadedTextures)
     majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);
     majorTom.setScale(sf::Vector2f(1.2f,1.2f));
-    setHealth(100);
+    setHealth(5);
     setSurvivors(20);
 }
 

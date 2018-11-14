@@ -682,16 +682,18 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
     }
 }
 
-void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
+void GameLogic::clearAssets()
 {
-
-    for (int i = 0; i < 5; i++)
+     for (int i = 0; i < currentBullet.size(); i++)
         {
             currentBullet[i].clear();
             currentKorat[i].clear();
         }
+}
 
-
+void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
+{
+    clearAssets();
 
     majorTom -> setTomPositionX(156);
 

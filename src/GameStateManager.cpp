@@ -10,9 +10,9 @@ GameStateManager::GameStateManager()
 bool GameStateManager::gameViewIsOpen()
 {
     bool quit;
+    menuView = new GameViewMenu();
     if (currentState == "Start")
     {
-        menuView = new GameViewMenu();
         quit = menuView -> gameViewIsOpen(gameWindow);
         return quit;
     }
@@ -22,6 +22,13 @@ bool GameStateManager::gameViewIsOpen()
         quit = playView -> gameViewIsOpen(gameWindow);
         return quit;
     }
+
+    if (currentState == "Lost")
+    {
+        quit = playView -> lossViewIsOpen(gameWindow);
+        return quit;
+    }
+
 }
 
 void GameStateManager::setState(std::string state)
