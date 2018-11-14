@@ -28,7 +28,10 @@ GameLogic::GameLogic()
 bool GameLogic::checkEnd(MajorTom *tom)
 {
     if(tom -> getSurvivors() == 0 || tom -> getHealth() <= 0)
+    {
+        survivorCountSaved = majorTom->getSurvivors();
         return true;
+    }
     return false;
 }
 
@@ -692,8 +695,6 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
     gameSky.rotate(-rotation); //rotate the sun back to the beginning
 
     std::cout << "Current Level = " << currentLevel << std::endl;
-
-    selectMusic();
 
     if(currentLevel == 10)
     {
