@@ -98,12 +98,13 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         gameClock.restart();
 
 //-----------------------------------------------------------------
-        if (logic -> checkEnd(*majorTom))
+        /*
+        if (logic -> checkEnd(majorTom))
         {
             drawLossScreen(window);
                 //draw retry screen
         }
-
+        */
         logic -> runLevel(sky, majorTom, delta);
         logic -> updateKoratOrder();
         logic -> updateBulletOrder(); //Bullets generation and drawing
@@ -319,7 +320,6 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
 void GameViewPlayer::drawLossScreen(sf::RenderWindow &window)
 {
-        lossScreen.setTexture(&(loadedTextures->textureArray[11]));
         window.draw(lossScreen);
         bool retry = false;
         while(window.isOpen() && !retry)

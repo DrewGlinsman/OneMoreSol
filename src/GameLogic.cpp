@@ -29,9 +29,9 @@ GameLogic::GameLogic()
 
 }
 
-bool GameLogic::checkEnd(MajorTom &tom)
+bool GameLogic::checkEnd(MajorTom *tom)
 {
-    if(tom.getSurvivors() == 0 || tom.getHealth() <= 0)
+    if(tom -> getSurvivors() == 0 || tom -> getHealth() <= 0)
         return true;
     return false;
 }
@@ -603,21 +603,7 @@ int GameLogic::decideBulletLaneKorat(int givenLane)
 
 int GameLogic::decideBulletType(Gun* currentGun)
 {
-    if (currentGun -> getBulletType() == 1)
-        return 1;
-    else if (currentGun -> getBulletType() == 2)
-        return 2;
-    else if (currentGun -> getBulletType() == 3)
-        return 3;
-    else if (currentGun -> getBulletType() == 4)
-        return 4;
-    else if (currentGun -> getBulletType() == 5)
-        return 5;
-    else if (currentGun -> getBulletType() == 6)
-        return 6;
-    else if (currentGun -> getBulletType() == 7)
-        return 7;
-
+    return currentGun -> getBulletType();
 }
 
 
@@ -634,7 +620,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
     //-------------------------------------------------------------
     // lose game check
-    if (checkEnd(*majorTom))
+    if (checkEnd(majorTom))
     {
         loseLevel(gameSky, majorTom);
     }
