@@ -24,8 +24,6 @@ bool GameStateManager::gameViewIsOpen()
     if (currentState == "Play")
     {
         quit = playView -> gameViewIsOpen(gameWindow);
-        cout << "Game View Left" << endl;
-        cout << "Quit = " << quit << endl;
         return quit;
     }
 
