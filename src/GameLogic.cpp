@@ -25,9 +25,9 @@ GameLogic::GameLogic()
 
 }
 
-bool GameLogic::checkEnd(MajorTom *tom)
+bool GameLogic::checkEnd(MajorTom *majorTom)
 {
-    if(tom -> getSurvivors() == 0 || tom -> getHealth() <= 0)
+    if(majorTom -> getSurvivors() == 0 || majorTom -> getHealth() <= 0)
     {
         survivorCountSaved = majorTom->getSurvivors();
         return true;
