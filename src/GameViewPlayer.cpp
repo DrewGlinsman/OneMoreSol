@@ -122,9 +122,6 @@ void GameViewPlayer::initializePlayState()
     scoreCnt.setFillColor(sf::Color(0,0,0,255));
     scoreCnt.setPosition(1350,20);
 
-    logic = new GameLogic();
-    majorTom = new MajorTom(loadedTextures);
-
     //Major Tom Health Display
 	majorTomHealth.setFont(gameFont);
 	majorTomHealth.setCharacterSize(22);
