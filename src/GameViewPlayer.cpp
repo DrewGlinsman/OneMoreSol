@@ -475,7 +475,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     window.close();
                 }
 
-                if(Event.key.code == sf::Keyboard::Up || Event.key.code == sf::Keyboard::Down)
+                if(Event.key.code == sf::Keyboard::Left || Event.key.code == sf::Keyboard::Right)
                 {
                     if (selector.y == 1)
                     {
