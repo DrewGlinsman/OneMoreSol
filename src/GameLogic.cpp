@@ -64,6 +64,7 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                 {
                     if (currentKorat[i][j] -> getSpeed() == 0)
                     {
+                        //majorTom->s
                         dyingKorat.emplace_back(move(currentKorat[i][j]));
                         currentKorat[i].erase(currentKorat[i].begin() + j);
                     }

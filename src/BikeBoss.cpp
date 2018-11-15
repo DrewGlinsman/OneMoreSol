@@ -109,7 +109,7 @@ void BikeBoss::moveBoss(float timePassed)
     if(bikeBoss.getPosition().x > -100)
     {
         bikeBoss.move(-speed * timePassed, 0);
-        if(!((int)bikeBoss.getPosition().x % 33))//slows down the switching of frames
+        if(!((int)bikeBoss.getPosition().x % 7))//slows down the switching of frames
         {
             incrementRunFrameBoss(&spriteFrame, &bikeBoss);
         }
@@ -126,7 +126,7 @@ void BikeBoss::incrementRunFrameBoss(sf::IntRect* sF, sf::Sprite* baddie)
     //to move to the next frame. To loop, make circular arith with mod
     // 3*192 is 576, as mod circles back to 0, add the initial value 832.
     //should 832 be added at every increment? no
-    sF->left = ((sF->left)%1408); //+832
+    sF->left = ((sF->left +192)%1408); //+832
     if(sF->left == 0) {sF->left += 832;}
     baddie->setTextureRect(*sF);
 }
