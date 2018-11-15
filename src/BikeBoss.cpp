@@ -128,7 +128,7 @@ void BikeBoss::incrementRunFrameBoss(sf::IntRect* sF, sf::Sprite* baddie)
     //should 832 be added at every increment? no
     sF->left = ((sF->left)%576);
     if (sF->left == 0)
-        sF += 832;
+        {sF += 832;}
     baddie->setTextureRect(*sF);
 }
 
