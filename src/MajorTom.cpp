@@ -16,6 +16,7 @@ MajorTom::MajorTom(TextureLoader* loadedTextures)
     majorTom.setScale(sf::Vector2f(1.2f,1.2f));
     setHealth(5);
     setSurvivors(20);
+    setScore(0);
 }
 
 void MajorTom::drawTom (sf::RenderWindow& window)
@@ -266,6 +267,16 @@ int MajorTom::getHealth()
 void MajorTom::setHealth(int newHealth)
 {
     currentHealth = newHealth;
+}
+
+int MajorTom::getScore()
+{
+    return score;
+}
+
+void MajorTom::setScore(int num)
+{
+    score = num;
 }
 
 int MajorTom::getGun()

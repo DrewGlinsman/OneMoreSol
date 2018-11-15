@@ -124,6 +124,7 @@ public:
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();
     void updateMajorTomHealth();
+    void updateScoreCount();
     void updateLossScreen(sf::RenderWindow &window);
     void selectButton(sf::RenderWindow &window, int y);
     void selectMenuButton(sf::RenderWindow &window, int y);

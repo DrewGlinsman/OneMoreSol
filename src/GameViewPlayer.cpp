@@ -553,6 +553,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
     updateSurvivorCount();
     updateMajorTomHealth();
+    updateScoreCount();
 
     window.display();
 }
@@ -615,4 +616,10 @@ void GameViewPlayer::updateMajorTomHealth()
 {
 	string cnt = std::to_string(majorTom->getHealth()) + "/100 Health";
 	majorTomHealth.setString(cnt);
+}
+
+void GameViewPlayer::updateScoreCount()
+{
+    string cnt = std::to_string(majorTom->getScore()) + " Score";
+    scoreCnt.setString(cnt);
 }
