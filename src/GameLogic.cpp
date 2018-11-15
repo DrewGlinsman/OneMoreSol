@@ -14,10 +14,6 @@ GameLogic::GameLogic()
     loadedTextures = new TextureLoader();
     loadedAudio = new AudioLoader();
 
-    backgroundMusic.setBuffer(loadedAudio->soundTrack[currentLevel - 1]);
-    backgroundMusic.setVolume(50);
-    backgroundMusic.play();
-
     if(currentLevel == 10)
     {
         startBikeBoss(loadedTextures);
@@ -29,10 +25,13 @@ GameLogic::GameLogic()
 
 }
 
-bool GameLogic::checkEnd()
+bool GameLogic::checkEnd(MajorTom *majorTom)
 {
-    if(survivorCount == 0)
+    if(majorTom -> getSurvivors() == 0 || majorTom -> getHealth() <= 0)
+    {
+        survivorCountSaved = majorTom->getSurvivors();
         return true;
+    }
     return false;
 }
 
@@ -385,8 +384,15 @@ void GameLogic::moveBullet(float timePassed)
                 {
                     if(currentBullet[i][j] -> getBullet().getGlobalBounds().intersects(currentBikeBoss[z] -> getBoss().getGlobalBounds()))
                     {
-                        currentBikeBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
-                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                        if(currentBullet[i][j] -> getBullet().getPosition().x > currentBikeBoss[z] -> getBoss().getPosition().x - 50)
+                        {
+                            currentBikeBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
+                            currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
+                        else
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
                     }
                     else
                     {
@@ -424,8 +430,15 @@ void GameLogic::moveBullet(float timePassed)
                 {
                     if(currentBullet[i][j] -> getBullet().getGlobalBounds().intersects(currentTankBoss[z] -> getBoss().getGlobalBounds()))
                     {
+                        if(currentBullet[i][j] -> getBullet().getPosition().x > (currentTankBoss[z] -> getBoss().getPosition().x))
+                        {
                         currentTankBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
                         currentBullet[i].erase(currentBullet[i].begin() + j);
+                        }
+                        else
+                        {
+                            currentBullet[i][j] -> moveCurrentBullet(timePassed);
+                        }
                     }
                     else
                     {
@@ -462,15 +475,17 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 	{
 		for (int j = 0; j < currentKoratBullet[i].size(); j++)
 		{
-			//if (currentKoratBullet[i][j] -> getHeight() > majorTom -> getTomPositionX())
-			{
-			//	currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
-			}
-			cout << currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()) << endl;
 			if (currentKoratBullet[i][j] -> getBullet().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
 			{
-                majorTom -> wasShot(currentKoratBullet[i][j] -> getDamage());
-				currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
+			    if(currentKoratBullet[i][j] -> getBullet().getPosition().x < majorTom -> getTomPositionX())
+                {
+                    majorTom -> wasShot(currentKoratBullet[i][j] -> getDamage());
+                    currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
+                }
+                else
+                {
+                    currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
+                }
 			}
 			else
             {
@@ -587,21 +602,7 @@ int GameLogic::decideBulletLaneKorat(int givenLane)
 
 int GameLogic::decideBulletType(Gun* currentGun)
 {
-    if (currentGun -> getBulletType() == 1)
-        return 1;
-    else if (currentGun -> getBulletType() == 2)
-        return 2;
-    else if (currentGun -> getBulletType() == 3)
-        return 3;
-    else if (currentGun -> getBulletType() == 4)
-        return 4;
-    else if (currentGun -> getBulletType() == 5)
-        return 5;
-    else if (currentGun -> getBulletType() == 6)
-        return 6;
-    else if (currentGun -> getBulletType() == 7)
-        return 7;
-
+    return currentGun -> getBulletType();
 }
 
 
@@ -618,7 +619,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
     //-------------------------------------------------------------
     // lose game check
-    if (majorTom->getSurvivors() == 0)
+    if (checkEnd(majorTom))
     {
         loseLevel(gameSky, majorTom);
     }
@@ -640,8 +641,6 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
             majorTom -> setTomPositionY(508);
 
             cout << "Current Level = " << currentLevel << endl;
-
-            selectMusic();
 
             // start text adventure
 
@@ -673,14 +672,19 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
     }
 }
 
-void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
+void GameLogic::clearAssets()
 {
-
-    for (int i = 0; i < 5; i++)
+     for (int i = 0; i < currentBullet.size(); i++)
         {
             currentBullet[i].clear();
             currentKorat[i].clear();
+            currentKoratBullet[i].clear();
         }
+}
+
+void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
+{
+    clearAssets();
 
     majorTom -> setTomPositionX(156);
 
@@ -691,8 +695,6 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
     gameSky.rotate(-rotation); //rotate the sun back to the beginning
 
     std::cout << "Current Level = " << currentLevel << std::endl;
-
-    selectMusic();
 
     if(currentLevel == 10)
     {
@@ -705,15 +707,8 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
     }
 
     majorTom->setSurvivors(survivorCountSaved);
+    majorTom->setHealth(100);
 
-}
-
-void GameLogic::selectMusic()
-{
-
-    backgroundMusic.setBuffer(loadedAudio -> soundTrack[currentLevel - 1]);
-    backgroundMusic.setVolume(50);
-    backgroundMusic.play();
 }
 
 void GameLogic::startBikeBoss(TextureLoader* loadedTextures)
@@ -864,7 +859,6 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                 {
                         dyingTankBoss.emplace_back(move(currentTankBoss[i]));
                         currentTankBoss.erase(currentTankBoss.begin() + i);
-
                 }
                 else
                 {

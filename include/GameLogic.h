@@ -69,6 +69,16 @@ class GameLogic{
         int bulletSpawnLane;
         int bulletSpawnType;
 
+        /*
+            1 = Grunt
+            2 = Jackal
+            3 = Elite
+            4 = Hunter
+            5 = Brute
+            6 = Bomber
+            7 = MiniTank
+        */
+
         std::vector <int> enemyPool1 {1};
         std::vector <int> enemyPool2 {1, 2};
         std::vector <int> enemyPool3 {1, 2, 3};
@@ -77,17 +87,17 @@ class GameLogic{
         std::vector <int> enemyPool6 {1, 2, 3, 4, 5, 6};
         std::vector <int> enemyPool7 {1, 2, 3, 4, 5, 6, 7};
 
-        int lane1 = 335;
-        int lane2 = 422;
-        int lane3 = 508;
-        int lane4 = 594;
-        int lane5 = 680;
+        const int lane1 = 335;
+        const int lane2 = 422;
+        const int lane3 = 508;
+        const int lane4 = 594;
+        const int lane5 = 680;
 
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
         int sunSetOrientation = 150;
         float levelSpeedModifier = 10;
-        float levelSpawnModifier = 3;
+        float levelSpawnModifier = 1;
         float rotation;
         float spawnTime;
         bool enemyBehindTom = false;
@@ -97,9 +107,11 @@ class GameLogic{
 
         float lastBulletFired;
 
-         sf::SoundBuffer level1Music;
-         sf::SoundBuffer level2Music;
-         sf::Sound backgroundMusic;
+        sf::SoundBuffer level1Music;
+        sf::SoundBuffer level2Music;
+        sf::Sound backgroundMusic;
+
+        bool lostGame;
 
         bool movingUp = false;
         bool movingDown = false;
@@ -122,7 +134,7 @@ class GameLogic{
         void selectKorat();
         //needs survivor count
         void spawnKorat();
-        bool checkEnd();
+        bool checkEnd(MajorTom *tom);
         int decideKoratLane();
         int decideKoratType(std::vector<int> enemyPool);
 
@@ -141,8 +153,6 @@ class GameLogic{
         //changes survivor count
         void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
 
-        void selectMusic();
-
         void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
 
         void updateDyingKorat();
@@ -159,6 +169,9 @@ class GameLogic{
 
         int getLevel();
         void queryKoratFiring();
+
+        void clearAssets();
+
 };
 
 

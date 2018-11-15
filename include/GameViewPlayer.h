@@ -17,11 +17,58 @@ class GameViewPlayer
 {
 
 private:
+    bool initialized;
     float timePassed;
+
+    sf::Font menuFont;
+    sf::Texture menuImage;
+    sf::Texture playBtnImg;
+    sf::Texture playBtnHImg;
+    sf::Texture storyBtnImg;
+    sf::Texture storyBtnHImg;
+    sf::Texture exitBtnImg;
+    sf::Texture exitBtnHImg;
+
+    sf::RectangleShape menuBackground;
+    sf::RectangleShape menuSelector;
+    sf::RectangleShape playBtnRec;
+    sf::RectangleShape storyBtnRec;
+    sf::RectangleShape exitBtnRec;
+    sf::SoundBuffer Menu_Music;
+    sf::SoundBuffer Menu_Transition;
+    sf::SoundBuffer Menu_Selection;
+    sf::Sound menuMusic;
+    sf::Sound menuTransition;
+    sf::Sound menuSelection;
+    sf::Text menuTitle;
+    sf::Text menuPlay1;
+    sf::Text menuPlay2;
+    sf::Text menuPlay3;
+    sf::Text menuPlay4;
+    sf::Text menuPlay5;
+
+    float titleX = 130;
+    float titleY = 20;
+
+    float playX1 = 40;
+    float playY1 = 165;
+
+    float playX2 = 30;
+    float playY2 = 205;
+
+    float playX3 = 30;
+    float playY3 = 245;
+
+    float playX4 = 168;
+    float playY4 = 245;
+
+    float playX5 = 262;
+    float playY5 = 245;
 
 public:
     sf::Font gameFont;
     const int iconScale = 64;
+    int currentLevel;
 
     sf::RectangleShape background;
     sf::RectangleShape lossScreen;
@@ -37,7 +84,7 @@ public:
 
     sf::Vector2f selector;
     sf::RectangleShape retryBtnRec;
-    sf::RectangleShape exitBtnRec;
+    sf::RectangleShape giveUpBtnRec;
 
     sf::Texture gameImage;
     sf::Texture playerImage;
@@ -53,6 +100,7 @@ public:
     sf::Sound gameMusic;
     sf::Text survivorCnt;
     sf::Text scoreCnt;
+    sf::Text majorTomHealth;
     sf::Event Event;
 
     bool lost;
@@ -62,14 +110,23 @@ public:
     MajorTom* majorTom;
 
     TextureLoader* loadedTextures;
+    AudioLoader* loadedAudio;
 
     GameViewPlayer();
 
+    void initializeMenuState();
+    void initializePlayState();
+    void cleanUpMenuState();
+    bool menuViewIsOpen(sf::RenderWindow& window);
     bool gameViewIsOpen(sf::RenderWindow& window);
+    bool lossViewIsOpen(sf::RenderWindow& window);
+    void updateMenu(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();
-    void drawLossScreen(sf::RenderWindow &window);
+    void updateMajorTomHealth();
+    void updateLossScreen(sf::RenderWindow &window);
     void selectButton(sf::RenderWindow &window, int y);
+    void selectMenuButton(sf::RenderWindow &window, int y);
 
 
 };

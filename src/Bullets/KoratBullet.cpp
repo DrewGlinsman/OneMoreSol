@@ -19,7 +19,7 @@ KoratBullet::KoratBullet(int givenLane, int givenHeight, TextureLoader* loadedTe
 	setLane(givenLane);
 	plasma.setPosition(givenHeight, lane);
 	speed = 500;
-	damage = 35;
+	damage = 5;
 
 	if (!plasmaPistolSound.loadFromFile("assets/Plasma_Pistol_Sound.ogg")) // Loads and initializes all sounds based on impact
     std::cout << "Could not load Plasma Pistol Sound." << std::endl;
