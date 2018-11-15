@@ -120,7 +120,7 @@ void GameViewPlayer::initializePlayState()
     scoreCnt.setCharacterSize(22);
     scoreCnt.setString("0 Score");//might be able to take out due to updater code redundancy
     scoreCnt.setFillColor(sf::Color(0,0,0,255));
-    scoreCnt.setPosition(1350,20);
+    scoreCnt.setPosition(1300,20);
 
     //Major Tom Health Display
 	majorTomHealth.setFont(gameFont);
