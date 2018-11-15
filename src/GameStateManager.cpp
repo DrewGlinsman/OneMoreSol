@@ -9,6 +9,14 @@ GameStateManager::GameStateManager()
 
 void GameStateManager::initialize()
 {
+    if(!loadScreenTexture.loadFromFile("assets/loadingScreen.png"))
+        std::cout<<"Failed to load loading screen." << std::endl;
+    loadScreen.setOrigin(0,900);
+    loadScreen.setPosition(0,900);
+    loadScreen.setSize(sf::Vector2f(1440,900));
+    loadScreen.setTexture(&loadScreenTexture);
+    gameWindow.draw(loadScreen);
+    gameWindow.display();
     playView = new GameViewPlayer();
 }
 
