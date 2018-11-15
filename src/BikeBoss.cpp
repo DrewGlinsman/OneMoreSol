@@ -126,9 +126,8 @@ void BikeBoss::incrementRunFrameBoss(sf::IntRect* sF, sf::Sprite* baddie)
     //to move to the next frame. To loop, make circular arith with mod
     // 3*192 is 576, as mod circles back to 0, add the initial value 832.
     //should 832 be added at every increment? no
-    sF->left = ((sF->left)%576);
-    if (sF->left == 0)
-        {sF += 832;}
+    sF->left = ((sF->left)%1408); //+832
+    if(sF->left == 0) {sF->left += 832;}
     baddie->setTextureRect(*sF);
 }
 
