@@ -97,10 +97,31 @@ void GameLogic::updateDyingKorat()
         if (dyingKorat[i] -> checkDeath() == true)
         {
             if (dyingKorat[i] -> getName() == "Bomber")
-                cout << "You Killed a Bomber" << endl;
+            {
+                explode(*dyingKorat[i]);
+            }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
         }
+    }
+}
+
+void GameLogic::explode(KoratEmpire &bomber)
+{
+    for (int i = 0; i < currentKorat.size(); i ++)
+    {
+        cout << "Bomber's lane: " << bomber.getLane() - 1 << endl;
+            for (int j = 0; j < currentKorat[i].size(); j++)
+            {
+                if ((bomber.getPositionX() - currentKorat[i][j] -> getPositionX()) <= 200
+                    && bomber.getPositionX() - currentKorat[i][j] -> getPositionX() >= -200
+                    && bomber.getLane() - currentKorat[i][j] -> getLane() <= 100
+                    && bomber.getLane() - currentKorat[i][j] -> getLane() >= -100 )
+                {
+                    currentKorat[i][j] -> wasShot(200);
+                }
+            }
+
     }
 }
 
@@ -182,15 +203,15 @@ void GameLogic::spawnKorat()
     }
     currentKorat[koratSpawnLane - 1].emplace_back(newKorat);
     currentKoratCount++;
-    std::cout << "currentKoratCount = " << currentKoratCount << std::endl;
+    //std::cout << "currentKoratCount = " << currentKoratCount << std::endl;
 
-    std::cout << "==============================" << std::endl;
+    //std::cout << "==============================" << std::endl;
     for (int i = 0; i < currentKorat.size(); i ++)
     {
 
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            cout << currentKorat[i][j] -> getName() << ' ';
+            //cout << currentKorat[i][j] -> getName() << ' ';
             if (currentKorat[i][j] -> getLane() == 680)
             {
                  print = false;
@@ -199,12 +220,12 @@ void GameLogic::spawnKorat()
                  print = true;
 
         }
-        if(print == true)
-        cout << endl << "------------------------------" << endl;
-        else
-            cout << endl;
+        //if(print == true)
+        //cout << endl << "------------------------------" << endl;
+        //else
+            //cout << endl;
     }
-    cout << "==============================" << endl;
+   // cout << "==============================" << endl;
 }
 
 int GameLogic::decideKoratLane()

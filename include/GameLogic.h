@@ -84,7 +84,7 @@ class GameLogic{
         std::vector <int> enemyPool3 {1, 2, 3};
         std::vector <int> enemyPool4 {1, 2, 3, 4};
         std::vector <int> enemyPool5 {1, 2, 3, 4, 5};
-        std::vector <int> enemyPool6 {1, 2, 3, 4, 5, 6};
+        std::vector <int> enemyPool6 {5, 6};
         std::vector <int> enemyPool7 {1, 2, 3, 4, 5, 6, 7};
 
         const int lane1 = 335;
@@ -170,6 +170,7 @@ class GameLogic{
         int getLevel();
         void queryKoratFiring();
 
+        void explode(KoratEmpire &bomber);
         void clearAssets();
 
 };
