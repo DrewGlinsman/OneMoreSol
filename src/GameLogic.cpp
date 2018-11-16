@@ -95,6 +95,8 @@ void GameLogic::updateDyingKorat()
     {
         if (dyingKorat[i] -> checkDeath() == true)
         {
+            if (dyingKorat[i] -> getName() == "Bomber")
+                cout << "You Killed a Bomber" << endl;
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
         }
