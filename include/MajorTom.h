@@ -25,6 +25,7 @@ class MajorTom {
         int currentHealth;
         int newHealth;
         int survivorCnt;
+        int score;
 
     public:
         sf::Sprite majorTom;
@@ -60,6 +61,9 @@ class MajorTom {
 
         int getHealth();
         void setHealth(int);
+        int getScore();
+        void setScore(int);
+
         void wasShot(int);
 
         void shoot(float);

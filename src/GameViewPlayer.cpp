@@ -115,6 +115,13 @@ void GameViewPlayer::initializePlayState()
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
+    //Score count display
+    scoreCnt.setFont(gameFont);
+    scoreCnt.setCharacterSize(22);
+    scoreCnt.setString("0 Score");//might be able to take out due to updater code redundancy
+    scoreCnt.setFillColor(sf::Color(0,0,0,255));
+    scoreCnt.setPosition(1300,20);
+
     //Major Tom Health Display
 	majorTomHealth.setFont(gameFont);
 	majorTomHealth.setCharacterSize(22);
@@ -529,7 +536,10 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
         logic -> drawTankBoss(window);
     }
 
+    window.draw(scoreCnt);
+
     logic -> drawBullet(window);
+
 
     window.draw(survivorCnt);
     window.draw(majorTomHealth);
@@ -543,6 +553,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
     updateSurvivorCount();
     updateMajorTomHealth();
+    updateScoreCount();
 
     window.display();
 }
@@ -605,4 +616,10 @@ void GameViewPlayer::updateMajorTomHealth()
 {
 	string cnt = std::to_string(majorTom->getHealth()) + "/100 Health";
 	majorTomHealth.setString(cnt);
+}
+
+void GameViewPlayer::updateScoreCount()
+{
+    string cnt = std::to_string(majorTom->getScore()) + " Score";
+    scoreCnt.setString(cnt);
 }
