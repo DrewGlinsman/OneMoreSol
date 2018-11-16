@@ -58,9 +58,7 @@ int main(int argc, char** argv)
 
         currentGameWindow -> setState("Lost");
 
-        quit == currentGameWindow -> gameViewIsOpen();
-
-        gameOver = quit;
+        quit = currentGameWindow -> gameViewIsOpen();
 
         if (quit == true)
         {

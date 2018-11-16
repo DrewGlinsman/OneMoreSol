@@ -132,9 +132,9 @@ void GameViewPlayer::initializePlayState()
 
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 {
+    updateMenu(window);
     menuMusic.play();
     menuMusic.setLoop(true);
-    updateMenu(window);
     menuSelector.setPosition(0,0);
     cout << "0,0" << endl;
     while(window.isOpen()) // Menu loop
@@ -472,6 +472,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
             {
                 gameMusic.stop();
                 window.close(); // Quit game
+                return true;
             }
 
             if(Event.type == sf::Event::KeyPressed)
@@ -502,6 +503,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     {
                         retry = true;
                         logic -> loseLevel(sky, majorTom);
+                        return false;
                     }
                     else if (selector.y == 1)
                     {
