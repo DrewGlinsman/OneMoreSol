@@ -150,6 +150,8 @@ class GameLogic{
         int decideBulletLaneKorat(int givenLane);
         int decideBulletType(Gun* currentGun);
 
+        void bulletLeftScreen(float timePassed, int i, int j);
+
         //changes survivor count
         void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
 
