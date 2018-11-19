@@ -264,7 +264,7 @@ void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed
     }
     else if(currentGun -> getShotsFired() == currentGun -> getClipSize())
     {
-        if (reloadCurrentGun(majorTom, currentGun) == true)
+        if (reloadCurrentGun(currentGun) == true)
         {
                 currentGun -> shotsFiredPlusOne();
                 selectBullet(majorTom, currentGun, timePassed);
@@ -274,7 +274,7 @@ void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed
 
 }
 
-bool GameLogic::reloadCurrentGun(MajorTom* majorTom, Gun* currentGun)
+bool GameLogic::reloadCurrentGun(Gun* currentGun)
 {
     if(reloadStarted == false)
     {
