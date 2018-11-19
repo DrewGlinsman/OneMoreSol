@@ -24,6 +24,8 @@ bool GameStateManager::gameViewIsOpen()
 {
     bool quit;
 
+    loadScreen.setSize(sf::Vector2f(0,0));//quick fix for loading screen not going away after menu is switched to.
+
     if (currentState == "Start")
     {
         quit = playView -> menuViewIsOpen(gameWindow);
