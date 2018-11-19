@@ -49,6 +49,12 @@ void MajorTom::setTomPositionY(float positionPassed)
     majorTom.setPosition(majorTom.getPosition().x, positionPassed);
 }
 
+void MajorTom::incrementRunFrame()
+{
+    spriteFrame.left = (spriteFrame.left+64)%192;
+    majorTom.setTextureRect(spriteFrame);
+}
+
 bool MajorTom::initMove(float timePassed, string direction)
 {
     if(direction == "Up")
@@ -139,6 +145,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * 250, timePassed * -500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -153,6 +161,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * 250, timePassed * -500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -167,6 +177,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * 250, timePassed * -500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -181,6 +193,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * 250, timePassed * -500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -199,6 +213,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * -250, timePassed * 500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -213,6 +229,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * -250, timePassed * 500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -227,6 +245,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * -250, timePassed * 500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -241,6 +261,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * -250, timePassed * 500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
