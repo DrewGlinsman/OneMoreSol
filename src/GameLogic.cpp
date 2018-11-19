@@ -559,68 +559,70 @@ void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePass
 
 void GameLogic::spawnBullet(float timePassed)
 {
-    Bullet* newBullet;
-    Bullet* plasmaShotgunBurst2;
-    Bullet* plasmaShotgunBurst3;
+    Bullet* newBullet1;
+    Bullet* newBullet2;
+    Bullet* newBullet3;
 
     switch(bulletSpawnType)
     {
         case 1:
-            newBullet = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
+            newBullet1 = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
             break;
         case 2:
-            newBullet = new PlasmaShotgunBullet(bulletSpawnLane, loadedTextures);
-            plasmaShotgunBurst2 = new PlasmaShotgunBullet(bulletSpawnLane - 1, loadedTextures);
-            plasmaShotgunBurst3 = new PlasmaShotgunBullet(bulletSpawnLane + 1, loadedTextures);
+            newBullet1 = new PlasmaShotgunBullet(bulletSpawnLane, loadedTextures);
+            newBullet2 = new PlasmaShotgunBullet(bulletSpawnLane - 1, loadedTextures);
+            newBullet3 = new PlasmaShotgunBullet(bulletSpawnLane + 1, loadedTextures);
             break;
         case 3:
-            newBullet = new LaserRifleBullet(bulletSpawnLane, loadedTextures);
+            newBullet1 = new LaserRifleBullet(bulletSpawnLane, loadedTextures);
             break;
         case 4:
-            newBullet = new LaserMinigunBullet(bulletSpawnLane, loadedTextures);
+            newBullet1 = new LaserMinigunBullet(bulletSpawnLane, loadedTextures);
             break;
         case 5:
-            newBullet = new ArcBullet(bulletSpawnLane, loadedTextures);
+            newBullet1 = new ArcBullet(bulletSpawnLane, loadedTextures);
+            newBullet2 = new ArcBullet(bulletSpawnLane - 1, loadedTextures);
+            newBullet3 = new ArcBullet(bulletSpawnLane + 1, loadedTextures);
             break;
         case 6:
-            newBullet = new GaussBullet (bulletSpawnLane, loadedTextures);
+            newBullet1 = new GaussBullet (bulletSpawnLane, loadedTextures);
             break;
         case 7:
-            newBullet = new BFGBullet (bulletSpawnLane, loadedTextures);
+            newBullet1 = new BFGBullet (bulletSpawnLane, loadedTextures);
             break;
         default:
-            newBullet = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
+            newBullet1 = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
             cout << "Break Case Activated" << endl;
             break;
 
     }
-    if (bulletSpawnType == 2)
+    if (bulletSpawnType == 2 || bulletSpawnType == 5)
     {
-        currentBullet[bulletSpawnLane - 1].emplace_back(newBullet);
+        currentBullet[bulletSpawnLane - 1].emplace_back(newBullet1);
 
         if (bulletSpawnLane != 1)
         {
-            currentBullet[bulletSpawnLane - 2].emplace_back(plasmaShotgunBurst2);
+            currentBullet[bulletSpawnLane - 2].emplace_back(newBullet2);
         }
         else
         {
-            delete plasmaShotgunBurst2;
+            delete newBullet2;
         }
 
         if (bulletSpawnLane != 5)
         {
-            currentBullet[bulletSpawnLane].emplace_back(plasmaShotgunBurst3);
+            currentBullet[bulletSpawnLane].emplace_back(newBullet3);
         }
         else
         {
-            delete plasmaShotgunBurst3;
+            delete newBullet3;
         }
     }
     else
     {
-        currentBullet[bulletSpawnLane - 1].emplace_back(newBullet);
-        delete plasmaShotgunBurst2;
-        delete plasmaShotgunBurst3;
+        currentBullet[bulletSpawnLane - 1].emplace_back(newBullet1);
+        delete newBullet2;
+        delete newBullet3;
     }
 }
 
