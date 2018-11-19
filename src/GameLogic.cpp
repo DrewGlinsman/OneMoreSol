@@ -560,8 +560,8 @@ void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePass
 void GameLogic::spawnBullet(float timePassed)
 {
     Bullet* newBullet;
-    Bullet* newBullet2;
-    Bullet* newBullet3;
+    Bullet* plasmaShotgunBurst2;
+    Bullet* plasmaShotgunBurst3;
 
     switch(bulletSpawnType)
     {
@@ -570,8 +570,8 @@ void GameLogic::spawnBullet(float timePassed)
             break;
         case 2:
             newBullet = new PlasmaShotgunBullet(bulletSpawnLane, loadedTextures);
-            newBullet2 = new PlasmaShotgunBullet(bulletSpawnLane - 1, loadedTextures);
-            newBullet3 = new PlasmaShotgunBullet(bulletSpawnLane + 1, loadedTextures);
+            plasmaShotgunBurst2 = new PlasmaShotgunBullet(bulletSpawnLane - 1, loadedTextures);
+            plasmaShotgunBurst3 = new PlasmaShotgunBullet(bulletSpawnLane + 1, loadedTextures);
             break;
         case 3:
             newBullet = new LaserRifleBullet(bulletSpawnLane, loadedTextures);
@@ -598,29 +598,29 @@ void GameLogic::spawnBullet(float timePassed)
     {
         currentBullet[bulletSpawnLane - 1].emplace_back(newBullet);
 
-        if (bulletSpawnLane != 0)
+        if (bulletSpawnLane != 1)
         {
-            currentBullet[bulletSpawnLane - 2].emplace_back(newBullet2);
+            currentBullet[bulletSpawnLane - 2].emplace_back(plasmaShotgunBurst2);
         }
         else
         {
-            delete newBullet2;
+            delete plasmaShotgunBurst2;
         }
 
         if (bulletSpawnLane != 5)
         {
-            currentBullet[bulletSpawnLane].emplace_back(newBullet3);
+            currentBullet[bulletSpawnLane].emplace_back(plasmaShotgunBurst3);
         }
         else
         {
-            delete newBullet3;
+            delete plasmaShotgunBurst3;
         }
     }
     else
     {
         currentBullet[bulletSpawnLane - 1].emplace_back(newBullet);
-        delete newBullet2;
-        delete newBullet3;
+        delete plasmaShotgunBurst2;
+        delete plasmaShotgunBurst3;
     }
 }
 
