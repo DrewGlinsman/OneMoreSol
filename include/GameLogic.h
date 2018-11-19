@@ -61,7 +61,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 10;
+        int currentLevel = 8;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -149,6 +149,8 @@ class GameLogic{
         int decideBulletLane(MajorTom* majorTom);
         int decideBulletLaneKorat(int givenLane);
         int decideBulletType(Gun* currentGun);
+
+        void bulletLeftScreen(float timePassed, int i, int j);
 
         //changes survivor count
         void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
