@@ -10,7 +10,12 @@ MajorTom::MajorTom(TextureLoader* loadedTextures)
     setGun(1);
 
     majorTom.setTexture(loadedTextures->textureArray[0]);
-    majorTom.setTextureRect(sf::IntRect(0,0,64,64));
+    spriteFrame.left = 0;//x
+	spriteFrame.top = 0;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	majorTom.setTextureRect(spriteFrame);
+
     majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);
     majorTom.setScale(sf::Vector2f(1.2f,1.2f));
@@ -303,6 +308,9 @@ void MajorTom::setGun(int gunNumber)
             break;
 
     }
+    //change the frame series to the correct gun and reset the texture
+    spriteFrame.top = (gunNumber - 1)*64;
+    majorTom.setTextureRect(spriteFrame);
 }
 
 int MajorTom::getSurvivors()

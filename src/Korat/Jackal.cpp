@@ -7,7 +7,7 @@ Jackal::Jackal(int startLane, TextureLoader* loadedTextures){
 
 	jackal.setTexture(loadedTextures->textureArray[0]);
 	spriteFrame.left = 0;//x
-	spriteFrame.top = 576;//y
+	spriteFrame.top = 768;//y
 	spriteFrame.width = 64;
 	spriteFrame.height = 64;
 	jackal.setTextureRect(spriteFrame);

@@ -8,7 +8,7 @@ Biker::Biker(int startLane, TextureLoader* loadedTextures){
 
 	biker.setTexture(loadedTextures->textureArray[0]);
 	spriteFrame.left = 0;//x
-	spriteFrame.top = 768;//y
+	spriteFrame.top = 832;//y
 	spriteFrame.width = 64;
 	spriteFrame.height = 64;
 	biker.setTextureRect(spriteFrame);
