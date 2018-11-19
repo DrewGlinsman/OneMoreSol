@@ -917,7 +917,7 @@ void GameLogic::queryKoratFiring()
 		for (int j = 0; j < currentKorat[i].size(); j++)
 		{
 
-			if (currentKorat[i][j] -> getName() == "Jackal") //this only works for Jackals right now
+			if (currentKorat[i][j] -> getName() == "Jackal" or currentKorat[i][j] -> getName() == "Elite" or currentKorat[i][j] -> getName() == "Brute") //this only works for Jackals right now
 			{
 				if (currentKorat[i][j] -> queryToFire() == true) //if the Korat is ready to Fire
 				{

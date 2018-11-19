@@ -139,7 +139,36 @@ int Brute::getSpeed()
     return speed;
 }
 
-void Brute::shootWeapon()
+double Brute::getFireRate()
 {
-	//Brute will shot weapon
+	return fireRate;
+}
+
+void Brute::setFireRate(double givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
+bool Brute::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
 }
