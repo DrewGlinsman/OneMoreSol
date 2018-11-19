@@ -25,13 +25,11 @@ class MajorTom {
         int currentHealth;
         int newHealth;
         int survivorCnt;
+        int score;
 
     public:
         sf::Sprite majorTom;
-
-        sf::Texture mtSpriteSheet;//this is a second load, loaded also on gameviewplayer. how to expand scope?
-
-        sf::Sprite mtStandPPistol;
+        sf::IntRect spriteFrame;
 
         Gun* pistol = new PlasmaPistol();
         Gun* shotgun = new PlasmaShotgun();
@@ -48,8 +46,13 @@ class MajorTom {
         void drawTom(sf::RenderWindow& window);
 
         float getTomPosition();
+        float getTomPositionX();
         void setTomPositionX(float);
         void setTomPositionY(float);
+
+        void incrementRunFrame();
+
+        sf::Sprite getTom();
 
         bool initMove(float, string);
 
@@ -57,6 +60,10 @@ class MajorTom {
 
         int getHealth();
         void setHealth(int);
+        int getScore();
+        void setScore(int);
+
+        void wasShot(int);
 
         void shoot(float);
 

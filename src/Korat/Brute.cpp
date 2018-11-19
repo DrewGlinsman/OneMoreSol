@@ -6,7 +6,11 @@ Brute::Brute(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
 	brute.setTexture(loadedTextures->textureArray[0]);
-	brute.setTextureRect(sf::IntRect(0,448,64,64));
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 640;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	brute.setTextureRect(spriteFrame);
 	brute.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	brute.setPosition(1500, lane);
@@ -64,6 +68,8 @@ void Brute::moveCurrentKorat(float timePassed)
         if(brute.getPosition().x > -100)
         {
             brute.move(-speed * timePassed, 0);
+            if(!((int)brute.getPosition().x % 10))
+                KoratEmpire::incrementRunFrame(&spriteFrame, &brute);
         }
         else
         {
@@ -133,7 +139,36 @@ int Brute::getSpeed()
     return speed;
 }
 
-void Brute::shootWeapon()
+double Brute::getFireRate()
 {
-	//Brute will shot weapon
+	return fireRate;
+}
+
+void Brute::setFireRate(double givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
+bool Brute::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
 }

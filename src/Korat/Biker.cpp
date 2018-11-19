@@ -3,10 +3,15 @@
 #include <iostream>
 
 Biker::Biker(int startLane, TextureLoader* loadedTextures){
+
     lane = 0;
 
 	biker.setTexture(loadedTextures->textureArray[0]);
-	biker.setTextureRect(sf::IntRect(0,768,64,64));
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 832;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	biker.setTextureRect(spriteFrame);
 	biker.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	biker.setPosition(1500, lane);
@@ -64,6 +69,8 @@ void Biker::moveCurrentKorat(float timePassed)
         if(biker.getPosition().x > -100)
         {
             biker.move(-speed * timePassed, 0);
+            if(!((int)biker.getPosition().x % 10))
+                KoratEmpire::incrementRunFrame(&spriteFrame, &biker);
         }
         else
         {
@@ -131,4 +138,38 @@ int Biker::getHealth()
 int Biker::getSpeed()
 {
     return speed;
+}
+
+double Biker::getFireRate()
+{
+	return fireRate;
+}
+
+void Biker::setFireRate(double givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
+bool Biker::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
 }

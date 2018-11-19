@@ -10,12 +10,18 @@ MajorTom::MajorTom(TextureLoader* loadedTextures)
     setGun(1);
 
     majorTom.setTexture(loadedTextures->textureArray[0]);
-    majorTom.setTextureRect(sf::IntRect(0,0,64,64));
+    spriteFrame.left = 0;//x
+	spriteFrame.top = 0;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	majorTom.setTextureRect(spriteFrame);
+
     majorTom.setOrigin(sf::Vector2f(32.f, 32.f));
     majorTom.setPosition(156,508);
     majorTom.setScale(sf::Vector2f(1.2f,1.2f));
-    setHealth(100);
+    setHealth(5);
     setSurvivors(20);
+    setScore(0);
 }
 
 void MajorTom::drawTom (sf::RenderWindow& window)
@@ -28,6 +34,11 @@ float MajorTom::getTomPosition()
     return majorTom.getPosition().y;
 }
 
+float MajorTom::getTomPositionX()
+{
+    return majorTom.getPosition().x;
+}
+
 void MajorTom::setTomPositionX(float positionPassed)
 {
     majorTom.setPosition(positionPassed ,majorTom.getPosition().y);
@@ -36,6 +47,12 @@ void MajorTom::setTomPositionX(float positionPassed)
 void MajorTom::setTomPositionY(float positionPassed)
 {
     majorTom.setPosition(majorTom.getPosition().x, positionPassed);
+}
+
+void MajorTom::incrementRunFrame()
+{
+    spriteFrame.left = (spriteFrame.left+64)%192;
+    majorTom.setTextureRect(spriteFrame);
 }
 
 bool MajorTom::initMove(float timePassed, string direction)
@@ -128,6 +145,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * 250, timePassed * -500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -142,6 +161,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * 250, timePassed * -500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -156,6 +177,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * 250, timePassed * -500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -170,6 +193,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * 250, timePassed * -500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -188,6 +213,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * -250, timePassed * 500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -202,6 +229,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * -250, timePassed * 500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -216,6 +245,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * -250, timePassed * 500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -230,6 +261,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             else
             {
                 majorTom.move(timePassed * -250, timePassed * 500);
+                if(!((int)majorTom.getPosition().x % 5))
+                    incrementRunFrame();
                 return true;
             }
         }
@@ -242,6 +275,17 @@ bool MajorTom::keepMoving(float timePassed, string direction)
         }
 }
 
+sf::Sprite MajorTom::getTom()
+{
+    return majorTom;
+}
+
+void MajorTom::wasShot(int damage)
+{
+    currentHealth = currentHealth - damage;
+
+}
+
 int MajorTom::getHealth()
 {
     return currentHealth;
@@ -250,6 +294,16 @@ int MajorTom::getHealth()
 void MajorTom::setHealth(int newHealth)
 {
     currentHealth = newHealth;
+}
+
+int MajorTom::getScore()
+{
+    return score;
+}
+
+void MajorTom::setScore(int num)
+{
+    score = num;
 }
 
 int MajorTom::getGun()
@@ -287,6 +341,9 @@ void MajorTom::setGun(int gunNumber)
             break;
 
     }
+    //change the frame series to the correct gun and reset the texture
+    spriteFrame.top = (gunNumber - 1)*64;
+    majorTom.setTextureRect(spriteFrame);
 }
 
 int MajorTom::getSurvivors()

@@ -6,7 +6,11 @@ Hunter::Hunter(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
 	hunter.setTexture(loadedTextures->textureArray[0]);
-	hunter.setTextureRect(sf::IntRect(0,640,64,64));
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 576;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	hunter.setTextureRect(spriteFrame);
 	hunter.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	hunter.setPosition(1500, lane);
@@ -63,6 +67,8 @@ void Hunter::moveCurrentKorat(float timePassed)
         if(hunter.getPosition().x > -100)
         {
             hunter.move(-speed * timePassed, 0);
+            if(!((int)hunter.getPosition().x % 10))
+                KoratEmpire::incrementRunFrame(&spriteFrame, &hunter);
         }
         else
         {
@@ -132,7 +138,37 @@ int Hunter::getSpeed()
     return speed;
 }
 
-void Hunter::shootWeapon()
+double Hunter::getFireRate()
 {
-	//Hunter will shot weapon
+	return fireRate;
 }
+
+void Hunter::setFireRate(double givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
+bool Hunter::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
+}
+

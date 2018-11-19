@@ -4,24 +4,45 @@ GameStateManager::GameStateManager()
 : gameWindow(sf::VideoMode(1440, 900, 32), "One More Sol",sf::Style::Titlebar | sf::Style::Close)
 
 {
+    initialize();
+}
 
+void GameStateManager::initialize()
+{
+    if(!loadScreenTexture.loadFromFile("assets/loadingScreen.png"))
+        std::cout<<"Failed to load loading screen." << std::endl;
+    loadScreen.setOrigin(0,900);
+    loadScreen.setPosition(0,900);
+    loadScreen.setSize(sf::Vector2f(1440,900));
+    loadScreen.setTexture(&loadScreenTexture);
+    gameWindow.draw(loadScreen);
+    gameWindow.display();
+    playView = new GameViewPlayer();
 }
 
 bool GameStateManager::gameViewIsOpen()
 {
     bool quit;
+
+    loadScreen.setSize(sf::Vector2f(0,0));//quick fix for loading screen not going away after menu is switched to.
+
     if (currentState == "Start")
     {
-        menuView = new GameViewMenu();
-        quit = menuView -> gameViewIsOpen(gameWindow);
+        quit = playView -> menuViewIsOpen(gameWindow);
         return quit;
     }
     if (currentState == "Play")
     {
-        playView = new GameViewPlayer();
         quit = playView -> gameViewIsOpen(gameWindow);
         return quit;
     }
+
+    if (currentState == "Lost")
+    {
+        quit = playView -> lossViewIsOpen(gameWindow);
+        return quit;
+    }
+
 }
 
 void GameStateManager::setState(std::string state)

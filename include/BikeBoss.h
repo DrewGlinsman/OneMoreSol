@@ -11,6 +11,7 @@ class BikeBoss {
 
     public:
         sf::Sprite bikeBoss;
+        sf::IntRect spriteFrame;
 
         BikeBoss(TextureLoader* loadedTextures);
 
@@ -27,6 +28,8 @@ class BikeBoss {
         void initBossDown();
 
         void moveBoss(float timePassed);
+
+        void incrementRunFrameBoss(sf::IntRect*, sf::Sprite*);
 
         void drawBoss(sf::RenderWindow& window);
 

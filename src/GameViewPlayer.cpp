@@ -1,16 +1,60 @@
 #include "GameViewPlayer.h"
+#include <windows.h>
 
 using namespace std;
 
 GameViewPlayer::GameViewPlayer() // Player window constructor
+{
+    if(!initialized)
+    {
+        cout << "initializing" << endl;
+        initializeMenuState();
+        initializePlayState();
+    }
+    initialized = true;
+    logic = new GameLogic();
+    majorTom = new MajorTom(loadedTextures);
+}
+
+void GameViewPlayer::initializeMenuState()
+{
+
+    loadedTextures = new TextureLoader();
+    loadedAudio = new AudioLoader();
+
+    menuMusic.setBuffer(loadedAudio -> soundTrack[20]);
+    menuTransition.setBuffer(loadedAudio -> soundTrack[21]);
+    menuSelection.setBuffer(loadedAudio -> soundTrack[22]);
+
+    menuBackground.setSize(sf::Vector2f(1,1));
+
+    menuBackground.setPosition(0,0);
+    menuBackground.setSize(sf::Vector2f(1440,900));
+    menuBackground.setTexture(&(loadedTextures -> textureArray[4]));
+
+    playBtnRec.setOrigin((1308/2),0);
+    playBtnRec.setPosition(1440,400);
+    playBtnRec.setSize(sf::Vector2f((1308/2),(224/2)));
+    playBtnRec.setTexture(&(loadedTextures -> textureArray[6]));
+
+    storyBtnRec.setOrigin((1050/2),0);
+    storyBtnRec.setPosition(1440,530);
+    storyBtnRec.setSize(sf::Vector2f((1050/2),(117/2)));
+    storyBtnRec.setTexture(&(loadedTextures -> textureArray[7]));
+
+    exitBtnRec.setOrigin((444),0);
+    exitBtnRec.setPosition(1440,605);
+    exitBtnRec.setSize(sf::Vector2f(444,(117/2)));
+    exitBtnRec.setTexture(&(loadedTextures -> textureArray[9]));
+}
+
+void GameViewPlayer::initializePlayState()
 {
     if(!gameFont.loadFromFile("assets/impact.ttf"))
         std::cout << "Could not load requested font." << std::endl;
 
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
-
-    loadedTextures = new TextureLoader();
 
     sky.setRadius(894);
     sky.setOrigin(894,894);
@@ -20,9 +64,20 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     background.setOrigin(0,724);
     background.setPosition(0,900);
     background.setSize(sf::Vector2f(1440,724));
-    background.setTexture(&(loadedTextures->textureArray[1]));
+    background.setTexture(&(loadedTextures -> textureArray[1]));
 
-    lossScreen.setTexture(&(loadedTextures->textureArray[11]));
+    lossScreen.setOrigin(0,900);
+    lossScreen.setPosition(0,900);
+    lossScreen.setSize(sf::Vector2f(1440,900));
+    lossScreen.setTexture(&(loadedTextures -> textureArray[11]));
+
+    retryBtnRec.setPosition(200, 600);
+    retryBtnRec.setSize(sf::Vector2f(366, 79));
+    retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
+
+    giveUpBtnRec.setPosition(900, 600);
+    giveUpBtnRec.setSize(sf::Vector2f(366,79));
+    giveUpBtnRec.setTexture(&(loadedTextures->textureArray[14]));
 
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
@@ -60,15 +115,135 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     survivorCnt.setFillColor(sf::Color(0,0,0,255));
     survivorCnt.setPosition(75,860);
 
-    logic = new GameLogic();
-    majorTom = new MajorTom(loadedTextures);
+    //Score count display
+    scoreCnt.setFont(gameFont);
+    scoreCnt.setCharacterSize(22);
+    scoreCnt.setString("0 Score");//might be able to take out due to updater code redundancy
+    scoreCnt.setFillColor(sf::Color(0,0,0,255));
+    scoreCnt.setPosition(1300,20);
 
+    //Major Tom Health Display
+	majorTomHealth.setFont(gameFont);
+	majorTomHealth.setCharacterSize(22);
+	majorTomHealth.setString("100/100 Health");//might be able to take this out after survivor count is looped in updater
+	majorTomHealth.setFillColor(sf::Color(0,0,0,255));
+	majorTomHealth.setPosition(75,770);
+}
+
+bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
+{
+    menuMusic.play();
+    menuMusic.setLoop(true);
+    updateMenu(window);
+    menuSelector.setPosition(0,0);
+    cout << "0,0" << endl;
+    while(window.isOpen()) // Menu loop
+	{
+		while(window.pollEvent(Event))
+		{
+			if(Event.type == sf::Event::Closed)
+			{
+				window.close(); // Quit game
+				return true;
+			}
+
+			if(Event.type == sf::Event::KeyPressed)
+			{
+				if(Event.key.code == sf::Keyboard::Up)
+				{
+					if(sf::Vector2f (0,0) == menuSelector.getPosition())
+					{
+						menuSelector.setPosition(0,2);
+						selectMenuButton(window,2);
+						menuTransition.play();
+						cout << "0,2" << endl;
+					}
+					else if(sf::Vector2f (0,1) == menuSelector.getPosition())
+					{
+						menuSelector.setPosition(0,0);
+						selectMenuButton(window,0);
+						menuTransition.play();
+						cout << "0,0" << endl;
+					}
+					else if(sf::Vector2f (0,2) == menuSelector.getPosition())
+					{
+						menuSelector.setPosition(0,1);
+						selectMenuButton(window,1);
+						menuTransition.play();
+						cout << "0,1" << endl;
+					}
+				}
+
+				if(Event.key.code == sf::Keyboard::Down)
+				{
+					if(sf::Vector2f (0,0) == menuSelector.getPosition())
+					{
+						menuSelector.setPosition(0,1);
+						selectMenuButton(window,1);
+						menuTransition.play();
+						cout << "0,1" << endl;
+					}
+					else if(sf::Vector2f (0,1) == menuSelector.getPosition())
+					{
+						menuSelector.setPosition(0,2);
+						selectMenuButton(window,2);
+						menuTransition.play();
+						cout << "0,2" << endl;
+					}
+					else if(sf::Vector2f (0,2) == menuSelector.getPosition())
+					{
+						menuSelector.setPosition(0,0);
+						selectMenuButton(window,0);
+						menuTransition.play();
+						cout << "0,0" << endl;
+					}
+				}
+
+				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+				{
+					if(sf::Vector2f (0,0) == menuSelector.getPosition())
+					{
+						menuSelection.play();
+						Sleep(900);
+						menuMusic.stop();
+						return false;
+					}
+					if(sf::Vector2f (0,1) == menuSelector.getPosition())
+					{
+						menuSelection.play();
+						Sleep(900);
+						menuMusic.stop();
+						return false;
+					}
+					if(sf::Vector2f (0,2) == menuSelector.getPosition())
+					{
+						menuSelection.play();
+						Sleep(900);
+						window.close();
+						return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
+}
+
+void GameViewPlayer::updateMenu(sf::RenderWindow& window) // Updates screen
+{
+    window.clear(sf::Color::Black);
+    window.draw(menuBackground);
+    window.draw(playBtnRec);
+    window.draw(storyBtnRec);
+    window.draw(exitBtnRec);
+
+    // display
+    window.display();
 }
 
 bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 {
-    gameMusic.play();
-    gameMusic.setLoop(true);
+    currentLevel = logic -> getLevel() - 1;
 
     sf::Clock fireRate1;
     sf::Clock fireRate2;
@@ -85,6 +260,14 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
     while(window.isOpen())
     {
+        if(currentLevel < logic -> getLevel())
+        {
+            gameMusic.stop();
+            gameMusic.setBuffer(loadedAudio->soundTrack[currentLevel]);
+            gameMusic.play();
+            gameMusic.setLoop(true);
+        }
+        currentLevel = logic -> getLevel();
         updateGame(window);
 
         delta = gameClock.getElapsedTime().asSeconds();
@@ -92,11 +275,19 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
 //-----------------------------------------------------------------
 
+        if (logic -> checkEnd(majorTom))
+        {
+            logic -> clearAssets();
+            break;
+        }
+
         logic -> runLevel(sky, majorTom, delta);
         logic -> updateKoratOrder();
-        logic -> updateBulletOrder();
+        logic -> updateBulletOrder(); //Bullets generation and drawing
         logic -> updateDyingKorat();
         logic -> moveKorat(delta, majorTom);
+        logic -> queryKoratFiring();
+
 
         if (logic -> getLevel() == 10)
         {
@@ -110,6 +301,8 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         }
 
         logic -> moveBullet(delta);
+        logic -> moveKoratBullet(delta, majorTom);
+
 
 //-----------------------------------------------------------------
         if(keepMovingUp == true)
@@ -262,9 +455,69 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
     return false;
 }
 
+bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
+{
+    gameMusic.stop();
+    gameMusic.setBuffer(loadedAudio -> soundTrack[23]);
+    gameMusic.play();
+    gameMusic.setLoop(true);
+
+    bool retry = false;
+    updateLossScreen(window);
+    while(window.isOpen() && !retry)
+    {
+        while(window.pollEvent(Event))
+        {
+            if(Event.type == sf::Event::Closed)
+            {
+                gameMusic.stop();
+                window.close(); // Quit game
+            }
+
+            if(Event.type == sf::Event::KeyPressed)
+            {
+                if(Event.key.code == sf::Keyboard::Escape)
+                {
+                    gameMusic.stop();
+                    window.close();
+                }
+
+                if(Event.key.code == sf::Keyboard::Left || Event.key.code == sf::Keyboard::Right)
+                {
+                    if (selector.y == 1)
+                    {
+                        selector.y = 0;
+                        selectButton(window, selector.y);
+                    }
+                    else
+                    {
+                        selector.y = 1;
+                        selectButton(window, selector.y);
+                    }
+                }
+
+                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+                {
+                    if (selector.y == 0)
+                    {
+                        retry = true;
+                        logic -> loseLevel(sky, majorTom);
+                    }
+                    else if (selector.y == 1)
+                    {
+                        gameMusic.stop();
+                        window.close();
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
 {
-
     window.clear(sf::Color::Black);
 
     window.draw(sky);
@@ -272,13 +525,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     majorTom -> drawTom(window);
 
     logic -> drawKorat(window);
-    logic -> drawBullet(window);
 
-    if (logic -> checkEnd())
-    {
-        drawLossScreen(window);
-        //draw retry screen
-    }
 
     if (logic -> getLevel() == 10)
     {
@@ -289,7 +536,13 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
         logic -> drawTankBoss(window);
     }
 
+    window.draw(scoreCnt);
+
+    logic -> drawBullet(window);
+
+
     window.draw(survivorCnt);
+    window.draw(majorTomHealth);
     window.draw(weapon1);
     window.draw(weapon2);
     window.draw(weapon3);
@@ -299,77 +552,57 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.draw(weapon7);
 
     updateSurvivorCount();
+    updateMajorTomHealth();
+    updateScoreCount();
 
     window.display();
 }
 
-void GameViewPlayer::drawLossScreen(sf::RenderWindow &window)
+void GameViewPlayer::updateLossScreen(sf::RenderWindow &window)
 {
-        //window.draw(lossScreen) #need a loss screen to implement
-        bool retry = false;
-        while(window.isOpen() && !retry)
-        {
-            while(window.pollEvent(Event))
-            {
-                if(Event.type == sf::Event::Closed)
-                {
-                    gameMusic.stop();
-                    window.close(); // Quit game
-                }
+        window.clear(sf::Color::Black);
+        window.draw(lossScreen);
+        window.draw(retryBtnRec);
+        window.draw(giveUpBtnRec);
+        window.display();
+}
 
-                if(Event.type == sf::Event::KeyPressed)
-                {
-                    if(Event.key.code == sf::Keyboard::Escape)
-                    {
-                        gameMusic.stop();
-                        window.close();
-                    }
-
-                   if(Event.key.code == sf::Keyboard::Up || Event.key.code == sf::Keyboard::Down)
-                   {
-                       if (selector.y == 1)
-                       {
-                           selector.y = 0;
-                           //selectButton(window, 0, 0);
-
-                       }
-                       else
-                       {
-                           selector.y = 1;
-                           //selectButton(window, 0, 1);
-                       }
-                   }
-
-                   if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
-                    {
-                        if (selector.y == 0)
-                        {
-                            retry = true;
-                        }
-                        else if (selector.y == 1)
-                        {
-                            gameMusic.stop();
-                            window.close();
-                        }
-                    }
-            }
-        }
+void GameViewPlayer::selectMenuButton(sf::RenderWindow& window, int y)
+{
+    if(y == 0)
+    {
+        playBtnRec.setTexture(&(loadedTextures -> textureArray[6]));
+        storyBtnRec.setTexture(&(loadedTextures -> textureArray[7]));
+        exitBtnRec.setTexture(&(loadedTextures -> textureArray[9]));
     }
+    else if(y == 1)
+    {
+        playBtnRec.setTexture(&(loadedTextures -> textureArray[5]));
+        storyBtnRec.setTexture(&(loadedTextures -> textureArray[8]));
+        exitBtnRec.setTexture(&(loadedTextures -> textureArray[9]));
+    }
+    else if(y == 2)
+    {
+        playBtnRec.setTexture(&(loadedTextures -> textureArray[5]));
+        storyBtnRec.setTexture(&(loadedTextures -> textureArray[7]));
+        exitBtnRec.setTexture(&(loadedTextures -> textureArray[10]));
+    }
+    updateMenu(window);//could this be more optimally placed?
 }
 
 void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
 {
     if(y == 0)
     {
-        retryBtnRec.setTexture(&(loadedTextures->textureArray[12]));
-        exitBtnRec.setTexture(&(loadedTextures->textureArray[15]));
+        retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
+        giveUpBtnRec.setTexture(&(loadedTextures->textureArray[14]));
     }
     else if(y == 1)
     {
-        retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
-        exitBtnRec.setTexture(&(loadedTextures->textureArray[14]));
+        retryBtnRec.setTexture(&(loadedTextures->textureArray[12]));
+        giveUpBtnRec.setTexture(&(loadedTextures->textureArray[15]));
     }
-    updateGame(window);//could this be more optimally placed?
+    updateLossScreen(window);
 }
 
 
@@ -377,4 +610,16 @@ void GameViewPlayer::updateSurvivorCount()
 {
     string cnt = std::to_string(majorTom->getSurvivors()) + "/20 Survivors";
     survivorCnt.setString(cnt);
+}
+
+void GameViewPlayer::updateMajorTomHealth()
+{
+	string cnt = std::to_string(majorTom->getHealth()) + "/100 Health";
+	majorTomHealth.setString(cnt);
+}
+
+void GameViewPlayer::updateScoreCount()
+{
+    string cnt = std::to_string(majorTom->getScore()) + " Score";
+    scoreCnt.setString(cnt);
 }

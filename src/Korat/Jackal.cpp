@@ -6,7 +6,11 @@ Jackal::Jackal(int startLane, TextureLoader* loadedTextures){
     lane = 0;
 
 	jackal.setTexture(loadedTextures->textureArray[0]);
-	jackal.setTextureRect(sf::IntRect(0,576,64,64));
+	spriteFrame.left = 0;//x
+	spriteFrame.top = 768;//y
+	spriteFrame.width = 64;
+	spriteFrame.height = 64;
+	jackal.setTextureRect(spriteFrame);
 	jackal.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
 	jackal.setPosition(1500, lane);
@@ -74,6 +78,8 @@ void Jackal::moveCurrentKorat(float timePassed)
         if(jackal.getPosition().x > -100)
         {
             jackal.move(-speed * timePassed, 0);
+            if(!((int)jackal.getPosition().x % 10))
+                KoratEmpire::incrementRunFrame(&spriteFrame, &jackal);
         }
         else
         {
@@ -141,4 +147,38 @@ int Jackal::getHealth()
 int Jackal::getSpeed()
 {
     return speed;
+}
+
+double Jackal::getFireRate()
+{
+	return fireRate;
+}
+
+void Jackal::setFireRate(double givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
+bool Jackal::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
 }

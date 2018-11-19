@@ -82,4 +82,16 @@ void AudioLoader::load()
     if (!soundTrack[19].loadFromFile("assets/Level_20_Cut.ogg")) // Loads and initializes all sounds based on impact
     std::cout << "Could not load Level 20 Music into soundTrack." << std::endl;
 
+    if (!soundTrack[20].loadFromFile("assets/Menu_Music.ogg"))
+    std::cout << "Could not load request menu music." << std::endl;
+
+    if (!soundTrack[21].loadFromFile("assets/Menu_Transition.ogg"))
+    std::cout << "Could not load request menu transition sound." << std::endl;
+
+    if (!soundTrack[22].loadFromFile("assets/Menu_Selection.ogg"))
+    std::cout << "Could not load request menu selection sound." << std::endl;
+
+    if(!soundTrack[23].loadFromFile("assets/Lose_Music.ogg"))
+        std::cout << "Could not load loss music" << std::endl;
+
 }
