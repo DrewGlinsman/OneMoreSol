@@ -25,6 +25,11 @@ GameLogic::GameLogic()
 
 }
 
+bool GameLogic::currentLevelEnd()
+{
+    return levelWon;
+}
+
 bool GameLogic::checkEnd(MajorTom *majorTom)
 {
     if(majorTom -> getSurvivors() == 0 || majorTom -> getHealth() <= 0)
@@ -688,6 +693,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 	{
 		if (currentKoratCount == 0)
         {
+            levelWon = true;
             gameSky.rotate(-rotation); //rotate the sun back to the beginning
             currentLevel++;
             survivorCountSaved = majorTom->getSurvivors();

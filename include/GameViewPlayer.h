@@ -46,6 +46,7 @@ private:
     sf::Text menuPlay3;
     sf::Text menuPlay4;
     sf::Text menuPlay5;
+    sf::Text textAdventure;
 
     float titleX = 130;
     float titleY = 20;

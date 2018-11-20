@@ -112,6 +112,7 @@ class GameLogic{
         sf::Sound backgroundMusic;
 
         bool lostGame;
+        bool levelWon;
 
         bool movingUp = false;
         bool movingDown = false;
@@ -173,6 +174,7 @@ class GameLogic{
         void queryKoratFiring();
 
         void clearAssets();
+        bool currentLevelEnd();
 
 };
 
