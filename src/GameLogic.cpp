@@ -84,6 +84,11 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
             }
             else
             {
+                if(currentKorat[i][j] -> getName() == "Bomber")
+                {
+                    majorTom -> setSurvivors(0);
+                    break;
+                }
                 currentKorat[i].erase(currentKorat[i].begin() + j);
                 currentKoratCount--;
                 //update the gameviewplayer to reflect decremented survivors
