@@ -8,7 +8,7 @@ Biker::Biker(int startLane, TextureLoader* loadedTextures){
 
 	biker.setTexture(loadedTextures->textureArray[0]);
 	spriteFrame.left = 0;//x
-	spriteFrame.top = 768;//y
+	spriteFrame.top = 832;//y
 	spriteFrame.width = 64;
 	spriteFrame.height = 64;
 	biker.setTextureRect(spriteFrame);
@@ -138,4 +138,38 @@ int Biker::getHealth()
 int Biker::getSpeed()
 {
     return speed;
+}
+
+double Biker::getFireRate()
+{
+	return fireRate;
+}
+
+void Biker::setFireRate(double givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
+bool Biker::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
 }

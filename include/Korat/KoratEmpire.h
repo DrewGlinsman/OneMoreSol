@@ -39,7 +39,7 @@ public:
 
 	virtual void wasShot(int damage);
 
-	sf::Sprite getKorat();
+	virtual sf::Sprite getKorat();
 
 	virtual bool checkSurvive();
 
