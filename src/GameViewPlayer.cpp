@@ -125,7 +125,7 @@ void GameViewPlayer::initializePlayState()
     //Level count display
     levelCnt.setFont(gameFont);
     levelCnt.setCharacterSize(22);
-    levelCnt.setString("Level /20");//might be able to take out due to updater code redundancy
+    levelCnt.setString("Sol /20");//might be able to take out due to updater code redundancy
     levelCnt.setFillColor(sf::Color(0,0,0,255));
     levelCnt.setPosition(1300,40);
 
@@ -647,6 +647,6 @@ void GameViewPlayer::updateScoreCount()
 
 void GameViewPlayer::updateLevelCount()
 {
-    string cnt = "Level " + std::to_string(logic -> getLevel()) + "/20";
+    string cnt = "Sol " + std::to_string(logic -> getLevel()) + "/20";
     levelCnt.setString(cnt);
 }
