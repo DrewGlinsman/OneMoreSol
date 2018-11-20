@@ -623,8 +623,12 @@ void GameLogic::spawnBullet(float timePassed)
     else
     {
         currentBullet[bulletSpawnLane - 1].emplace_back(newBullet1);
-        delete newBullet2;
-        delete newBullet3;
+        if (bulletSpawnType == 2 || bulletSpawnType == 5)
+        {
+            delete newBullet2;
+            delete newBullet3;
+        }
+
     }
 }
 
