@@ -561,9 +561,9 @@ void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePass
 
 void GameLogic::spawnBullet(float timePassed)
 {
-    Bullet* newBullet1;
-    Bullet* newBullet2;
-    Bullet* newBullet3;
+    Bullet* newBullet1 = 0;
+    Bullet* newBullet2 = 0;
+    Bullet* newBullet3 = 0;
 
     switch(bulletSpawnType)
     {
@@ -623,6 +623,8 @@ void GameLogic::spawnBullet(float timePassed)
     else
     {
         currentBullet[bulletSpawnLane - 1].emplace_back(newBullet1);
+        delete newBullet2;
+        delete newBullet3;
     }
 }
 
