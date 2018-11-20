@@ -25,11 +25,15 @@ GameLogic::GameLogic()
 
 }
 
+bool GameLogic::currentLevelEnd()
+{
+    return levelWon;
+}
+
 bool GameLogic::checkEnd(MajorTom *majorTom)
 {
     if(majorTom -> getSurvivors() == 0 || majorTom -> getHealth() <= 0)
     {
-        survivorCountSaved = majorTom->getSurvivors();
         return true;
     }
     return false;
@@ -80,6 +84,11 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
             }
             else
             {
+                if(currentKorat[i][j] -> getName() == "Bomber")
+                {
+                    majorTom -> setSurvivors(0);
+                    break;
+                }
                 currentKorat[i].erase(currentKorat[i].begin() + j);
                 currentKoratCount--;
                 //update the gameviewplayer to reflect decremented survivors
@@ -97,10 +106,31 @@ void GameLogic::updateDyingKorat()
         if (dyingKorat[i] -> checkDeath() == true)
         {
             if (dyingKorat[i] -> getName() == "Bomber")
-                cout << "You Killed a Bomber" << endl;
+            {
+                explode(*dyingKorat[i]);
+            }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
         }
+    }
+}
+
+void GameLogic::explode(KoratEmpire &bomber)
+{
+    for (int i = 0; i < currentKorat.size(); i ++)
+    {
+        cout << "Bomber's lane: " << bomber.getLane() - 1 << endl;
+            for (int j = 0; j < currentKorat[i].size(); j++)
+            {
+                if ((bomber.getPositionX() - currentKorat[i][j] -> getPositionX()) <= 200
+                    && bomber.getPositionX() - currentKorat[i][j] -> getPositionX() >= -200
+                    && bomber.getLane() - currentKorat[i][j] -> getLane() <= 100
+                    && bomber.getLane() - currentKorat[i][j] -> getLane() >= -100 )
+                {
+                    currentKorat[i][j] -> wasShot(200);
+                }
+            }
+
     }
 }
 
@@ -182,15 +212,15 @@ void GameLogic::spawnKorat()
     }
     currentKorat[koratSpawnLane - 1].emplace_back(newKorat);
     currentKoratCount++;
-    std::cout << "currentKoratCount = " << currentKoratCount << std::endl;
+    //std::cout << "currentKoratCount = " << currentKoratCount << std::endl;
 
-    std::cout << "==============================" << std::endl;
+    //std::cout << "==============================" << std::endl;
     for (int i = 0; i < currentKorat.size(); i ++)
     {
 
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            cout << currentKorat[i][j] -> getName() << ' ';
+            //cout << currentKorat[i][j] -> getName() << ' ';
             if (currentKorat[i][j] -> getLane() == 680)
             {
                  print = false;
@@ -199,12 +229,12 @@ void GameLogic::spawnKorat()
                  print = true;
 
         }
-        if(print == true)
-        cout << endl << "------------------------------" << endl;
-        else
-            cout << endl;
+        //if(print == true)
+        //cout << endl << "------------------------------" << endl;
+        //else
+            //cout << endl;
     }
-    cout << "==============================" << endl;
+   // cout << "==============================" << endl;
 }
 
 int GameLogic::decideKoratLane()
@@ -674,6 +704,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 	long now;
     now = ((unsigned long) time((time_t *) NULL)) % 255;
     SelectStream((int) now);
+    firstLevel = true;
 
     //-------------------------------------------------------------
     // lose game check
@@ -699,7 +730,12 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
             majorTom -> setTomPositionY(508);
 
             cout << "Current Level = " << currentLevel << endl;
+            if(!firstLevel)
+            {
+                levelWon = true;
+            }
 
+            firstLevel = false;
             // start text adventure
 
             if(currentLevel == 10)
@@ -717,9 +753,11 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 	else if(currentLevel == 10 | currentLevel == 20)
     {
         gameSky.rotate(timePassed * levelSpeedModifier);
+        levelWon = false;
     }
 	else
     {
+        levelWon = false;
         gameSky.rotate(timePassed * levelSpeedModifier);
 
         if (spawnTime >= levelSpawnModifier)
