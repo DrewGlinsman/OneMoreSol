@@ -113,6 +113,7 @@ class GameLogic{
 
         bool lostGame;
         bool levelWon;
+        bool firstLevel;
 
         bool movingUp = false;
         bool movingDown = false;

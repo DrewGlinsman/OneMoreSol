@@ -679,6 +679,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 	long now;
     now = ((unsigned long) time((time_t *) NULL)) % 255;
     SelectStream((int) now);
+    firstLevel = true;
 
     //-------------------------------------------------------------
     // lose game check
@@ -693,7 +694,6 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 	{
 		if (currentKoratCount == 0)
         {
-            levelWon = true;
             gameSky.rotate(-rotation); //rotate the sun back to the beginning
             currentLevel++;
             survivorCountSaved = majorTom->getSurvivors();
@@ -705,7 +705,12 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
             majorTom -> setTomPositionY(508);
 
             cout << "Current Level = " << currentLevel << endl;
+            if(!firstLevel)
+            {
+                levelWon = true;
+            }
 
+            firstLevel = false;
             // start text adventure
 
             if(currentLevel == 10)
@@ -723,9 +728,11 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 	else if(currentLevel == 10 | currentLevel == 20)
     {
         gameSky.rotate(timePassed * levelSpeedModifier);
+        levelWon = false;
     }
 	else
     {
+        levelWon = false;
         gameSky.rotate(timePassed * levelSpeedModifier);
 
         if (spawnTime >= levelSpawnModifier)

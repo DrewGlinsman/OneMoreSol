@@ -283,6 +283,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         if (logic -> currentLevelEnd())
         {
+            std::cout << "Entered text adventure" << endl;
             textAdventureIsOpen(window);
         }
 
@@ -534,6 +535,8 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
     textAdventure.setString("You found 5 Survivors!");
     textAdventure.setFillColor(sf::Color::White);
     textAdventure.setPosition(500,500);
+    window.draw(textAdventure);
+    window.display();
 
     while(window.isOpen())
     {
