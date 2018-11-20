@@ -120,6 +120,8 @@ public:
     bool menuViewIsOpen(sf::RenderWindow& window);
     bool gameViewIsOpen(sf::RenderWindow& window);
     bool lossViewIsOpen(sf::RenderWindow& window);
+    bool winViewIsOpen(sf::RenderWindow& window);
+    bool textAdventureIsOpen(sf::RenderWindow& window);
     void updateMenu(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();

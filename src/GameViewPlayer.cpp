@@ -518,6 +518,16 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
     return false;
 }
 
+bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
+{
+    return false;
+}
+
+bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
+{
+    return false;
+}
+
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
 {
     window.clear(sf::Color::Black);

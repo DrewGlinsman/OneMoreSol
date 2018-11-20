@@ -43,6 +43,17 @@ bool GameStateManager::gameViewIsOpen()
         return quit;
     }
 
+    if (currentState == "Won")
+    {
+        quit = playView -> winViewIsOpen(gameWindow);
+        return quit;
+    }
+
+    if (currentState == "Text")
+    {
+        quit = playView -> textAdventureIsOpen(gameWindow);
+        return quit;
+    }
 }
 
 void GameStateManager::setState(std::string state)
