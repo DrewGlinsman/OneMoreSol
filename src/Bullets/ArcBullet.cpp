@@ -8,7 +8,7 @@ ArcBullet::ArcBullet(int startLane, TextureLoader* loadedTextures) {
 	arc.setOrigin(sf::Vector2f(96.f,96.f));
 	setLane(startLane);
 	arc.setPosition(height, lane);
-	speed = 100;
+	speed = 1000;
 	damage = 40;
 }
 
@@ -69,7 +69,7 @@ void ArcBullet::setLane(int givenLane)
 
 void ArcBullet::moveCurrentBullet(float timePassed)
 {
-        if(arc.getPosition().x < 1500)
+        if(arc.getPosition().x < 500)
         {
             arc.move(speed * timePassed, 0);
             outOfBounds = false;

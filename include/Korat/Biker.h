@@ -6,6 +6,8 @@
 #include <SFML/Audio.hpp>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
+#include "rngs.h"
+
 
 class Biker: public KoratEmpire {
 public:
@@ -39,6 +41,12 @@ public:
 
 	int getSpeed();
 
+	double getFireRate();
+
+	void setFireRate(double);
+
+	bool queryToFire();
+
 private:
 
 	int lane;
@@ -51,6 +59,10 @@ private:
     int lane3 = 508;
     int lane4 = 594;
     int lane5 = 680;
+
+    double fireRate = 1;
+    float lastBulletFired;
+    sf::Clock fireBulletClock;
 
     bool koratDeathSoundPlayed = false;
 	bool koratLeftSoundPlayed = false;

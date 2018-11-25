@@ -122,6 +122,13 @@ void GameViewPlayer::initializePlayState()
     scoreCnt.setFillColor(sf::Color(0,0,0,255));
     scoreCnt.setPosition(1300,20);
 
+    //Level count display
+    levelCnt.setFont(gameFont);
+    levelCnt.setCharacterSize(22);
+    levelCnt.setString("Sol /20");//might be able to take out due to updater code redundancy
+    levelCnt.setFillColor(sf::Color(0,0,0,255));
+    levelCnt.setPosition(1300,40);
+
     //Major Tom Health Display
 	majorTomHealth.setFont(gameFont);
 	majorTomHealth.setCharacterSize(22);
@@ -132,9 +139,9 @@ void GameViewPlayer::initializePlayState()
 
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 {
+    updateMenu(window);
     menuMusic.play();
     menuMusic.setLoop(true);
-    updateMenu(window);
     menuSelector.setPosition(0,0);
     cout << "0,0" << endl;
     while(window.isOpen()) // Menu loop
@@ -472,6 +479,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
             {
                 gameMusic.stop();
                 window.close(); // Quit game
+                return true;
             }
 
             if(Event.type == sf::Event::KeyPressed)
@@ -502,6 +510,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     {
                         retry = true;
                         logic -> loseLevel(sky, majorTom);
+                        return false;
                     }
                     else if (selector.y == 1)
                     {
@@ -513,6 +522,16 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
             }
         }
     }
+    return false;
+}
+
+bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
+{
+    return false;
+}
+
+bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
+{
     return false;
 }
 
@@ -537,6 +556,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     }
 
     window.draw(scoreCnt);
+    window.draw(levelCnt);
 
     logic -> drawBullet(window);
 
@@ -554,6 +574,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     updateSurvivorCount();
     updateMajorTomHealth();
     updateScoreCount();
+    updateLevelCount();
 
     window.display();
 }
@@ -622,4 +643,10 @@ void GameViewPlayer::updateScoreCount()
 {
     string cnt = std::to_string(majorTom->getScore()) + " Score";
     scoreCnt.setString(cnt);
+}
+
+void GameViewPlayer::updateLevelCount()
+{
+    string cnt = "Sol " + std::to_string(logic -> getLevel()) + "/20";
+    levelCnt.setString(cnt);
 }

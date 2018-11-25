@@ -100,6 +100,7 @@ public:
     sf::Sound gameMusic;
     sf::Text survivorCnt;
     sf::Text scoreCnt;
+    sf::Text levelCnt;
     sf::Text majorTomHealth;
     sf::Event Event;
 
@@ -120,11 +121,14 @@ public:
     bool menuViewIsOpen(sf::RenderWindow& window);
     bool gameViewIsOpen(sf::RenderWindow& window);
     bool lossViewIsOpen(sf::RenderWindow& window);
+    bool winViewIsOpen(sf::RenderWindow& window);
+    bool textAdventureIsOpen(sf::RenderWindow& window);
     void updateMenu(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();
     void updateMajorTomHealth();
     void updateScoreCount();
+    void updateLevelCount();
     void updateLossScreen(sf::RenderWindow &window);
     void selectButton(sf::RenderWindow &window, int y);
     void selectMenuButton(sf::RenderWindow &window, int y);
