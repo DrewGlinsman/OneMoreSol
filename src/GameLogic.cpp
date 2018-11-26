@@ -306,6 +306,12 @@ void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed
 
 }
 
+/** \brief
+ * Reload function to calculate reload times.
+ * \param Pointer to current gun to find reload times
+ * \return Bool
+ *
+ */
 bool GameLogic::reloadCurrentGun(Gun* currentGun)
 {
     if(reloadStarted == false)
