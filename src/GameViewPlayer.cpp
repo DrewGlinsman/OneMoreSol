@@ -284,9 +284,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logic -> currentLevelEnd())
         {
             std::cout << "Entered text adventure" << endl;
+            logic -> pauseGame();
             textAdventureIsOpen(window);
         }
 
+        logic -> pauseGame();
         logic -> runLevel(sky, majorTom, delta);
         logic -> updateKoratOrder();
         logic -> updateBulletOrder(); //Bullets generation and drawing
@@ -532,12 +534,11 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 {
     window.clear(sf::Color::Black);
-    textAdventure.setFont(menuFont);
-    textAdventure.setCharacterSize(22);
+    textAdventure.setFont(gameFont);
+    textAdventure.setCharacterSize(44);
     textAdventure.setString("You found 5 Survivors!");
-    textAdventure.setFillColor(sf::Color::White);
+    textAdventure.setFillColor(sf::Color(255,255,255,255));
     textAdventure.setPosition(500,500);
-    window.draw(textAdventure);
     window.display();
 
     while(window.isOpen())

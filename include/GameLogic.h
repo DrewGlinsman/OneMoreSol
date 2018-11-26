@@ -118,6 +118,8 @@ class GameLogic{
         bool movingUp = false;
         bool movingDown = false;
 
+        bool isPaused = false;
+
         double directMove = 1;
 
     public:
@@ -174,6 +176,7 @@ class GameLogic{
         int getLevel();
         void queryKoratFiring();
 
+        void pauseGame();
         void explode(KoratEmpire &bomber);
         void clearAssets();
         bool currentLevelEnd();
