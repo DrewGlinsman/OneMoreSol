@@ -1,5 +1,7 @@
 #include "GameViewPlayer.h"
 #include <windows.h>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -534,11 +536,25 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 {
     window.clear(sf::Color::Black);
-    textAdventure.setFont(gameFont);
-    textAdventure.setCharacterSize(44);
-    textAdventure.setString("You found 5 Survivors!");
-    textAdventure.setFillColor(sf::Color(255,255,255,255));
-    textAdventure.setPosition(500,500);
+    std::ifstream currentAdventure;
+    currentAdventure.open("assets/TextAdventures/LevelOne.txt");
+    std::string adventure;
+    std::string line;
+    if(currentAdventure.is_open())
+    {
+        int x = 1;
+        while(getline(currentAdventure, line))
+        {
+            adventure = line;
+            textAdventure.setFont(gameFont);
+            textAdventure.setCharacterSize(32);
+            textAdventure.setString(adventure);
+            textAdventure.setFillColor(sf::Color::White);
+            textAdventure.setPosition(300,250 + (x * 50));
+            window.draw(textAdventure);
+            x++;
+        }
+    }
     window.display();
 
     while(window.isOpen())
