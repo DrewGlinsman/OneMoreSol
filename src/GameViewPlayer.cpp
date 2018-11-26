@@ -540,20 +540,43 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
     currentAdventure.open("assets/TextAdventures/LevelOne.txt");
     std::string adventure;
     std::string line;
+    bool switchSides = false;
+
+    textAdventure.setFont(gameFont);
+    textAdventure.setCharacterSize(32);
+    textAdventure.setFillColor(sf::Color::White);
     if(currentAdventure.is_open())
     {
         int x = 1;
+        int y = 0;
         while(getline(currentAdventure, line))
         {
             adventure = line;
-            textAdventure.setFont(gameFont);
-            textAdventure.setCharacterSize(32);
+            if (adventure == " ")
+            {
+                switchSides = !switchSides;
+                continue;
+            }
+            if(switchSides)
+            {
+                while(window.pollEvent(Event))
+                {
+                    if(Event.type == sf::Event::KeyPressed)
+                    {
+                        if(Event.key.code == sf::Keyboard::Space)
+                        {
+                            y = 5;
+                            break;
+                        }
+                    }
+                }
+            }
             textAdventure.setString(adventure);
-            textAdventure.setFillColor(sf::Color::White);
-            textAdventure.setPosition(300,250 + (x * 50));
+            textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
             window.draw(textAdventure);
             x++;
         }
+
     }
     window.display();
 
