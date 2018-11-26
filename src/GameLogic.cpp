@@ -80,6 +80,11 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
             }
             else
             {
+                if(currentKorat[i][j] -> getName() == "Bomber")
+                {
+                    majorTom->setSurvivors(0);
+                    break;
+                }
                 currentKorat[i].erase(currentKorat[i].begin() + j);
                 currentKoratCount--;
                 //update the gameviewplayer to reflect decremented survivors
@@ -657,6 +662,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
             gameSky.rotate(-rotation); //rotate the sun back to the beginning
             currentLevel++;
             survivorCountSaved = majorTom->getSurvivors();
+            cout << "Survivor Count Saved: " << survivorCountSaved << endl;
             levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
             levelSpawnModifier = levelSpawnModifier * 15/16; //
 
@@ -729,7 +735,7 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
     {
         startTankBoss(loadedTextures);
     }
-
+    cout << "Suvivor Count Saved: " << survivorCountSaved << endl;
     majorTom->setSurvivors(survivorCountSaved);
     majorTom->setHealth(100);
 
