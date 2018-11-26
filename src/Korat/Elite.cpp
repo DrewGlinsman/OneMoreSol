@@ -143,7 +143,37 @@ int Elite::getSpeed()
     return speed;
 }
 
-void Elite::shootWeapon()
+double Elite::getFireRate()
 {
-	//Brute will shot weapon
+	return fireRate;
 }
+
+void Elite::setFireRate(double givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
+bool Elite::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
+}
+

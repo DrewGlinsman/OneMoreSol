@@ -7,7 +7,7 @@ Hunter::Hunter(int startLane, TextureLoader* loadedTextures){
 
 	hunter.setTexture(loadedTextures->textureArray[0]);
 	spriteFrame.left = 0;//x
-	spriteFrame.top = 640;//y
+	spriteFrame.top = 576;//y
 	spriteFrame.width = 64;
 	spriteFrame.height = 64;
 	hunter.setTextureRect(spriteFrame);
@@ -138,7 +138,37 @@ int Hunter::getSpeed()
     return speed;
 }
 
-void Hunter::shootWeapon()
+double Hunter::getFireRate()
 {
-	//Hunter will shot weapon
+	return fireRate;
 }
+
+void Hunter::setFireRate(double givenFireRate)
+{
+	fireRate = givenFireRate;
+}
+
+bool Hunter::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+	if(lastBulletFired > getFireRate())
+	{
+	   readyToFire = true;
+
+	   double randomFireRate = Random() * 3;
+	   if(randomFireRate > 1 && randomFireRate < 2)
+		  setFireRate(2);
+	   else if(randomFireRate > 2)
+		  setFireRate(3);
+	   else
+		   setFireRate(1);
+	   setFireRate(randomFireRate);
+	   fireBulletClock.restart();
+	}
+
+
+	return readyToFire;
+}
+
