@@ -551,14 +551,19 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
         int y = 0;
         while(getline(currentAdventure, line))
         {
+
+            cout << "Current Line: " << line << endl;
             adventure = line;
-            if (adventure == " ")
+
+            if (line.empty())
             {
                 switchSides = !switchSides;
                 continue;
             }
+
             if(switchSides)
             {
+                cout << "Entered if" << endl;
                 while(window.pollEvent(Event))
                 {
                     if(Event.type == sf::Event::KeyPressed)
@@ -566,13 +571,20 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
                         if(Event.key.code == sf::Keyboard::Space)
                         {
                             y = 5;
-                            break;
+                            textAdventure.setString(adventure);
+                            textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
                         }
                     }
                 }
+                cout << "Exited If" << endl;
             }
-            textAdventure.setString(adventure);
-            textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
+
+            else
+            {
+                textAdventure.setString(adventure);
+                textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
+            }
+
             window.draw(textAdventure);
             x++;
         }
