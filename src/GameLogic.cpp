@@ -704,6 +704,8 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
             majorTom -> setTomPositionY(508);
 
+            clearAssets();
+
             cout << "Current Level = " << currentLevel << endl;
 
             // start text adventure
@@ -738,12 +740,20 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
 
 void GameLogic::clearAssets()
 {
-     for (int i = 0; i < currentBullet.size(); i++)
-        {
-            currentBullet[i].clear();
-            currentKorat[i].clear();
-            currentKoratBullet[i].clear();
-        }
+    for (int i = 0; i < currentBullet.size(); i++)
+    {
+        currentBullet[i].clear();
+    }
+    for (int i = 0; i < currentKorat.size(); i++)
+    {
+        currentKorat[i].clear();
+    }
+    for (int i = 0; i < currentKoratBullet.size(); i++)
+    {
+        currentKoratBullet[i].clear();
+    }
+    currentBikeBoss.clear();
+    currentTankBoss.clear();
 }
 
 void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
