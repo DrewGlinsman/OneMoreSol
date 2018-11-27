@@ -1,5 +1,4 @@
 #include "GameViewPlayer.h"
-#include <windows.h>
 
 using namespace std;
 
@@ -206,26 +205,26 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					}
 				}
 
-				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
 				{
 					if(sf::Vector2f (0,0) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900); //cant use this on linux, find an alternative
 						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900); //cant use this on linux, find an alternative
 						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900); //cant use this on linux, find an alternative
 						window.close();
 						return true;
 					}
@@ -505,7 +504,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     }
                 }
 
-                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
                 {
                     if (selector.y == 0)
                     {
