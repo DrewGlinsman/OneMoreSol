@@ -161,7 +161,7 @@ class GameLogic{
 
         void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
 
-        void updateDyingKorat();
+        void updateDyingKorat(MajorTom*);
 
         void startBikeBoss(TextureLoader*);
         void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
@@ -177,7 +177,7 @@ class GameLogic{
         void queryKoratFiring();
 
         void pauseGame();
-        void explode(KoratEmpire &bomber);
+        void explode(KoratEmpire &bomber, MajorTom* majorTom);
         void clearAssets();
         bool currentLevelEnd();
 

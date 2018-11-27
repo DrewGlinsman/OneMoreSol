@@ -102,7 +102,7 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
     }
 }
 
-void GameLogic::updateDyingKorat()
+void GameLogic::updateDyingKorat(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingKorat.size(); i++)
     {
@@ -110,7 +110,7 @@ void GameLogic::updateDyingKorat()
         {
             if (dyingKorat[i] -> getName() == "Bomber")
             {
-                explode(*dyingKorat[i]);
+                explode(*dyingKorat[i], majorTom);
             }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
@@ -118,7 +118,7 @@ void GameLogic::updateDyingKorat()
     }
 }
 
-void GameLogic::explode(KoratEmpire &bomber)
+void GameLogic::explode(KoratEmpire &bomber, MajorTom* majorTom)
 {
     for (int i = 0; i < currentKorat.size(); i ++)
     {
@@ -131,6 +131,13 @@ void GameLogic::explode(KoratEmpire &bomber)
                     && bomber.getLane() - currentKorat[i][j] -> getLane() >= -100 )
                 {
                     currentKorat[i][j] -> wasShot(200);
+                }
+                if (majorTom -> getTomPosition() - currentKorat[i][j] -> getLane() <= 100 &&
+                    majorTom -> getTomPosition() - currentKorat[i][j] -> getLane() >= - 100 &&
+                    majorTom -> getTomPositionX() - currentKorat[i][j] -> getPositionX() <= 200 &&
+                    majorTom -> getTomPositionX() - currentKorat[i][j] -> getPositionX() >= -200)
+                {
+                    majorTom -> setHealth(majorTom->getHealth() - 50);
                 }
             }
 
