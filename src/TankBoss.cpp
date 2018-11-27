@@ -59,7 +59,7 @@ bool TankBoss::checkSurvive()
 
 float TankBoss::getPositionX()
 {
-    return tankBoss.getPosition().x;
+    return tankBoss.getPosition().x - 220;
 }
 
 sf::RectangleShape TankBoss::getBoss()

@@ -821,6 +821,10 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
 {
     for(int i = 0; i < currentBikeBoss.size(); i++)
     {
+        if(currentBikeBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
+        {
+            loseLevel(gameSky, majorTom);
+        }
         if (currentBikeBoss[i] -> checkSurvive() == false)
         {
             if (currentBikeBoss[i] -> checkDeath() == false)
@@ -937,6 +941,10 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                 else
                 {
                     currentTankBoss[i] -> moveBoss(timePassed);
+                    if(currentTankBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
+                    {
+                        loseLevel(gameSky, majorTom);
+                    }
                 }
             }
             else
@@ -1015,47 +1023,47 @@ void GameLogic::queryTankFiring()
 	for (int i = 0; i < currentTankBoss.size(); i ++)
 	{
 
-        if (currentTankBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
+        if (currentTankBoss[i] -> getPositionX() < 1440)
         {
-            int firingLaneInPixels = currentTankBoss[i] -> decideFiringLane();
-            //implement stuff to make Korat fire here
-            Bullet* newBullet;
-            newBullet = new KoratBullet(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
-
-            int laneToGoIn;
-
-            switch(firingLaneInPixels)
+            if (currentTankBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
             {
-            case 335:
-                laneToGoIn = 0;
-                break;
-            case 422:
-                laneToGoIn = 1;
-                break;
-            case 508:
-                laneToGoIn = 2;
-                break;
-            case 594:
-                laneToGoIn = 3;
-                break;
-            case 680:
-                laneToGoIn = 4;
-                break;
-            default:
-                laneToGoIn = 0;
-                break;
+                int firingLaneInPixels = currentTankBoss[i] -> decideFiringLane();
+                //implement stuff to make Korat fire here
+                Bullet* newBullet;
+                newBullet = new KoratBullet(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
+
+                int laneToGoIn;
+
+                switch(firingLaneInPixels)
+                {
+                case 335:
+                    laneToGoIn = 0;
+                    break;
+                case 422:
+                    laneToGoIn = 1;
+                    break;
+                case 508:
+                    laneToGoIn = 2;
+                    break;
+                case 594:
+                    laneToGoIn = 3;
+                    break;
+                case 680:
+                    laneToGoIn = 4;
+                    break;
+                default:
+                    laneToGoIn = 0;
+                    break;
+                }
+                cout << firingLaneInPixels << endl;
+
+
+                currentKoratBullet[laneToGoIn].emplace_back(newBullet);
+
+                counter++;
+
+                //405 count
             }
-            cout << firingLaneInPixels << endl;
-
-
-            currentKoratBullet[laneToGoIn].emplace_back(newBullet);
-
-            counter++;
-
-            //405 count
-        } else {
-            //pass? basically ask again later
         }
-
 	}
 }
