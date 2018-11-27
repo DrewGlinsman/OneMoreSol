@@ -542,6 +542,7 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
     std::string line;
     bool switchSides = false;
     bool optionSelected = false;
+    bool spaceHit = false;
 
     textAdventure.setFont(gameFont);
     textAdventure.setCharacterSize(32);
@@ -552,16 +553,17 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
         {
             int x = 1;
             int y = 0;
-            while(getline(currentAdventure, line) || !optionSelected)
+            while(getline(currentAdventure, line))
             {
-
+                spaceHit = false;
                 cout << "Current Line: " << line << endl;
                 adventure = line;
 
                 if(switchSides)
                 {
-                    while(window.waitEvent(Event))
+                    while(window.pollEvent(Event) || !spaceHit)
                     {
+                        cout << "Entered while loop " << endl;
                         if(Event.type == sf::Event::KeyPressed)
                         {
                             if(Event.key.code == sf::Keyboard::Space)
@@ -569,17 +571,12 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
                                 y = 5;
                                 textAdventure.setString(adventure);
                                 textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
+                                spaceHit = true;
                             }
-                            if(Event.key.code == sf::Keyboard::Y)
-                            {
-                                optionSelected = true;
-                            }
-                            if(Event.key.code == sf::Keyboard::N)
-                            {
-                                optionSelected = true;
-                            }
+
                         }
                     }
+                    cout << "Exited while loop" << endl;
                 }
 
                 if (line.empty())
@@ -609,6 +606,14 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
                 if(Event.key.code == sf::Keyboard::Space)
                 {
                     return false;
+                }
+                if(Event.key.code == sf::Keyboard::Y)
+                {
+                    optionSelected = true;
+                }
+                if(Event.key.code == sf::Keyboard::N)
+                {
+                    optionSelected = true;
                 }
             }
         }
