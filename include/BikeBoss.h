@@ -41,6 +41,8 @@ class BikeBoss {
 
         int getSpeed();
 
+        bool queryToFire();
+
         sf::Sprite getBoss();
 
 

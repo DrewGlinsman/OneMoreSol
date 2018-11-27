@@ -57,6 +57,11 @@ bool TankBoss::checkSurvive()
     return survive;
 }
 
+float TankBoss::getPositionX()
+{
+    return tankBoss.getPosition().x;
+}
+
 sf::RectangleShape TankBoss::getBoss()
 {
     return tankBoss;
@@ -70,6 +75,28 @@ void TankBoss::wasShot(int damage)
 int TankBoss::getSpeed()
 {
     return speed;
+}
+
+bool TankBoss::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+    // 0.67415730337
+	if(lastBulletFired > 0.33707865168)
+	{
+	   readyToFire = true;
+	   fireBulletClock.restart();
+	}
+
+return readyToFire;
+}
+
+int TankBoss::decideFiringLane()
+{
+    int lane = firingLane[index];
+    index++;
+    return lane;
 }
 
 void TankBoss::drawBoss(sf::RenderWindow& window)

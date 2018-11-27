@@ -304,6 +304,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logic -> getLevel() == 20)
         {
             logic -> moveTankBoss(sky, majorTom, delta);
+            logic -> queryTankFiring();
             logic -> updateDyingTankBoss();
         }
 
