@@ -211,6 +211,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					{
 						menuSelection.play();
 						//Sleep(900); //cant use this on linux, find an alternative
+						sf::sleep(sf::milliseconds(900)); //the fix
 						menuMusic.stop();
 						return false;
 					}
@@ -218,6 +219,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					{
 						menuSelection.play();
 						//Sleep(900); //cant use this on linux, find an alternative
+						sf::sleep(sf::milliseconds(900)); //the fix
 						menuMusic.stop();
 						return false;
 					}
@@ -225,6 +227,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					{
 						menuSelection.play();
 						//Sleep(900); //cant use this on linux, find an alternative
+						sf::sleep(sf::milliseconds(900)); //the fix
 						window.close();
 						return true;
 					}
