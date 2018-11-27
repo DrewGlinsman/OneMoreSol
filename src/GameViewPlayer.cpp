@@ -541,54 +541,62 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
     std::string adventure;
     std::string line;
     bool switchSides = false;
+    bool optionSelected = false;
 
     textAdventure.setFont(gameFont);
     textAdventure.setCharacterSize(32);
     textAdventure.setFillColor(sf::Color::White);
     if(currentAdventure.is_open())
     {
-        int x = 1;
-        int y = 0;
-        while(getline(currentAdventure, line))
+        while(!optionSelected)
         {
-
-            cout << "Current Line: " << line << endl;
-            adventure = line;
-
-            if (line.empty())
+            int x = 1;
+            int y = 0;
+            while(getline(currentAdventure, line) || !optionSelected)
             {
-                switchSides = !switchSides;
-                continue;
-            }
 
-            if(switchSides)
-            {
-                cout << "Entered if" << endl;
-                while(window.pollEvent(Event))
+                cout << "Current Line: " << line << endl;
+                adventure = line;
+
+                if(switchSides)
                 {
-                    if(Event.type == sf::Event::KeyPressed)
+                    while(window.waitEvent(Event))
                     {
-                        if(Event.key.code == sf::Keyboard::Space)
+                        if(Event.type == sf::Event::KeyPressed)
                         {
-                            y = 5;
-                            textAdventure.setString(adventure);
-                            textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
+                            if(Event.key.code == sf::Keyboard::Space)
+                            {
+                                y = 5;
+                                textAdventure.setString(adventure);
+                                textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
+                            }
+                            if(Event.key.code == sf::Keyboard::Y)
+                            {
+                                optionSelected = true;
+                            }
+                            if(Event.key.code == sf::Keyboard::N)
+                            {
+                                optionSelected = true;
+                            }
                         }
                     }
                 }
-                cout << "Exited If" << endl;
-            }
 
-            else
-            {
-                textAdventure.setString(adventure);
-                textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
-            }
+                if (line.empty())
+                {
+                    switchSides = !switchSides;
+                }
 
-            window.draw(textAdventure);
-            x++;
+                else
+                {
+                    textAdventure.setString(adventure);
+                    textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
+                }
+
+                window.draw(textAdventure);
+                x++;
+            }
         }
-
     }
     window.display();
 
