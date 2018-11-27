@@ -99,7 +99,7 @@ class TankBoss {
                                     lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,
                                     lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,
                                     lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,
-                                    lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,
+                                    lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3,lane3};
 
         float lastBulletFired;
         sf::Clock fireBulletClock;
