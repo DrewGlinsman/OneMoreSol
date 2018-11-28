@@ -1010,7 +1010,7 @@ cout << "Shots Fired = "<< counter << endl;
                     {
                         Bullet* newBullet1;
                         firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() - 86;
-                        newBullet1 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX(), loadedTextures);
+                        newBullet1 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
 
                         int laneToGoIn;
                         switch(firingLaneInPixels)
@@ -1040,7 +1040,7 @@ cout << "Shots Fired = "<< counter << endl;
                     {
                         Bullet* newBullet2;
                         firingLaneInPixels = currentBikeBoss[i] -> getBossPosition();
-                        newBullet2 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX(), loadedTextures);
+                        newBullet2 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
 
                         int laneToGoIn;
                         switch(firingLaneInPixels)
@@ -1070,7 +1070,7 @@ cout << "Shots Fired = "<< counter << endl;
                     {
                         Bullet* newBullet3;
                         firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() + 86;
-                        newBullet3 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX(), loadedTextures);
+                        newBullet3 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
 
                         int laneToGoIn;
                         switch(firingLaneInPixels)
