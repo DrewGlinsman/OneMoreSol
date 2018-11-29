@@ -10,7 +10,8 @@ using namespace std;
 class TankBoss {
 
     public:
-        sf::RectangleShape tankBoss;
+        sf::Sprite tankBoss;
+        sf::IntRect spriteFrame;
 
         TankBoss(TextureLoader* loadedTextures);
 
@@ -19,6 +20,8 @@ class TankBoss {
         void setBossPosition(float positionPassed);
 
         void moveBoss(float timePassed);
+
+        void incrementRunFrameBoss(sf::IntRect*, sf::Sprite*);
 
         void drawBoss(sf::RenderWindow& window);
 
@@ -30,7 +33,7 @@ class TankBoss {
 
         int getSpeed();
 
-        sf::RectangleShape getBoss();
+        sf::Sprite getBoss();
 
     private:
         int speed = 10;
