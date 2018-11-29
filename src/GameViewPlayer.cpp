@@ -535,69 +535,10 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 
 bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 {
-    window.clear(sf::Color::Black);
-    std::ifstream currentAdventure;
-    currentAdventure.open("assets/TextAdventures/LevelOne.txt");
-    std::string adventure;
-    std::string line;
-    bool switchSides = false;
     bool optionSelected = false;
-    bool spaceHit = false;
+    drawAdventure(window);
 
-    textAdventure.setFont(gameFont);
-    textAdventure.setCharacterSize(32);
-    textAdventure.setFillColor(sf::Color::White);
-    if(currentAdventure.is_open())
-    {
-        while(!optionSelected)
-        {
-            int x = 1;
-            int y = 0;
-            while(getline(currentAdventure, line))
-            {
-                spaceHit = false;
-                cout << "Current Line: " << line << endl;
-                adventure = line;
-
-                if(switchSides)
-                {
-                    while(window.pollEvent(Event) || !spaceHit)
-                    {
-                        cout << "Entered while loop " << endl;
-                        if(Event.type == sf::Event::KeyPressed)
-                        {
-                            if(Event.key.code == sf::Keyboard::Space)
-                            {
-                                y = 5;
-                                textAdventure.setString(adventure);
-                                textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
-                                spaceHit = true;
-                            }
-
-                        }
-                    }
-                    cout << "Exited while loop" << endl;
-                }
-
-                if (line.empty())
-                {
-                    switchSides = !switchSides;
-                }
-
-                else
-                {
-                    textAdventure.setString(adventure);
-                    textAdventure.setPosition(300 + (y * 50),250 + (x * 50));
-                }
-
-                window.draw(textAdventure);
-                x++;
-            }
-        }
-    }
-    window.display();
-
-    while(window.isOpen())
+    while(window.isOpen() && !optionSelected)
     {
         while(window.pollEvent(Event))
         {
@@ -619,6 +560,42 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
         }
     }
     return false;
+}
+
+void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
+{
+    window.clear(sf::Color::Black);
+    std::string adventure;
+    std::string sol;
+    sf::Text solNum;
+    std::string line;
+    std::ifstream currentAdventure;
+    int offset = 0;
+    currentAdventure.open("assets/TextAdventures/LevelOne.txt");
+
+    solNum.setFont(gameFont);
+    solNum.setCharacterSize(24);
+    solNum.setFillColor(sf::Color::White);
+    solNum.setPosition(0,0);
+    sol = "Sol " + std::to_string(logic -> getLevel());
+    solNum.setString(sol);
+    window.draw(solNum);
+
+    textAdventure.setFont(gameFont);
+    textAdventure.setCharacterSize(32);
+    textAdventure.setFillColor(sf::Color::White);
+
+    while(getline(currentAdventure,line))
+    {
+        adventure = line;
+        textAdventure.setString(adventure);
+        textAdventure.setPosition(300, 250 + offset);
+        window.draw(textAdventure);
+        offset += 50;
+    }
+
+
+    window.display();
 }
 
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
