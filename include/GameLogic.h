@@ -62,12 +62,13 @@ class GameLogic{
         int currentKoratCount = 0;
 
         int currentLevel = 20;
-
         int koratSpawnLane;
         int koratSpawnType;
 
         int bulletSpawnLane;
         int bulletSpawnType;
+
+        int counter = 0;
 
         /*
             1 = Grunt
@@ -171,6 +172,8 @@ class GameLogic{
 
         int getLevel();
         void queryKoratFiring();
+        void queryBikeFiring();
+        void queryTankFiring();
 
         void clearAssets();
 

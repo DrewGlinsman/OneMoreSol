@@ -1,5 +1,4 @@
 #include "GameViewPlayer.h"
-#include <windows.h>
 
 using namespace std;
 
@@ -227,26 +226,29 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					}
 				}
 
-				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
 				{
 					if(sf::Vector2f (0,0) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900); //cant use this on linux, find an alternative
+						sf::sleep(sf::milliseconds(900)); //the fix
 						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900); //cant use this on linux, find an alternative
+						sf::sleep(sf::milliseconds(900)); //the fix
 						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900); //cant use this on linux, find an alternative
+						sf::sleep(sf::milliseconds(900)); //the fix
 						window.close();
 						return true;
 					}
@@ -320,11 +322,13 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logic -> getLevel() == 10)
         {
             logic -> moveBikeBoss(sky, majorTom, delta);
+            logic -> queryBikeFiring();
             logic -> updateDyingBikeBoss();
         }
         if (logic -> getLevel() == 20)
         {
             logic -> moveTankBoss(sky, majorTom, delta);
+            logic -> queryTankFiring();
             logic -> updateDyingTankBoss();
         }
 
@@ -402,22 +406,28 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                                     logic -> fireBullet(majorTom, majorTom -> pistol, delta);
                                     break;
                                 case 2:
-                                    logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
+                                	if (logic -> getLevel() >= 3)
+                                		logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
                                     break;
                                 case 3:
-                                    logic -> fireBullet(majorTom, majorTom -> rifle, delta);
+                                	if (logic -> getLevel() >= 5)
+                                    	logic -> fireBullet(majorTom, majorTom -> rifle, delta);
                                     break;
                                 case 4:
-                                    logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                                	if (logic -> getLevel() >= 7)
+                                		logic -> fireBullet(majorTom, majorTom -> minigun, delta);
                                     break;
                                 case 5:
-                                    logic -> fireBullet(majorTom, majorTom -> thrower, delta);
+                                	if (logic -> getLevel() >= 9)
+                                		logic -> fireBullet(majorTom, majorTom -> thrower, delta);
                                     break;
                                 case 6:
-                                    logic -> fireBullet(majorTom, majorTom -> sniper, delta);
+                                	if (logic -> getLevel() >= 11)
+                                		logic -> fireBullet(majorTom, majorTom -> sniper, delta);
                                     break;
                                 case 7:
-                                    logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
+                                	if (logic -> getLevel() >= 13)
+                                		logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
                                     break;
                                 default:
                                     logic -> fireBullet(majorTom, majorTom -> pistol, delta);
@@ -525,7 +535,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     }
                 }
 
-                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
                 {
                     if (selector.y == 0)
                     {
@@ -585,12 +595,18 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.draw(survivorCnt);
     window.draw(majorTomHealth);
     window.draw(weapon1);
-    window.draw(weapon2);
-    window.draw(weapon3);
-    window.draw(weapon4);
-    window.draw(weapon5);
-    window.draw(weapon6);
-    window.draw(weapon7);
+    if (logic -> getLevel() >= 3)
+    	window.draw(weapon2);
+    if (logic -> getLevel() >= 5)
+    	window.draw(weapon3);
+    if (logic -> getLevel() >= 7)
+    	window.draw(weapon4);
+    if (logic -> getLevel() >= 9)
+    	window.draw(weapon5);
+    if (logic -> getLevel() >= 11)
+    	window.draw(weapon6);
+    if (logic -> getLevel() >= 13)
+    	window.draw(weapon7);
 
     for(int i = 0; i < 7; ++i)
     {
