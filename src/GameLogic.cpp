@@ -282,7 +282,7 @@ void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed
  * \return Bool
  *
  */
-bool GameLogic::reloadCurrentGun(Gun* currentGun)
+bool GameLogic::reloadCurrentGun(Gun* currentGun)//needs to communicate to gameview to visualize reload time
 {
     if(reloadStarted == false)
     {
@@ -308,7 +308,7 @@ bool GameLogic::reloadCurrentGun(Gun* currentGun)
             reloadStarted = false;
             return true;
         }
-        cout << reloadTime << endl;
+        cout << reloadTime << endl;//this is a scaler for the reload visual
         return false;
     }
 }
