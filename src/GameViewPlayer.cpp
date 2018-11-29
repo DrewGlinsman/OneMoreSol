@@ -571,7 +571,9 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     std::string line;
     std::ifstream currentAdventure;
     int offset = 0;
-    currentAdventure.open("assets/TextAdventures/LevelOne.txt");
+    std::string fileString;
+    fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
+    currentAdventure.open(fileString);
 
     solNum.setFont(gameFont);
     solNum.setCharacterSize(24);
@@ -589,7 +591,7 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     {
         adventure = line;
         textAdventure.setString(adventure);
-        textAdventure.setPosition(300, 250 + offset);
+        textAdventure.setPosition(100, 250 + offset);
         window.draw(textAdventure);
         offset += 50;
     }
