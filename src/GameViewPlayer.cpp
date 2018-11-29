@@ -385,22 +385,28 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                                     logic -> fireBullet(majorTom, majorTom -> pistol, delta);
                                     break;
                                 case 2:
-                                    logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
+                                	if (logic -> getLevel() >= 3)
+                                		logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
                                     break;
                                 case 3:
-                                    logic -> fireBullet(majorTom, majorTom -> rifle, delta);
+                                	if (logic -> getLevel() >= 5)
+                                    	logic -> fireBullet(majorTom, majorTom -> rifle, delta);
                                     break;
                                 case 4:
-                                    logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                                	if (logic -> getLevel() >= 7)
+                                		logic -> fireBullet(majorTom, majorTom -> minigun, delta);
                                     break;
                                 case 5:
-                                    logic -> fireBullet(majorTom, majorTom -> thrower, delta);
+                                	if (logic -> getLevel() >= 9)
+                                		logic -> fireBullet(majorTom, majorTom -> thrower, delta);
                                     break;
                                 case 6:
-                                    logic -> fireBullet(majorTom, majorTom -> sniper, delta);
+                                	if (logic -> getLevel() >= 11)
+                                		logic -> fireBullet(majorTom, majorTom -> sniper, delta);
                                     break;
                                 case 7:
-                                    logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
+                                	if (logic -> getLevel() >= 13)
+                                		logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
                                     break;
                                 default:
                                     logic -> fireBullet(majorTom, majorTom -> pistol, delta);
@@ -568,12 +574,18 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.draw(survivorCnt);
     window.draw(majorTomHealth);
     window.draw(weapon1);
-    window.draw(weapon2);
-    window.draw(weapon3);
-    window.draw(weapon4);
-    window.draw(weapon5);
-    window.draw(weapon6);
-    window.draw(weapon7);
+    if (logic -> getLevel() >= 3)
+    	window.draw(weapon2);
+    if (logic -> getLevel() >= 5)
+    	window.draw(weapon3);
+    if (logic -> getLevel() >= 7)
+    	window.draw(weapon4);
+    if (logic -> getLevel() >= 9)
+    	window.draw(weapon5);
+    if (logic -> getLevel() >= 11)
+    	window.draw(weapon6);
+    if (logic -> getLevel() >= 13)
+    	window.draw(weapon7);
 
     updateSurvivorCount();
     updateMajorTomHealth();
