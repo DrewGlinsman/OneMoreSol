@@ -553,12 +553,7 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 {
     window.clear(sf::Color::Black);
-    textAdventure.setFont(gameFont);
-    textAdventure.setCharacterSize(44);
-    textAdventure.setString("You found 5 Survivors!");
-    textAdventure.setFillColor(sf::Color(255,255,255,255));
-    textAdventure.setPosition(500,500);
-    window.display();
+    drawAdventure(window);
 
     while(window.isOpen() && !optionSelected)
     {

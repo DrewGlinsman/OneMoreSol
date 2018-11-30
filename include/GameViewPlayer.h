@@ -106,6 +106,7 @@ public:
     sf::Event Event;
 
     bool lost;
+    bool optionSelected;
 
     GameLogic* logic;
 
