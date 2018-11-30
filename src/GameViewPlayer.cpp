@@ -685,15 +685,15 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
     for(int i = 0; i < 7; ++i)
     {
-        if(logic->reloadStarted)
-            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1)));
-        else
+        for(int c = 0; c < 7; ++c)
         {
-            for(int c = 0; c < 7; ++c)
-            {
-                reloadRect[c].setSize(sf::Vector2f(64.f,0.f));
-            }
+            reloadRect[c].setSize(sf::Vector2f(64.f,0.f));
         }
+        if(logic->reloadStarted)
+            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
+        if((64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1) > 32.f) || (64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1) < 0.f))
+            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,0.f));
+
         window.draw(reloadRect[i]);
     }
 
