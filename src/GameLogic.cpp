@@ -25,11 +25,15 @@ GameLogic::GameLogic()
 
 }
 
+bool GameLogic::currentLevelEnd()
+{
+    return levelWon;
+}
+
 bool GameLogic::checkEnd(MajorTom *majorTom)
 {
     if(majorTom -> getSurvivors() == 0 || majorTom -> getHealth() <= 0)
     {
-        survivorCountSaved = majorTom->getSurvivors();
         return true;
     }
     return false;
@@ -54,53 +58,89 @@ void GameLogic::updateKoratOrder()
 
 void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
 {
-    for (int i = 0; i < currentKorat.size(); i ++)
+    if(!isPaused)
     {
-        for (int j = 0; j < currentKorat[i].size(); j++)
+        for (int i = 0; i < currentKorat.size(); i ++)
         {
-            if (currentKorat[i][j] -> checkSurvive() == false)
+            for (int j = 0; j < currentKorat[i].size(); j++)
             {
-                if (currentKorat[i][j] -> checkDeath() == false)
+                if (currentKorat[i][j] -> checkSurvive() == false)
                 {
-                    if (currentKorat[i][j] -> getSpeed() == 0)
+                    if (currentKorat[i][j] -> checkDeath() == false)
                     {
-                        majorTom->setScore(majorTom->getScore()+20);
-                        dyingKorat.emplace_back(move(currentKorat[i][j]));
-                        currentKorat[i].erase(currentKorat[i].begin() + j);
+                        if (currentKorat[i][j] -> getSpeed() == 0)
+                        {
+                            majorTom->setScore(majorTom->getScore()+20);
+                            dyingKorat.emplace_back(move(currentKorat[i][j]));
+                            currentKorat[i].erase(currentKorat[i].begin() + j);
+                        }
+                        else
+                        {
+                        currentKorat[i][j] -> moveCurrentKorat(timePassed);
+                        }
                     }
                     else
                     {
-                    currentKorat[i][j] -> moveCurrentKorat(timePassed);
+                        // This will never be true!
                     }
                 }
                 else
                 {
-                    // This will never be true!
+                    if(currentKorat[i][j] -> getName() == "Bomber")
+                    {
+                        majorTom -> setSurvivors(0);
+                        break;
+                    }
+                    currentKorat[i].erase(currentKorat[i].begin() + j);
+                    currentKoratCount--;
+                    //update the gameviewplayer to reflect decremented survivors
+                    majorTom->setSurvivors(majorTom->getSurvivors()-1);
+                    std::cout << "survivor count = " << majorTom->getSurvivors() << std::endl;
                 }
-            }
-            else
-            {
-                currentKorat[i].erase(currentKorat[i].begin() + j);
-                currentKoratCount--;
-                //update the gameviewplayer to reflect decremented survivors
-                majorTom->setSurvivors(majorTom->getSurvivors()-1);
-                std::cout << "survivor count = " << majorTom->getSurvivors() << std::endl;
             }
         }
     }
 }
 
-void GameLogic::updateDyingKorat()
+void GameLogic::updateDyingKorat(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingKorat.size(); i++)
     {
         if (dyingKorat[i] -> checkDeath() == true)
         {
             if (dyingKorat[i] -> getName() == "Bomber")
-                cout << "You Killed a Bomber" << endl;
+            {
+                explode(*dyingKorat[i], majorTom);
+            }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
         }
+    }
+}
+
+void GameLogic::explode(KoratEmpire &bomber, MajorTom* majorTom)
+{
+    for (int i = 0; i < currentKorat.size(); i ++)
+    {
+        cout << "Bomber's lane: " << bomber.getLane() - 1 << endl;
+            for (int j = 0; j < currentKorat[i].size(); j++)
+            {
+                if ((bomber.getPositionX() - currentKorat[i][j] -> getPositionX()) <= 200
+                    && bomber.getPositionX() - currentKorat[i][j] -> getPositionX() >= -200
+                    && bomber.getLane() - currentKorat[i][j] -> getLane() <= 100
+                    && bomber.getLane() - currentKorat[i][j] -> getLane() >= -100 )
+                {
+                    currentKorat[i][j] -> wasShot(200);
+                }
+                if (majorTom -> getTomPosition() - currentKorat[i][j] -> getLane() <= 100 &&
+                    majorTom -> getTomPosition() - currentKorat[i][j] -> getLane() >= - 100 &&
+                    majorTom -> getTomPositionX() - currentKorat[i][j] -> getPositionX() <= 200 &&
+                    majorTom -> getTomPositionX() - currentKorat[i][j] -> getPositionX() >= -200)
+                {
+                    majorTom -> setHealth(majorTom->getHealth() - 50);
+                }
+            }
+
     }
 }
 
@@ -182,15 +222,15 @@ void GameLogic::spawnKorat()
     }
     currentKorat[koratSpawnLane - 1].emplace_back(newKorat);
     currentKoratCount++;
-    std::cout << "currentKoratCount = " << currentKoratCount << std::endl;
+    //std::cout << "currentKoratCount = " << currentKoratCount << std::endl;
 
-    std::cout << "==============================" << std::endl;
+    //std::cout << "==============================" << std::endl;
     for (int i = 0; i < currentKorat.size(); i ++)
     {
 
         for (int j = 0; j < currentKorat[i].size(); j++)
         {
-            cout << currentKorat[i][j] -> getName() << ' ';
+            //cout << currentKorat[i][j] -> getName() << ' ';
             if (currentKorat[i][j] -> getLane() == 680)
             {
                  print = false;
@@ -199,12 +239,12 @@ void GameLogic::spawnKorat()
                  print = true;
 
         }
-        if(print == true)
-        cout << endl << "------------------------------" << endl;
-        else
-            cout << endl;
+        //if(print == true)
+        //cout << endl << "------------------------------" << endl;
+        //else
+            //cout << endl;
     }
-    cout << "==============================" << endl;
+   // cout << "==============================" << endl;
 }
 
 int GameLogic::decideKoratLane()
@@ -674,66 +714,78 @@ int GameLogic::decideBulletType(Gun* currentGun)
 
 void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
-	rotation = gameSky.getRotation();
-	spawnTime = spawnClock.getElapsedTime().asSeconds();
-
-	long now;
-    now = ((unsigned long) time((time_t *) NULL)) % 255;
-    SelectStream((int) now);
-
-    //-------------------------------------------------------------
-    // lose game check
-    if (checkEnd(majorTom))
+    if(!isPaused)
     {
-        loseLevel(gameSky, majorTom);
-    }
+        rotation = gameSky.getRotation();
+        spawnTime = spawnClock.getElapsedTime().asSeconds();
 
-    //-------------------------------------------------------------
+        long now;
+        now = ((unsigned long) time((time_t *) NULL)) % 255;
+        SelectStream((int) now);
+        firstLevel = true;
 
-	if (rotation >= sunSetOrientation) // if the sun has set
-	{
-		if (currentKoratCount == 0)
+        //-------------------------------------------------------------
+        // lose game check
+        if (checkEnd(majorTom))
         {
-            gameSky.rotate(-rotation); //rotate the sun back to the beginning
-            currentLevel++;
-            survivorCountSaved = majorTom->getSurvivors();
-            levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
-            levelSpawnModifier = levelSpawnModifier * 15/16; //
+            loseLevel(gameSky, majorTom);
+        }
 
-            majorTom ->  setTomPositionX(156);
+        //-------------------------------------------------------------
 
-            majorTom -> setTomPositionY(508);
+        if (rotation >= sunSetOrientation) // if the sun has set
+        {
+            if (currentKoratCount == 0)
+            {
+                gameSky.rotate(-rotation); //rotate the sun back to the beginning
+                currentLevel++;
+                survivorCountSaved = majorTom->getSurvivors();
+                cout << "Survivor Count Saved: " << survivorCountSaved << endl;
+                levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
+                levelSpawnModifier = levelSpawnModifier * 15/16; //
+
+                majorTom ->  setTomPositionX(156);
+
+                majorTom -> setTomPositionY(508);
+
+                cout << "Current Level = " << currentLevel << endl;
+                if(!firstLevel)
+                {
+                    levelWon = true;
+                }
+
+                firstLevel = false;
+                // start text adventure
 
             clearAssets();
 
-            cout << "Current Level = " << currentLevel << endl;
+                if(currentLevel == 10)
+                {
+                    startBikeBoss(loadedTextures);
+                }
 
-            // start text adventure
+                if(currentLevel == 20)
+                {
+                    startTankBoss(loadedTextures);
+                }
 
-            if(currentLevel == 10)
-            {
-                startBikeBoss(loadedTextures);
             }
-
-            if(currentLevel == 20)
-            {
-                startTankBoss(loadedTextures);
-            }
-
         }
-	}
-	else if(currentLevel == 10 | currentLevel == 20)
-    {
-        gameSky.rotate(timePassed * levelSpeedModifier);
-    }
-	else
-    {
-        gameSky.rotate(timePassed * levelSpeedModifier);
-
-        if (spawnTime >= levelSpawnModifier)
+        else if(currentLevel == 10 | currentLevel == 20)
         {
-            selectKorat();
-            spawnClock.restart();
+            gameSky.rotate(timePassed * levelSpeedModifier);
+            levelWon = false;
+        }
+        else
+        {
+            levelWon = false;
+            gameSky.rotate(timePassed * levelSpeedModifier);
+
+            if (spawnTime >= levelSpawnModifier)
+            {
+                selectKorat();
+                spawnClock.restart();
+            }
         }
     }
 }
@@ -779,7 +831,7 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
     {
         startTankBoss(loadedTextures);
     }
-
+    cout << "Suvivor Count Saved: " << survivorCountSaved << endl;
     majorTom->setSurvivors(survivorCountSaved);
     majorTom->setHealth(100);
 
@@ -969,27 +1021,35 @@ int GameLogic::getLevel()
 
 void GameLogic::queryKoratFiring()
 {
-	for (int i = 0; i < currentKorat.size(); i ++)
-	{
-		for (int j = 0; j < currentKorat[i].size(); j++)
-		{
+    if(!isPaused)
+    {
+        for (int i = 0; i < currentKorat.size(); i ++)
+        {
+            for (int j = 0; j < currentKorat[i].size(); j++)
+            {
 
-			if (currentKorat[i][j] -> getName() == "Jackal" or currentKorat[i][j] -> getName() == "Elite" or currentKorat[i][j] -> getName() == "Brute" or currentKorat[i][j] -> getName() == "Biker" or currentKorat[i][j] -> getName() == "Hunter")
-			{
-				if (currentKorat[i][j] -> queryToFire() == true) //if the Korat is ready to Fire
-				{
-					//implement stuff to make Korat fire here
-					Bullet* newBullet;
-					newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+                if (currentKorat[i][j] -> getName() == "Jackal" or currentKorat[i][j] -> getName() == "Elite" or currentKorat[i][j] -> getName() == "Brute" or currentKorat[i][j] -> getName() == "Biker" or currentKorat[i][j] -> getName() == "Hunter")
+                {
+                    if (currentKorat[i][j] -> queryToFire() == true) //if the Korat is ready to Fire
+                    {
+                        //implement stuff to make Korat fire here
+                        Bullet* newBullet;
+                        newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
 
-					int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
-					currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
-				} else {
-					//pass? basically ask again later
-				}
-			}
-		}
-	}
+                        int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
+                        currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
+                    } else {
+                        //pass? basically ask again later
+                    }
+                }
+            }
+        }
+    }
+}
+
+void GameLogic::pauseGame()
+{
+    isPaused = !isPaused;
 }
 
 void GameLogic::queryBikeFiring()

@@ -290,10 +290,18 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
             break;
         }
 
+        if (logic -> currentLevelEnd())
+        {
+            std::cout << "Entered text adventure" << endl;
+            logic -> pauseGame();
+            textAdventureIsOpen(window);
+        }
+
+        logic -> pauseGame();
         logic -> runLevel(sky, majorTom, delta);
         logic -> updateKoratOrder();
         logic -> updateBulletOrder(); //Bullets generation and drawing
-        logic -> updateDyingKorat();
+        logic -> updateDyingKorat(majorTom);
         logic -> moveKorat(delta, majorTom);
         logic -> queryKoratFiring();
 
@@ -542,6 +550,27 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 
 bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 {
+    window.clear(sf::Color::Black);
+    textAdventure.setFont(gameFont);
+    textAdventure.setCharacterSize(44);
+    textAdventure.setString("You found 5 Survivors!");
+    textAdventure.setFillColor(sf::Color(255,255,255,255));
+    textAdventure.setPosition(500,500);
+    window.display();
+
+    while(window.isOpen())
+    {
+        while(window.pollEvent(Event))
+        {
+            if(Event.type == sf::Event::KeyPressed)
+            {
+                if(Event.key.code == sf::Keyboard::Space)
+                {
+                    return false;
+                }
+            }
+        }
+    }
     return false;
 }
 
