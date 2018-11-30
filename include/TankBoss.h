@@ -16,6 +16,8 @@ class TankBoss {
 
         float getBossPosition();
 
+        float getPositionX();
+
         void setBossPosition(float positionPassed);
 
         void moveBoss(float timePassed);
@@ -30,6 +32,10 @@ class TankBoss {
 
         int getSpeed();
 
+        bool queryToFire();
+
+        int decideFiringLane();
+
         sf::RectangleShape getBoss();
 
     private:
@@ -37,10 +43,74 @@ class TankBoss {
         int health = 500;
         bool survive = false;
 
+        int lane1 = 335;
+        int lane2 = 422;
+        int lane3 = 508;
+        int lane4 = 594;
+        int lane5 = 680;
+
+        int index = 0;
+
+        std::vector<int> firingLane{lane1,lane2,lane4,lane5,lane4,lane3,lane2,lane5,lane4,lane1,
+                                    lane2,lane3,lane3,lane1,lane1,lane2,lane2,lane3,lane3,lane4,
+                                    lane4,lane5,lane5,lane5,lane4,lane3,lane2,lane2,lane3,lane3,
+                                    lane4,lane4,lane5,lane5,lane1,lane1,lane4,lane4,lane2,lane2,
+                                    lane3,lane5,lane5,lane5,lane4,lane3,lane4,lane3,lane4,lane1,
+                                    lane1,lane1,lane4,lane2,lane3,lane1,lane5,lane3,lane4,lane2,
+                                    lane2,lane3,lane2,lane3,lane4,lane3,lane4,lane3,lane4,lane3,
+                                    lane1,lane2,lane3,lane4,lane1,lane5,lane4,lane3,lane2,lane5,
+                                    lane1,lane2,lane3,lane4,lane4,lane3,lane4,lane3,lane2,lane3,
+                                    lane1,lane2,lane3,lane5,lane3,lane4,lane2,lane1,lane5,lane3,
+
+                                    lane1,lane2,lane4,lane5,lane4,lane3,lane2,lane5,lane4,lane1,
+                                    lane2,lane3,lane3,lane1,lane1,lane2,lane2,lane3,lane3,lane4,
+                                    lane4,lane5,lane5,lane5,lane4,lane3,lane2,lane2,lane3,lane3,
+                                    lane4,lane4,lane5,lane5,lane1,lane1,lane4,lane4,lane2,lane2,
+                                    lane3,lane5,lane5,lane5,lane4,lane3,lane4,lane3,lane4,lane1,
+                                    lane1,lane1,lane4,lane2,lane3,lane1,lane5,lane3,lane4,lane2,
+                                    lane2,lane3,lane2,lane3,lane4,lane3,lane4,lane3,lane4,lane3,
+                                    lane1,lane2,lane3,lane4,lane1,lane5,lane4,lane3,lane2,lane5,
+                                    lane1,lane2,lane3,lane4,lane4,lane3,lane4,lane3,lane2,lane3,
+                                    lane1,lane2,lane3,lane5,lane3,lane4,lane2,lane1,lane5,lane3,
+
+                                    lane1,lane2,lane4,lane5,lane4,lane3,lane2,lane5,lane4,lane1,
+                                    lane2,lane3,lane3,lane1,lane1,lane2,lane2,lane3,lane3,lane4,
+                                    lane4,lane5,lane5,lane5,lane4,lane3,lane2,lane2,lane3,lane3,
+                                    lane4,lane4,lane5,lane5,lane1,lane1,lane4,lane4,lane2,lane2,
+                                    lane3,lane5,lane5,lane5,lane4,lane3,lane4,lane3,lane4,lane1,
+                                    lane1,lane1,lane4,lane2,lane3,lane1,lane5,lane3,lane4,lane2,
+                                    lane2,lane3,lane2,lane3,lane4,lane3,lane4,lane3,lane4,lane3,
+                                    lane1,lane2,lane3,lane4,lane1,lane5,lane4,lane3,lane2,lane5,
+                                    lane1,lane2,lane3,lane4,lane4,lane3,lane4,lane3,lane2,lane3,
+                                    lane1,lane2,lane3,lane5,lane3,lane4,lane2,lane1,lane5,lane3,
+
+                                    lane1,lane2,lane4,lane5,lane4,lane3,lane2,lane5,lane4,lane1,
+                                    lane2,lane3,lane3,lane1,lane1,lane2,lane2,lane3,lane3,lane4,
+                                    lane4,lane5,lane5,lane5,lane4,lane3,lane2,lane2,lane3,lane3,
+                                    lane4,lane4,lane5,lane5,lane1,lane1,lane4,lane4,lane2,lane2,
+                                    lane3,lane5,lane5,lane5,lane4,lane3,lane4,lane3,lane4,lane1,
+                                    lane1,lane1,lane4,lane2,lane3,lane1,lane5,lane3,lane4,lane2,
+                                    lane2,lane3,lane2,lane3,lane4,lane3,lane4,lane3,lane4,lane3,
+                                    lane1,lane2,lane3,lane4,lane1,lane5,lane4,lane3,lane2,lane5,
+                                    lane1,lane2,lane3,lane4,lane4,lane3,lane4,lane3,lane2,lane3,
+                                    lane1,lane2,lane3,lane5,lane3,lane4,lane2,lane1,lane5,lane3,
+
+                                    lane1,lane2,lane4,lane5,lane4,lane3,lane2,lane5,lane4,lane1,
+                                    lane2,lane3,lane3,lane1,lane1,lane2,lane2,lane3,lane3,lane4,
+                                    lane4,lane5,lane5,lane5,lane4,lane3,lane2,lane2,lane3,lane3,
+                                    lane4,lane4,lane5,lane5,lane1,lane1,lane4,lane4,lane2,lane2,
+                                    lane3,lane5,lane5,lane5,lane4,lane3,lane4,lane3,lane4,lane1,
+                                    lane1,lane1,lane4,lane2,lane3,lane1,lane5,lane3,lane4,lane2,
+                                    lane2,lane3,lane2,lane3,lane4,lane3,lane4,lane3,lane4,lane3,
+                                    lane1,lane2,lane3,lane4,lane1,lane5,lane4,lane3,lane2,lane5,
+                                    lane1,lane2,lane3,lane4,lane4,lane3,lane4,lane3,lane2,lane3,
+                                    lane1,lane2,lane3,lane5,lane3,lane4,lane2,lane1,lane5,lane3,};
+
+        float lastBulletFired;
+        sf::Clock fireBulletClock;
+
         float postDeathTime;
         sf::Clock postDeathClock;
-
-        int lane3 = 508;
 };
 
 #endif

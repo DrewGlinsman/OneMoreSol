@@ -17,6 +17,8 @@ class BikeBoss {
 
         float getBossPosition();
 
+        float getPositionX();
+
         void setBossPosition(float positionPassed);
 
         bool moveBossUp(float timePassed);
@@ -41,6 +43,8 @@ class BikeBoss {
 
         int getSpeed();
 
+        bool queryToFire();
+
         sf::Sprite getBoss();
 
 
@@ -48,6 +52,9 @@ class BikeBoss {
         int speed = 40;
         int health = 500;
         bool survive = false;
+
+        float lastBulletFired;
+        sf::Clock fireBulletClock;
 
         float postDeathTime;
         sf::Clock postDeathClock;

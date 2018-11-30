@@ -101,6 +101,7 @@ public:
     sf::Sound gameMusic;
     sf::Text survivorCnt;
     sf::Text scoreCnt;
+    sf::Text levelCnt;
     sf::Text majorTomHealth;
     sf::Event Event;
 
@@ -129,6 +130,7 @@ public:
     void updateSurvivorCount();
     void updateMajorTomHealth();
     void updateScoreCount();
+    void updateLevelCount();
     void updateLossScreen(sf::RenderWindow &window);
     void selectButton(sf::RenderWindow &window, int y);
     void selectMenuButton(sf::RenderWindow &window, int y);
