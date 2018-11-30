@@ -14,6 +14,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     }
     initialized = true;
     logic = new GameLogic();
+    loadedAudio = new AudioLoader();
     majorTom = new MajorTom(loadedTextures);
 }
 

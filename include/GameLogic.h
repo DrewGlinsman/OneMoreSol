@@ -30,7 +30,6 @@
 #include "BFGBullet.h"
 
 #include "TextureLoader.h"
-#include "AudioLoader.h"
 #include "rngs.h"
 
 using namespace std;
@@ -58,6 +57,8 @@ class GameLogic{
 
         int survivorCount = 20;
         int survivorCountSaved = 20;
+
+        bool lostGame;
 
         int currentKoratCount = 0;
 
@@ -109,10 +110,6 @@ class GameLogic{
 
         float lastBulletFired;
 
-        sf::SoundBuffer level1Music;
-        sf::SoundBuffer level2Music;
-        sf::Sound backgroundMusic;
-
         bool levelWon;
 
         bool movingUp = false;
@@ -126,7 +123,6 @@ class GameLogic{
         GameLogic();
 
         TextureLoader* loadedTextures;
-        AudioLoader* loadedAudio;
 
         //needs survivor count
         void moveKorat(float timePassed, MajorTom* majorTom);

@@ -10,6 +10,7 @@
 #include "MajorTom.h"
 #include "GameLogic.h"
 #include "TextureLoader.h"
+#include "AudioLoader.h"
 
 using namespace std;
 
