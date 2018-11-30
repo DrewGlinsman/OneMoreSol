@@ -36,6 +36,10 @@ bool GameLogic::checkEnd(MajorTom *majorTom)
     {
         return true;
     }
+
+    if (lostGame)
+        return true;
+
     return false;
 }
 
@@ -703,6 +707,8 @@ int GameLogic::decideBulletType(Gun* currentGun)
 
 void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
+    lostGame = false;
+
     if(!isPaused)
     {
         rotation = gameSky.getRotation();
@@ -789,6 +795,8 @@ void GameLogic::clearAssets()
 
 void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 {
+    lostGame = true;
+
     clearAssets();
 
     majorTom -> setTomPositionX(156);
