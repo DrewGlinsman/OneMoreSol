@@ -726,7 +726,6 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
         long now;
         now = ((unsigned long) time((time_t *) NULL)) % 255;
         SelectStream((int) now);
-        firstLevel = true;
 
         //-------------------------------------------------------------
         // lose game check
@@ -753,15 +752,10 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
                 majorTom -> setTomPositionY(508);
 
                 cout << "Current Level = " << currentLevel << endl;
-                if(!firstLevel)
-                {
-                    levelWon = true;
-                }
-
-                firstLevel = false;
+                levelWon = true;
                 // start text adventure
 
-            clearAssets();
+                clearAssets();
 
                 if(currentLevel == 10)
                 {
