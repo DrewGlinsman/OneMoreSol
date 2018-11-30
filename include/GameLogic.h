@@ -69,6 +69,8 @@ class GameLogic{
         int bulletSpawnLane;
         int bulletSpawnType;
 
+        int counter = 0;
+
         /*
             1 = Grunt
             2 = Jackal
@@ -161,7 +163,7 @@ class GameLogic{
 
         void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
 
-        void updateDyingKorat();
+        void updateDyingKorat(MajorTom*);
 
         void startBikeBoss(TextureLoader*);
         void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
@@ -175,9 +177,11 @@ class GameLogic{
 
         int getLevel();
         void queryKoratFiring();
+        void queryBikeFiring();
+        void queryTankFiring();
 
         void pauseGame();
-        void explode(KoratEmpire &bomber);
+        void explode(KoratEmpire &bomber, MajorTom* majorTom);
         void clearAssets();
         bool currentLevelEnd();
 

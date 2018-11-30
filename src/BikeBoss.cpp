@@ -23,6 +23,11 @@ float BikeBoss::getBossPosition()
     return bikeBoss.getPosition().y;
 }
 
+float BikeBoss::getPositionX()
+{
+    return bikeBoss.getPosition().x;
+}
+
 void BikeBoss::setBossPosition(float positionPassed)
 {
     bikeBoss.setPosition(bikeBoss.getPosition().x, positionPassed);
@@ -50,7 +55,7 @@ bool BikeBoss::moveBossUp(float timePassed)
     {
         if (getBossPosition() < lane3 - 1 | getBossPosition() > lane3 + 1)
         {
-            bikeBoss.move(0, -speed * timePassed * 2);
+            bikeBoss.move(0, -speed * timePassed * 4);
             return false;
         }
         else
@@ -88,7 +93,7 @@ bool BikeBoss::moveBossDown(float timePassed)
     {
         if (getBossPosition() < lane3 - 1 | getBossPosition() > lane3 + 1)
         {
-            bikeBoss.move(0, speed * timePassed * 2);
+            bikeBoss.move(0, speed * timePassed * 4);
             return false;
         }
         else
@@ -176,6 +181,20 @@ int BikeBoss::getSpeed()
     return speed;
 }
 
+bool BikeBoss::queryToFire()
+{
+	bool readyToFire = false;
+	lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
+
+    // 0.67415730337
+	if(lastBulletFired > 0.33707865168)
+	{
+	   readyToFire = true;
+	   fireBulletClock.restart();
+	}
+
+return readyToFire;
+}
 
 void BikeBoss::drawBoss(sf::RenderWindow& window)
 {
