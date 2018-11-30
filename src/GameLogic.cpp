@@ -13,7 +13,7 @@ GameLogic::GameLogic()
 {
     loadedTextures = new TextureLoader();
     loadedAudio = new AudioLoader();
-
+    lostGame = false;
     if(currentLevel == 10)
     {
         startBikeBoss(loadedTextures);
@@ -32,13 +32,10 @@ bool GameLogic::currentLevelEnd()
 
 bool GameLogic::checkEnd(MajorTom *majorTom)
 {
-    if(majorTom -> getSurvivors() == 0 || majorTom -> getHealth() <= 0)
+    if(majorTom -> getSurvivors() == 0 || majorTom -> getHealth() <= 0 || lostGame)
     {
         return true;
     }
-
-    if (lostGame)
-        return true;
 
     return false;
 }
