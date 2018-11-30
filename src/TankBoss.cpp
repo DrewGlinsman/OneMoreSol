@@ -7,10 +7,15 @@ using namespace std;
 
 TankBoss::TankBoss(TextureLoader* loadedTextures)
 {
-    //tankBoss.setTexture(loadedTextures->textureArray[0]);
-    //tankBoss.setTextureRect(sf::IntRect(640,256,192,192));
-    tankBoss.setSize(sf::Vector2f(384.f,384.f));
-    tankBoss.setOrigin(sf::Vector2f(384.f/2,384.f/2));
+    tankBoss.setTexture(loadedTextures->textureArray[0]);
+    spriteFrame.left = 512;//x
+	spriteFrame.top = 448;//y
+	spriteFrame.width = 320;
+	spriteFrame.height = 320;
+    tankBoss.setTextureRect(spriteFrame);
+    //tankBoss.setSize(sf::Vector2f(384.f,384.f));
+    //tankBoss.setOrigin(sf::Vector2f(384.f/2,384.f/2));
+    tankBoss.setOrigin(sf::Vector2f(160.f,160.f));
     tankBoss.setScale(1.2f,1.2f);
     tankBoss.setPosition(1800, lane3);
 }
@@ -20,11 +25,26 @@ void TankBoss::moveBoss(float timePassed)
     if(tankBoss.getPosition().x > -100)
     {
         tankBoss.move(-speed * timePassed, 0);
+        if(!((int)tankBoss.getPosition().x % 3))//slows down the switching of frames
+        {
+            incrementRunFrameBoss(&spriteFrame, &tankBoss);
+        }
     }
     else
     {
         survive = true;
     }
+}
+
+void TankBoss::incrementRunFrameBoss(sf::IntRect* sF, sf::Sprite* baddie)
+{
+    //start with the upper left coordinate, add the sprite width to it
+    //to move to the next frame. To loop, make circular arith with mod
+    // 3*192 is 576, as mod circles back to 0, add the initial value 832.
+    //should 832 be added at every increment? no
+    sF->left = ((sF->left +320)%1792); //+832
+    if(sF->left == 0) {sF->left += 512;}
+    baddie->setTextureRect(*sF);
 }
 
 bool TankBoss::checkDeath()
@@ -62,7 +82,7 @@ float TankBoss::getPositionX()
     return tankBoss.getPosition().x - 220;
 }
 
-sf::RectangleShape TankBoss::getBoss()
+sf::Sprite TankBoss::getBoss()
 {
     return tankBoss;
 }

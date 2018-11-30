@@ -14,6 +14,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     }
     initialized = true;
     logic = new GameLogic();
+    loadedAudio = new AudioLoader();
     majorTom = new MajorTom(loadedTextures);
 }
 
@@ -57,6 +58,14 @@ void GameViewPlayer::initializePlayState()
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
 
+    reloadRect[0] = reload1;
+    reloadRect[1] = reload2;
+    reloadRect[2] = reload3;
+    reloadRect[3] = reload4;
+    reloadRect[4] = reload5;
+    reloadRect[5] = reload6;
+    reloadRect[6] = reload7;
+
     sky.setRadius(894);
     sky.setOrigin(894,894);
     sky.setPosition(720, 450);
@@ -88,12 +97,19 @@ void GameViewPlayer::initializePlayState()
     weapon6.setTextureRect(sf::IntRect(320,32,32,32));
     weapon7.setTextureRect(sf::IntRect(352,0,32,32));
     weapon1.setPosition(295,790);
+    reloadRect[0].setPosition(376,867);
     weapon2.setPosition(423,790);
+    reloadRect[1].setPosition(503,867);
     weapon3.setPosition(551,790);
+    reloadRect[2].setPosition(632,867);
     weapon4.setPosition(679,790);
+    reloadRect[3].setPosition(760,867);
     weapon5.setPosition(807,790);
+    reloadRect[4].setPosition(888,867);
     weapon6.setPosition(935,790);
+    reloadRect[5].setPosition(1016,867);
     weapon7.setPosition(1063,790);
+    reloadRect[6].setPosition(1143,867);
     weapon1.setTexture(loadedTextures->textureArray[0]);
     weapon2.setTexture(loadedTextures->textureArray[0]);
     weapon3.setTexture(loadedTextures->textureArray[0]);
@@ -108,6 +124,14 @@ void GameViewPlayer::initializePlayState()
     weapon5.setScale(sf::Vector2f(2.5f,2.5f));
     weapon6.setScale(sf::Vector2f(2.5f,2.5f));
     weapon7.setScale(sf::Vector2f(2.5f,2.5f));
+
+    for(int i = 0; i<7; ++i)
+    {
+        reloadRect[i].setFillColor(sf::Color(255,255,255,51));
+        reloadRect[i].setSize(sf::Vector2f(64,0));
+        reloadRect[i].setScale(sf::Vector2f(1.25f,1.25f));
+        reloadRect[i].setRotation(180.f);
+    }
 
     //Survivor Count Display
     survivorCnt.setFont(gameFont);
@@ -658,6 +682,20 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     	window.draw(weapon6);
     if (logic -> getLevel() >= 13)
     	window.draw(weapon7);
+
+    for(int i = 0; i < 7; ++i)
+    {
+        if(logic->reloadStarted)
+            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1)));
+        else
+        {
+            for(int c = 0; c < 7; ++c)
+            {
+                reloadRect[c].setSize(sf::Vector2f(64.f,0.f));
+            }
+        }
+        window.draw(reloadRect[i]);
+    }
 
     updateSurvivorCount();
     updateMajorTomHealth();
