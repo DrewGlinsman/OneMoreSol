@@ -693,7 +693,6 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     std::cout << "Current Level = " << currentLevel << std::endl;
 
-    selectMusic();
 
     if(currentLevel == 10)
     {
