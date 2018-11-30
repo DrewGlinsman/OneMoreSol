@@ -46,6 +46,7 @@ private:
     sf::Text menuPlay3;
     sf::Text menuPlay4;
     sf::Text menuPlay5;
+    sf::Text textAdventure;
 
     float titleX = 130;
     float titleY = 20;
@@ -115,6 +116,7 @@ public:
     sf::Event Event;
 
     bool lost;
+    bool optionSelected;
 
     GameLogic* logic;
 
@@ -133,6 +135,7 @@ public:
     bool lossViewIsOpen(sf::RenderWindow& window);
     bool winViewIsOpen(sf::RenderWindow& window);
     bool textAdventureIsOpen(sf::RenderWindow& window);
+    void drawAdventure(sf::RenderWindow& window);
     void updateMenu(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();

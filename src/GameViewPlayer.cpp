@@ -1,4 +1,6 @@
 #include "GameViewPlayer.h"
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -313,10 +315,18 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
             break;
         }
 
+        if (logic -> currentLevelEnd())
+        {
+            std::cout << "Entered text adventure" << endl;
+            logic -> pauseGame();
+            textAdventureIsOpen(window);
+        }
+
+        logic -> pauseGame();
         logic -> runLevel(sky, majorTom, delta);
         logic -> updateKoratOrder();
         logic -> updateBulletOrder(); //Bullets generation and drawing
-        logic -> updateDyingKorat();
+        logic -> updateDyingKorat(majorTom);
         logic -> moveKorat(delta, majorTom);
         logic -> queryKoratFiring();
 
@@ -565,7 +575,69 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 
 bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 {
+    window.clear(sf::Color::Black);
+    drawAdventure(window);
+
+    while(window.isOpen() && !optionSelected)
+    {
+        while(window.pollEvent(Event))
+        {
+            if(Event.type == sf::Event::KeyPressed)
+            {
+                if(Event.key.code == sf::Keyboard::Space)
+                {
+                    return false;
+                }
+                if(Event.key.code == sf::Keyboard::Y)
+                {
+                    optionSelected = true;
+                }
+                if(Event.key.code == sf::Keyboard::N)
+                {
+                    optionSelected = true;
+                }
+            }
+        }
+    }
     return false;
+}
+
+void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
+{
+    window.clear(sf::Color::Black);
+    std::string adventure;
+    std::string sol;
+    sf::Text solNum;
+    std::string line;
+    std::ifstream currentAdventure;
+    int offset = 0;
+    std::string fileString;
+    fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
+    currentAdventure.open(fileString);
+
+    solNum.setFont(gameFont);
+    solNum.setCharacterSize(24);
+    solNum.setFillColor(sf::Color::White);
+    solNum.setPosition(0,0);
+    sol = "Sol " + std::to_string(logic -> getLevel());
+    solNum.setString(sol);
+    window.draw(solNum);
+
+    textAdventure.setFont(gameFont);
+    textAdventure.setCharacterSize(32);
+    textAdventure.setFillColor(sf::Color::White);
+
+    while(getline(currentAdventure,line))
+    {
+        adventure = line;
+        textAdventure.setString(adventure);
+        textAdventure.setPosition(100, 250 + offset);
+        window.draw(textAdventure);
+        offset += 50;
+    }
+
+
+    window.display();
 }
 
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen

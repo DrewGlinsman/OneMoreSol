@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <memory>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
 
@@ -38,6 +39,8 @@ public:
 	int getHealth();
 
 	int getSpeed();
+
+	void explode(std::vector<std::vector<std::shared_ptr<KoratEmpire>>> &currentKorat);
 
 private:
 

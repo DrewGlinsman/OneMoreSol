@@ -60,7 +60,8 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 18;
+        int currentLevel = 3;
+
         int koratSpawnLane;
         int koratSpawnType;
 
@@ -84,7 +85,7 @@ class GameLogic{
         std::vector <int> enemyPool3 {1, 2, 3};
         std::vector <int> enemyPool4 {1, 2, 3, 4};
         std::vector <int> enemyPool5 {1, 2, 3, 4, 5};
-        std::vector <int> enemyPool6 {1, 2, 3, 4, 5, 6};
+        std::vector <int> enemyPool6 {5, 6};
         std::vector <int> enemyPool7 {1, 2, 3, 4, 5, 6, 7};
 
         const int lane1 = 335;
@@ -110,10 +111,12 @@ class GameLogic{
         sf::SoundBuffer level2Music;
         sf::Sound backgroundMusic;
 
-        bool lostGame;
+        bool levelWon;
 
         bool movingUp = false;
         bool movingDown = false;
+
+        bool isPaused = false;
 
         double directMove = 1;
 
@@ -159,7 +162,7 @@ class GameLogic{
 
         void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
 
-        void updateDyingKorat();
+        void updateDyingKorat(MajorTom*);
 
         void startBikeBoss(TextureLoader*);
         void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
@@ -176,7 +179,10 @@ class GameLogic{
         void queryBikeFiring();
         void queryTankFiring();
 
+        void pauseGame();
+        void explode(KoratEmpire &bomber, MajorTom* majorTom);
         void clearAssets();
+        bool currentLevelEnd();
 
 };
 

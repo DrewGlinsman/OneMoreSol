@@ -127,6 +127,11 @@ bool Bomber::checkDeath()
     }
 }
 
+void Bomber::explode(std::vector<std::vector<std::shared_ptr<KoratEmpire>>> &currentKorat)
+{
+
+}
+
 bool Bomber::checkSurvive()
 {
     return survive;
