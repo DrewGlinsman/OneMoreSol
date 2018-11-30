@@ -61,7 +61,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 1;
+        int currentLevel = 3;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -113,7 +113,6 @@ class GameLogic{
         sf::SoundBuffer level2Music;
         sf::Sound backgroundMusic;
 
-        bool lostGame;
         bool levelWon;
 
         bool movingUp = false;

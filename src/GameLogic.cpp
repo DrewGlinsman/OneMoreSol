@@ -33,7 +33,7 @@ bool GameLogic::currentLevelEnd()
 
 bool GameLogic::checkEnd(MajorTom *majorTom)
 {
-    if(majorTom -> getSurvivors() == 0 || majorTom -> getHealth() <= 0 || lostGame)
+    if(majorTom -> getSurvivors() <= 0 || majorTom -> getHealth() <= 0)
     {
         return true;
     }
@@ -716,8 +716,6 @@ int GameLogic::decideBulletType(Gun* currentGun)
 
 void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
-    lostGame = false;
-
     if(!isPaused)
     {
         rotation = gameSky.getRotation();
@@ -808,8 +806,6 @@ void GameLogic::clearAssets()
 
 void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 {
-    lostGame = true;
-
     clearAssets();
 
     majorTom -> setTomPositionX(156);
