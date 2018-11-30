@@ -13,7 +13,6 @@ GameLogic::GameLogic()
 {
     loadedTextures = new TextureLoader();
     loadedAudio = new AudioLoader();
-    lostGame = false;
     levelWon = true;
     if(currentLevel == 10)
     {
