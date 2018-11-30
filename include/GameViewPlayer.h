@@ -74,6 +74,16 @@ public:
 
     sf::RectangleShape background;
     sf::RectangleShape lossScreen;
+    sf::RectangleShape reload1;
+    sf::RectangleShape reload2;
+    sf::RectangleShape reload3;
+    sf::RectangleShape reload4;
+    sf::RectangleShape reload5;
+    sf::RectangleShape reload6;
+    sf::RectangleShape reload7;
+
+    std::array<sf::RectangleShape, 7> reloadRect;//holds the reload visualizations
+
     sf::CircleShape sky;
 
     sf::Sprite weapon1;

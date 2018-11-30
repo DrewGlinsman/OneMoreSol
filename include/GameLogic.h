@@ -53,7 +53,6 @@ class GameLogic{
 
         sf::Clock spawnClock;
         sf::Clock fireBulletClock;
-        sf::Clock reloadClock;
 
         int survivorCount = 20;
         int survivorCountSaved = 20;
@@ -105,7 +104,6 @@ class GameLogic{
         float spawnTime;
         bool enemyBehindTom = false;
 
-        bool reloadStarted = false;
         float reloadTime;
 
         float lastBulletFired;
@@ -121,6 +119,9 @@ class GameLogic{
 
     public:
         GameLogic();
+
+        sf::Clock reloadClock;
+        bool reloadStarted = false;
 
         TextureLoader* loadedTextures;
 
