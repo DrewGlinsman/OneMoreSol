@@ -12,8 +12,6 @@ using namespace std;
 GameLogic::GameLogic()
 {
     loadedTextures = new TextureLoader();
-    loadedAudio = new AudioLoader();
-    lostGame = false;
     levelWon = true;
     if(currentLevel == 10)
     {
@@ -871,7 +869,7 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
     {
         if(currentBikeBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
         {
-            loseLevel(gameSky, majorTom);
+            majorTom -> setHealth(0);
         }
         if (currentBikeBoss[i] -> checkSurvive() == false)
         {
@@ -935,7 +933,7 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
         {
             currentBikeBoss.erase(currentBikeBoss.begin() + i);
             currentKoratCount--;
-            loseLevel(gameSky, majorTom);
+            majorTom -> setHealth(0);
         }
     }
 }
@@ -991,7 +989,7 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                     currentTankBoss[i] -> moveBoss(timePassed);
                     if(currentTankBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
                     {
-                        loseLevel(gameSky, majorTom);
+                        majorTom -> setHealth(0);
                     }
                 }
             }
@@ -1004,7 +1002,7 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
         {
             currentBikeBoss.erase(currentBikeBoss.begin() + i);
             currentKoratCount--;
-            loseLevel(gameSky, majorTom);
+            majorTom -> setHealth(0);
         }
     }
 }

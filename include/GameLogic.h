@@ -109,10 +109,6 @@ class GameLogic{
 
         float lastBulletFired;
 
-        sf::SoundBuffer level1Music;
-        sf::SoundBuffer level2Music;
-        sf::Sound backgroundMusic;
-
         bool levelWon;
 
         bool movingUp = false;
@@ -126,7 +122,6 @@ class GameLogic{
         GameLogic();
 
         TextureLoader* loadedTextures;
-        AudioLoader* loadedAudio;
 
         //needs survivor count
         void moveKorat(float timePassed, MajorTom* majorTom);
