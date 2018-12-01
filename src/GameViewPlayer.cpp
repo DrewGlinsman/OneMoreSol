@@ -70,6 +70,11 @@ void GameViewPlayer::initializePlayState()
     sky.setPosition(720, 450);
     sky.setTexture(&(loadedTextures->textureArray[2]));
 
+    nightSky.setPosition(0,0);
+    nightSky.setSize(sf::Vector2f(1440,760));
+    nightSky.setFillColor(sf::Color(255,255,255,0));
+    nightSky.setTexture(&(loadedTextures->textureArray[16]));
+
     background.setOrigin(0,724);
     background.setPosition(0,900);
     background.setSize(sf::Vector2f(1440,724));
@@ -660,6 +665,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
         logic -> drawTankBoss(window);
     }
 
+    window.draw(nightSky);
     window.draw(scoreCnt);
     window.draw(levelCnt);
 

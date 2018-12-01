@@ -34,12 +34,16 @@ private:
     sf::RectangleShape playBtnRec;
     sf::RectangleShape storyBtnRec;
     sf::RectangleShape exitBtnRec;
+    sf::RectangleShape nightSky;
+
     sf::SoundBuffer Menu_Music;
     sf::SoundBuffer Menu_Transition;
     sf::SoundBuffer Menu_Selection;
+
     sf::Sound menuMusic;
     sf::Sound menuTransition;
     sf::Sound menuSelection;
+
     sf::Text menuTitle;
     sf::Text menuPlay1;
     sf::Text menuPlay2;
