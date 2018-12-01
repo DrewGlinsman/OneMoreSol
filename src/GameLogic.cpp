@@ -361,6 +361,11 @@ void GameLogic::moveBullet(float timePassed)
         {
             for (int j = 0; j < currentBullet[i].size(); j++)
             {
+                if (currentBullet[i][j] -> getType() == "Gauss")
+                {
+                    currentKorat[i][j] -> wasShot(currentBullet[i][j] -> getDamage());
+                }
+
                 if (currentKorat[i].size() >= 3)
                 {
                     if(currentBullet[i][j] -> getBullet().getGlobalBounds().intersects(currentKorat[i][0] -> getKorat().getGlobalBounds()))

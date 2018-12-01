@@ -78,6 +78,10 @@ sf::Sprite Bullet::getBullet()
 {
 
 }
+std::string Bullet::getType()
+{
+
+}
 
 Bullet::~Bullet()
 {
