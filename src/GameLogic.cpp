@@ -747,8 +747,9 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
                 currentLevel++;
                 survivorCountSaved = majorTom->getSurvivors();
                 cout << "Survivor Count Saved: " << survivorCountSaved << endl;
-                levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
-                levelSpawnModifier = levelSpawnModifier * 15/16; //
+                levelSpeedModifier = levelSpeedModifierVector[currentLevel - 1];
+                levelSpawnModifier = levelSpawnModifierVector[currentLevel - 1];
+                cout << "level spawn modifier = " <<levelSpawnModifierVector[currentLevel - 1] << endl;
 
                 majorTom ->  setTomPositionX(156);
 
@@ -1026,6 +1027,10 @@ int GameLogic::getLevel()
     return currentLevel;
 }
 
+void GameLogic::pauseGame()
+{
+    isPaused = !isPaused;
+}
 
 void GameLogic::queryKoratFiring()
 {
@@ -1053,11 +1058,6 @@ void GameLogic::queryKoratFiring()
             }
         }
     }
-}
-
-void GameLogic::pauseGame()
-{
-    isPaused = !isPaused;
 }
 
 void GameLogic::queryBikeFiring()
