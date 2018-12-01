@@ -515,7 +515,7 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 {
 
     gameMusic.stop();
-    gameMusic.setBuffer(loadedAudio->soundTrack[20]);
+    gameMusic.setBuffer(loadedAudio->soundTrack[24]);
     gameMusic.play();
     gameMusic.setLoop(true);
 
