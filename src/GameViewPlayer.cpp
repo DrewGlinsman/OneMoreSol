@@ -11,11 +11,11 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
         cout << "initializing" << endl;
         initializeMenuState();
         initializePlayState();
+        logic = new GameLogic();
+        //loadedAudio = new AudioLoader();
+        majorTom = new MajorTom(loadedTextures);
     }
     initialized = true;
-    logic = new GameLogic();
-    loadedAudio = new AudioLoader();
-    majorTom = new MajorTom(loadedTextures);
 }
 
 void GameViewPlayer::initializeMenuState()
@@ -165,6 +165,7 @@ void GameViewPlayer::initializePlayState()
 	majorTomHealth.setString("100/100 Health");//might be able to take this out after survivor count is looped in updater
 	majorTomHealth.setFillColor(sf::Color(0,0,0,255));
 	majorTomHealth.setPosition(75,770);
+
 }
 
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
@@ -294,14 +295,12 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
     sf::Clock gameClock;
     float delta;
 
-    bool firstIteration = true;
     bool keepMovingUp = false;
     bool keepMovingDown = false;
     bool lockOutKeyboard = false;
 
     while(window.isOpen())
     {
-
         updateGame(window);
         delta = gameClock.getElapsedTime().asSeconds();
         gameClock.restart();
@@ -319,13 +318,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
             std::cout << "Entered text adventure" << endl;
             logic -> pauseGame();
             textAdventureIsOpen(window);
-        }
-
-        if(firstIteration)
-        {
-            cout << "Current Level: " << currentLevel << endl;
-            cout << "Game Logic Current Level: " << logic -> getLevel() << endl;
-            firstIteration = false;
         }
 
         if(currentLevel < logic -> getLevel())
@@ -535,14 +527,24 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 
     while(window.isOpen())
     {
+        if (delayClockStarted == false)
+        {
+            delayClock.restart();
+        }
+        delayClockStarted = true;
+        delayClockTime = delayClock.getElapsedTime().asSeconds();
+
         while(window.pollEvent(Event))
         {
             if(Event.type == sf::Event::KeyPressed)
             {
                 if(Event.key.code == sf::Keyboard::Space)
                 {
-                    gameMusic.stop();
-                    return false;
+                    if(delayClockTime > 2)
+                    {
+                        gameMusic.stop();
+                        return false;
+                    }
                 }
             }
         }
@@ -599,6 +601,13 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
     updateLossScreen(window);
     while(window.isOpen() && !retry)
     {
+
+        if (delayClockStarted == false)
+        {
+            delayClock.restart();
+        }
+        delayClockStarted = true;
+        delayClockTime = delayClock.getElapsedTime().asSeconds();
         while(window.pollEvent(Event))
         {
             if(Event.type == sf::Event::Closed)
@@ -632,17 +641,20 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
                 if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
                 {
-                    if (selector.y == 0)
+                    if(delayClockTime > 2)
                     {
-                        retry = true;
-                        logic -> loseLevel(sky, majorTom);
-                        return false;
-                    }
-                    else if (selector.y == 1)
-                    {
-                        gameMusic.stop();
-                        window.close();
-                        return true;
+                        if (selector.y == 0)
+                        {
+                            retry = true;
+                            logic -> loseLevel(sky, majorTom);
+                            return false;
+                        }
+                        else if (selector.y == 1)
+                        {
+                            gameMusic.stop();
+                            window.close();
+                            return true;
+                        }
                     }
                 }
             }
