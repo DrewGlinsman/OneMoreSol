@@ -90,7 +90,7 @@ class GameLogic{
         std::vector <int> enemyPool7 {3, 4, 5, 6, 7};
 
         std::vector <float> levelSpawnModifierVector {2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6,
-                                                      1.5, 1.4, 1.3, 1.2, 1.1, 1.0, .9, .8, .7, 6.};
+                                                      1.5, 1.4, 1.3, 1.2, 1.1, 1.0, .9, .8, .7, .6};
 
         std::vector <float> levelSpeedModifierVector {4.5, 4.5, 4.4, 4.4, 4.3, 4.3, 4.2, 4.2, 4.1, 2.1,
                                                       4.0, 4.0, 3.9, 3.9, 3.8, 3.8, 3.7, 3.7, 3.6, 3.6};
@@ -105,7 +105,7 @@ class GameLogic{
         int sunRiseOrientation = 10;
         int sunSetOrientation = 150;
         float levelSpeedModifier = 4.5;
-        float levelSpawnModifier = 1.9;
+        float levelSpawnModifier = 2.5;
         float rotation;
         float spawnTime;
         bool enemyBehindTom = false;
