@@ -19,6 +19,11 @@ class GameViewPlayer
 
 private:
     bool initialized;
+
+    sf::Clock delayClock;
+    float delayClockTime;
+    bool delayClockStarted;
+
     float timePassed;
 
     sf::Font menuFont;
