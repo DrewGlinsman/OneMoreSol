@@ -169,7 +169,7 @@ bool Elite::queryToFire()
 		  setFireRate(3);
 	   else
 		   setFireRate(1);
-	   setFireRate(randomFireRate);
+	   setFireRate(randomFireRate * 2);
 	   fireBulletClock.restart();
 	}
 

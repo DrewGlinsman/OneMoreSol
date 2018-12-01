@@ -60,7 +60,7 @@ private:
     int lane4 = 594;
     int lane5 = 680;
 
-    double fireRate = 1;
+    double fireRate = 3;
     float lastBulletFired;
     sf::Clock fireBulletClock;
 
