@@ -11,11 +11,11 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
         cout << "initializing" << endl;
         initializeMenuState();
         initializePlayState();
+        logic = new GameLogic();
+        //loadedAudio = new AudioLoader();
+        majorTom = new MajorTom(loadedTextures);
     }
     initialized = true;
-    logic = new GameLogic();
-    loadedAudio = new AudioLoader();
-    majorTom = new MajorTom(loadedTextures);
 }
 
 void GameViewPlayer::initializeMenuState()
@@ -165,6 +165,7 @@ void GameViewPlayer::initializePlayState()
 	majorTomHealth.setString("100/100 Health");//might be able to take this out after survivor count is looped in updater
 	majorTomHealth.setFillColor(sf::Color(0,0,0,255));
 	majorTomHealth.setPosition(75,770);
+
 }
 
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
@@ -306,6 +307,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
             gameMusic.setBuffer(loadedAudio->soundTrack[currentLevel]);
             gameMusic.play();
             gameMusic.setLoop(true);
+            delayClockStarted = false;
         }
         currentLevel = logic -> getLevel();
         updateGame(window);
@@ -522,6 +524,13 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
     updateLossScreen(window);
     while(window.isOpen() && !retry)
     {
+
+        if (delayClockStarted == false)
+        {
+            delayClock.restart();
+        }
+        delayClockStarted = true;
+        delayClockTime = delayClock.getElapsedTime().asSeconds();
         while(window.pollEvent(Event))
         {
             if(Event.type == sf::Event::Closed)
@@ -555,17 +564,20 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
                 if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
                 {
-                    if (selector.y == 0)
+                    if(delayClockTime > 2)
                     {
-                        retry = true;
-                        logic -> loseLevel(sky, majorTom);
-                        return false;
-                    }
-                    else if (selector.y == 1)
-                    {
-                        gameMusic.stop();
-                        window.close();
-                        return true;
+                        if (selector.y == 0)
+                        {
+                            retry = true;
+                            logic -> loseLevel(sky, majorTom);
+                            return false;
+                        }
+                        else if (selector.y == 1)
+                        {
+                            gameMusic.stop();
+                            window.close();
+                            return true;
+                        }
                     }
                 }
             }
@@ -586,13 +598,22 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 
     while(window.isOpen() && !optionSelected)
     {
+        if (delayClockStarted == false)
+        {
+            delayClock.restart();
+        }
+        delayClockStarted = true;
+        delayClockTime = delayClock.getElapsedTime().asSeconds();
         while(window.pollEvent(Event))
         {
             if(Event.type == sf::Event::KeyPressed)
             {
                 if(Event.key.code == sf::Keyboard::Space)
                 {
+                    if(delayClockTime > 2)
+                    {
                     return false;
+                    }
                 }
                 if(Event.key.code == sf::Keyboard::Y)
                 {
