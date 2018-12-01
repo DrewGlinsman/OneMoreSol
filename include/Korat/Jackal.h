@@ -49,7 +49,7 @@ public:
 private:
 
 	int lane;
-	int speed = 200;
+	int speed = 150;
 	int health = 100;
 	bool survive = false;
 
