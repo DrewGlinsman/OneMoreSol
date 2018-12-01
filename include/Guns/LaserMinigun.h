@@ -21,9 +21,9 @@ class LaserMinigun: public Gun
     private:
         int shotsFired = 0;
         int bulletType = 4;
-        float fireRate = 0.5;
-        int clip = 10;
-        float reloadSpeed = 1.5;
+        float fireRate = 0.05;
+        int clip = 100;
+        float reloadSpeed = 2.5;
 };
 
 #endif

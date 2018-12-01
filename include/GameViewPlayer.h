@@ -10,6 +10,7 @@
 #include "MajorTom.h"
 #include "GameLogic.h"
 #include "TextureLoader.h"
+#include "AudioLoader.h"
 
 using namespace std;
 
@@ -34,12 +35,16 @@ private:
     sf::RectangleShape playBtnRec;
     sf::RectangleShape storyBtnRec;
     sf::RectangleShape exitBtnRec;
+    sf::RectangleShape nightSky;
+
     sf::SoundBuffer Menu_Music;
     sf::SoundBuffer Menu_Transition;
     sf::SoundBuffer Menu_Selection;
+
     sf::Sound menuMusic;
     sf::Sound menuTransition;
     sf::Sound menuSelection;
+
     sf::Text menuTitle;
     sf::Text menuPlay1;
     sf::Text menuPlay2;
@@ -73,6 +78,16 @@ public:
 
     sf::RectangleShape background;
     sf::RectangleShape lossScreen;
+    sf::RectangleShape reload1;
+    sf::RectangleShape reload2;
+    sf::RectangleShape reload3;
+    sf::RectangleShape reload4;
+    sf::RectangleShape reload5;
+    sf::RectangleShape reload6;
+    sf::RectangleShape reload7;
+
+    std::array<sf::RectangleShape, 7> reloadRect;//holds the reload visualizations
+
     sf::CircleShape sky;
 
     sf::Sprite weapon1;
@@ -106,6 +121,7 @@ public:
     sf::Event Event;
 
     bool lost;
+    bool optionSelected;
 
     GameLogic* logic;
 
@@ -124,6 +140,7 @@ public:
     bool lossViewIsOpen(sf::RenderWindow& window);
     bool winViewIsOpen(sf::RenderWindow& window);
     bool textAdventureIsOpen(sf::RenderWindow& window);
+    void drawAdventure(sf::RenderWindow& window);
     void updateMenu(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();

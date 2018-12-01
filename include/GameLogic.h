@@ -30,7 +30,6 @@
 #include "BFGBullet.h"
 
 #include "TextureLoader.h"
-#include "AudioLoader.h"
 #include "rngs.h"
 
 using namespace std;
@@ -54,20 +53,23 @@ class GameLogic{
 
         sf::Clock spawnClock;
         sf::Clock fireBulletClock;
-        sf::Clock reloadClock;
 
         int survivorCount = 20;
         int survivorCountSaved = 20;
 
+        bool lostGame;
+
         int currentKoratCount = 0;
 
-        int currentLevel = 18;
+        int currentLevel = 7;
 
         int koratSpawnLane;
         int koratSpawnType;
 
         int bulletSpawnLane;
         int bulletSpawnType;
+
+        int counter = 0;
 
         /*
             1 = Grunt
@@ -83,9 +85,15 @@ class GameLogic{
         std::vector <int> enemyPool2 {1, 2};
         std::vector <int> enemyPool3 {1, 2, 3};
         std::vector <int> enemyPool4 {1, 2, 3, 4};
-        std::vector <int> enemyPool5 {1, 2, 3, 4, 5};
-        std::vector <int> enemyPool6 {5, 6};
-        std::vector <int> enemyPool7 {1, 2, 3, 4, 5, 6, 7};
+        std::vector <int> enemyPool5 {2, 3, 4, 5};
+        std::vector <int> enemyPool6 {2, 3, 4, 5, 6};
+        std::vector <int> enemyPool7 {3, 4, 5, 6, 7};
+
+        std::vector <float> levelSpawnModifierVector {2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6,
+                                                      1.5, 1.4, 1.3, 1.2, 1.1, 1.0, .9, .8, .7, .6};
+
+        std::vector <float> levelSpeedModifierVector {4.5, 4.5, 4.4, 4.4, 4.3, 4.3, 4.2, 4.2, 4.1, 2.1,
+                                                      4.0, 4.0, 3.9, 3.9, 3.8, 3.8, 3.7, 3.7, 3.6, 3.6};
 
         const int lane1 = 335;
         const int lane2 = 422;
@@ -96,35 +104,32 @@ class GameLogic{
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
         int sunSetOrientation = 150;
-        float levelSpeedModifier = 10;
-        float levelSpawnModifier = 1;
+        float levelSpeedModifier = 4.5;
+        float levelSpawnModifier = 2.5;
         float rotation;
         float spawnTime;
         bool enemyBehindTom = false;
 
-        bool reloadStarted = false;
         float reloadTime;
 
         float lastBulletFired;
 
-        sf::SoundBuffer level1Music;
-        sf::SoundBuffer level2Music;
-        sf::Sound backgroundMusic;
-
-        bool lostGame;
         bool levelWon;
-        bool firstLevel;
 
         bool movingUp = false;
         bool movingDown = false;
+
+        bool isPaused = false;
 
         double directMove = 1;
 
     public:
         GameLogic();
 
+        sf::Clock reloadClock;
+        bool reloadStarted = false;
+
         TextureLoader* loadedTextures;
-        AudioLoader* loadedAudio;
 
         //needs survivor count
         void moveKorat(float timePassed, MajorTom* majorTom);
@@ -136,45 +141,48 @@ class GameLogic{
         void selectKorat();
         //needs survivor count
         void spawnKorat();
-        bool checkEnd(MajorTom *tom);
+        bool checkEnd(MajorTom*);
         int decideKoratLane();
         int decideKoratType(std::vector<int> enemyPool);
 
-        void moveBullet(float timePassed);
-        void moveKoratBullet(float timePassed, MajorTom* majorTom);
-        void drawBullet(sf::RenderWindow& window);
+        void moveBullet(float);
+        void moveKoratBullet(float, MajorTom*);
+        void drawBullet(sf::RenderWindow&);
 
-        void fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
-        bool reloadCurrentGun(Gun* currentGun);
-        void selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
-        void spawnBullet(float timePassed);
-        int decideBulletLane(MajorTom* majorTom);
-        int decideBulletLaneKorat(int givenLane);
-        int decideBulletType(Gun* currentGun);
+        void fireBullet(MajorTom*, Gun*, float);
+        bool reloadCurrentGun(Gun*);
+        void selectBullet(MajorTom*, Gun*, float);
+        void spawnBullet(float);
+        int decideBulletLane(MajorTom*);
+        int decideBulletLaneKorat(int);
+        int decideBulletType(Gun*);
 
         void bulletLeftScreen(float timePassed, int i, int j);
 
         //changes survivor count
-        void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
+        void runLevel(sf::CircleShape&, MajorTom*, float, sf::RectangleShape&);
 
-        void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
+        void loseLevel(sf::CircleShape&, MajorTom*);
 
-        void updateDyingKorat();
+        void updateDyingKorat(MajorTom*);
 
         void startBikeBoss(TextureLoader*);
-        void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
-        void drawBikeBoss(sf::RenderWindow& window);
+        void moveBikeBoss(sf::CircleShape&, MajorTom*, float);
+        void drawBikeBoss(sf::RenderWindow&);
         void updateDyingBikeBoss();
 
         void startTankBoss(TextureLoader*);
-        void moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
-        void drawTankBoss(sf::RenderWindow& window);
+        void moveTankBoss(sf::CircleShape&, MajorTom*, float);
+        void drawTankBoss(sf::RenderWindow&);
         void updateDyingTankBoss();
 
         int getLevel();
         void queryKoratFiring();
+        void queryBikeFiring();
+        void queryTankFiring();
 
-        void explode(KoratEmpire &bomber);
+        void pauseGame();
+        void explode(KoratEmpire &bomber, MajorTom* majorTom);
         void clearAssets();
         bool currentLevelEnd();
 

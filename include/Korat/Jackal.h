@@ -49,7 +49,7 @@ public:
 private:
 
 	int lane;
-	int speed = 200;
+	int speed = 150;
 	int health = 100;
 	bool survive = false;
 
@@ -59,7 +59,7 @@ private:
     int lane4 = 594;
     int lane5 = 680;
 
-    double fireRate = 1;
+    double fireRate = 3;
     float lastBulletFired;
     sf::Clock fireBulletClock;
 

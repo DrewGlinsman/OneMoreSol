@@ -68,6 +68,9 @@ void TextureLoader::load()
     if (!textureArray[15].loadFromFile("assets/endButtonH.png"))
         std::cout << "Failed to Load endButtonH." << std::endl;
 
+    if (!textureArray[16].loadFromFile("assets/nightLayer.png"))
+        std::cout << "Failed to Load nightLayer." << std::endl;
+
     //goes through the textureArray and "anti-alias"es them.
     for(int i = 0; i < textureArray.size(); ++i)
     {

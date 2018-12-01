@@ -12,8 +12,7 @@ using namespace std;
 GameLogic::GameLogic()
 {
     loadedTextures = new TextureLoader();
-    loadedAudio = new AudioLoader();
-
+    levelWon = true;
     if(currentLevel == 10)
     {
         startBikeBoss(loadedTextures);
@@ -32,10 +31,11 @@ bool GameLogic::currentLevelEnd()
 
 bool GameLogic::checkEnd(MajorTom *majorTom)
 {
-    if(majorTom -> getSurvivors() == 0 || majorTom -> getHealth() <= 0)
+    if(majorTom -> getSurvivors() <= 0 || majorTom -> getHealth() <= 0)
     {
         return true;
     }
+
     return false;
 }
 
@@ -58,48 +58,51 @@ void GameLogic::updateKoratOrder()
 
 void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
 {
-    for (int i = 0; i < currentKorat.size(); i ++)
+    if(!isPaused)
     {
-        for (int j = 0; j < currentKorat[i].size(); j++)
+        for (int i = 0; i < currentKorat.size(); i ++)
         {
-            if (currentKorat[i][j] -> checkSurvive() == false)
+            for (int j = 0; j < currentKorat[i].size(); j++)
             {
-                if (currentKorat[i][j] -> checkDeath() == false)
+                if (currentKorat[i][j] -> checkSurvive() == false)
                 {
-                    if (currentKorat[i][j] -> getSpeed() == 0)
+                    if (currentKorat[i][j] -> checkDeath() == false)
                     {
-                        majorTom->setScore(majorTom->getScore()+20);
-                        dyingKorat.emplace_back(move(currentKorat[i][j]));
-                        currentKorat[i].erase(currentKorat[i].begin() + j);
+                        if (currentKorat[i][j] -> getSpeed() == 0)
+                        {
+                            majorTom -> setScore(majorTom -> getScore()+20);
+                            dyingKorat.emplace_back(move(currentKorat[i][j]));
+                            currentKorat[i].erase(currentKorat[i].begin() + j);
+                        }
+                        else
+                        {
+                        currentKorat[i][j] -> moveCurrentKorat(timePassed);
+                        }
                     }
                     else
                     {
-                    currentKorat[i][j] -> moveCurrentKorat(timePassed);
+                        // This will never be true!
                     }
                 }
                 else
                 {
-                    // This will never be true!
+                    if(currentKorat[i][j] -> getName() == "Bomber")
+                    {
+                        majorTom -> setSurvivors(0);
+                        break;
+                    }
+                    currentKorat[i].erase(currentKorat[i].begin() + j);
+                    currentKoratCount--;
+                    //update the gameviewplayer to reflect decremented survivors
+                    majorTom -> setSurvivors(majorTom -> getSurvivors()-1);
+                    std::cout << "survivor count = " << majorTom -> getSurvivors() << std::endl;
                 }
-            }
-            else
-            {
-                if(currentKorat[i][j] -> getName() == "Bomber")
-                {
-                    majorTom -> setSurvivors(0);
-                    break;
-                }
-                currentKorat[i].erase(currentKorat[i].begin() + j);
-                currentKoratCount--;
-                //update the gameviewplayer to reflect decremented survivors
-                majorTom->setSurvivors(majorTom->getSurvivors()-1);
-                std::cout << "survivor count = " << majorTom->getSurvivors() << std::endl;
             }
         }
     }
 }
 
-void GameLogic::updateDyingKorat()
+void GameLogic::updateDyingKorat(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingKorat.size(); i++)
     {
@@ -107,7 +110,7 @@ void GameLogic::updateDyingKorat()
         {
             if (dyingKorat[i] -> getName() == "Bomber")
             {
-                explode(*dyingKorat[i]);
+                explode(*dyingKorat[i], majorTom);
             }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
@@ -115,7 +118,7 @@ void GameLogic::updateDyingKorat()
     }
 }
 
-void GameLogic::explode(KoratEmpire &bomber)
+void GameLogic::explode(KoratEmpire &bomber, MajorTom* majorTom)
 {
     for (int i = 0; i < currentKorat.size(); i ++)
     {
@@ -128,6 +131,13 @@ void GameLogic::explode(KoratEmpire &bomber)
                     && bomber.getLane() - currentKorat[i][j] -> getLane() >= -100 )
                 {
                     currentKorat[i][j] -> wasShot(200);
+                }
+                if (majorTom -> getTomPosition() - currentKorat[i][j] -> getLane() <= 100 &&
+                    majorTom -> getTomPosition() - currentKorat[i][j] -> getLane() >= - 100 &&
+                    majorTom -> getTomPositionX() - currentKorat[i][j] -> getPositionX() <= 200 &&
+                    majorTom -> getTomPositionX() - currentKorat[i][j] -> getPositionX() >= -200)
+                {
+                    majorTom -> setHealth(majorTom->getHealth() - 50);
                 }
             }
 
@@ -312,7 +322,7 @@ void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed
  * \return Bool
  *
  */
-bool GameLogic::reloadCurrentGun(Gun* currentGun)
+bool GameLogic::reloadCurrentGun(Gun* currentGun)//needs to communicate to gameview to visualize reload time
 {
     if(reloadStarted == false)
     {
@@ -338,7 +348,7 @@ bool GameLogic::reloadCurrentGun(Gun* currentGun)
             reloadStarted = false;
             return true;
         }
-        cout << reloadTime << endl;
+        cout << reloadTime << endl;//this is a scaler for the reload visual
         return false;
     }
 }
@@ -702,86 +712,109 @@ int GameLogic::decideBulletType(Gun* currentGun)
 
 //----------------------------------------------------------
 
-void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
+/** \brief
+ *  Includes logic for running the day/night cycle.
+ * \param
+ * \param
+ * \return
+ *
+ */
+void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed, sf::RectangleShape& nightLayer)
 {
-	rotation = gameSky.getRotation();
-	spawnTime = spawnClock.getElapsedTime().asSeconds();
-
-	long now;
-    now = ((unsigned long) time((time_t *) NULL)) % 255;
-    SelectStream((int) now);
-    firstLevel = true;
-
-    //-------------------------------------------------------------
-    // lose game check
-    if (checkEnd(majorTom))
+    if(!isPaused)
     {
-        loseLevel(gameSky, majorTom);
-    }
+        rotation = gameSky.getRotation();
+        spawnTime = spawnClock.getElapsedTime().asSeconds();
 
-    //-------------------------------------------------------------
+        long now;
+        now = ((unsigned long) time((time_t *) NULL)) % 255;
+        SelectStream((int) now);
 
-	if (rotation >= sunSetOrientation) // if the sun has set
-	{
-		if (currentKoratCount == 0)
+        //-------------------------------------------------------------
+        // lose game check
+        if (checkEnd(majorTom))
         {
-            gameSky.rotate(-rotation); //rotate the sun back to the beginning
-            currentLevel++;
-            survivorCountSaved = majorTom->getSurvivors();
-            levelSpeedModifier = levelSpeedModifier * 15/16; //cut the speed of the sun down by 15/16ths
-            levelSpawnModifier = levelSpawnModifier * 15/16; //
-
-            majorTom ->  setTomPositionX(156);
-
-            majorTom -> setTomPositionY(508);
-
-            cout << "Current Level = " << currentLevel << endl;
-            if(!firstLevel)
-            {
-                levelWon = true;
-            }
-
-            firstLevel = false;
-            // start text adventure
-
-            if(currentLevel == 10)
-            {
-                startBikeBoss(loadedTextures);
-            }
-
-            if(currentLevel == 20)
-            {
-                startTankBoss(loadedTextures);
-            }
-
+            loseLevel(gameSky, majorTom);
         }
-	}
-	else if(currentLevel == 10 | currentLevel == 20)
-    {
-        gameSky.rotate(timePassed * levelSpeedModifier);
-        levelWon = false;
-    }
-	else
-    {
-        levelWon = false;
-        gameSky.rotate(timePassed * levelSpeedModifier);
 
-        if (spawnTime >= levelSpawnModifier)
+        //-------------------------------------------------------------
+
+        if (rotation >= sunSetOrientation) // if the sun has set
         {
-            selectKorat();
-            spawnClock.restart();
+            if (currentKoratCount == 0)
+            {
+                gameSky.rotate(-rotation); //rotate the sun back to the beginning
+                currentLevel++;
+                survivorCountSaved = majorTom->getSurvivors();
+                cout << "Survivor Count Saved: " << survivorCountSaved << endl;
+                levelSpeedModifier = levelSpeedModifierVector[currentLevel - 1];
+                levelSpawnModifier = levelSpawnModifierVector[currentLevel - 1];
+                cout << "level spawn modifier = " <<levelSpawnModifierVector[currentLevel - 1] << endl;
+
+                majorTom ->  setTomPositionX(156);
+
+                majorTom -> setTomPositionY(508);
+
+                cout << "Current Level = " << currentLevel << endl;
+                levelWon = true;
+                // start text adventure
+
+                clearAssets();
+
+                if(currentLevel == 10)
+                {
+                    startBikeBoss(loadedTextures);
+                }
+
+                if(currentLevel == 20)
+                {
+                    startTankBoss(loadedTextures);
+                }
+
+            }
+        }
+        else if(currentLevel == 10 | currentLevel == 20)
+        {
+            gameSky.rotate(timePassed * levelSpeedModifier);
+            levelWon = false;
+        }
+        else
+        {
+            levelWon = false;
+            gameSky.rotate(timePassed * levelSpeedModifier);
+
+            if((gameSky.getRotation() > 90.f) && (gameSky.getRotation() < 130.f))
+                nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()/3));
+            else if(gameSky.getRotation() > 130.f)
+                nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()/2));
+            else
+                nightLayer.setFillColor(sf::Color(255,255,255,0));
+
+            if (spawnTime >= levelSpawnModifier)
+            {
+                selectKorat();
+                spawnClock.restart();
+            }
         }
     }
 }
 
 void GameLogic::clearAssets()
 {
-     for (int i = 0; i < currentBullet.size(); i++)
-        {
-            currentBullet[i].clear();
-            currentKorat[i].clear();
-            currentKoratBullet[i].clear();
-        }
+    for (int i = 0; i < currentBullet.size(); i++)
+    {
+        currentBullet[i].clear();
+    }
+    for (int i = 0; i < currentKorat.size(); i++)
+    {
+        currentKorat[i].clear();
+    }
+    for (int i = 0; i < currentKoratBullet.size(); i++)
+    {
+        currentKoratBullet[i].clear();
+    }
+    currentBikeBoss.clear();
+    currentTankBoss.clear();
 }
 
 void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
@@ -807,7 +840,7 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
     {
         startTankBoss(loadedTextures);
     }
-
+    cout << "Suvivor Count Saved: " << survivorCountSaved << endl;
     majorTom->setSurvivors(survivorCountSaved);
     majorTom->setHealth(100);
 
@@ -849,6 +882,10 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
 {
     for(int i = 0; i < currentBikeBoss.size(); i++)
     {
+        if(currentBikeBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
+        {
+            majorTom -> setHealth(0);
+        }
         if (currentBikeBoss[i] -> checkSurvive() == false)
         {
             if (currentBikeBoss[i] -> checkDeath() == false)
@@ -911,7 +948,7 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
         {
             currentBikeBoss.erase(currentBikeBoss.begin() + i);
             currentKoratCount--;
-            loseLevel(gameSky, majorTom);
+            majorTom -> setHealth(0);
         }
     }
 }
@@ -965,6 +1002,10 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                 else
                 {
                     currentTankBoss[i] -> moveBoss(timePassed);
+                    if(currentTankBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
+                    {
+                        majorTom -> setHealth(0);
+                    }
                 }
             }
             else
@@ -976,7 +1017,7 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
         {
             currentBikeBoss.erase(currentBikeBoss.begin() + i);
             currentKoratCount--;
-            loseLevel(gameSky, majorTom);
+            majorTom -> setHealth(0);
         }
     }
 }
@@ -986,28 +1027,197 @@ int GameLogic::getLevel()
     return currentLevel;
 }
 
+void GameLogic::pauseGame()
+{
+    isPaused = !isPaused;
+}
 
 void GameLogic::queryKoratFiring()
 {
-	for (int i = 0; i < currentKorat.size(); i ++)
+    if(!isPaused)
+    {
+        for (int i = 0; i < currentKorat.size(); i ++)
+        {
+            for (int j = 0; j < currentKorat[i].size(); j++)
+            {
+
+                if (currentKorat[i][j] -> getName() == "Jackal" or currentKorat[i][j] -> getName() == "Elite" or currentKorat[i][j] -> getName() == "Brute" or currentKorat[i][j] -> getName() == "Biker" or currentKorat[i][j] -> getName() == "Hunter")
+                {
+                    if (currentKorat[i][j] -> queryToFire() == true) //if the Korat is ready to Fire
+                    {
+                        //implement stuff to make Korat fire here
+                        Bullet* newBullet;
+                        newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+
+                        int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
+                        currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
+                    } else {
+                        //pass? basically ask again later
+                    }
+                }
+            }
+        }
+    }
+}
+
+void GameLogic::queryBikeFiring()
+{
+cout << "Shots Fired = "<< counter << endl;
+	for (int i = 0; i < currentBikeBoss.size(); i ++)
 	{
-		for (int j = 0; j < currentKorat[i].size(); j++)
-		{
+        if (currentBikeBoss[i] -> getPositionX() < 1440)
+        {
+            if (currentBikeBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
+            {
+                if( movingDown == false && movingUp == false)
+                {
+                    double bikerGun = Random() * 4;
+                    int firingLaneInPixels;
 
-			if (currentKorat[i][j] -> getName() == "Jackal" or currentKorat[i][j] -> getName() == "Elite" or currentKorat[i][j] -> getName() == "Brute" or currentKorat[i][j] -> getName() == "Biker" or currentKorat[i][j] -> getName() == "Hunter")
-			{
-				if (currentKorat[i][j] -> queryToFire() == true) //if the Korat is ready to Fire
-				{
-					//implement stuff to make Korat fire here
-					Bullet* newBullet;
-					newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+                    if (bikerGun < 2)
+                    {
+                        Bullet* newBullet1;
+                        firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() - 86;
+                        newBullet1 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
 
-					int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
-					currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
-				} else {
-					//pass? basically ask again later
-				}
-			}
-		}
+                        int laneToGoIn;
+                        switch(firingLaneInPixels)
+                        {
+                        case 336:
+                            laneToGoIn = 0;
+                            break;
+                        case 422:
+                            laneToGoIn = 1;
+                            break;
+                        case 508:
+                            laneToGoIn = 2;
+                            break;
+                        case 594:
+                            laneToGoIn = 3;
+                            break;
+                        case 680:
+                            laneToGoIn = 4;
+                            break;
+                        default:
+                            laneToGoIn = 0;
+                            break;
+                        }
+                        currentKoratBullet[laneToGoIn].emplace_back(newBullet1);
+                    }
+                    else if(bikerGun >= 2 && bikerGun < 3)
+                    {
+                        Bullet* newBullet2;
+                        firingLaneInPixels = currentBikeBoss[i] -> getBossPosition();
+                        newBullet2 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+
+                        int laneToGoIn;
+                        switch(firingLaneInPixels)
+                        {
+                        case 336:
+                            laneToGoIn = 0;
+                            break;
+                        case 422:
+                            laneToGoIn = 1;
+                            break;
+                        case 508:
+                            laneToGoIn = 2;
+                            break;
+                        case 594:
+                            laneToGoIn = 3;
+                            break;
+                        case 680:
+                            laneToGoIn = 4;
+                            break;
+                        default:
+                            laneToGoIn = 0;
+                            break;
+                        }
+                        currentKoratBullet[laneToGoIn].emplace_back(newBullet2);
+                    }
+                    else
+                    {
+                        Bullet* newBullet3;
+                        firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() + 86;
+                        newBullet3 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+
+                        int laneToGoIn;
+                        switch(firingLaneInPixels)
+                        {
+                        case 336:
+                            laneToGoIn = 0;
+                            break;
+                        case 422:
+                            laneToGoIn = 1;
+                            break;
+                        case 508:
+                            laneToGoIn = 2;
+                            break;
+                        case 594:
+                            laneToGoIn = 3;
+                            break;
+                        case 680:
+                            laneToGoIn = 4;
+                            break;
+                        default:
+                            laneToGoIn = 0;
+                            break;
+                        }
+                        currentKoratBullet[laneToGoIn].emplace_back(newBullet3);
+                    }
+                }
+            }
+        }
+	}
+}
+
+
+void GameLogic::queryTankFiring()
+{
+	cout << "Shots Fired = "<< counter << endl;
+	for (int i = 0; i < currentTankBoss.size(); i ++)
+	{
+        if (currentTankBoss[i] -> getPositionX() < 1440)
+        {
+            if (currentTankBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
+            {
+                int firingLaneInPixels = currentTankBoss[i] -> decideFiringLane();
+                //implement stuff to make Korat fire here
+                Bullet* newBullet;
+                newBullet = new KoratBullet(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
+
+                int laneToGoIn;
+
+                switch(firingLaneInPixels)
+                {
+                case 335:
+                    laneToGoIn = 0;
+                    break;
+                case 422:
+                    laneToGoIn = 1;
+                    break;
+                case 508:
+                    laneToGoIn = 2;
+                    break;
+                case 594:
+                    laneToGoIn = 3;
+                    break;
+                case 680:
+                    laneToGoIn = 4;
+                    break;
+                default:
+                    laneToGoIn = 0;
+                    break;
+                }
+                cout << firingLaneInPixels << endl;
+
+
+                currentKoratBullet[laneToGoIn].emplace_back(newBullet);
+
+                counter++;
+
+                //405 count
+            }
+
+        }
 	}
 }

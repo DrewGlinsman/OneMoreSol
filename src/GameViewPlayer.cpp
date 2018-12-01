@@ -1,5 +1,6 @@
 #include "GameViewPlayer.h"
-#include <windows.h>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -13,6 +14,7 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     }
     initialized = true;
     logic = new GameLogic();
+    loadedAudio = new AudioLoader();
     majorTom = new MajorTom(loadedTextures);
 }
 
@@ -56,10 +58,23 @@ void GameViewPlayer::initializePlayState()
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
 
+    reloadRect[0] = reload1;
+    reloadRect[1] = reload2;
+    reloadRect[2] = reload3;
+    reloadRect[3] = reload4;
+    reloadRect[4] = reload5;
+    reloadRect[5] = reload6;
+    reloadRect[6] = reload7;
+
     sky.setRadius(894);
     sky.setOrigin(894,894);
     sky.setPosition(720, 450);
     sky.setTexture(&(loadedTextures->textureArray[2]));
+
+    nightSky.setPosition(0,0);
+    nightSky.setSize(sf::Vector2f(1440,760));
+    nightSky.setFillColor(sf::Color(255,255,255,0));
+    nightSky.setTexture(&(loadedTextures->textureArray[16]));
 
     background.setOrigin(0,724);
     background.setPosition(0,900);
@@ -87,12 +102,19 @@ void GameViewPlayer::initializePlayState()
     weapon6.setTextureRect(sf::IntRect(320,32,32,32));
     weapon7.setTextureRect(sf::IntRect(352,0,32,32));
     weapon1.setPosition(295,790);
+    reloadRect[0].setPosition(376,867);
     weapon2.setPosition(423,790);
+    reloadRect[1].setPosition(503,867);
     weapon3.setPosition(551,790);
+    reloadRect[2].setPosition(632,867);
     weapon4.setPosition(679,790);
+    reloadRect[3].setPosition(760,867);
     weapon5.setPosition(807,790);
+    reloadRect[4].setPosition(888,867);
     weapon6.setPosition(935,790);
+    reloadRect[5].setPosition(1016,867);
     weapon7.setPosition(1063,790);
+    reloadRect[6].setPosition(1143,867);
     weapon1.setTexture(loadedTextures->textureArray[0]);
     weapon2.setTexture(loadedTextures->textureArray[0]);
     weapon3.setTexture(loadedTextures->textureArray[0]);
@@ -107,6 +129,14 @@ void GameViewPlayer::initializePlayState()
     weapon5.setScale(sf::Vector2f(2.5f,2.5f));
     weapon6.setScale(sf::Vector2f(2.5f,2.5f));
     weapon7.setScale(sf::Vector2f(2.5f,2.5f));
+
+    for(int i = 0; i<7; ++i)
+    {
+        reloadRect[i].setFillColor(sf::Color(255,255,255,51));
+        reloadRect[i].setSize(sf::Vector2f(64,0));
+        reloadRect[i].setScale(sf::Vector2f(1.25f,1.25f));
+        reloadRect[i].setRotation(180.f);
+    }
 
     //Survivor Count Display
     survivorCnt.setFont(gameFont);
@@ -139,13 +169,13 @@ void GameViewPlayer::initializePlayState()
 
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 {
-    updateMenu(window);
     menuMusic.play();
     menuMusic.setLoop(true);
     menuSelector.setPosition(0,0);
     cout << "0,0" << endl;
     while(window.isOpen()) // Menu loop
 	{
+        updateMenu(window);
 		while(window.pollEvent(Event))
 		{
 			if(Event.type == sf::Event::Closed)
@@ -206,26 +236,29 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					}
 				}
 
-				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
 				{
 					if(sf::Vector2f (0,0) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900); //cant use this on linux, find an alternative
+						sf::sleep(sf::milliseconds(900)); //the fix
 						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900); //cant use this on linux, find an alternative
+						sf::sleep(sf::milliseconds(900)); //the fix
 						menuMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						Sleep(900);
+						//Sleep(900); //cant use this on linux, find an alternative
+						sf::sleep(sf::milliseconds(900)); //the fix
 						window.close();
 						return true;
 					}
@@ -291,13 +324,15 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logic -> currentLevelEnd())
         {
             std::cout << "Entered text adventure" << endl;
+            logic -> pauseGame();
             textAdventureIsOpen(window);
         }
 
-        logic -> runLevel(sky, majorTom, delta);
+        logic -> pauseGame();
+        logic -> runLevel(sky, majorTom, delta, nightSky);
         logic -> updateKoratOrder();
         logic -> updateBulletOrder(); //Bullets generation and drawing
-        logic -> updateDyingKorat();
+        logic -> updateDyingKorat(majorTom);
         logic -> moveKorat(delta, majorTom);
         logic -> queryKoratFiring();
 
@@ -305,11 +340,13 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logic -> getLevel() == 10)
         {
             logic -> moveBikeBoss(sky, majorTom, delta);
+            logic -> queryBikeFiring();
             logic -> updateDyingBikeBoss();
         }
         if (logic -> getLevel() == 20)
         {
             logic -> moveTankBoss(sky, majorTom, delta);
+            logic -> queryTankFiring();
             logic -> updateDyingTankBoss();
         }
 
@@ -387,22 +424,28 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                                     logic -> fireBullet(majorTom, majorTom -> pistol, delta);
                                     break;
                                 case 2:
-                                    logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
+                                	if (logic -> getLevel() >= 3)
+                                		logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
                                     break;
                                 case 3:
-                                    logic -> fireBullet(majorTom, majorTom -> rifle, delta);
+                                	if (logic -> getLevel() >= 5)
+                                    	logic -> fireBullet(majorTom, majorTom -> rifle, delta);
                                     break;
                                 case 4:
-                                    logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                                	if (logic -> getLevel() >= 7)
+                                		logic -> fireBullet(majorTom, majorTom -> minigun, delta);
                                     break;
                                 case 5:
-                                    logic -> fireBullet(majorTom, majorTom -> thrower, delta);
+                                	if (logic -> getLevel() >= 9)
+                                		logic -> fireBullet(majorTom, majorTom -> thrower, delta);
                                     break;
                                 case 6:
-                                    logic -> fireBullet(majorTom, majorTom -> sniper, delta);
+                                	if (logic -> getLevel() >= 11)
+                                		logic -> fireBullet(majorTom, majorTom -> sniper, delta);
                                     break;
                                 case 7:
-                                    logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
+                                	if (logic -> getLevel() >= 13)
+                                		logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
                                     break;
                                 default:
                                     logic -> fireBullet(majorTom, majorTom -> pistol, delta);
@@ -510,7 +553,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     }
                 }
 
-                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Enter)
+                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
                 {
                     if (selector.y == 0)
                     {
@@ -539,15 +582,9 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 {
     window.clear(sf::Color::Black);
-    textAdventure.setFont(menuFont);
-    textAdventure.setCharacterSize(22);
-    textAdventure.setString("You found 5 Survivors!");
-    textAdventure.setFillColor(sf::Color::White);
-    textAdventure.setPosition(500,500);
-    window.draw(textAdventure);
-    window.display();
+    drawAdventure(window);
 
-    while(window.isOpen())
+    while(window.isOpen() && !optionSelected)
     {
         while(window.pollEvent(Event))
         {
@@ -557,10 +594,56 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
                 {
                     return false;
                 }
+                if(Event.key.code == sf::Keyboard::Y)
+                {
+                    optionSelected = true;
+                }
+                if(Event.key.code == sf::Keyboard::N)
+                {
+                    optionSelected = true;
+                }
             }
         }
     }
     return false;
+}
+
+void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
+{
+    window.clear(sf::Color::Black);
+    std::string adventure;
+    std::string sol;
+    sf::Text solNum;
+    std::string line;
+    std::ifstream currentAdventure;
+    int offset = 0;
+    std::string fileString;
+    fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
+    currentAdventure.open(fileString);
+
+    solNum.setFont(gameFont);
+    solNum.setCharacterSize(24);
+    solNum.setFillColor(sf::Color::White);
+    solNum.setPosition(0,0);
+    sol = "Sol " + std::to_string(logic -> getLevel());
+    solNum.setString(sol);
+    window.draw(solNum);
+
+    textAdventure.setFont(gameFont);
+    textAdventure.setCharacterSize(32);
+    textAdventure.setFillColor(sf::Color::White);
+
+    while(getline(currentAdventure,line))
+    {
+        adventure = line;
+        textAdventure.setString(adventure);
+        textAdventure.setPosition(100, 250 + offset);
+        window.draw(textAdventure);
+        offset += 50;
+    }
+
+
+    window.display();
 }
 
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
@@ -583,6 +666,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
         logic -> drawTankBoss(window);
     }
 
+    window.draw(nightSky);
     window.draw(scoreCnt);
     window.draw(levelCnt);
 
@@ -592,12 +676,32 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.draw(survivorCnt);
     window.draw(majorTomHealth);
     window.draw(weapon1);
-    window.draw(weapon2);
-    window.draw(weapon3);
-    window.draw(weapon4);
-    window.draw(weapon5);
-    window.draw(weapon6);
-    window.draw(weapon7);
+    if (logic -> getLevel() >= 3)
+    	window.draw(weapon2);
+    if (logic -> getLevel() >= 5)
+    	window.draw(weapon3);
+    if (logic -> getLevel() >= 7)
+    	window.draw(weapon4);
+    if (logic -> getLevel() >= 9)
+    	window.draw(weapon5);
+    if (logic -> getLevel() >= 11)
+    	window.draw(weapon6);
+    if (logic -> getLevel() >= 13)
+    	window.draw(weapon7);
+
+    for(int i = 0; i < 7; ++i)
+    {
+        for(int c = 0; c < 7; ++c)
+        {
+            reloadRect[c].setSize(sf::Vector2f(64.f,0.f));
+        }
+        if(logic->reloadStarted)
+            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
+        if((64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1) > 32.f) || (64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1) < 0.f))
+            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,0.f));
+
+        window.draw(reloadRect[i]);
+    }
 
     updateSurvivorCount();
     updateMajorTomHealth();
