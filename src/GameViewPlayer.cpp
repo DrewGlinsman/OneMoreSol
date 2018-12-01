@@ -294,22 +294,15 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
     sf::Clock gameClock;
     float delta;
 
+    bool firstIteration = true;
     bool keepMovingUp = false;
     bool keepMovingDown = false;
     bool lockOutKeyboard = false;
 
     while(window.isOpen())
     {
-        if(currentLevel < logic -> getLevel())
-        {
-            gameMusic.stop();
-            gameMusic.setBuffer(loadedAudio->soundTrack[currentLevel]);
-            gameMusic.play();
-            gameMusic.setLoop(true);
-        }
-        currentLevel = logic -> getLevel();
-        updateGame(window);
 
+        updateGame(window);
         delta = gameClock.getElapsedTime().asSeconds();
         gameClock.restart();
 
@@ -328,7 +321,25 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
             textAdventureIsOpen(window);
         }
 
+        if(firstIteration)
+        {
+            cout << "Current Level: " << currentLevel << endl;
+            cout << "Game Logic Current Level: " << logic -> getLevel() << endl;
+            firstIteration = false;
+        }
+
+        if(currentLevel < logic -> getLevel())
+        {
+            gameMusic.stop();
+            gameMusic.setBuffer(loadedAudio->soundTrack[logic -> getLevel() - 1]);
+            gameMusic.play();
+            gameMusic.setLoop(true);
+        }
+
+        currentLevel = logic -> getLevel();
+
         logic -> pauseGame();
+
         logic -> runLevel(sky, majorTom, delta, nightSky);
         logic -> updateKoratOrder();
         logic -> updateBulletOrder(); //Bullets generation and drawing
@@ -511,6 +522,72 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
     return false;
 }
 
+bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
+{
+
+    gameMusic.stop();
+    gameMusic.setBuffer(loadedAudio->soundTrack[20]);
+    gameMusic.play();
+    gameMusic.setLoop(true);
+
+    window.clear(sf::Color::Black);
+    drawAdventure(window);
+
+    while(window.isOpen())
+    {
+        while(window.pollEvent(Event))
+        {
+            if(Event.type == sf::Event::KeyPressed)
+            {
+                if(Event.key.code == sf::Keyboard::Space)
+                {
+                    gameMusic.stop();
+                    return false;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
+{
+    window.clear(sf::Color::Black);
+    std::string adventure;
+    std::string sol;
+    sf::Text solNum;
+    std::string line;
+    std::ifstream currentAdventure;
+    int offset = 0;
+    std::string fileString;
+    fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
+    currentAdventure.open(fileString);
+
+    solNum.setFont(gameFont);
+    solNum.setCharacterSize(24);
+    solNum.setFillColor(sf::Color::White);
+    solNum.setPosition(0,0);
+    sol = "Sol " + std::to_string(logic -> getLevel());
+    solNum.setString(sol);
+    window.draw(solNum);
+
+    textAdventure.setFont(gameFont);
+    textAdventure.setCharacterSize(32);
+    textAdventure.setFillColor(sf::Color::White);
+
+    while(getline(currentAdventure,line))
+    {
+        adventure = line;
+        textAdventure.setString(adventure);
+        textAdventure.setPosition(100, 250 + offset);
+        window.draw(textAdventure);
+        offset += 50;
+    }
+
+
+    window.display();
+}
+
 bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 {
     gameMusic.stop();
@@ -577,73 +654,6 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 {
     return false;
-}
-
-bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
-{
-    window.clear(sf::Color::Black);
-    drawAdventure(window);
-
-    while(window.isOpen() && !optionSelected)
-    {
-        while(window.pollEvent(Event))
-        {
-            if(Event.type == sf::Event::KeyPressed)
-            {
-                if(Event.key.code == sf::Keyboard::Space)
-                {
-                    return false;
-                }
-                if(Event.key.code == sf::Keyboard::Y)
-                {
-                    optionSelected = true;
-                }
-                if(Event.key.code == sf::Keyboard::N)
-                {
-                    optionSelected = true;
-                }
-            }
-        }
-    }
-    return false;
-}
-
-void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
-{
-    window.clear(sf::Color::Black);
-    std::string adventure;
-    std::string sol;
-    sf::Text solNum;
-    std::string line;
-    std::ifstream currentAdventure;
-    int offset = 0;
-    std::string fileString;
-    fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
-    currentAdventure.open(fileString);
-
-    solNum.setFont(gameFont);
-    solNum.setCharacterSize(24);
-    solNum.setFillColor(sf::Color::White);
-    solNum.setPosition(0,0);
-    sol = "Sol " + std::to_string(logic -> getLevel());
-    solNum.setString(sol);
-    window.draw(solNum);
-
-    textAdventure.setFont(gameFont);
-    textAdventure.setCharacterSize(32);
-    textAdventure.setFillColor(sf::Color::White);
-
-    while(getline(currentAdventure,line))
-    {
-        adventure = line;
-        textAdventure.setString(adventure);
-        textAdventure.setPosition(100, 250 + offset);
-        window.draw(textAdventure);
-        offset += 50;
-    }
-
-
-    window.display();
 }
 
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen

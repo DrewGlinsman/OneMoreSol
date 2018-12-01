@@ -44,6 +44,7 @@ private:
     sf::Sound menuMusic;
     sf::Sound menuTransition;
     sf::Sound menuSelection;
+    sf::Sound textMusic;
 
     sf::Text menuTitle;
     sf::Text menuPlay1;
