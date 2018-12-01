@@ -135,39 +135,39 @@ class GameLogic{
         void selectKorat();
         //needs survivor count
         void spawnKorat();
-        bool checkEnd(MajorTom *tom);
+        bool checkEnd(MajorTom*);
         int decideKoratLane();
         int decideKoratType(std::vector<int> enemyPool);
 
-        void moveBullet(float timePassed);
-        void moveKoratBullet(float timePassed, MajorTom* majorTom);
-        void drawBullet(sf::RenderWindow& window);
+        void moveBullet(float);
+        void moveKoratBullet(float, MajorTom*);
+        void drawBullet(sf::RenderWindow&);
 
-        void fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
-        bool reloadCurrentGun(Gun* currentGun);
-        void selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed);
-        void spawnBullet(float timePassed);
-        int decideBulletLane(MajorTom* majorTom);
-        int decideBulletLaneKorat(int givenLane);
-        int decideBulletType(Gun* currentGun);
+        void fireBullet(MajorTom*, Gun*, float);
+        bool reloadCurrentGun(Gun*);
+        void selectBullet(MajorTom*, Gun*, float);
+        void spawnBullet(float);
+        int decideBulletLane(MajorTom*);
+        int decideBulletLaneKorat(int);
+        int decideBulletType(Gun*);
 
         void bulletLeftScreen(float timePassed, int i, int j);
 
         //changes survivor count
-        void runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
+        void runLevel(sf::CircleShape&, MajorTom*, float, sf::RectangleShape&);
 
-        void loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom);
+        void loseLevel(sf::CircleShape&, MajorTom*);
 
         void updateDyingKorat(MajorTom*);
 
         void startBikeBoss(TextureLoader*);
-        void moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
-        void drawBikeBoss(sf::RenderWindow& window);
+        void moveBikeBoss(sf::CircleShape&, MajorTom*, float);
+        void drawBikeBoss(sf::RenderWindow&);
         void updateDyingBikeBoss();
 
         void startTankBoss(TextureLoader*);
-        void moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed);
-        void drawTankBoss(sf::RenderWindow& window);
+        void moveTankBoss(sf::CircleShape&, MajorTom*, float);
+        void drawTankBoss(sf::RenderWindow&);
         void updateDyingTankBoss();
 
         int getLevel();

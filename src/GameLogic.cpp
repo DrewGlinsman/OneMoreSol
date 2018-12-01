@@ -712,7 +712,14 @@ int GameLogic::decideBulletType(Gun* currentGun)
 
 //----------------------------------------------------------
 
-void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
+/** \brief
+ *  Includes logic for running the day/night cycle.
+ * \param
+ * \param
+ * \return
+ *
+ */
+void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed, sf::RectangleShape& nightLayer)
 {
     if(!isPaused)
     {
@@ -774,6 +781,13 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
         {
             levelWon = false;
             gameSky.rotate(timePassed * levelSpeedModifier);
+
+            if((gameSky.getRotation() > 90.f) && (gameSky.getRotation() < 130.f))
+                nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()/3));
+            else if(gameSky.getRotation() > 130.f)
+                nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()/2));
+            else
+                nightLayer.setFillColor(sf::Color(255,255,255,0));
 
             if (spawnTime >= levelSpawnModifier)
             {

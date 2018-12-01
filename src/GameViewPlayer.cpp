@@ -329,7 +329,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         }
 
         logic -> pauseGame();
-        logic -> runLevel(sky, majorTom, delta);
+        logic -> runLevel(sky, majorTom, delta, nightSky);
         logic -> updateKoratOrder();
         logic -> updateBulletOrder(); //Bullets generation and drawing
         logic -> updateDyingKorat(majorTom);
