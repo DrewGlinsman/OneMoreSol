@@ -169,13 +169,13 @@ void GameViewPlayer::initializePlayState()
 
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 {
-    updateMenu(window);
     menuMusic.play();
     menuMusic.setLoop(true);
     menuSelector.setPosition(0,0);
     cout << "0,0" << endl;
     while(window.isOpen()) // Menu loop
 	{
+        updateMenu(window);
 		while(window.pollEvent(Event))
 		{
 			if(Event.type == sf::Event::Closed)
