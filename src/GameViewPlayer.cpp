@@ -374,6 +374,46 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         //cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
        //cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
 
+         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            {
+                if(lockOutKeyboard == false)
+                {
+                     switch(majorTom -> getGun())
+                    {
+                        case 1:
+                            logic -> fireBullet(majorTom, majorTom -> pistol, delta);
+                            break;
+                        case 2:
+                            if (logic -> getLevel() >= 3)
+                                logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
+                            break;
+                        case 3:
+                            if (logic -> getLevel() >= 5)
+                                logic -> fireBullet(majorTom, majorTom -> rifle, delta);
+                            break;
+                        case 4:
+                            if (logic -> getLevel() >= 7)
+                                logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                            break;
+                        case 5:
+                            if (logic -> getLevel() >= 9)
+                                logic -> fireBullet(majorTom, majorTom -> thrower, delta);
+                            break;
+                        case 6:
+                            if (logic -> getLevel() >= 11)
+                                logic -> fireBullet(majorTom, majorTom -> sniper, delta);
+                            break;
+                        case 7:
+                            if (logic -> getLevel() >= 13)
+                                logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
+                            break;
+                        default:
+                            logic -> fireBullet(majorTom, majorTom -> pistol, delta);
+                            break;
+                    }
+                }
+            }
+
          while(window.pollEvent(Event))
             {
                 if(Event.type == sf::Event::Closed)
@@ -414,48 +454,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         keepMovingDown = majorTom->initMove(delta, "Down");
-                    }
-
-                    if(Event.key.code == sf::Keyboard::Space)
-                    {
-                        if(lockOutKeyboard == false)
-                        {
-
-                             switch(majorTom -> getGun())
-                            {
-                                case 1:
-                                    logic -> fireBullet(majorTom, majorTom -> pistol, delta);
-                                    break;
-                                case 2:
-                                	if (logic -> getLevel() >= 3)
-                                		logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
-                                    break;
-                                case 3:
-                                	if (logic -> getLevel() >= 5)
-                                    	logic -> fireBullet(majorTom, majorTom -> rifle, delta);
-                                    break;
-                                case 4:
-                                	if (logic -> getLevel() >= 7)
-                                		logic -> fireBullet(majorTom, majorTom -> minigun, delta);
-                                    break;
-                                case 5:
-                                	if (logic -> getLevel() >= 9)
-                                		logic -> fireBullet(majorTom, majorTom -> thrower, delta);
-                                    break;
-                                case 6:
-                                	if (logic -> getLevel() >= 11)
-                                		logic -> fireBullet(majorTom, majorTom -> sniper, delta);
-                                    break;
-                                case 7:
-                                	if (logic -> getLevel() >= 13)
-                                		logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
-                                    break;
-                                default:
-                                    logic -> fireBullet(majorTom, majorTom -> pistol, delta);
-                                    break;
-                            }
-
-                        }
                     }
 
                     if(Event.key.code == sf::Keyboard::Num1)
@@ -509,8 +507,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     }
                 }
             }
-    }
-
+        }
     return false;
 }
 
