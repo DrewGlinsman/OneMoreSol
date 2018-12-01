@@ -54,12 +54,28 @@ std::string KoratEmpire::getName()
 
 }
 
+/** \brief
+ * Frame looping function to run animations for standard sized sprites.
+ * Set up for a 3 frame loop.
+ * \param sf::IntRect*
+ * \param sf::Sprite*
+ * \return void
+ *
+ */
 void KoratEmpire::incrementRunFrame(sf::IntRect* sF, sf::Sprite* baddie)
 {
     sF->left = (sF->left+64)%192;
     baddie->setTextureRect(*sF);
 }
 
+/** \brief
+ * Frame looping function to run longer boss animations for boss sized sprites.
+ * Set up for a 5 frame loop.
+ * \param sf::IntRect*
+ * \param sf::Sprite*
+ * \return void
+ *
+ */
 void KoratEmpire::incrementRunFrame5(sf::IntRect* sF, sf::Sprite* baddie)
 {
     sF->left = (sF->left+64)%320;
