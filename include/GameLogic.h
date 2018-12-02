@@ -58,7 +58,7 @@ class GameLogic{
         int survivorCountSaved = 20;
 
         bool lostGame;
-        bool tankBossDead;
+        bool tankBossDead = false;
 
         int currentKoratCount = 0;
 
