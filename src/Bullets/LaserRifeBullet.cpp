@@ -102,3 +102,8 @@ sf::Sprite LaserRifleBullet::getBullet()
     return laser;
 }
 
+std::string LaserRifleBullet::getType()
+{
+    return "Laser";
+}
+

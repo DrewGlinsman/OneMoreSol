@@ -22,8 +22,8 @@ class BFG: public Gun
         int shotsFired = 0;
         int bulletType = 7;
         float fireRate = 0.5;
-        int clip = 10;
-        float reloadSpeed = 1.5;
+        int clip = 1;
+        float reloadSpeed = 700;
 };
 
 #endif

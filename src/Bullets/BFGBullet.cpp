@@ -69,7 +69,7 @@ void BFGBullet::setLane(int givenLane)
 
 void BFGBullet::moveCurrentBullet(float timePassed)
 {
-        if(blast.getPosition().x < 1500)
+        if(blast.getPosition().x < 250)
         {
             blast.move(speed * timePassed, 0);
             outOfBounds = false;

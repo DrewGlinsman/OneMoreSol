@@ -95,3 +95,7 @@ sf::Sprite ArcBullet::getBullet()
     return arc;
 }
 
+std::string ArcBullet::getType()
+{
+    return "Arc";
+}

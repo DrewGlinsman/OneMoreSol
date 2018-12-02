@@ -363,7 +363,20 @@ void GameLogic::moveBullet(float timePassed)
             {
                 if (currentBullet[i][j] -> getType() == "Gauss")
                 {
-                    currentKorat[i][j] -> wasShot(currentBullet[i][j] -> getDamage());
+                    for(int k = 0; k < currentKorat[i].size(); k++)
+                    {
+                        currentKorat[i][k] -> wasShot(currentBullet[i][j] -> getDamage());
+                    }
+                }
+                if (currentBullet[i][j] -> getType() == "BFG")
+                {
+                    for(int h = 0; h < currentKorat.size(); h++)
+                    {
+                        for(int k = 0; k < currentKorat[h].size(); k++)
+                        {
+                            currentKorat[h][k] -> wasShot(currentBullet[i][j] -> getDamage());
+                        }
+                    }
                 }
 
                 if (currentKorat[i].size() >= 3)
@@ -748,6 +761,7 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
         {
             if (currentKoratCount == 0)
             {
+                BFGfired = false;
                 gameSky.rotate(-rotation); //rotate the sun back to the beginning
                 currentLevel++;
                 survivorCountSaved = majorTom->getSurvivors();
@@ -759,6 +773,14 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
                 majorTom ->  setTomPositionX(156);
 
                 majorTom -> setTomPositionY(508);
+
+                majorTom -> pistol -> resetShotsFired();
+                majorTom -> shotgun -> resetShotsFired();
+                majorTom -> rifle -> resetShotsFired();
+                majorTom -> minigun -> resetShotsFired();
+                majorTom -> thrower -> resetShotsFired();
+                majorTom -> sniper -> resetShotsFired();
+                majorTom -> bigFunGun -> resetShotsFired();
 
                 cout << "Current Level = " << currentLevel << endl;
                 levelWon = true;

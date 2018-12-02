@@ -106,3 +106,8 @@ sf::Sprite KoratBullet::getBullet()
     return plasma;
 }
 
+std::string KoratBullet::getType()
+{
+    return "Korat";
+}
+
