@@ -41,6 +41,7 @@ private:
     sf::RectangleShape storyBtnRec;
     sf::RectangleShape exitBtnRec;
     sf::RectangleShape nightSky;
+    sf::RectangleShape winScreen;
 
     sf::SoundBuffer Menu_Music;
     sf::SoundBuffer Menu_Transition;

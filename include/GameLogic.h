@@ -58,10 +58,11 @@ class GameLogic{
         int survivorCountSaved = 20;
 
         bool lostGame;
+        bool tankBossDead;
 
         int currentKoratCount = 0;
 
-        int currentLevel = 16;
+        int currentLevel = 20;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -185,6 +186,8 @@ class GameLogic{
         void explode(KoratEmpire &bomber, MajorTom* majorTom);
         void clearAssets();
         bool currentLevelEnd();
+
+        bool isTankBossDead();
 
 };
 

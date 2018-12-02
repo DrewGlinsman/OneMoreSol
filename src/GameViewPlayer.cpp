@@ -86,6 +86,11 @@ void GameViewPlayer::initializePlayState()
     lossScreen.setSize(sf::Vector2f(1440,900));
     lossScreen.setTexture(&(loadedTextures -> textureArray[11]));
 
+    winScreen.setOrigin(0,900);
+    winScreen.setPosition(0,900);
+    winScreen.setSize(sf::Vector2f(1440,900));
+    winScreen.setTexture(&loadedTextures -> textureArray[17]);
+
     retryBtnRec.setPosition(200, 600);
     retryBtnRec.setSize(sf::Vector2f(366, 79));
     retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
@@ -301,6 +306,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
     while(window.isOpen())
     {
+        if(logic -> isTankBossDead())
+        {
+            winViewIsOpen(window);
+        }
+
         updateGame(window);
         delta = gameClock.getElapsedTime().asSeconds();
         gameClock.restart();
@@ -567,6 +577,8 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     solNum.setFillColor(sf::Color::White);
     solNum.setPosition(0,0);
     sol = "Sol " + std::to_string(logic -> getLevel());
+    if(currentLevel == 10)
+        sol = "Sol 11";
     solNum.setString(sol);
     window.draw(solNum);
 
@@ -662,6 +674,13 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
 bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 {
+    window.clear(sf::Color::Black);
+    window.draw(winScreen);
+    window.display();
+    while(window.isOpen())
+    {
+
+    }
     return false;
 }
 

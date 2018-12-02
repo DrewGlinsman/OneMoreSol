@@ -889,6 +889,7 @@ void GameLogic::drawBikeBoss(sf::RenderWindow& window)
     {
         dyingBikeBoss[j] -> drawBoss(window);
     }
+
 }
 
 void GameLogic::updateDyingBikeBoss()
@@ -899,6 +900,7 @@ void GameLogic::updateDyingBikeBoss()
         {
             dyingBikeBoss.erase(dyingBikeBoss.begin() + i);
             currentKoratCount--;
+            levelWon = true;
 
         }
     }
@@ -906,75 +908,78 @@ void GameLogic::updateDyingBikeBoss()
 
 void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
-    for(int i = 0; i < currentBikeBoss.size(); i++)
+    if(!isPaused)
     {
-        if(currentBikeBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
+        for(int i = 0; i < currentBikeBoss.size(); i++)
         {
-            majorTom -> setHealth(0);
-        }
-        if (currentBikeBoss[i] -> checkSurvive() == false)
-        {
-            if (currentBikeBoss[i] -> checkDeath() == false)
+            if(currentBikeBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
             {
-                if (currentBikeBoss[i] -> getSpeed() == 0)
+                majorTom -> setHealth(0);
+            }
+            if (currentBikeBoss[i] -> checkSurvive() == false)
+            {
+                if (currentBikeBoss[i] -> checkDeath() == false)
                 {
-                        dyingBikeBoss.emplace_back(move(currentBikeBoss[i]));
-                        currentBikeBoss.erase(currentBikeBoss.begin() + i);
-                        movingUp = false;
-                        movingDown = false;
-                        directMove = 1;
-                }
-                else if (movingUp == false && movingDown == false)
-                {
-                    if (directMove < 1998)
+                    if (currentBikeBoss[i] -> getSpeed() == 0)
                     {
-                        directMove = Random() * 2000;
+                            dyingBikeBoss.emplace_back(move(currentBikeBoss[i]));
+                            currentBikeBoss.erase(currentBikeBoss.begin() + i);
+                            movingUp = false;
+                            movingDown = false;
+                            directMove = 1;
+                    }
+                    else if (movingUp == false && movingDown == false)
+                    {
+                        if (directMove < 1998)
+                        {
+                            directMove = Random() * 2000;
+                            currentBikeBoss[i] -> moveBoss(timePassed);
+                        }
+                        else if (directMove >= 1998 && directMove < 1999)
+                        {
+                            directMove = Random() * 2000;
+                            currentBikeBoss[i] -> initBossUp();
+                            movingUp = true;
+                            movingDown = false;
+                        }
+                        else if (directMove >= 1999)
+                        {
+                            directMove = Random() * 2000;
+                            currentBikeBoss[i] -> initBossDown();
+                            movingUp = false;
+                            movingDown = true;
+                        }
+                    }
+                    else if(movingUp == true)
+                    {
+                        if (currentBikeBoss[i] -> moveBossUp(timePassed) == true)
+                        {
+                            movingUp = false;
+                            movingDown = false;
+                        }
                         currentBikeBoss[i] -> moveBoss(timePassed);
                     }
-                    else if (directMove >= 1998 && directMove < 1999)
+                    else if(movingDown == true)
                     {
-                        directMove = Random() * 2000;
-                        currentBikeBoss[i] -> initBossUp();
-                        movingUp = true;
-                        movingDown = false;
-                    }
-                    else if (directMove >= 1999)
-                    {
-                        directMove = Random() * 2000;
-                        currentBikeBoss[i] -> initBossDown();
-                        movingUp = false;
-                        movingDown = true;
+                        if (currentBikeBoss[i] -> moveBossDown(timePassed) == true)
+                        {
+                            movingUp = false;
+                            movingDown = false;
+                        }
+                        currentBikeBoss[i] -> moveBoss(timePassed);
                     }
                 }
-                else if(movingUp == true)
+                else
                 {
-                    if (currentBikeBoss[i] -> moveBossUp(timePassed) == true)
-                    {
-                        movingUp = false;
-                        movingDown = false;
-                    }
-                    currentBikeBoss[i] -> moveBoss(timePassed);
-                }
-                else if(movingDown == true)
-                {
-                    if (currentBikeBoss[i] -> moveBossDown(timePassed) == true)
-                    {
-                        movingUp = false;
-                        movingDown = false;
-                    }
-                    currentBikeBoss[i] -> moveBoss(timePassed);
+                    // nothing happens will never trigger
                 }
             }
             else
             {
-                // nothing happens will never trigger
+                currentBikeBoss.erase(currentBikeBoss.begin() + i);
+                currentKoratCount--;
+                majorTom -> setHealth(0);
             }
-        }
-        else
-        {
-            currentBikeBoss.erase(currentBikeBoss.begin() + i);
-            currentKoratCount--;
-            majorTom -> setHealth(0);
         }
     }
 }
@@ -989,7 +994,7 @@ void GameLogic::startTankBoss(TextureLoader* loadedTextures)
 
 void GameLogic::drawTankBoss(sf::RenderWindow& window)
 {
-     for(int i = 0; i < currentTankBoss.size(); i++)
+    for(int i = 0; i < currentTankBoss.size(); i++)
     {
         currentTankBoss[i] -> drawBoss(window);
     }
@@ -997,6 +1002,7 @@ void GameLogic::drawTankBoss(sf::RenderWindow& window)
     {
         dyingTankBoss[j] -> drawBoss(window);
     }
+
 }
 
 void GameLogic::updateDyingTankBoss()
@@ -1007,43 +1013,52 @@ void GameLogic::updateDyingTankBoss()
         {
             dyingTankBoss.erase(dyingTankBoss.begin() + i);
             currentKoratCount--;
+            tankBossDead = true;
 
         }
     }
 }
 
+bool GameLogic::isTankBossDead()
+{
+    return tankBossDead;
+}
+
 void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
-    for(int i = 0; i < currentTankBoss.size(); i++)
+    if(!isPaused)
     {
-        if (currentTankBoss[i] -> checkSurvive() == false)
+        for(int i = 0; i < currentTankBoss.size(); i++)
         {
-            if (currentTankBoss[i] -> checkDeath() == false)
+            if (currentTankBoss[i] -> checkSurvive() == false)
             {
-                if (currentTankBoss[i] -> getSpeed() == 0)
+                if (currentTankBoss[i] -> checkDeath() == false)
                 {
-                        dyingTankBoss.emplace_back(move(currentTankBoss[i]));
-                        currentTankBoss.erase(currentTankBoss.begin() + i);
+                    if (currentTankBoss[i] -> getSpeed() == 0)
+                    {
+                            dyingTankBoss.emplace_back(move(currentTankBoss[i]));
+                            currentTankBoss.erase(currentTankBoss.begin() + i);
+                    }
+                    else
+                    {
+                        currentTankBoss[i] -> moveBoss(timePassed);
+                        if(currentTankBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
+                        {
+                            majorTom -> setHealth(0);
+                        }
+                    }
                 }
                 else
                 {
-                    currentTankBoss[i] -> moveBoss(timePassed);
-                    if(currentTankBoss[i] -> getBoss().getGlobalBounds().intersects(majorTom -> getTom().getGlobalBounds()))
-                    {
-                        majorTom -> setHealth(0);
-                    }
+                    // nothing happens will never trigger
                 }
             }
             else
             {
-                // nothing happens will never trigger
+                currentBikeBoss.erase(currentBikeBoss.begin() + i);
+                currentKoratCount--;
+                majorTom -> setHealth(0);
             }
-        }
-        else
-        {
-            currentBikeBoss.erase(currentBikeBoss.begin() + i);
-            currentKoratCount--;
-            majorTom -> setHealth(0);
         }
     }
 }
@@ -1088,162 +1103,168 @@ void GameLogic::queryKoratFiring()
 
 void GameLogic::queryBikeFiring()
 {
-cout << "Shots Fired = "<< counter << endl;
-	for (int i = 0; i < currentBikeBoss.size(); i ++)
-	{
-        if (currentBikeBoss[i] -> getPositionX() < 1440)
+    if(!isPaused)
+    {
+        cout << "Shots Fired = "<< counter << endl;
+        for (int i = 0; i < currentBikeBoss.size(); i ++)
         {
-            if (currentBikeBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
+            if (currentBikeBoss[i] -> getPositionX() < 1440)
             {
-                if( movingDown == false && movingUp == false)
+                if (currentBikeBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
                 {
-                    double bikerGun = Random() * 4;
-                    int firingLaneInPixels;
-
-                    if (bikerGun < 2)
+                    if( movingDown == false && movingUp == false)
                     {
-                        Bullet* newBullet1;
-                        firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() - 86;
-                        newBullet1 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+                        double bikerGun = Random() * 4;
+                        int firingLaneInPixels;
 
-                        int laneToGoIn;
-                        switch(firingLaneInPixels)
+                        if (bikerGun < 2)
                         {
-                        case 336:
-                            laneToGoIn = 0;
-                            break;
-                        case 422:
-                            laneToGoIn = 1;
-                            break;
-                        case 508:
-                            laneToGoIn = 2;
-                            break;
-                        case 594:
-                            laneToGoIn = 3;
-                            break;
-                        case 680:
-                            laneToGoIn = 4;
-                            break;
-                        default:
-                            laneToGoIn = 0;
-                            break;
-                        }
-                        currentKoratBullet[laneToGoIn].emplace_back(newBullet1);
-                    }
-                    else if(bikerGun >= 2 && bikerGun < 3)
-                    {
-                        Bullet* newBullet2;
-                        firingLaneInPixels = currentBikeBoss[i] -> getBossPosition();
-                        newBullet2 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+                            Bullet* newBullet1;
+                            firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() - 86;
+                            newBullet1 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
 
-                        int laneToGoIn;
-                        switch(firingLaneInPixels)
-                        {
-                        case 336:
-                            laneToGoIn = 0;
-                            break;
-                        case 422:
-                            laneToGoIn = 1;
-                            break;
-                        case 508:
-                            laneToGoIn = 2;
-                            break;
-                        case 594:
-                            laneToGoIn = 3;
-                            break;
-                        case 680:
-                            laneToGoIn = 4;
-                            break;
-                        default:
-                            laneToGoIn = 0;
-                            break;
+                            int laneToGoIn;
+                            switch(firingLaneInPixels)
+                            {
+                            case 336:
+                                laneToGoIn = 0;
+                                break;
+                            case 422:
+                                laneToGoIn = 1;
+                                break;
+                            case 508:
+                                laneToGoIn = 2;
+                                break;
+                            case 594:
+                                laneToGoIn = 3;
+                                break;
+                            case 680:
+                                laneToGoIn = 4;
+                                break;
+                            default:
+                                laneToGoIn = 0;
+                                break;
+                            }
+                            currentKoratBullet[laneToGoIn].emplace_back(newBullet1);
                         }
-                        currentKoratBullet[laneToGoIn].emplace_back(newBullet2);
-                    }
-                    else
-                    {
-                        Bullet* newBullet3;
-                        firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() + 86;
-                        newBullet3 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+                        else if(bikerGun >= 2 && bikerGun < 3)
+                        {
+                            Bullet* newBullet2;
+                            firingLaneInPixels = currentBikeBoss[i] -> getBossPosition();
+                            newBullet2 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
 
-                        int laneToGoIn;
-                        switch(firingLaneInPixels)
-                        {
-                        case 336:
-                            laneToGoIn = 0;
-                            break;
-                        case 422:
-                            laneToGoIn = 1;
-                            break;
-                        case 508:
-                            laneToGoIn = 2;
-                            break;
-                        case 594:
-                            laneToGoIn = 3;
-                            break;
-                        case 680:
-                            laneToGoIn = 4;
-                            break;
-                        default:
-                            laneToGoIn = 0;
-                            break;
+                            int laneToGoIn;
+                            switch(firingLaneInPixels)
+                            {
+                            case 336:
+                                laneToGoIn = 0;
+                                break;
+                            case 422:
+                                laneToGoIn = 1;
+                                break;
+                            case 508:
+                                laneToGoIn = 2;
+                                break;
+                            case 594:
+                                laneToGoIn = 3;
+                                break;
+                            case 680:
+                                laneToGoIn = 4;
+                                break;
+                            default:
+                                laneToGoIn = 0;
+                                break;
+                            }
+                            currentKoratBullet[laneToGoIn].emplace_back(newBullet2);
                         }
-                        currentKoratBullet[laneToGoIn].emplace_back(newBullet3);
+                        else
+                        {
+                            Bullet* newBullet3;
+                            firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() + 86;
+                            newBullet3 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+
+                            int laneToGoIn;
+                            switch(firingLaneInPixels)
+                            {
+                            case 336:
+                                laneToGoIn = 0;
+                                break;
+                            case 422:
+                                laneToGoIn = 1;
+                                break;
+                            case 508:
+                                laneToGoIn = 2;
+                                break;
+                            case 594:
+                                laneToGoIn = 3;
+                                break;
+                            case 680:
+                                laneToGoIn = 4;
+                                break;
+                            default:
+                                laneToGoIn = 0;
+                                break;
+                            }
+                            currentKoratBullet[laneToGoIn].emplace_back(newBullet3);
+                        }
                     }
                 }
             }
         }
-	}
+    }
 }
 
 
 void GameLogic::queryTankFiring()
 {
-	cout << "Shots Fired = "<< counter << endl;
-	for (int i = 0; i < currentTankBoss.size(); i ++)
-	{
-        if (currentTankBoss[i] -> getPositionX() < 1440)
+    if(!isPaused)
+    {
+        cout << "Shots Fired = "<< counter << endl;
+        for (int i = 0; i < currentTankBoss.size(); i ++)
         {
-            if (currentTankBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
+            if (currentTankBoss[i] -> getPositionX() < 1440)
             {
-                int firingLaneInPixels = currentTankBoss[i] -> decideFiringLane();
-                //implement stuff to make Korat fire here
-                Bullet* newBullet;
-                newBullet = new KoratBullet(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
-
-                int laneToGoIn;
-
-                switch(firingLaneInPixels)
+                if (currentTankBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
                 {
-                case 335:
-                    laneToGoIn = 0;
-                    break;
-                case 422:
-                    laneToGoIn = 1;
-                    break;
-                case 508:
-                    laneToGoIn = 2;
-                    break;
-                case 594:
-                    laneToGoIn = 3;
-                    break;
-                case 680:
-                    laneToGoIn = 4;
-                    break;
-                default:
-                    laneToGoIn = 0;
-                    break;
+                    int firingLaneInPixels = currentTankBoss[i] -> decideFiringLane();
+                    //implement stuff to make Korat fire here
+                    Bullet* newBullet;
+                    newBullet = new KoratBullet(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
+
+                    int laneToGoIn;
+
+                    switch(firingLaneInPixels)
+                    {
+                    case 335:
+                        laneToGoIn = 0;
+                        break;
+                    case 422:
+                        laneToGoIn = 1;
+                        break;
+                    case 508:
+                        laneToGoIn = 2;
+                        break;
+                    case 594:
+                        laneToGoIn = 3;
+                        break;
+                    case 680:
+                        laneToGoIn = 4;
+                        break;
+                    default:
+                        laneToGoIn = 0;
+                        break;
+                    }
+                    cout << firingLaneInPixels << endl;
+
+
+                    currentKoratBullet[laneToGoIn].emplace_back(newBullet);
+
+                    counter++;
+
+                    //405 count
                 }
-                cout << firingLaneInPixels << endl;
 
-
-                currentKoratBullet[laneToGoIn].emplace_back(newBullet);
-
-                counter++;
-
-                //405 count
             }
-
         }
-	}
+    }
 }
