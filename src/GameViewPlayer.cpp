@@ -58,6 +58,7 @@ void GameViewPlayer::initializePlayState()
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
 
+    //Store the reload rectangles into the array
     reloadRect[0] = reload1;
     reloadRect[1] = reload2;
     reloadRect[2] = reload3;
@@ -94,6 +95,7 @@ void GameViewPlayer::initializePlayState()
     giveUpBtnRec.setSize(sf::Vector2f(366,79));
     giveUpBtnRec.setTexture(&(loadedTextures->textureArray[14]));
 
+    //Weapon icon and reload rectangle inits
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
     weapon3.setTextureRect(sf::IntRect(288,0,32,32));
@@ -138,6 +140,7 @@ void GameViewPlayer::initializePlayState()
         reloadRect[i].setRotation(180.f);
     }
 
+    //Box around the selected weapon
     selectionBox.setTexture(loadedTextures->textureArray[0]);
 	selectionBox.setTextureRect(sf::IntRect(0,896,95,95));
 	selectionBox.setPosition(285,780);//init the selection box onto the first weapon
