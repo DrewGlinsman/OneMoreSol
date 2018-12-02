@@ -721,7 +721,7 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
     window.draw(menuBtnRec);
     window.draw(scoreCnt);
     window.display();
-    while(window.isOpen())
+    /*while(window.isOpen())
     {
          while(window.pollEvent(Event))
          {
@@ -730,7 +730,73 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                     return false;
                 }
          }
+    }*/
+
+
+    bool menu = false;
+    while(window.isOpen() && !menu)
+    {
+
+        if (delayClockStarted == false)
+        {
+            delayClock.restart();
+        }
+        delayClockStarted = true;
+        delayClockTime = delayClock.getElapsedTime().asSeconds();
+        while(window.pollEvent(Event))
+        {
+            if(Event.type == sf::Event::Closed)
+            {
+                gameMusic.stop();
+                window.close(); // Quit game
+                return true;
+            }
+
+            if(Event.type == sf::Event::KeyPressed)
+            {
+                if(Event.key.code == sf::Keyboard::Escape)
+                {
+                    gameMusic.stop();
+                    window.close();
+                }
+
+                if(Event.key.code == sf::Keyboard::Left || Event.key.code == sf::Keyboard::Right)
+                {
+                    if (selector.y == 1)
+                    {
+                        selector.y = 0;
+                        selectButton(window, selector.y);
+                    }
+                    else
+                    {
+                        selector.y = 1;
+                        selectButton(window, selector.y);
+                    }
+                }
+
+                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
+                {
+                    if(delayClockTime > 2)
+                    {
+                        if (selector.y == 0)
+                        {
+                            menu = true;
+                            logic -> loseLevel(sky, majorTom);
+                            return false;
+                        }
+                        else if (selector.y == 1)
+                        {
+                            gameMusic.stop();
+                            window.close();
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
     }
+
+
     return false;
 }
 
