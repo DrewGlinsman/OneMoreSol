@@ -109,6 +109,8 @@ public:
     sf::Vector2f selector;
     sf::RectangleShape retryBtnRec;
     sf::RectangleShape giveUpBtnRec;
+    sf::RectangleShape menuBtnRec;
+    sf::RectangleShape winBtnRec;
 
     sf::Texture gameImage;
     sf::Texture playerImage;

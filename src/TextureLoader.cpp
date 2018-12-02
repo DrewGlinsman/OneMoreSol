@@ -74,6 +74,18 @@ void TextureLoader::load()
     if(!textureArray[17].loadFromFile("assets/winScreen.png"))
         std::cout << "Failed to Load Win Screen" << std::endl;
 
+    if(!textureArray[18].loadFromFile("assets/menuButton.png"))
+        std::cout << "Failed to Load menu Button" << std::endl;
+
+    if(!textureArray[19].loadFromFile("assets/menuButtonH.png"))
+        std::cout << "Failed to Load menuButtonH" << std::endl;
+
+    if(!textureArray[20].loadFromFile("assets/winButton.png"))
+        std::cout << "Failed to Load Win button" << std::endl;
+
+    if(!textureArray[21].loadFromFile("assets/winButtonH.png"))
+        std::cout << "Failed to Load Win buttonH" << std::endl;
+
     //goes through the textureArray and "anti-alias"es them.
     for(int i = 0; i < textureArray.size(); ++i)
     {

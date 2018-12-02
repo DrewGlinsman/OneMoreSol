@@ -92,6 +92,14 @@ void GameViewPlayer::initializePlayState()
     winScreen.setSize(sf::Vector2f(1440,900));
     winScreen.setTexture(&loadedTextures -> textureArray[17]);
 
+    menuBtnRec.setPosition(300,780);
+    menuBtnRec.setSize(sf::Vector2f(366,79));
+    menuBtnRec.setTexture(&loadedTextures->textureArray[18]);
+
+    winBtnRec.setPosition(900,780);
+    winBtnRec.setSize(sf::Vector2f(366,79));
+    winBtnRec.setTexture(&loadedTextures->textureArray[20]);
+
     retryBtnRec.setPosition(200, 600);
     retryBtnRec.setSize(sf::Vector2f(366, 79));
     retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
@@ -703,12 +711,14 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 {
     window.clear(sf::Color::Black);
-    scoreCnt.setPosition(sf::Vector2f(700,700));
+    scoreCnt.setPosition(sf::Vector2f(630,700));
     scoreCnt.setFillColor(sf::Color::White);
-    scoreCnt.setCharacterSize(22);
+    scoreCnt.setCharacterSize(44);
     string finalScore = "Final Score: " + std::to_string(majorTom -> getScore());
     scoreCnt.setString(finalScore);
     window.draw(winScreen);
+    window.draw(winBtnRec);
+    window.draw(menuBtnRec);
     window.draw(scoreCnt);
     window.display();
     while(window.isOpen())
