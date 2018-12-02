@@ -83,6 +83,7 @@ public:
     const int iconScale = 64;
     int currentLevel;
 
+    sf::RectangleShape journal;
     sf::RectangleShape background;
     sf::RectangleShape lossScreen;
     sf::RectangleShape reload1;
@@ -124,6 +125,7 @@ public:
     sf::Text survivorCnt;
     sf::Text scoreCnt;
     sf::Text levelCnt;
+    sf::Text finalScoreCnt;
     sf::Text majorTomHealth;
     sf::Event Event;
 
@@ -157,7 +159,7 @@ public:
     void updateLossScreen(sf::RenderWindow &window);
     void selectButton(sf::RenderWindow &window, int y);
     void selectMenuButton(sf::RenderWindow &window, int y);
-
+    void resetGameToMenu(sf::RenderWindow &window);
 
 };
 

@@ -74,6 +74,9 @@ void TextureLoader::load()
     if(!textureArray[17].loadFromFile("assets/winScreen.png"))
         std::cout << "Failed to Load Win Screen" << std::endl;
 
+    if(!textureArray[18].loadFromFile("assets/storyScreen.png"))
+        std::cout << "Failed to Load Story Screen" << std::endl;
+
     //goes through the textureArray and "anti-alias"es them.
     for(int i = 0; i < textureArray.size(); ++i)
     {
