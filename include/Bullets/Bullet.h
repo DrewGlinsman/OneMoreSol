@@ -24,7 +24,7 @@ class Bullet
 
         virtual int getHeight();
 
-        virtual std::string getType();
+        virtual int getType();
 
     protected:
 

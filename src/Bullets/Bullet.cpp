@@ -78,7 +78,7 @@ sf::Sprite Bullet::getBullet()
 {
 
 }
-std::string Bullet::getType()
+int Bullet::getType()
 {
 
 }

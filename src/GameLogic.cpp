@@ -122,7 +122,6 @@ void GameLogic::explode(KoratEmpire &bomber, MajorTom* majorTom)
 {
     for (int i = 0; i < currentKorat.size(); i ++)
     {
-        cout << "Bomber's lane: " << bomber.getLane() - 1 << endl;
             for (int j = 0; j < currentKorat[i].size(); j++)
             {
                 if ((bomber.getPositionX() - currentKorat[i][j] -> getPositionX()) <= 200
@@ -361,14 +360,14 @@ void GameLogic::moveBullet(float timePassed)
         {
             for (int j = 0; j < currentBullet[i].size(); j++)
             {
-                if (currentBullet[i][j] -> getType() == "Gauss")
+                if (currentBullet[i][j] -> getType() == 6)
                 {
                     for(int k = 0; k < currentKorat[i].size(); k++)
                     {
                         currentKorat[i][k] -> wasShot(currentBullet[i][j] -> getDamage());
                     }
                 }
-                if (currentBullet[i][j] -> getType() == "BFG")
+                if (currentBullet[i][j] -> getType() == 7)
                 {
                     for(int h = 0; h < currentKorat.size(); h++)
                     {

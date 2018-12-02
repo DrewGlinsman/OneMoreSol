@@ -106,8 +106,8 @@ sf::Sprite KoratBullet::getBullet()
     return plasma;
 }
 
-std::string KoratBullet::getType()
+int KoratBullet::getType()
 {
-    return "Korat";
+    return 8;
 }
 

@@ -95,7 +95,7 @@ sf::Sprite BFGBullet::getBullet()
     return blast;
 }
 
-std::string BFGBullet::getType()
+int BFGBullet::getType()
 {
-    return "BFG";
+    return 7;
 }

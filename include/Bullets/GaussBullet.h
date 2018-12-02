@@ -31,7 +31,7 @@ public:
 
 	int getHeight();
 
-    std::string getType();
+    int getType();
 
 private:
 
