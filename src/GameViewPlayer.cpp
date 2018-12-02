@@ -675,11 +675,23 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 {
     window.clear(sf::Color::Black);
+    scoreCnt.setPosition(sf::Vector2f(700,700));
+    scoreCnt.setFillColor(sf::Color::White);
+    scoreCnt.setCharacterSize(22);
+    string finalScore = "Final Score: " + std::to_string(majorTom -> getScore());
+    scoreCnt.setString(finalScore);
     window.draw(winScreen);
+    window.draw(scoreCnt);
     window.display();
     while(window.isOpen())
     {
-
+         while(window.pollEvent(Event))
+         {
+                if(Event.key.code == sf::Keyboard::Space)
+                {
+                    return false;
+                }
+         }
     }
     return false;
 }
