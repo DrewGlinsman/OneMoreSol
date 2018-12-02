@@ -58,6 +58,7 @@ void GameViewPlayer::initializePlayState()
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
 
+    //Store the reload rectangles into the array
     reloadRect[0] = reload1;
     reloadRect[1] = reload2;
     reloadRect[2] = reload3;
@@ -91,6 +92,14 @@ void GameViewPlayer::initializePlayState()
     winScreen.setSize(sf::Vector2f(1440,900));
     winScreen.setTexture(&loadedTextures -> textureArray[17]);
 
+    menuBtnRec.setPosition(215,780);
+    menuBtnRec.setSize(sf::Vector2f(366,79));
+    menuBtnRec.setTexture(&loadedTextures->textureArray[18]);
+
+    winBtnRec.setPosition(900,780);
+    winBtnRec.setSize(sf::Vector2f(366,79));
+    winBtnRec.setTexture(&loadedTextures->textureArray[20]);
+
     retryBtnRec.setPosition(200, 600);
     retryBtnRec.setSize(sf::Vector2f(366, 79));
     retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
@@ -99,6 +108,7 @@ void GameViewPlayer::initializePlayState()
     giveUpBtnRec.setSize(sf::Vector2f(366,79));
     giveUpBtnRec.setTexture(&(loadedTextures->textureArray[14]));
 
+    //Weapon icon and reload rectangle inits
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
     weapon3.setTextureRect(sf::IntRect(288,0,32,32));
@@ -142,6 +152,11 @@ void GameViewPlayer::initializePlayState()
         reloadRect[i].setScale(sf::Vector2f(1.25f,1.25f));
         reloadRect[i].setRotation(180.f);
     }
+
+    //Box around the selected weapon
+    selectionBox.setTexture(loadedTextures->textureArray[0]);
+	selectionBox.setTextureRect(sf::IntRect(0,896,95,95));
+	selectionBox.setPosition(285,780);//init the selection box onto the first weapon
 
     //Survivor Count Display
     survivorCnt.setFont(gameFont);
@@ -470,14 +485,20 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     if(Event.key.code == sf::Keyboard::Num1)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(1);
-                        cout << "selected plasma pistol" << endl;
+                        {
+                            majorTom->setGun(1);
+                            selectionBox.setPosition(285,780);
+                        }
+                        std::cout << "selected plasma pistol" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num2)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(2);
+                        {
+                            majorTom->setGun(2);
+                            selectionBox.setPosition(413,780);
+                        }
                         cout << "selected plasma shotgun" << endl;
 
                     }
@@ -485,35 +506,50 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     if(Event.key.code == sf::Keyboard::Num3)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(3);
+                        {
+                            majorTom->setGun(3);
+                            selectionBox.setPosition(541,780);
+                        }
                         cout << "selected laser rifle" << endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num4)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(4);
+                        {
+                            majorTom->setGun(4);
+                            selectionBox.setPosition(669,780);
+                        }
                         cout << "selected laser minigun" << endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num5)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(5);
+                        {
+                            majorTom->setGun(5);
+                            selectionBox.setPosition(797,780);
+                        }
                         cout << "selected arc thrower" << endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num6)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(6);
+                        {
+                            majorTom->setGun(6);
+                            selectionBox.setPosition(925,780);
+                        }
                         cout << "selected gauss rifle" << endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num7)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(7);
+                        {
+                            majorTom->setGun(7);
+                            selectionBox.setPosition(1053,780);
+                        }
                         cout << "selected BFG" << endl;
                     }
                 }
@@ -707,7 +743,12 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
     window.draw(finalScoreCnt);
     window.display();
 
-    while(window.isOpen())
+    window.draw(winBtnRec);
+    window.draw(menuBtnRec);
+    window.draw(scoreCnt);
+    window.display();
+    /*while(window.isOpen())
+
     {
          while(window.pollEvent(Event))
          {
@@ -729,7 +770,74 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                     window.close();
                 }
          }
+    }*/
+
+
+    bool menu = false;
+    while(window.isOpen() && !menu)
+    {
+
+        if (delayClockStarted == false)
+        {
+            delayClock.restart();
+        }
+        delayClockStarted = true;
+        delayClockTime = delayClock.getElapsedTime().asSeconds();
+        while(window.pollEvent(Event))
+        {
+            if(Event.type == sf::Event::Closed)
+            {
+                gameMusic.stop();
+                window.close(); // Quit game
+                return true;
+            }
+
+            if(Event.type == sf::Event::KeyPressed)
+            {
+                if(Event.key.code == sf::Keyboard::Escape)
+                {
+                    gameMusic.stop();
+                    window.close();
+                }
+
+                if(Event.key.code == sf::Keyboard::Left || Event.key.code == sf::Keyboard::Right)
+                {
+                    if (selector.y == 1)
+                    {
+                        selector.y = 0;
+                        selectButton(window, selector.y);
+                    }
+                    else
+                    {
+                        selector.y = 1;
+                        selectButton(window, selector.y);
+                    }
+                }
+
+                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
+                {
+                    if(delayClockTime > 2)
+                    {
+                        if (selector.y == 0)
+                        {
+                            menu = true;
+                            //logic -> loseLevel(sky, majorTom);//how to set this up for menu?
+
+                            return false;
+                        }
+                        else if (selector.y == 1)
+                        {
+                            gameMusic.stop();
+                            window.close();
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
     }
+
+
     return false;
 }
 
@@ -763,6 +871,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     }
 
     window.draw(nightSky);
+    window.draw(selectionBox);
     window.draw(scoreCnt);
     window.draw(levelCnt);
 
