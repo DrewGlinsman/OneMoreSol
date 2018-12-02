@@ -761,7 +761,6 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
         {
             if (currentKoratCount == 0)
             {
-                BFGfired = false;
                 gameSky.rotate(-rotation); //rotate the sun back to the beginning
                 currentLevel++;
                 survivorCountSaved = majorTom->getSurvivors();
