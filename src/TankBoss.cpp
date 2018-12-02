@@ -17,7 +17,7 @@ TankBoss::TankBoss(TextureLoader* loadedTextures)
     //tankBoss.setOrigin(sf::Vector2f(384.f/2,384.f/2));
     tankBoss.setOrigin(sf::Vector2f(160.f,160.f));
     tankBoss.setScale(1.2f,1.2f);
-    tankBoss.setPosition(1800, lane3);
+    tankBoss.setPosition(1713, lane3);
 }
 
 void TankBoss::moveBoss(float timePassed)
@@ -79,7 +79,7 @@ bool TankBoss::checkSurvive()
 
 float TankBoss::getPositionX()
 {
-    return tankBoss.getPosition().x - 220;
+    return tankBoss.getPosition().x - 175;
 }
 
 sf::Sprite TankBoss::getBoss()
