@@ -32,6 +32,8 @@ public:
 
 	int getHeight();
 
+	std::string getType();
+
 private:
 
 	int lane;

@@ -102,3 +102,7 @@ sf::Sprite PlasmaShotgunBullet::getBullet()
     return plasma;
 }
 
+std::string PlasmaShotgunBullet::getType()
+{
+    return "Plasma";
+}
