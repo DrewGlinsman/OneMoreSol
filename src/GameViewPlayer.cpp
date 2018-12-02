@@ -781,7 +781,8 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                         if (selector.y == 0)
                         {
                             menu = true;
-                            logic -> loseLevel(sky, majorTom);
+                            //logic -> loseLevel(sky, majorTom);//how to set this up for menu?
+
                             return false;
                         }
                         else if (selector.y == 1)
