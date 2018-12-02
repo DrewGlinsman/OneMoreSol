@@ -104,6 +104,7 @@ public:
     sf::Sprite weapon5;
     sf::Sprite weapon6;
     sf::Sprite weapon7;
+    sf::Sprite selectionBox;
 
     sf::Vector2f selector;
     sf::RectangleShape retryBtnRec;
