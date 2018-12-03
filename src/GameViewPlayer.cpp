@@ -119,9 +119,10 @@ void GameViewPlayer::initializePlayState()
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
     weapon3.setTextureRect(sf::IntRect(288,0,32,32));
     weapon4.setTextureRect(sf::IntRect(288,32,32,32));
-    weapon5.setTextureRect(sf::IntRect(320,0,32,32));
-    weapon6.setTextureRect(sf::IntRect(320,32,32,32));
-    weapon7.setTextureRect(sf::IntRect(352,0,32,32));
+    //the following x values were adjusted as the sprites overlapped for some reason
+    weapon5.setTextureRect(sf::IntRect(322,0,32,32));
+    weapon6.setTextureRect(sf::IntRect(322,32,32,32));
+    weapon7.setTextureRect(sf::IntRect(353,0,32,32));
     weapon1.setPosition(295,790);
     reloadRect[0].setPosition(376,867);
     weapon2.setPosition(423,790);
