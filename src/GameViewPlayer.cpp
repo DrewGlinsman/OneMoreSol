@@ -861,7 +861,6 @@ void GameViewPlayer::updateWinScreen(sf::RenderWindow& window)
     window.draw(finalScoreCnt);
     window.draw(winBtnRec);
     window.draw(menuBtnRec);
-    window.draw(scoreCnt);
     window.display();
 }
 
