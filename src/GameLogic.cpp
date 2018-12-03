@@ -1159,6 +1159,7 @@ void GameLogic::queryBikeFiring()
                             Bullet* newBullet1;
                             firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() - 86;
                             newBullet1 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+                            topBikerBulletsFired += 1;
 
                             int laneToGoIn;
                             switch(firingLaneInPixels)
@@ -1189,6 +1190,7 @@ void GameLogic::queryBikeFiring()
                             Bullet* newBullet2;
                             firingLaneInPixels = currentBikeBoss[i] -> getBossPosition();
                             newBullet2 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+                            middleBikerBulletsFired += 1;
 
                             int laneToGoIn;
                             switch(firingLaneInPixels)
@@ -1219,6 +1221,7 @@ void GameLogic::queryBikeFiring()
                             Bullet* newBullet3;
                             firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() + 86;
                             newBullet3 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+                            bottomBikerBulletsFired += 1;
 
                             int laneToGoIn;
                             switch(firingLaneInPixels)
@@ -1355,6 +1358,22 @@ int GameLogic::getTankBossBulletsFired()
 {
 	return tankBossBulletsFired;
 }
+
+int GameLogic::getTopBikerBulletsFired()
+{
+	return topBikerBulletsFired;
+}
+
+int GameLogic::getMiddleBikerBulletsFired()
+{
+	return middleBikerBulletsFired;
+}
+
+int GameLogic::getBottomBikerBulletsFired()
+{
+	return bottomBikerBulletsFired;
+}
+
 
 //string GameLogic::getHowDidIDie()
 //{

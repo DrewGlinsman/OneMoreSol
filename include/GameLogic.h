@@ -62,7 +62,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 20;
+        int currentLevel = 10;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -132,6 +132,9 @@ class GameLogic{
         int koratSurvived = 0;
         int bombersExploded = 0;
         int tankBossBulletsFired = 0;
+        int topBikerBulletsFired = 0;
+        int middleBikerBulletsFired = 0;
+        int bottomBikerBulletsFired = 0;
 
         //string howDidIDie;
 
@@ -213,6 +216,9 @@ class GameLogic{
         int getKoratSurvived();
         int getBombersExploded();
         int getTankBossBulletsFired();
+        int getTopBikerBulletsFired();
+        int getMiddleBikerBulletsFired();
+        int getBottomBikerBulletsFired();
 
         //string getHowDidIDie();
 
