@@ -95,7 +95,6 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                     currentKoratCount--;
                     //update the gameviewplayer to reflect decremented survivors
                     majorTom -> setSurvivors(majorTom -> getSurvivors()-1);
-                    std::cout << "survivor count = " << majorTom -> getSurvivors() << std::endl;
                 }
             }
         }
@@ -215,7 +214,6 @@ void GameLogic::spawnKorat()
             break;
         default:
             newKorat = new Grunt(koratSpawnLane, loadedTextures);
-            std::cout << "Break Case Activated" << std::endl;
             break;
 
     }
@@ -1114,7 +1112,6 @@ void GameLogic::queryBikeFiring()
 {
     if(!isPaused)
     {
-        cout << "Shots Fired = "<< counter << endl;
         for (int i = 0; i < currentBikeBoss.size(); i ++)
         {
             if (currentBikeBoss[i] -> getPositionX() < 1440)
@@ -1228,7 +1225,6 @@ void GameLogic::queryTankFiring()
 {
     if(!isPaused)
     {
-        cout << "Shots Fired = "<< counter << endl;
         for (int i = 0; i < currentTankBoss.size(); i ++)
         {
             if (currentTankBoss[i] -> getPositionX() < 1440)
@@ -1263,14 +1259,9 @@ void GameLogic::queryTankFiring()
                         laneToGoIn = 0;
                         break;
                     }
-                    cout << firingLaneInPixels << endl;
 
 
                     currentKoratBullet[laneToGoIn].emplace_back(newBullet);
-
-                    counter++;
-
-                    //405 count
                 }
 
             }
