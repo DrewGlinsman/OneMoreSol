@@ -754,7 +754,7 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
     window.draw(menuBtnRec);
     window.draw(scoreCnt);
     window.display();
-    /*while(window.isOpen())
+    while(window.isOpen())
 
     {
          while(window.pollEvent(Event))
@@ -777,10 +777,10 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                     window.close();
                 }
          }
-    }*/
+    }
 
 
-    bool menu = false;
+    /*bool menu = false;
     while(window.isOpen() && !menu)
     {
 
@@ -842,7 +842,7 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                 }
             }
         }
-    }
+    }*/
 
 
     return false;
