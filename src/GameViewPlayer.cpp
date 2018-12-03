@@ -2,13 +2,11 @@
 #include <iostream>
 #include <fstream>
 
-using namespace std;
-
 GameViewPlayer::GameViewPlayer() // Player window constructor
 {
     if(!initialized)
     {
-        cout << "initializing" << endl;
+        std::cout << "initializing" << std::endl;
         initializeMenuState();
         initializePlayState();
         logic = new GameLogic();
@@ -193,7 +191,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
     menuMusic.play();
     menuMusic.setLoop(true);
     menuSelector.setPosition(0,0);
-    cout << "0,0" << endl;
+    std::cout << "0,0" << std::endl;
     while(window.isOpen()) // Menu loop
 	{
         updateMenu(window);
@@ -214,21 +212,21 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelector.setPosition(0,2);
 						selectMenuButton(window,2);
 						menuTransition.play();
-						cout << "0,2" << endl;
+						std::cout << "0,2" << std::endl;
 					}
 					else if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,0);
 						selectMenuButton(window,0);
 						menuTransition.play();
-						cout << "0,0" << endl;
+						std::cout << "0,0" << std::endl;
 					}
 					else if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,1);
 						selectMenuButton(window,1);
 						menuTransition.play();
-						cout << "0,1" << endl;
+						std::cout << "0,1" << std::endl;
 					}
 				}
 
@@ -239,21 +237,21 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelector.setPosition(0,1);
 						selectMenuButton(window,1);
 						menuTransition.play();
-						cout << "0,1" << endl;
+						std::cout << "0,1" << std::endl;
 					}
 					else if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,2);
 						selectMenuButton(window,2);
 						menuTransition.play();
-						cout << "0,2" << endl;
+						std::cout << "0,2" << std::endl;
 					}
 					else if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,0);
 						selectMenuButton(window,0);
 						menuTransition.play();
-						cout << "0,0" << endl;
+						std::cout << "0,0" << std::endl;
 					}
 				}
 
@@ -340,7 +338,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         if (logic -> currentLevelEnd())
         {
-            std::cout << "Entered text adventure" << endl;
+            std::cout << "Entered text adventure" << std::endl;
             logic -> pauseGame();
             textAdventureIsOpen(window);
         }
@@ -396,8 +394,8 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         else
             lockOutKeyboard = false;
 
-        //cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
-       //cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
+        //std::cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
+       //std::cout << " Major Tom Location = " << majorTom.getTomPosition() << std::endl;
 
          if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             {
@@ -498,7 +496,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             majorTom->setGun(2);
                             selectionBox.setPosition(413,780);
                         }
-                        cout << "selected plasma shotgun" << endl;
+                        std::cout << "selected plasma shotgun" << std::endl;
 
                     }
 
@@ -509,7 +507,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             majorTom->setGun(3);
                             selectionBox.setPosition(541,780);
                         }
-                        cout << "selected laser rifle" << endl;
+                        std::cout << "selected laser rifle" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num4)
@@ -519,7 +517,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             majorTom->setGun(4);
                             selectionBox.setPosition(669,780);
                         }
-                        cout << "selected laser minigun" << endl;
+                        std::cout << "selected laser minigun" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num5)
@@ -529,7 +527,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             majorTom->setGun(5);
                             selectionBox.setPosition(797,780);
                         }
-                        cout << "selected arc thrower" << endl;
+                        std::cout << "selected arc thrower" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num6)
@@ -539,7 +537,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             majorTom->setGun(6);
                             selectionBox.setPosition(925,780);
                         }
-                        cout << "selected gauss rifle" << endl;
+                        std::cout << "selected gauss rifle" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num7)
@@ -549,7 +547,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             majorTom->setGun(7);
                             selectionBox.setPosition(1053,780);
                         }
-                        cout << "selected BFG" << endl;
+                        std::cout << "selected BFG" << std::endl;
                     }
                 }
             }
