@@ -28,7 +28,7 @@ void GameViewPlayer::initializeMenuState()
     menuMusic.setVolume(75);
     menuSelection.setVolume(75);
     menuTransition.setVolume(75);
-    gameMusic.setVolume(75);
+    gameMusic.setVolume(85);
     textMusic.setVolume(75);
 
     menuTransition.setBuffer(loadedAudio -> soundTrack[21]);
@@ -58,10 +58,10 @@ void GameViewPlayer::initializeMenuState()
 
 void GameViewPlayer::initializePlayState()
 {
-    if(!gameFont.loadFromFile("assets/impact.ttf"))
+    if(!gameFont.loadFromFile("../assets/impact.ttf"))
         std::cout << "Could not load requested font." << std::endl;
 
-    if (!lockIcon.loadFromFile("assets/lockIcon.png"))
+    if (!lockIcon.loadFromFile("../assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
 
     //Store the reload rectangles into the array
@@ -100,11 +100,11 @@ void GameViewPlayer::initializePlayState()
 
     menuBtnRec.setPosition(215,780);
     menuBtnRec.setSize(sf::Vector2f(366,79));
-    menuBtnRec.setTexture(&loadedTextures->textureArray[18]);
+    menuBtnRec.setTexture(&loadedTextures->textureArray[20]);
 
     winBtnRec.setPosition(900,780);
     winBtnRec.setSize(sf::Vector2f(366,79));
-    winBtnRec.setTexture(&loadedTextures->textureArray[20]);
+    winBtnRec.setTexture(&loadedTextures->textureArray[21]);
 
     retryBtnRec.setPosition(200, 600);
     retryBtnRec.setSize(sf::Vector2f(366, 79));
@@ -264,7 +264,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					}
 				}
 
-				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
+				if(Event.key.code == sf::Keyboard::Return)
 				{
 					if(sf::Vector2f (0,0) == menuSelector.getPosition())
 					{
@@ -330,7 +330,12 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
     {
         if(logic -> isTankBossDead())
         {
-            winViewIsOpen(window);
+            bool exit;
+            exit = winViewIsOpen(window);
+            if (exit)
+            {
+              return true;
+            }
         }
 
         updateGame(window);
@@ -389,7 +394,137 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         logic -> moveBullet(delta);
         logic -> moveKoratBullet(delta, majorTom);
 
+        int logicKilledKorat = logic -> getKilledKorat();
+        if (logicKilledKorat > koratKilled)
+        {
+        	//for loop to count how many times to play death sound
+        	for(logicKilledKorat; logicKilledKorat > koratKilled; koratKilled++)
+				koratDyingSound.stop();
+				koratDyingSound.setBuffer(loadedAudio->soundTrack[25]);
+				koratFiringSound.setVolume(60);
+				koratDyingSound.play();
+        }
 
+        int logicJackalBulletsFired = logic -> getJackalBulletsFired();
+		if (logicJackalBulletsFired > jackalBulletsFired)
+		{
+			for(logicJackalBulletsFired; logicJackalBulletsFired > jackalBulletsFired; jackalBulletsFired++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[27]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
+
+        int logicEliteBulletsFired = logic -> getEliteBulletsFired();
+		if (logicEliteBulletsFired > eliteBulletsFired)
+		{
+			for(logicEliteBulletsFired; logicEliteBulletsFired > eliteBulletsFired; eliteBulletsFired++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[27]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
+
+        int logicBruteBulletsFired = logic -> getBruteBulletsFired();
+		if (logicBruteBulletsFired > bruteBulletsFired)
+		{
+			for(logicBruteBulletsFired; logicBruteBulletsFired > bruteBulletsFired; bruteBulletsFired++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[28]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
+
+        int logicHunterBulletsFired = logic -> getHunterBulletsFired();
+		if (logicHunterBulletsFired > hunterBulletsFired)
+		{
+			for(logicHunterBulletsFired; logicHunterBulletsFired > hunterBulletsFired; hunterBulletsFired++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[28]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
+
+        int logicBikerBulletsFired = logic -> getBikerBulletsFired();
+		if (logicBikerBulletsFired > bikerBulletsFired)
+		{
+			for(logicBikerBulletsFired; logicBikerBulletsFired > bikerBulletsFired; bikerBulletsFired++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[29]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
+
+        int logicBombersExploded = logic -> getBombersExploded();
+		if (logicBombersExploded > bombersExploded)
+		{
+			for(logicBombersExploded; logicBombersExploded > bombersExploded; bombersExploded++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[26]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
+
+		int logicKoratHitCount = logic -> getKoratHitCount();
+		if (logicKoratHitCount > koratHitCount)
+		{
+			//for loop to count how many times to play death sound
+			for(logicKoratHitCount; logicKoratHitCount > koratHitCount; koratHitCount++)
+				koratHitSound.stop();
+				koratHitSound.setBuffer(loadedAudio->soundTrack[30]);
+				koratFiringSound.setVolume(60);
+				koratHitSound.play();
+		}
+
+		int logicKoratSurvived = logic -> getKoratSurvived();
+		if (logicKoratSurvived > koratSurvived)
+		{
+			for(logicKoratSurvived; logicKoratSurvived > koratSurvived; koratSurvived++)
+				koratSurvivedSound.stop();
+				koratSurvivedSound.setBuffer(loadedAudio->soundTrack[39]);
+				koratFiringSound.setVolume(60);
+				koratSurvivedSound.play();
+		}
+
+    int logicTankBossBulletsFired = logic -> getTankBossBulletsFired();
+		if (logicTankBossBulletsFired > tankBossBulletsFired)
+		{
+			for(logicTankBossBulletsFired; logicTankBossBulletsFired > tankBossBulletsFired; tankBossBulletsFired++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[40]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
+
+    int logicTopBikerBulletsFired = logic -> getTopBikerBulletsFired();
+		if (logicTopBikerBulletsFired > topBikerBulletsFired)
+		{
+			for(logicTopBikerBulletsFired; logicTopBikerBulletsFired > topBikerBulletsFired; topBikerBulletsFired++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[27]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
+
+    int logicMiddleBikerBulletsFired = logic -> getMiddleBikerBulletsFired();
+		if (logicMiddleBikerBulletsFired > middleBikerBulletsFired)
+		{
+			for(logicMiddleBikerBulletsFired; logicMiddleBikerBulletsFired > middleBikerBulletsFired; middleBikerBulletsFired++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[37]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
+
+    int logicBottomBikerBulletsFired = logic -> getBottomBikerBulletsFired();
+		if (logicBottomBikerBulletsFired > bottomBikerBulletsFired)
+		{
+			for(logicBottomBikerBulletsFired; logicBottomBikerBulletsFired > bottomBikerBulletsFired; bottomBikerBulletsFired++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[29]);
+				koratFiringSound.setVolume(60);
+				koratFiringSound.play();
+		}
 //-----------------------------------------------------------------
         if(keepMovingUp == true)
         {
@@ -411,35 +546,95 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                      switch(majorTom -> getGun())
                     {
                         case 1:
-                            logic -> fireBullet(majorTom, majorTom -> pistol, delta);
-                            break;
+                        	if (logic -> fireBullet(majorTom, majorTom -> pistol, delta)) //if the gun fired
+                        	{
+                        		playerWeaponSound.stop();
+								playerWeaponSound.setBuffer(loadedAudio->soundTrack[31]); //plasma pistol sound
+								playerWeaponSound.setVolume(60);
+								playerWeaponSound.play();
+                        	}
+                        	break;
                         case 2:
                             if (logic -> getLevel() >= 3)
-                                logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
+                            {
+                                if (logic -> fireBullet(majorTom, majorTom -> shotgun, delta))
+                                {
+                                	playerWeaponSound.stop();
+									playerWeaponSound.setBuffer(loadedAudio->soundTrack[32]);
+									playerWeaponSound.setVolume(60);
+									playerWeaponSound.play();
+                                }
+                            }
                             break;
                         case 3:
                             if (logic -> getLevel() >= 5)
-                                logic -> fireBullet(majorTom, majorTom -> rifle, delta);
+                            {
+                            	if (logic -> fireBullet(majorTom, majorTom -> rifle, delta))
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[33]);
+    								playerWeaponSound.setVolume(60);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         case 4:
                             if (logic -> getLevel() >= 7)
-                                logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                            {
+                            	logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[34]);
+    								playerWeaponSound.setVolume(60);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         case 5:
                             if (logic -> getLevel() >= 9)
-                                logic -> fireBullet(majorTom, majorTom -> thrower, delta);
+                            {
+                            	if (logic -> fireBullet(majorTom, majorTom -> thrower, delta))
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[35]);
+    								playerWeaponSound.setVolume(60);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         case 6:
                             if (logic -> getLevel() >= 11)
-                                logic -> fireBullet(majorTom, majorTom -> sniper, delta);
+                            {
+                            	if (logic -> fireBullet(majorTom, majorTom -> sniper, delta))
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[36]);
+    								playerWeaponSound.setVolume(60);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         case 7:
                             if (logic -> getLevel() >= 13)
-                                logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
+                            {
+                            	if (logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta))
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[37]);
+    								playerWeaponSound.setVolume(60);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         default:
-                            logic -> fireBullet(majorTom, majorTom -> pistol, delta);
-                            break;
+                        	if (logic -> fireBullet(majorTom, majorTom -> pistol, delta)) //if the gun fired
+                        	{
+                        		playerWeaponSound.stop();
+								playerWeaponSound.setBuffer(loadedAudio->soundTrack[31]); //plasma pistol sound
+								playerWeaponSound.setVolume(60);
+								playerWeaponSound.play();
+                        	}
+                        	break;
                     }
                 }
             }
@@ -500,8 +695,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(2);
-                            selectionBox.setPosition(413,780);
+                        	if (logic -> getLevel() >= 3)
+                        	{
+                        		majorTom->setGun(2);
+								selectionBox.setPosition(413,780);
+                        	}
                         }
                         std::cout << "selected plasma shotgun" << std::endl;
 
@@ -511,8 +709,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(3);
-                            selectionBox.setPosition(541,780);
+                        	if (logic -> getLevel() >= 5)
+                        	{
+								majorTom->setGun(3);
+								selectionBox.setPosition(541,780);
+                        	}
                         }
                         std::cout << "selected laser rifle" << std::endl;
                     }
@@ -521,8 +722,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(4);
-                            selectionBox.setPosition(669,780);
+                        	if (logic -> getLevel() >= 7)
+                        	{
+								majorTom->setGun(4);
+								selectionBox.setPosition(669,780);
+                        	}
                         }
                         std::cout << "selected laser minigun" << std::endl;
                     }
@@ -531,8 +735,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(5);
-                            selectionBox.setPosition(797,780);
+                        	if (logic -> getLevel() >= 9)
+                        	{
+								majorTom->setGun(5);
+								selectionBox.setPosition(797,780);
+                        	}
                         }
                         std::cout << "selected arc thrower" << std::endl;
                     }
@@ -541,8 +748,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(6);
-                            selectionBox.setPosition(925,780);
+                        	if (logic -> getLevel() >= 11)
+                        	{
+								majorTom->setGun(6);
+								selectionBox.setPosition(925,780);
+                        	}
                         }
                         std::cout << "selected gauss rifle" << std::endl;
                     }
@@ -551,8 +761,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(7);
-                            selectionBox.setPosition(1053,780);
+                        	if (logic -> getLevel() >= 13)
+                        	{
+                        		majorTom->setGun(7);
+                                selectionBox.setPosition(1053,780);
+                        	}
                         }
                         std::cout << "selected BFG" << std::endl;
                     }
@@ -586,9 +799,9 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
         {
             if(Event.type == sf::Event::KeyPressed)
             {
-                if(Event.key.code == sf::Keyboard::Space)
+                if(Event.key.code == sf::Keyboard::Return)
                 {
-                    if(delayClockTime > 2)
+                    if(delayClockTime > 1)
                     {
                         gameMusic.stop();
                         return false;
@@ -610,10 +823,10 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     std::ifstream currentAdventure;
     int offset = 0;
     std::string fileString;
-    fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
+    fileString = "../assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
 
     if (currentLevel == 10)
-        fileString = "assets/TextAdventures/Level11.txt";
+        fileString = "../assets/TextAdventures/Level11.txt";
     currentAdventure.open(fileString);
 
     journal.setPosition(450,25);
@@ -701,9 +914,9 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     }
                 }
 
-                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
+                if(Event.key.code == sf::Keyboard::Return)
                 {
-                    if(delayClockTime > 2)
+                    if(delayClockTime > 1)
                     {
                         if (selector.y == 0)
                         {
@@ -727,13 +940,10 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
 bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 {
-    /*
-        music skeleton
     gameMusic.stop();
-    gameMusic.setBuffer(loadedAudio -> soundTrack[24]);
+    gameMusic.setBuffer(loadedAudio -> soundTrack[38]);
     gameMusic.play();
     gameMusic.setLoop(true);
-    */
 
     window.clear(sf::Color::Black);
 
@@ -743,14 +953,11 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
     finalScoreCnt.setCharacterSize(22);
     string finalScore = "Final Score: " + std::to_string(majorTom -> getScore());
     finalScoreCnt.setString(finalScore);
-    window.draw(winScreen);
-    window.draw(finalScoreCnt);
-    window.display();
 
-    window.draw(winBtnRec);
-    window.draw(menuBtnRec);
-    window.draw(scoreCnt);
-    window.display();
+    updateWinScreen(window);
+    int x = 0;
+
+
     while(window.isOpen())
 
     {
@@ -762,87 +969,54 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                     window.close(); // Quit game
                     return true;
                 }
-                if(Event.key.code == sf::Keyboard::Space)
+                if(Event.type == sf::Event::KeyPressed)
                 {
-                    resetGameToMenu(window);
-                    return false;
-                }
+                    if(Event.key.code == sf::Keyboard::Return)
+                    {
+                        if(x == 0)
+                            resetGameToMenu(window);
+                        if(x == 1)
+                            window.close();
+                        return false;
+                    }
 
-                if(Event.key.code == sf::Keyboard::Escape)
-                {
-                    gameMusic.stop();
-                    window.close();
+                    if(Event.key.code == sf::Keyboard::Escape)
+                    {
+                        gameMusic.stop();
+                        window.close();
+                        return true;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Left || Event.key.code == sf::Keyboard::Right)
+                    {
+                        if (x == 0)
+                        {
+                            cout << "Moved Right" << endl;;
+                            x = 1;
+                            selectWinButton(window, x);
+                            updateWinScreen(window);
+                        }
+                        else
+                        {
+                            cout << "Moved left" << endl;
+                            x = 0;
+                            selectWinButton(window, x);
+                            updateWinScreen(window);
+                        }
+                    }
                 }
-         }
+        }
     }
 
+}
 
-    /*bool menu = false;
-    while(window.isOpen() && !menu)
-    {
-
-        if (delayClockStarted == false)
-        {
-            delayClock.restart();
-        }
-        delayClockStarted = true;
-        delayClockTime = delayClock.getElapsedTime().asSeconds();
-        while(window.pollEvent(Event))
-        {
-            if(Event.type == sf::Event::Closed)
-            {
-                gameMusic.stop();
-                window.close(); // Quit game
-                return true;
-            }
-
-            if(Event.type == sf::Event::KeyPressed)
-            {
-                if(Event.key.code == sf::Keyboard::Escape)
-                {
-                    gameMusic.stop();
-                    window.close();
-                }
-
-                if(Event.key.code == sf::Keyboard::Left || Event.key.code == sf::Keyboard::Right)
-                {
-                    if (selector.y == 1)
-                    {
-                        selector.y = 0;
-                        selectButton(window, selector.y);
-                    }
-                    else
-                    {
-                        selector.y = 1;
-                        selectButton(window, selector.y);
-                    }
-                }
-
-                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
-                {
-                    if(delayClockTime > 2)
-                    {
-                        if (selector.y == 0)
-                        {
-                            menu = true;
-                            //logic -> loseLevel(sky, majorTom);//how to set this up for menu?
-
-                            return false;
-                        }
-                        else if (selector.y == 1)
-                        {
-                            gameMusic.stop();
-                            window.close();
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-    }*/
-
-
-    return false;
+void GameViewPlayer::updateWinScreen(sf::RenderWindow& window)
+{
+    window.draw(winScreen);
+    window.draw(finalScoreCnt);
+    window.draw(winBtnRec);
+    window.draw(menuBtnRec);
+    window.display();
 }
 
 void GameViewPlayer::resetGameToMenu(sf::RenderWindow& window)
@@ -922,11 +1096,25 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
 void GameViewPlayer::updateLossScreen(sf::RenderWindow &window)
 {
-        window.clear(sf::Color::Black);
-        window.draw(lossScreen);
-        window.draw(retryBtnRec);
-        window.draw(giveUpBtnRec);
-        window.display();
+    window.clear(sf::Color::Black);
+    window.draw(lossScreen);
+    window.draw(retryBtnRec);
+    window.draw(giveUpBtnRec);
+    window.display();
+}
+
+void GameViewPlayer::selectWinButton(sf::RenderWindow& window, int x)
+{
+    if (x == 0)
+    {
+        menuBtnRec.setTexture(&loadedTextures -> textureArray[20]);
+        winBtnRec.setTexture(&loadedTextures -> textureArray[21]);
+    }
+    if (x == 1)
+    {
+        menuBtnRec.setTexture(&loadedTextures -> textureArray[19]);
+        winBtnRec.setTexture(&loadedTextures -> textureArray[22]);
+    }
 }
 
 void GameViewPlayer::selectMenuButton(sf::RenderWindow& window, int y)

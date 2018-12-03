@@ -62,7 +62,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 20;
+        int currentLevel = 10;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -122,6 +122,22 @@ class GameLogic{
 
         double directMove = 1;
 
+        int killedKorat = 0;
+        int jackalBulletsFired = 0;
+        int eliteBulletsFired = 0;
+        int bruteBulletsFired = 0;
+        int hunterBulletsFired = 0;
+        int bikerBulletsFired = 0;
+        int koratHitCount = 0;
+        int koratSurvived = 0;
+        int bombersExploded = 0;
+        int tankBossBulletsFired = 0;
+        int topBikerBulletsFired = 0;
+        int middleBikerBulletsFired = 0;
+        int bottomBikerBulletsFired = 0;
+
+        //string howDidIDie;
+
     public:
         GameLogic();
 
@@ -150,7 +166,7 @@ class GameLogic{
         void moveKoratBullet(float, MajorTom*);
         void drawBullet(sf::RenderWindow&);
 
-        void fireBullet(MajorTom*, Gun*, float);
+        bool fireBullet(MajorTom*, Gun*, float);
         bool reloadCurrentGun(Gun*);
         void selectBullet(MajorTom*, Gun*, float);
         void spawnBullet(float);
@@ -189,6 +205,22 @@ class GameLogic{
         bool currentLevelEnd();
 
         bool isTankBossDead();
+
+        int getKilledKorat();
+        int getJackalBulletsFired();
+        int getEliteBulletsFired();
+        int getBruteBulletsFired();
+        int getHunterBulletsFired();
+        int getBikerBulletsFired();
+        int getKoratHitCount();
+        int getKoratSurvived();
+        int getBombersExploded();
+        int getTankBossBulletsFired();
+        int getTopBikerBulletsFired();
+        int getMiddleBikerBulletsFired();
+        int getBottomBikerBulletsFired();
+
+        //string getHowDidIDie();
 
 };
 

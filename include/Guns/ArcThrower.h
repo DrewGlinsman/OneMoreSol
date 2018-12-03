@@ -21,7 +21,7 @@ class ArcThrower: public Gun
     private:
         int shotsFired = 0;
         int bulletType = 5;
-        float fireRate = 0.01;
+        float fireRate = 0.05;
         int clip = 100;
         float reloadSpeed = 1.5;
 };

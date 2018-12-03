@@ -3,7 +3,6 @@
 #define INCLUDE_ELITE_H_
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
 #include "rngs.h"
@@ -69,13 +68,6 @@ private:
 	sf::Clock postDeathClock;
 	sf::Clock postLeftClock;
 	float postLeftTime;
-
-	sf::SoundBuffer eliteHitSound;
-    sf::Sound eliteWasHit;
-    sf::SoundBuffer koratDeathSound;
-    sf::Sound koratDied;
-    sf::SoundBuffer koratLeftSound;
-	sf::Sound koratLeft;
 };
 
 #endif

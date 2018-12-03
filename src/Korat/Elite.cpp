@@ -27,9 +27,6 @@ Elite::~Elite() {
 void Elite::wasShot(int damage)
 {
     health = health - damage;
-    eliteWasHit.setBuffer(eliteHitSound);
-	eliteWasHit.setVolume(75);
-	eliteWasHit.play();
 }
 
 int Elite::getLane()
@@ -112,9 +109,6 @@ bool Elite::checkDeath()
 			if (koratDeathSoundPlayed == false)
 			{
 				postDeathClock.restart();
-				koratDied.setBuffer(koratDeathSound);
-				koratDied.setVolume(100);
-				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
 			return false;

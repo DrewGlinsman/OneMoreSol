@@ -21,7 +21,7 @@ class PlasmaPistol: public Gun
     private:
         int shotsFired = 0;
         int bulletType = 1;
-        float fireRate = 0.15;
+        float fireRate = 0.25;
         int clip = 12;
         float reloadSpeed = 1;
 };

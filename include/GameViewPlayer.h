@@ -46,11 +46,21 @@ private:
     sf::SoundBuffer Menu_Music;
     sf::SoundBuffer Menu_Transition;
     sf::SoundBuffer Menu_Selection;
+    sf::SoundBuffer Player_Firing_Weapon_Sound;
+    sf::SoundBuffer Korat_Dying_Sound;
+    sf::SoundBuffer Korat_Firing_Sound;
+    sf::SoundBuffer Korat_Hit_Sound;
+    sf::SoundBuffer Korat_Survived;
 
     sf::Sound menuMusic;
     sf::Sound menuTransition;
     sf::Sound menuSelection;
     sf::Sound textMusic;
+    sf::Sound playerWeaponSound;
+    sf::Sound koratDyingSound;
+    sf::Sound koratFiringSound;
+    sf::Sound koratHitSound;
+    sf::Sound koratSurvivedSound;
 
     sf::Text menuTitle;
     sf::Text menuPlay1;
@@ -77,6 +87,20 @@ private:
 
     float playX5 = 262;
     float playY5 = 245;
+
+    int koratKilled = 0;
+    int jackalBulletsFired = 0;
+    int eliteBulletsFired = 0;
+    int bruteBulletsFired = 0;
+    int hunterBulletsFired = 0;
+    int bikerBulletsFired = 0;
+    int tankBossBulletsFired = 0;
+    int topBikerBulletsFired = 0;
+    int middleBikerBulletsFired = 0;
+    int bottomBikerBulletsFired = 0;
+    int bombersExploded = 0;
+    int koratHitCount = 0;
+    int koratSurvived = 0;
 
 public:
     sf::Font gameFont;
@@ -154,6 +178,7 @@ public:
     bool textAdventureIsOpen(sf::RenderWindow& window);
     void drawAdventure(sf::RenderWindow& window);
     void updateMenu(sf::RenderWindow& window);
+    void updateWinScreen(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();
     void updateMajorTomHealth();
@@ -162,6 +187,7 @@ public:
     void updateLossScreen(sf::RenderWindow &window);
     void selectButton(sf::RenderWindow &window, int y);
     void selectMenuButton(sf::RenderWindow &window, int y);
+    void selectWinButton(sf::RenderWindow &window, int x);
     void resetGameToMenu(sf::RenderWindow &window);
 
 };

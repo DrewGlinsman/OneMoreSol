@@ -70,13 +70,6 @@ private:
 	sf::Clock postDeathClock;
 	sf::Clock postLeftClock;
 	float postLeftTime;
-
-    sf::SoundBuffer gruntHitSound;
-    sf::Sound gruntWasHit;
-    sf::SoundBuffer koratDeathSound;
-    sf::Sound koratDied;
-    sf::SoundBuffer koratLeftSound;
-	sf::Sound koratLeft;
 };
 
 #endif
