@@ -175,16 +175,16 @@ void GameViewPlayer::initializePlayState()
     //Score count display
     scoreCnt.setFont(gameFont);
     scoreCnt.setCharacterSize(22);
-    scoreCnt.setString("0 Score");//might be able to take out due to updater code redundancy
+    scoreCnt.setString("0");//might be able to take out due to updater code redundancy
     scoreCnt.setFillColor(sf::Color(0,0,0,255));
-    scoreCnt.setPosition(1300,20);
+    scoreCnt.setPosition(1215,860);
 
     //Level count display
     levelCnt.setFont(gameFont);
     levelCnt.setCharacterSize(22);
-    levelCnt.setString("Sol /20");//might be able to take out due to updater code redundancy
+    levelCnt.setString("/20");//might be able to take out due to updater code redundancy
     levelCnt.setFillColor(sf::Color(0,0,0,255));
-    levelCnt.setPosition(1300,40);
+    levelCnt.setPosition(1215,770);
 
     //Major Tom Health Display
 	majorTomHealth.setFont(gameFont);
@@ -403,9 +403,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         }
         else
             lockOutKeyboard = false;
-
-        //std::cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
-       //std::cout << " Major Tom Location = " << majorTom.getTomPosition() << std::endl;
 
          if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             {
@@ -627,9 +624,9 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     solNum.setCharacterSize(20);
     solNum.setFillColor(sf::Color::Black);
     solNum.setPosition(475,75);
-    sol = "Sol " + std::to_string(logic -> getLevel());
+    sol = "" + std::to_string(logic -> getLevel());
     if(currentLevel == 10)
-        sol = "Sol 11";
+        sol = "11";
     solNum.setString(sol);
 
     window.draw(sky);
@@ -985,7 +982,7 @@ void GameViewPlayer::updateMajorTomHealth()
 
 void GameViewPlayer::updateScoreCount()
 {
-    string cnt = std::to_string(majorTom->getScore()) + " Score";
+    string cnt = std::to_string(majorTom->getScore());//Used to have + score
     scoreCnt.setString(cnt);
 }
 
