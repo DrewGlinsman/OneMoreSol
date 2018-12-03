@@ -922,6 +922,7 @@ void GameLogic::updateDyingBikeBoss()
             dyingBikeBoss.erase(dyingBikeBoss.begin() + i);
             currentKoratCount--;
             levelWon = true;
+            currentLevel = 11;
 
         }
     }
