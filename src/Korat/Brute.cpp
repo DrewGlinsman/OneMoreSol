@@ -94,17 +94,17 @@ float Brute::getPositionX()
 
 bool Brute::checkDeath()
 {
-    if (health <= 0)
+    if (health <= 0)//clock resets here
     {
 		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
 		if (postDeathTime >= .5)
 		{
-			postDeathClock.restart();
+			postDeathClock.restart();//plays as long as the korat is alive
 			return true;
 		}
 		else
         {
-			speed = 0;
+			speed = 0;//gets death system to work
 			if (koratDeathSoundPlayed == false)
 			{
 				postDeathClock.restart();
