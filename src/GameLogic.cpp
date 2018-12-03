@@ -1354,3 +1354,8 @@ int GameLogic::getTankBossBulletsFired()
 {
 	return tankBossBulletsFired;
 }
+
+//string GameLogic::getHowDidIDie()
+//{
+//	return howDidIDie;
+//}
