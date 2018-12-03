@@ -62,7 +62,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 20;
+        int currentLevel = 7;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -121,6 +121,10 @@ class GameLogic{
         bool isPaused = false;
 
         double directMove = 1;
+
+        int killedKorat = 0;
+        int koratBulletsFired = 0;
+        int koratHitCount = 0;
 
     public:
         GameLogic();
@@ -189,6 +193,10 @@ class GameLogic{
         bool currentLevelEnd();
 
         bool isTankBossDead();
+
+        int getKilledKorat();
+        int getKoratBulletSize();
+        int getKoratHitCount();
 
 };
 

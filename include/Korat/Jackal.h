@@ -3,7 +3,6 @@
 #define INCLUDE_JACKAL_H_
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
 #include "rngs.h"
@@ -70,12 +69,6 @@ private:
 	sf::Clock postLeftClock;
 	float postLeftTime;
 
-	sf::SoundBuffer jackalHitSound;
-    sf::Sound jackalWasHit;
-    sf::SoundBuffer koratDeathSound;
-    sf::Sound koratDied;
-    sf::SoundBuffer koratLeftSound;
-	sf::Sound koratLeft;
 };
 
 #endif

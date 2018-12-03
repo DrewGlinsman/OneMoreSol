@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include "KoratEmpire.h"
 #include "TextureLoader.h"
-#include <SFML/Audio.hpp>
 
 class Grunt: public KoratEmpire {
 public:
@@ -52,18 +51,10 @@ private:
     int lane5 = 680;
 
     bool koratDeathSoundPlayed = false;
-	bool koratLeftSoundPlayed = false;
 	float postDeathTime;
 	sf::Clock postDeathClock;
 	sf::Clock postLeftClock;
 	float postLeftTime;
-
-    sf::SoundBuffer gruntHitSound;
-    sf::Sound gruntWasHit;
-    sf::SoundBuffer koratDeathSound;
-    sf::Sound koratDied;
-    sf::SoundBuffer koratLeftSound;
-	sf::Sound koratLeft;
 };
 
 #endif

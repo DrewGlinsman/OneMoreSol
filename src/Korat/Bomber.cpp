@@ -111,9 +111,6 @@ bool Bomber::checkDeath()
 			if (koratDeathSoundPlayed == false)
 			{
 				postDeathClock.restart();
-				koratDied.setBuffer(koratDeathSound);
-				koratDied.setVolume(100);
-				koratDied.play();
 				koratDeathSoundPlayed = true;
 			}
 			return false;

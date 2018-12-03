@@ -389,6 +389,36 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         logic -> moveBullet(delta);
         logic -> moveKoratBullet(delta, majorTom);
 
+        int logicKilledKorat = logic -> getKilledKorat();
+        if (logicKilledKorat > koratKilled)
+        {
+        	//for loop to count how many times to play death sound
+        	for(logicKilledKorat; logicKilledKorat > koratKilled; koratKilled++)
+				koratDyingSound.stop();
+				koratDyingSound.setBuffer(loadedAudio->soundTrack[25]);
+				koratDyingSound.play();
+        }
+
+        int logicKoratBulletSize = logic -> getKoratBulletSize();
+		if (logicKoratBulletSize > koratBulletSize)
+		{
+			//for loop to count how many times to play death sound
+			for(logicKoratBulletSize; logicKoratBulletSize > koratBulletSize; koratBulletSize++)
+				koratFiringSound.stop();
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[27]);
+				koratFiringSound.play();
+		}
+
+		int logicKoratHitCount = logic -> getKoratHitCount();
+		if (logicKoratHitCount > koratHitCount)
+		{
+			//for loop to count how many times to play death sound
+			for(logicKoratHitCount; logicKoratHitCount > koratHitCount; koratHitCount++)
+				koratHitSound.stop();
+				koratHitSound.setBuffer(loadedAudio->soundTrack[30]);
+				koratHitSound.play();
+		}
+
 
 //-----------------------------------------------------------------
         if(keepMovingUp == true)

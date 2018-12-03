@@ -47,12 +47,18 @@ private:
     sf::SoundBuffer Menu_Transition;
     sf::SoundBuffer Menu_Selection;
     sf::SoundBuffer Player_Firing_Weapon_Sound;
+    sf::SoundBuffer Korat_Dying_Sound;
+    sf::SoundBuffer Korat_Firing_Sound;
+    sf::SoundBuffer Korat_Hit_Sound;
 
     sf::Sound menuMusic;
     sf::Sound menuTransition;
     sf::Sound menuSelection;
     sf::Sound textMusic;
     sf::Sound playerWeaponSound;
+    sf::Sound koratDyingSound;
+    sf::Sound koratFiringSound;
+    sf::Sound koratHitSound;
 
     sf::Text menuTitle;
     sf::Text menuPlay1;
@@ -79,6 +85,10 @@ private:
 
     float playX5 = 262;
     float playY5 = 245;
+
+    int koratKilled = 0;
+    int koratBulletSize = 0;
+    int koratHitCount = 0;
 
 public:
     sf::Font gameFont;
