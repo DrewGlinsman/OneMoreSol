@@ -122,6 +122,10 @@ class GameLogic{
 
         double directMove = 1;
 
+        int topBikerBulletsFired;
+        int middleBikerBulletsFired;
+        int bottomBikerBulletsFired;
+
         int killedKorat = 0;
         int jackalBulletsFired = 0;
         int eliteBulletsFired = 0;
@@ -202,6 +206,10 @@ class GameLogic{
         bool currentLevelEnd();
 
         bool isTankBossDead();
+
+        int getTopBikerBulletsFired();
+        int getMiddleBikerBulletsFired();
+        int getBottomBikerBulletsFired();
 
         int getKilledKorat();
         int getJackalBulletsFired();
