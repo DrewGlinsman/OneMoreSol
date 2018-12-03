@@ -488,6 +488,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[40]);
 				playerWeaponSound.setVolume(60);
+				koratFiringSound.setVolume(40);
 				koratFiringSound.play();
 		}
 
