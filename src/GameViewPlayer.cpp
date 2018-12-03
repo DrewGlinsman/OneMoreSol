@@ -1170,7 +1170,7 @@ void GameViewPlayer::updateMajorTomHealth()
 
 void GameViewPlayer::updateScoreCount()
 {
-    string cnt = std::to_string(majorTom->getScore());//Used to have + score
+    string cnt = "Score " + std::to_string(majorTom->getScore());//Used to have + score
     scoreCnt.setString(cnt);
 }
 
