@@ -100,7 +100,7 @@ void GameViewPlayer::initializePlayState()
 
     menuBtnRec.setPosition(215,780);
     menuBtnRec.setSize(sf::Vector2f(366,79));
-    menuBtnRec.setTexture(&loadedTextures->textureArray[19]);
+    menuBtnRec.setTexture(&loadedTextures->textureArray[20]);
 
     winBtnRec.setPosition(900,780);
     winBtnRec.setSize(sf::Vector2f(366,79));
@@ -798,14 +798,11 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
     finalScoreCnt.setCharacterSize(22);
     string finalScore = "Final Score: " + std::to_string(majorTom -> getScore());
     finalScoreCnt.setString(finalScore);
-    window.draw(winScreen);
-    window.draw(finalScoreCnt);
-    window.display();
 
-    window.draw(winBtnRec);
-    window.draw(menuBtnRec);
-    window.draw(scoreCnt);
-    window.display();
+    updateWinScreen(window);
+    int x = 0;
+
+
     while(window.isOpen())
 
     {
@@ -817,21 +814,55 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                     window.close(); // Quit game
                     return true;
                 }
-                if(Event.key.code == sf::Keyboard::Space)
+                if(Event.type == sf::Event::KeyPressed)
                 {
-                    resetGameToMenu(window);
-                    return false;
-                }
+                    if(Event.key.code == sf::Keyboard::Space)
+                    {
+                        if(x == 0)
+                            resetGameToMenu(window);
+                        if(x == 1)
+                            window.close();
+                        return false;
+                    }
 
-                if(Event.key.code == sf::Keyboard::Escape)
-                {
-                    gameMusic.stop();
-                    window.close();
+                    if(Event.key.code == sf::Keyboard::Escape)
+                    {
+                        gameMusic.stop();
+                        window.close();
+                        return true;
+                    }
+
+                    if(Event.key.code == sf::Keyboard::Left || Event.key.code == sf::Keyboard::Right)
+                    {
+                        if (x == 0)
+                        {
+                            cout << "Moved Right" << endl;;
+                            x = 1;
+                            selectWinButton(window, x);
+                            updateWinScreen(window);
+                        }
+                        else
+                        {
+                            cout << "Moved left" << endl;
+                            x = 0;
+                            selectWinButton(window, x);
+                            updateWinScreen(window);
+                        }
+                    }
                 }
-         }
+        }
     }
-<
 
+}
+
+void GameViewPlayer::updateWinScreen(sf::RenderWindow& window)
+{
+    window.draw(winScreen);
+    window.draw(finalScoreCnt);
+    window.draw(winBtnRec);
+    window.draw(menuBtnRec);
+    window.draw(scoreCnt);
+    window.display();
 }
 
 void GameViewPlayer::resetGameToMenu(sf::RenderWindow& window)
@@ -916,6 +947,20 @@ void GameViewPlayer::updateLossScreen(sf::RenderWindow &window)
         window.draw(retryBtnRec);
         window.draw(giveUpBtnRec);
         window.display();
+}
+
+void GameViewPlayer::selectWinButton(sf::RenderWindow& window, int x)
+{
+    if (x == 0)
+    {
+        menuBtnRec.setTexture(&loadedTextures -> textureArray[20]);
+        winBtnRec.setTexture(&loadedTextures -> textureArray[21]);
+    }
+    if (x == 1)
+    {
+        menuBtnRec.setTexture(&loadedTextures -> textureArray[19]);
+        winBtnRec.setTexture(&loadedTextures -> textureArray[22]);
+    }
 }
 
 void GameViewPlayer::selectMenuButton(sf::RenderWindow& window, int y)
