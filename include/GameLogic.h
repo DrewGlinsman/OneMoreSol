@@ -62,7 +62,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 1;
+        int currentLevel = 9;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -93,8 +93,8 @@ class GameLogic{
         std::vector <float> levelSpawnModifierVector {2.5, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6,
                                                       1.5, 1.4, 1.3, 1.2, 1.1, 1.0, .9, .8, .7, .6};
 
-        std::vector <float> levelSpeedModifierVector {4.5, 4.5, 4.4, 4.4, 4.3, 4.3, 4.2, 4.2, 4.1, 2.1,
-                                                      4.0, 4.0, 3.9, 3.9, 3.8, 3.8, 3.7, 3.7, 3.6, 3.6};
+        std::vector <float> levelSpeedModifierVector {4.5, 4.5, 4.4, 4.4, 4.3, 4.3, 4.2, 4.2, 4.1, 15,
+                                                      4.0, 4.0, 3.9, 3.9, 3.8, 3.8, 3.7, 3.7, 3.6, 6};
 
         const int lane1 = 335;
         const int lane2 = 422;
@@ -132,9 +132,6 @@ class GameLogic{
         int koratSurvived = 0;
         int bombersExploded = 0;
         int tankBossBulletsFired = 0;
-        int topBikerBulletsFired = 0;
-        int middleBikerBulletsFired = 0;
-        int bottomBikerBulletsFired = 0;
 
         //string howDidIDie;
 
@@ -186,12 +183,12 @@ class GameLogic{
         void startBikeBoss(TextureLoader*);
         void moveBikeBoss(sf::CircleShape&, MajorTom*, float);
         void drawBikeBoss(sf::RenderWindow&);
-        void updateDyingBikeBoss();
+        void updateDyingBikeBoss(MajorTom*);
 
         void startTankBoss(TextureLoader*);
         void moveTankBoss(sf::CircleShape&, MajorTom*, float);
         void drawTankBoss(sf::RenderWindow&);
-        void updateDyingTankBoss();
+        void updateDyingTankBoss(MajorTom*);
 
         int getLevel();
         void setLevel(int lev);
@@ -216,9 +213,6 @@ class GameLogic{
         int getKoratSurvived();
         int getBombersExploded();
         int getTankBossBulletsFired();
-        int getTopBikerBulletsFired();
-        int getMiddleBikerBulletsFired();
-        int getBottomBikerBulletsFired();
 
         //string getHowDidIDie();
 

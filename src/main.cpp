@@ -16,6 +16,7 @@ int main(int argc, char** argv)
     bool gameOver = false; // Never gets set to true
     bool quit = false; // Checks to see if player quit
     bool gameStarted = false;
+    bool gameRestarted = false;
 
     GameStateManager* currentGameWindow = new GameStateManager();
 
@@ -23,7 +24,7 @@ int main(int argc, char** argv)
     {
          //Create menu window for player
 
-        if(!gameStarted)
+        if(!gameStarted || gameRestarted)
         {
             currentGameWindow -> setState("Start");
 
@@ -39,33 +40,16 @@ int main(int argc, char** argv)
 
         currentGameWindow -> setState("Play");
 
-        // # of players has been determined and the game is starting
-
-        //--------------------------------------------------------------------------------------
-
-        sf::Clock clock; // Game loop clock
-
-        float delta; // Time between game loops
-
         quit = currentGameWindow -> gameViewIsOpen();
 
         if (quit == true)
         {
             return 0;
         }
-
-        delta = clock.getElapsedTime().asSeconds(); // Gets clock time between loops
 
         currentGameWindow -> setState("Lost");
 
-        quit = currentGameWindow -> gameViewIsOpen();
-
-        if (quit == true)
-        {
-            return 0;
-        }
-
-        clock.restart();  // Resets game clock between loops
+        gameRestarted = currentGameWindow -> gameViewIsOpen();
 
     }
 }

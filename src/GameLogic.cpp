@@ -70,8 +70,22 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                     {
                         if (currentKorat[i][j] -> getSpeed() == 0)
                         {
-                        	killedKorat += 1;
-                            majorTom -> setScore(majorTom -> getScore()+20);
+                        	  killedKorat += 1;
+                            if(currentKorat[i][j] -> getName() == "Biker")
+                                  majorTom -> setScore(majorTom -> getScore() + 60);
+                            if(currentKorat[i][j] -> getName() == "Bomber")
+                                  majorTom -> setScore(majorTom -> getScore() + 45);
+                            if(currentKorat[i][j] -> getName() == "Brute")
+                                  majorTom -> setScore(majorTom -> getScore() + 50);
+                            if(currentKorat[i][j] -> getName() == "Elite")
+                                  majorTom -> setScore(majorTom -> getScore() + 35);
+                            if(currentKorat[i][j] -> getName() == "Grunt")
+                                  majorTom -> setScore(majorTom -> getScore() + 20);
+                            if(currentKorat[i][j] -> getName() == "Hunter")
+                                  majorTom -> setScore(majorTom -> getScore() + 40);
+                            if(currentKorat[i][j] -> getName() == "Jackal")
+                                  majorTom -> setScore(majorTom -> getScore() + 30);
+
                             dyingKorat.emplace_back(move(currentKorat[i][j]));
                             currentKorat[i].erase(currentKorat[i].begin() + j);
                         }
@@ -370,6 +384,7 @@ void GameLogic::moveBullet(float timePassed)
                     {
                         currentKorat[i][k] -> wasShot(currentBullet[i][j] -> getDamage());
                         koratHitCount += 1;
+                        std::cout << "Hit with Gauss" << endl;
                     }
                 }
                 if (currentBullet[i][j] -> getType() == 7)
@@ -913,7 +928,7 @@ void GameLogic::drawBikeBoss(sf::RenderWindow& window)
 
 }
 
-void GameLogic::updateDyingBikeBoss()
+void GameLogic::updateDyingBikeBoss(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingBikeBoss.size(); i++)
     {
@@ -921,9 +936,7 @@ void GameLogic::updateDyingBikeBoss()
         {
             dyingBikeBoss.erase(dyingBikeBoss.begin() + i);
             currentKoratCount--;
-            levelWon = true;
-            currentLevel = 11;
-
+            majorTom -> setScore(majorTom -> getScore() + 800);
         }
     }
 }
@@ -1027,7 +1040,7 @@ void GameLogic::drawTankBoss(sf::RenderWindow& window)
 
 }
 
-void GameLogic::updateDyingTankBoss()
+void GameLogic::updateDyingTankBoss(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingTankBoss.size(); i++)
     {
@@ -1035,6 +1048,7 @@ void GameLogic::updateDyingTankBoss()
         {
             dyingTankBoss.erase(dyingTankBoss.begin() + i);
             currentKoratCount--;
+            majorTom -> setScore(majorTom -> getScore() + 1500);
             tankBossDead = true;
 
         }
