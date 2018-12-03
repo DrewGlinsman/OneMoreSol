@@ -122,9 +122,9 @@ class GameLogic{
 
         double directMove = 1;
 
-        int topBikerBulletsFired;
-        int middleBikerBulletsFired;
-        int bottomBikerBulletsFired;
+        int topBikerBulletsFired = 0;
+        int middleBikerBulletsFired = 0;
+        int bottomBikerBulletsFired = 0;
 
         int killedKorat = 0;
         int jackalBulletsFired = 0;
