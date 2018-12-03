@@ -852,6 +852,14 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
     majorTom -> setTomPositionY(508);
 
+    majorTom -> pistol -> resetShotsFired();
+    majorTom -> shotgun -> resetShotsFired();
+    majorTom -> rifle -> resetShotsFired();
+    majorTom -> minigun -> resetShotsFired();
+    majorTom -> thrower -> resetShotsFired();
+    majorTom -> sniper -> resetShotsFired();
+    majorTom -> bigFunGun -> resetShotsFired();
+
     currentKoratCount = 0;
 
     gameSky.rotate(-rotation); //rotate the sun back to the beginning
