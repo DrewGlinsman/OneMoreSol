@@ -8,4 +8,4 @@ shotgun for me! It will allow me to fire in
 wider bursts hitting multiple Korats at the 
 same time. This should help me if they send 
 new forces.
-(Press Space to Continue)
+(Press enter to continue)

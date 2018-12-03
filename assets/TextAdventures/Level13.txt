@@ -7,3 +7,4 @@ as it is. Dr. Lao got the weapon working. She
 could only get the overcharge mode to work. 
 It does massive damage but it needs an entire 
 sol to cool down. Lets try this puppy out!
+(Press enter to continue)
