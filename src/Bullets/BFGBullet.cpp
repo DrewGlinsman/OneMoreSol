@@ -9,7 +9,7 @@ BFGBullet::BFGBullet(int startLane, TextureLoader* loadedTextures) {
 	setLane(startLane);
 	blast.setPosition(height, lane);
 	speed = 100;
-	damage = 40;
+	damage = 200;
 }
 
 BFGBullet::~BFGBullet() {

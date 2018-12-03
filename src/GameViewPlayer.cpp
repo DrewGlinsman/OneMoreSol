@@ -264,7 +264,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					}
 				}
 
-				if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
+				if(Event.key.code == sf::Keyboard::Return)
 				{
 					if(sf::Vector2f (0,0) == menuSelector.getPosition())
 					{
@@ -641,7 +641,7 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
         {
             if(Event.type == sf::Event::KeyPressed)
             {
-                if(Event.key.code == sf::Keyboard::Space)
+                if(Event.key.code == sf::Keyboard::Return)
                 {
                     if(delayClockTime > 2)
                     {
@@ -756,7 +756,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                     }
                 }
 
-                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
+                if(Event.key.code == sf::Keyboard::Return)
                 {
                     if(delayClockTime > 2)
                     {
@@ -816,7 +816,7 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                 }
                 if(Event.type == sf::Event::KeyPressed)
                 {
-                    if(Event.key.code == sf::Keyboard::Space)
+                    if(Event.key.code == sf::Keyboard::Return)
                     {
                         if(x == 0)
                             resetGameToMenu(window);
@@ -942,11 +942,11 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
 void GameViewPlayer::updateLossScreen(sf::RenderWindow &window)
 {
-        window.clear(sf::Color::Black);
-        window.draw(lossScreen);
-        window.draw(retryBtnRec);
-        window.draw(giveUpBtnRec);
-        window.display();
+    window.clear(sf::Color::Black);
+    window.draw(lossScreen);
+    window.draw(retryBtnRec);
+    window.draw(giveUpBtnRec);
+    window.display();
 }
 
 void GameViewPlayer::selectWinButton(sf::RenderWindow& window, int x)
