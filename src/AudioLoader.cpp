@@ -142,5 +142,8 @@ void AudioLoader::load()
     if(!soundTrack[39].loadFromFile("assets/Korat_Left.ogg"))
         std::cout<<"Could not load Korat Left sound" << std::endl;
 
+    if(!soundTrack[40].loadFromFile("assets/Tank_Boss_Fire.ogg"))
+        std::cout<<"Could not load Tank Boss fire sound" << std::endl;
+
 
 }
