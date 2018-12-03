@@ -62,7 +62,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 18;
+        int currentLevel = 6;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -132,6 +132,8 @@ class GameLogic{
         int koratSurvived = 0;
         int bombersExploded = 0;
         int tankBossBulletsFired = 0;
+
+        //string howDidIDie;
 
     public:
         GameLogic();
@@ -211,6 +213,8 @@ class GameLogic{
         int getKoratSurvived();
         int getBombersExploded();
         int getTankBossBulletsFired();
+
+        //string getHowDidIDie();
 
 };
 

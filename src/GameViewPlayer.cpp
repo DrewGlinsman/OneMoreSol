@@ -664,8 +664,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(2);
-                            selectionBox.setPosition(413,780);
+                        	if (logic -> getLevel() >= 3)
+                        	{
+                        		majorTom->setGun(2);
+								selectionBox.setPosition(413,780);
+                        	}
                         }
                         std::cout << "selected plasma shotgun" << std::endl;
 
@@ -675,8 +678,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(3);
-                            selectionBox.setPosition(541,780);
+                        	if (logic -> getLevel() >= 5)
+                        	{
+								majorTom->setGun(3);
+								selectionBox.setPosition(541,780);
+                        	}
                         }
                         std::cout << "selected laser rifle" << std::endl;
                     }
@@ -685,8 +691,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(4);
-                            selectionBox.setPosition(669,780);
+                        	if (logic -> getLevel() >= 7)
+                        	{
+								majorTom->setGun(4);
+								selectionBox.setPosition(669,780);
+                        	}
                         }
                         std::cout << "selected laser minigun" << std::endl;
                     }
@@ -695,8 +704,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(5);
-                            selectionBox.setPosition(797,780);
+                        	if (logic -> getLevel() >= 9)
+                        	{
+								majorTom->setGun(5);
+								selectionBox.setPosition(797,780);
+                        	}
                         }
                         std::cout << "selected arc thrower" << std::endl;
                     }
@@ -705,8 +717,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(6);
-                            selectionBox.setPosition(925,780);
+                        	if (logic -> getLevel() >= 11)
+                        	{
+								majorTom->setGun(6);
+								selectionBox.setPosition(925,780);
+                        	}
                         }
                         std::cout << "selected gauss rifle" << std::endl;
                     }
@@ -715,8 +730,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         if(lockOutKeyboard == false)
                         {
-                            majorTom->setGun(7);
-                            selectionBox.setPosition(1053,780);
+                        	if (logic -> getLevel() >= 13)
+                        	{
+                        		majorTom->setGun(7);
+                                selectionBox.setPosition(1053,780);
+                        	}
                         }
                         std::cout << "selected BFG" << std::endl;
                     }
