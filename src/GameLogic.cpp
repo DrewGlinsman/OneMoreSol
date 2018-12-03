@@ -85,8 +85,9 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                         // This will never be true!
                     }
                 }
-                else
+                else //the korat survived and walked off screen
                 {
+                	koratSurvived += 1;
                     if(currentKorat[i][j] -> getName() == "Bomber")
                     {
                         majorTom -> setSurvivors(0);
@@ -1299,4 +1300,9 @@ int GameLogic::getKoratBulletSize()
 int GameLogic::getKoratHitCount()
 {
 	return koratHitCount;
+}
+
+int GameLogic::getKoratSurvived()
+{
+	return koratSurvived;
 }

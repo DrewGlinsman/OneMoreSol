@@ -396,16 +396,17 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         	for(logicKilledKorat; logicKilledKorat > koratKilled; koratKilled++)
 				koratDyingSound.stop();
 				koratDyingSound.setBuffer(loadedAudio->soundTrack[25]);
+				playerWeaponSound.setVolume(60);
 				koratDyingSound.play();
         }
 
         int logicKoratBulletSize = logic -> getKoratBulletSize();
 		if (logicKoratBulletSize > koratBulletSize)
 		{
-			//for loop to count how many times to play death sound
 			for(logicKoratBulletSize; logicKoratBulletSize > koratBulletSize; koratBulletSize++)
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[27]);
+				playerWeaponSound.setVolume(60);
 				koratFiringSound.play();
 		}
 
@@ -416,7 +417,18 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 			for(logicKoratHitCount; logicKoratHitCount > koratHitCount; koratHitCount++)
 				koratHitSound.stop();
 				koratHitSound.setBuffer(loadedAudio->soundTrack[30]);
+				playerWeaponSound.setVolume(60);
 				koratHitSound.play();
+		}
+
+		int logicKoratSurvived = logic -> getKoratSurvived();
+		if (logicKoratSurvived > koratSurvived)
+		{
+			for(logicKoratSurvived; logicKoratSurvived > koratSurvived; koratSurvived++)
+				koratSurvivedSound.stop();
+				koratSurvivedSound.setBuffer(loadedAudio->soundTrack[39]);
+				playerWeaponSound.setVolume(60);
+				koratSurvivedSound.play();
 		}
 
 
@@ -448,6 +460,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                         	{
                         		playerWeaponSound.stop();
 								playerWeaponSound.setBuffer(loadedAudio->soundTrack[31]); //plasma pistol sound
+								playerWeaponSound.setVolume(60);
 								playerWeaponSound.play();
                         	}
                         	break;
@@ -458,6 +471,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                                 {
                                 	playerWeaponSound.stop();
 									playerWeaponSound.setBuffer(loadedAudio->soundTrack[32]);
+									playerWeaponSound.setVolume(60);
 									playerWeaponSound.play();
                                 }
                             }
@@ -469,6 +483,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             	{
                                     playerWeaponSound.stop();
     								playerWeaponSound.setBuffer(loadedAudio->soundTrack[33]);
+    								playerWeaponSound.setVolume(60);
     								playerWeaponSound.play();
                             	}
                             }
@@ -480,6 +495,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             	{
                                     playerWeaponSound.stop();
     								playerWeaponSound.setBuffer(loadedAudio->soundTrack[34]);
+    								playerWeaponSound.setVolume(60);
     								playerWeaponSound.play();
                             	}
                             }
@@ -491,6 +507,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             	{
                                     playerWeaponSound.stop();
     								playerWeaponSound.setBuffer(loadedAudio->soundTrack[35]);
+    								playerWeaponSound.setVolume(60);
     								playerWeaponSound.play();
                             	}
                             }
@@ -502,6 +519,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             	{
                                     playerWeaponSound.stop();
     								playerWeaponSound.setBuffer(loadedAudio->soundTrack[36]);
+    								playerWeaponSound.setVolume(60);
     								playerWeaponSound.play();
                             	}
                             }
@@ -513,6 +531,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             	{
                                     playerWeaponSound.stop();
     								playerWeaponSound.setBuffer(loadedAudio->soundTrack[37]);
+    								playerWeaponSound.setVolume(60);
     								playerWeaponSound.play();
                             	}
                             }
@@ -522,6 +541,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                         	{
                         		playerWeaponSound.stop();
 								playerWeaponSound.setBuffer(loadedAudio->soundTrack[31]); //plasma pistol sound
+								playerWeaponSound.setVolume(60);
 								playerWeaponSound.play();
                         	}
                         	break;

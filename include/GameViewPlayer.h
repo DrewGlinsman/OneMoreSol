@@ -50,6 +50,7 @@ private:
     sf::SoundBuffer Korat_Dying_Sound;
     sf::SoundBuffer Korat_Firing_Sound;
     sf::SoundBuffer Korat_Hit_Sound;
+    sf::SoundBuffer Korat_Survived;
 
     sf::Sound menuMusic;
     sf::Sound menuTransition;
@@ -59,6 +60,7 @@ private:
     sf::Sound koratDyingSound;
     sf::Sound koratFiringSound;
     sf::Sound koratHitSound;
+    sf::Sound koratSurvivedSound;
 
     sf::Text menuTitle;
     sf::Text menuPlay1;
@@ -89,6 +91,7 @@ private:
     int koratKilled = 0;
     int koratBulletSize = 0;
     int koratHitCount = 0;
+    int koratSurvived = 0;
 
 public:
     sf::Font gameFont;

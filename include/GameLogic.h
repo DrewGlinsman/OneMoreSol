@@ -125,6 +125,7 @@ class GameLogic{
         int killedKorat = 0;
         int koratBulletsFired = 0;
         int koratHitCount = 0;
+        int koratSurvived = 0;
 
     public:
         GameLogic();
@@ -197,6 +198,7 @@ class GameLogic{
         int getKilledKorat();
         int getKoratBulletSize();
         int getKoratHitCount();
+        int getKoratSurvived();
 
 };
 
