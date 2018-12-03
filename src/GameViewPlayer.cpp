@@ -349,6 +349,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         {
             std::cout << "Entered text adventure" << std::endl;
             logic -> pauseGame();
+            logic -> levelWon = false;
             textAdventureIsOpen(window);
         }
 
@@ -613,29 +614,41 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     int offset = 0;
     std::string fileString;
     fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
+
+    if (currentLevel == 10)
+        fileString = "assets/TextAdventures/Level11.txt";
     currentAdventure.open(fileString);
 
+    journal.setPosition(450,25);
+    journal.setTexture(&loadedTextures -> textureArray[18]);
+    journal.setSize(sf::Vector2f(537,839));
+
     solNum.setFont(gameFont);
-    solNum.setCharacterSize(24);
-    solNum.setFillColor(sf::Color::White);
-    solNum.setPosition(0,0);
+    solNum.setCharacterSize(20);
+    solNum.setFillColor(sf::Color::Black);
+    solNum.setPosition(475,75);
     sol = "Sol " + std::to_string(logic -> getLevel());
     if(currentLevel == 10)
         sol = "Sol 11";
     solNum.setString(sol);
+
+    window.draw(sky);
+    window.draw(background);
+    majorTom -> drawTom(window);
+    window.draw(journal);
     window.draw(solNum);
 
     textAdventure.setFont(gameFont);
-    textAdventure.setCharacterSize(32);
-    textAdventure.setFillColor(sf::Color::White);
+    textAdventure.setCharacterSize(24);
+    textAdventure.setFillColor(sf::Color::Black);
 
     while(getline(currentAdventure,line))
     {
         adventure = line;
         textAdventure.setString(adventure);
-        textAdventure.setPosition(100, 250 + offset);
+        textAdventure.setPosition(475, 100 + offset);
         window.draw(textAdventure);
-        offset += 50;
+        offset += 40;
     }
 
 
@@ -717,24 +730,51 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
 bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 {
+    /*
+        music skeleton
+    gameMusic.stop();
+    gameMusic.setBuffer(loadedAudio -> soundTrack[24]);
+    gameMusic.play();
+    gameMusic.setLoop(true);
+    */
+
     window.clear(sf::Color::Black);
-    scoreCnt.setPosition(sf::Vector2f(600,700));
-    scoreCnt.setFillColor(sf::Color::White);
-    scoreCnt.setCharacterSize(44);
+
+    finalScoreCnt.setFont(gameFont);
+    finalScoreCnt.setPosition(sf::Vector2f(700,700));
+    finalScoreCnt.setFillColor(sf::Color::White);
+    finalScoreCnt.setCharacterSize(22);
     string finalScore = "Final Score: " + std::to_string(majorTom -> getScore());
-    scoreCnt.setString(finalScore);
+    finalScoreCnt.setString(finalScore);
     window.draw(winScreen);
+    window.draw(finalScoreCnt);
+    window.display();
+
     window.draw(winBtnRec);
     window.draw(menuBtnRec);
     window.draw(scoreCnt);
     window.display();
     /*while(window.isOpen())
+
     {
          while(window.pollEvent(Event))
          {
+                if(Event.type == sf::Event::Closed)
+                {
+                    gameMusic.stop();
+                    window.close(); // Quit game
+                    return true;
+                }
                 if(Event.key.code == sf::Keyboard::Space)
                 {
+                    resetGameToMenu(window);
                     return false;
+                }
+
+                if(Event.key.code == sf::Keyboard::Escape)
+                {
+                    gameMusic.stop();
+                    window.close();
                 }
          }
     }*/
@@ -806,6 +846,15 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 
 
     return false;
+}
+
+void GameViewPlayer::resetGameToMenu(sf::RenderWindow& window)
+{
+    delete logic;
+    GameLogic* logic = new GameLogic();
+    logic -> pauseGame();
+    menuViewIsOpen(window);
+
 }
 
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen

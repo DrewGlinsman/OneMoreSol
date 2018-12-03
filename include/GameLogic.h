@@ -115,8 +115,6 @@ class GameLogic{
 
         float lastBulletFired;
 
-        bool levelWon;
-
         bool movingUp = false;
         bool movingDown = false;
 
@@ -126,6 +124,8 @@ class GameLogic{
 
     public:
         GameLogic();
+
+        bool levelWon;
 
         sf::Clock reloadClock;
         bool reloadStarted = false;
@@ -178,6 +178,7 @@ class GameLogic{
         void updateDyingTankBoss();
 
         int getLevel();
+        void setLevel(int lev);
         void queryKoratFiring();
         void queryBikeFiring();
         void queryTankFiring();

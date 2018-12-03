@@ -1267,3 +1267,8 @@ void GameLogic::queryTankFiring()
         }
     }
 }
+
+void GameLogic::setLevel(int lev)
+{
+    currentLevel = lev;
+}
