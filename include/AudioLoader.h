@@ -9,6 +9,6 @@ private:
 public:
     AudioLoader();
     void load();
-    std::array<sf::SoundBuffer, 25> soundTrack; //needs to be larger to hold sound effects too
+    std::array<sf::SoundBuffer, 38> soundTrack; //needs to be larger to hold sound effects too
 };
 #endif

@@ -292,7 +292,7 @@ void GameLogic::updateBulletOrder()
         }
 }
 
-void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
+bool GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
 {
     lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
 
@@ -302,6 +302,7 @@ void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed
            currentGun -> shotsFiredPlusOne();
            selectBullet(majorTom, currentGun, timePassed);
            fireBulletClock.restart();
+           return true;
     }
     else if(currentGun -> getShotsFired() == currentGun -> getClipSize())
     {
@@ -310,9 +311,10 @@ void GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed
                 currentGun -> shotsFiredPlusOne();
                 selectBullet(majorTom, currentGun, timePassed);
                 fireBulletClock.restart();
+                return true;
         }
     }
-
+    return false;
 }
 
 /** \brief

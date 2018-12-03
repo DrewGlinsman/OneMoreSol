@@ -97,4 +97,44 @@ void AudioLoader::load()
     if (!soundTrack[24].loadFromFile("assets/Text_Adventure_Music.ogg"))
         std::cout << "Could not load Text Adventure music" << std::endl;
 
+    if (!soundTrack[25].loadFromFile("assets/Korat_Death.ogg"))
+            std::cout << "Could not load Korat Death sound" << std::endl;
+
+    if (!soundTrack[26].loadFromFile("assets/Korat_Explode.ogg"))
+            std::cout << "Could not load Korat Explode sound" << std::endl;
+
+    if (!soundTrack[27].loadFromFile("assets/Korat_Fire1.ogg"))
+            std::cout << "Could not load Korat Fire 1 sound" << std::endl;
+
+    if (!soundTrack[28].loadFromFile("assets/Korat_Fire2.ogg"))
+            std::cout << "Could not load Korat Fire 2 sound" << std::endl;
+
+    if (!soundTrack[29].loadFromFile("assets/Korat_Fire3.ogg"))
+            std::cout << "Could not load Korat Fire 3 sound" << std::endl;
+
+    if (!soundTrack[30].loadFromFile("assets/Korat_Hit.ogg"))
+            std::cout << "Could not load Korat Hit sound" << std::endl;
+
+    if (!soundTrack[31].loadFromFile("assets/Plasma_Pistol_Fire.ogg"))
+            std::cout << "Could not load Plasma Pistol sound" << std::endl;
+
+    if (!soundTrack[32].loadFromFile("assets/Plasma_Shotgun_Fire.ogg"))
+            std::cout << "Could not load Plasma Shotgun sound" << std::endl;
+
+    if (!soundTrack[33].loadFromFile("assets/Laser_Rifle_Fire.ogg"))
+            std::cout << "Could not load Laser Rifle sound" << std::endl;
+
+    if (!soundTrack[34].loadFromFile("assets/Laser_Minigun_Fire.ogg"))
+            std::cout << "Could not load Korat Hit sound" << std::endl;
+
+    if (!soundTrack[35].loadFromFile("assets/Arc_Thrower_Fire.ogg"))
+                std::cout << "Could not load Arc Thrower sound" << std::endl;
+
+    if (!soundTrack[36].loadFromFile("assets/Gauss_Rifle_Fire.ogg"))
+            std::cout << "Could not load Guass Rifle sound" << std::endl;
+
+    if (!soundTrack[37].loadFromFile("assets/BFG_Fire.ogg"))
+                std::cout << "Could not load BFG sound" << std::endl;
+
+
 }
