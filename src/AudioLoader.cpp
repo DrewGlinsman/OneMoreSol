@@ -127,11 +127,11 @@ void AudioLoader::load()
     if (!soundTrack[34].loadFromFile("assets/Laser_Minigun_Fire.ogg"))
             std::cout << "Could not load Korat Hit sound" << std::endl;
 
-    if (!soundTrack[35].loadFromFile("assets/Gauss_Rifle_Fire.ogg"))
-            std::cout << "Could not load Guass Rifle sound" << std::endl;
-
-    if (!soundTrack[36].loadFromFile("assets/Arc_Thrower_Fire.ogg"))
+    if (!soundTrack[35].loadFromFile("assets/Arc_Thrower_Fire.ogg"))
                 std::cout << "Could not load Arc Thrower sound" << std::endl;
+
+    if (!soundTrack[36].loadFromFile("assets/Gauss_Rifle_Fire.ogg"))
+            std::cout << "Could not load Guass Rifle sound" << std::endl;
 
     if (!soundTrack[37].loadFromFile("assets/BFG_Fire.ogg"))
                 std::cout << "Could not load BFG sound" << std::endl;
