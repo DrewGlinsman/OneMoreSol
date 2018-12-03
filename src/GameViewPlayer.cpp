@@ -782,13 +782,10 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
 bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 {
-    /*
-        music skeleton
     gameMusic.stop();
-    gameMusic.setBuffer(loadedAudio -> soundTrack[24]);
+    gameMusic.setBuffer(loadedAudio -> soundTrack[38]);
     gameMusic.play();
     gameMusic.setLoop(true);
-    */
 
     window.clear(sf::Color::Black);
 
