@@ -801,6 +801,7 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
             {
                 if(Event.key.code == sf::Keyboard::Return)
                 {
+                    menuSelection.play();
                     if(delayClockTime > 1)
                     {
                         gameMusic.stop();
@@ -917,6 +918,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
                 if(Event.key.code == sf::Keyboard::Return)
                 {
+                    menuSelection.play();
                     if(delayClockTime > 1)
                     {
                         if (selector.y == 0)
@@ -975,6 +977,7 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                 {
                     if(Event.key.code == sf::Keyboard::Return)
                     {
+                        menuSelection.play();
                         if(x == 0)
                             resetGameToMenu(window);
                         if(x == 1)
@@ -1111,11 +1114,13 @@ void GameViewPlayer::selectWinButton(sf::RenderWindow& window, int x)
     {
         menuBtnRec.setTexture(&loadedTextures -> textureArray[20]);
         winBtnRec.setTexture(&loadedTextures -> textureArray[21]);
+        menuTransition.play();
     }
     if (x == 1)
     {
         menuBtnRec.setTexture(&loadedTextures -> textureArray[19]);
         winBtnRec.setTexture(&loadedTextures -> textureArray[22]);
+        menuTransition.play();
     }
 }
 
@@ -1148,11 +1153,13 @@ void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
     {
         retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
         giveUpBtnRec.setTexture(&(loadedTextures->textureArray[14]));
+        menuTransition.play();
     }
     else if(y == 1)
     {
         retryBtnRec.setTexture(&(loadedTextures->textureArray[12]));
         giveUpBtnRec.setTexture(&(loadedTextures->textureArray[15]));
+        menuTransition.play();
     }
     updateLossScreen(window);
 }
