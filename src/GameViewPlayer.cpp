@@ -2,19 +2,18 @@
 #include <iostream>
 #include <fstream>
 
-using namespace std;
-
 GameViewPlayer::GameViewPlayer() // Player window constructor
 {
     if(!initialized)
     {
-        cout << "initializing" << endl;
+        std::cout << "initializing" << std::endl;
         initializeMenuState();
         initializePlayState();
+        logic = new GameLogic();
+        //loadedAudio = new AudioLoader();
+        majorTom = new MajorTom(loadedTextures);
     }
     initialized = true;
-    logic = new GameLogic();
-    majorTom = new MajorTom(loadedTextures);
 }
 
 void GameViewPlayer::initializeMenuState()
@@ -24,6 +23,14 @@ void GameViewPlayer::initializeMenuState()
     loadedAudio = new AudioLoader();
 
     menuMusic.setBuffer(loadedAudio -> soundTrack[20]);
+
+    //sound was a bit loud so I adjusted it
+    menuMusic.setVolume(75);
+    menuSelection.setVolume(75);
+    menuTransition.setVolume(75);
+    gameMusic.setVolume(75);
+    textMusic.setVolume(75);
+
     menuTransition.setBuffer(loadedAudio -> soundTrack[21]);
     menuSelection.setBuffer(loadedAudio -> soundTrack[22]);
 
@@ -57,6 +64,7 @@ void GameViewPlayer::initializePlayState()
     if (!lockIcon.loadFromFile("assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
 
+    //Store the reload rectangles into the array
     reloadRect[0] = reload1;
     reloadRect[1] = reload2;
     reloadRect[2] = reload3;
@@ -70,6 +78,11 @@ void GameViewPlayer::initializePlayState()
     sky.setPosition(720, 450);
     sky.setTexture(&(loadedTextures->textureArray[2]));
 
+    nightSky.setPosition(0,0);
+    nightSky.setSize(sf::Vector2f(1440,760));
+    nightSky.setFillColor(sf::Color(255,255,255,0));
+    nightSky.setTexture(&(loadedTextures->textureArray[16]));
+
     background.setOrigin(0,724);
     background.setPosition(0,900);
     background.setSize(sf::Vector2f(1440,724));
@@ -80,6 +93,19 @@ void GameViewPlayer::initializePlayState()
     lossScreen.setSize(sf::Vector2f(1440,900));
     lossScreen.setTexture(&(loadedTextures -> textureArray[11]));
 
+    winScreen.setOrigin(0,900);
+    winScreen.setPosition(0,900);
+    winScreen.setSize(sf::Vector2f(1440,900));
+    winScreen.setTexture(&loadedTextures -> textureArray[17]);
+
+    menuBtnRec.setPosition(215,780);
+    menuBtnRec.setSize(sf::Vector2f(366,79));
+    menuBtnRec.setTexture(&loadedTextures->textureArray[18]);
+
+    winBtnRec.setPosition(900,780);
+    winBtnRec.setSize(sf::Vector2f(366,79));
+    winBtnRec.setTexture(&loadedTextures->textureArray[20]);
+
     retryBtnRec.setPosition(200, 600);
     retryBtnRec.setSize(sf::Vector2f(366, 79));
     retryBtnRec.setTexture(&(loadedTextures->textureArray[13]));
@@ -88,13 +114,15 @@ void GameViewPlayer::initializePlayState()
     giveUpBtnRec.setSize(sf::Vector2f(366,79));
     giveUpBtnRec.setTexture(&(loadedTextures->textureArray[14]));
 
+    //Weapon icon and reload rectangle inits
     weapon1.setTextureRect(sf::IntRect(256,0,32,32));
     weapon2.setTextureRect(sf::IntRect(256,32,32,32));
     weapon3.setTextureRect(sf::IntRect(288,0,32,32));
     weapon4.setTextureRect(sf::IntRect(288,32,32,32));
-    weapon5.setTextureRect(sf::IntRect(320,0,32,32));
-    weapon6.setTextureRect(sf::IntRect(320,32,32,32));
-    weapon7.setTextureRect(sf::IntRect(352,0,32,32));
+    //the following x values were adjusted as the sprites overlapped for some reason
+    weapon5.setTextureRect(sf::IntRect(322,0,32,32));
+    weapon6.setTextureRect(sf::IntRect(322,32,32,32));
+    weapon7.setTextureRect(sf::IntRect(353,0,32,32));
     weapon1.setPosition(295,790);
     reloadRect[0].setPosition(376,867);
     weapon2.setPosition(423,790);
@@ -132,6 +160,11 @@ void GameViewPlayer::initializePlayState()
         reloadRect[i].setRotation(180.f);
     }
 
+    //Box around the selected weapon
+    selectionBox.setTexture(loadedTextures->textureArray[0]);
+	selectionBox.setTextureRect(sf::IntRect(0,896,95,95));
+	selectionBox.setPosition(285,780);//init the selection box onto the first weapon
+
     //Survivor Count Display
     survivorCnt.setFont(gameFont);
     survivorCnt.setCharacterSize(22);
@@ -159,17 +192,18 @@ void GameViewPlayer::initializePlayState()
 	majorTomHealth.setString("100/100 Health");//might be able to take this out after survivor count is looped in updater
 	majorTomHealth.setFillColor(sf::Color(0,0,0,255));
 	majorTomHealth.setPosition(75,770);
+
 }
 
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 {
-    updateMenu(window);
     menuMusic.play();
     menuMusic.setLoop(true);
     menuSelector.setPosition(0,0);
-    cout << "0,0" << endl;
+    std::cout << "0,0" << std::endl;
     while(window.isOpen()) // Menu loop
 	{
+        updateMenu(window);
 		while(window.pollEvent(Event))
 		{
 			if(Event.type == sf::Event::Closed)
@@ -187,21 +221,21 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelector.setPosition(0,2);
 						selectMenuButton(window,2);
 						menuTransition.play();
-						cout << "0,2" << endl;
+						std::cout << "0,2" << std::endl;
 					}
 					else if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,0);
 						selectMenuButton(window,0);
 						menuTransition.play();
-						cout << "0,0" << endl;
+						std::cout << "0,0" << std::endl;
 					}
 					else if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,1);
 						selectMenuButton(window,1);
 						menuTransition.play();
-						cout << "0,1" << endl;
+						std::cout << "0,1" << std::endl;
 					}
 				}
 
@@ -212,21 +246,21 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelector.setPosition(0,1);
 						selectMenuButton(window,1);
 						menuTransition.play();
-						cout << "0,1" << endl;
+						std::cout << "0,1" << std::endl;
 					}
 					else if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,2);
 						selectMenuButton(window,2);
 						menuTransition.play();
-						cout << "0,2" << endl;
+						std::cout << "0,2" << std::endl;
 					}
 					else if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,0);
 						selectMenuButton(window,0);
 						menuTransition.play();
-						cout << "0,0" << endl;
+						std::cout << "0,0" << std::endl;
 					}
 				}
 
@@ -294,16 +328,12 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
     while(window.isOpen())
     {
-        if(currentLevel < logic -> getLevel())
+        if(logic -> isTankBossDead())
         {
-            gameMusic.stop();
-            gameMusic.setBuffer(loadedAudio->soundTrack[currentLevel]);
-            gameMusic.play();
-            gameMusic.setLoop(true);
+            winViewIsOpen(window);
         }
-        currentLevel = logic -> getLevel();
-        updateGame(window);
 
+        updateGame(window);
         delta = gameClock.getElapsedTime().asSeconds();
         gameClock.restart();
 
@@ -317,13 +347,25 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         if (logic -> currentLevelEnd())
         {
-            std::cout << "Entered text adventure" << endl;
+            std::cout << "Entered text adventure" << std::endl;
             logic -> pauseGame();
+            logic -> levelWon = false;
             textAdventureIsOpen(window);
         }
 
+        if(currentLevel < logic -> getLevel())
+        {
+            gameMusic.stop();
+            gameMusic.setBuffer(loadedAudio->soundTrack[logic -> getLevel() - 1]);
+            gameMusic.play();
+            gameMusic.setLoop(true);
+        }
+
+        currentLevel = logic -> getLevel();
+
         logic -> pauseGame();
-        logic -> runLevel(sky, majorTom, delta);
+
+        logic -> runLevel(sky, majorTom, delta, nightSky);
         logic -> updateKoratOrder();
         logic -> updateBulletOrder(); //Bullets generation and drawing
         logic -> updateDyingKorat(majorTom);
@@ -362,8 +404,48 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         else
             lockOutKeyboard = false;
 
-        //cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
-       //cout << " Major Tom Location = " << majorTom.getTomPosition() << endl;
+        //std::cout << "Move UP = " << keepMovingUp << " Move DOWN = " << keepMovingDown;
+       //std::cout << " Major Tom Location = " << majorTom.getTomPosition() << std::endl;
+
+         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            {
+                if(lockOutKeyboard == false)
+                {
+                     switch(majorTom -> getGun())
+                    {
+                        case 1:
+                            logic -> fireBullet(majorTom, majorTom -> pistol, delta);
+                            break;
+                        case 2:
+                            if (logic -> getLevel() >= 3)
+                                logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
+                            break;
+                        case 3:
+                            if (logic -> getLevel() >= 5)
+                                logic -> fireBullet(majorTom, majorTom -> rifle, delta);
+                            break;
+                        case 4:
+                            if (logic -> getLevel() >= 7)
+                                logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                            break;
+                        case 5:
+                            if (logic -> getLevel() >= 9)
+                                logic -> fireBullet(majorTom, majorTom -> thrower, delta);
+                            break;
+                        case 6:
+                            if (logic -> getLevel() >= 11)
+                                logic -> fireBullet(majorTom, majorTom -> sniper, delta);
+                            break;
+                        case 7:
+                            if (logic -> getLevel() >= 13)
+                                logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
+                            break;
+                        default:
+                            logic -> fireBullet(majorTom, majorTom -> pistol, delta);
+                            break;
+                    }
+                }
+            }
 
          while(window.pollEvent(Event))
             {
@@ -407,102 +489,170 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                         keepMovingDown = majorTom->initMove(delta, "Down");
                     }
 
-                    if(Event.key.code == sf::Keyboard::Space)
-                    {
-                        if(lockOutKeyboard == false)
-                        {
-
-                             switch(majorTom -> getGun())
-                            {
-                                case 1:
-                                    logic -> fireBullet(majorTom, majorTom -> pistol, delta);
-                                    break;
-                                case 2:
-                                	if (logic -> getLevel() >= 3)
-                                		logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
-                                    break;
-                                case 3:
-                                	if (logic -> getLevel() >= 5)
-                                    	logic -> fireBullet(majorTom, majorTom -> rifle, delta);
-                                    break;
-                                case 4:
-                                	if (logic -> getLevel() >= 7)
-                                		logic -> fireBullet(majorTom, majorTom -> minigun, delta);
-                                    break;
-                                case 5:
-                                	if (logic -> getLevel() >= 9)
-                                		logic -> fireBullet(majorTom, majorTom -> thrower, delta);
-                                    break;
-                                case 6:
-                                	if (logic -> getLevel() >= 11)
-                                		logic -> fireBullet(majorTom, majorTom -> sniper, delta);
-                                    break;
-                                case 7:
-                                	if (logic -> getLevel() >= 13)
-                                		logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
-                                    break;
-                                default:
-                                    logic -> fireBullet(majorTom, majorTom -> pistol, delta);
-                                    break;
-                            }
-
-                        }
-                    }
-
                     if(Event.key.code == sf::Keyboard::Num1)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(1);
-                        cout << "selected plasma pistol" << endl;
+                        {
+                            majorTom->setGun(1);
+                            selectionBox.setPosition(285,780);
+                        }
+                        std::cout << "selected plasma pistol" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num2)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(2);
-                        cout << "selected plasma shotgun" << endl;
+                        {
+                            majorTom->setGun(2);
+                            selectionBox.setPosition(413,780);
+                        }
+                        std::cout << "selected plasma shotgun" << std::endl;
 
                     }
 
                     if(Event.key.code == sf::Keyboard::Num3)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(3);
-                        cout << "selected laser rifle" << endl;
+                        {
+                            majorTom->setGun(3);
+                            selectionBox.setPosition(541,780);
+                        }
+                        std::cout << "selected laser rifle" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num4)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(4);
-                        cout << "selected laser minigun" << endl;
+                        {
+                            majorTom->setGun(4);
+                            selectionBox.setPosition(669,780);
+                        }
+                        std::cout << "selected laser minigun" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num5)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(5);
-                        cout << "selected arc thrower" << endl;
+                        {
+                            majorTom->setGun(5);
+                            selectionBox.setPosition(797,780);
+                        }
+                        std::cout << "selected arc thrower" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num6)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(6);
-                        cout << "selected gauss rifle" << endl;
+                        {
+                            majorTom->setGun(6);
+                            selectionBox.setPosition(925,780);
+                        }
+                        std::cout << "selected gauss rifle" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num7)
                     {
                         if(lockOutKeyboard == false)
-                        majorTom->setGun(7);
-                        cout << "selected BFG" << endl;
+                        {
+                            majorTom->setGun(7);
+                            selectionBox.setPosition(1053,780);
+                        }
+                        std::cout << "selected BFG" << std::endl;
                     }
                 }
             }
+        }
+    return false;
+}
+
+bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
+{
+
+    gameMusic.stop();
+    gameMusic.setBuffer(loadedAudio->soundTrack[24]);
+    gameMusic.play();
+    gameMusic.setLoop(true);
+
+    window.clear(sf::Color::Black);
+    drawAdventure(window);
+
+    while(window.isOpen())
+    {
+        if (delayClockStarted == false)
+        {
+            delayClock.restart();
+        }
+        delayClockStarted = true;
+        delayClockTime = delayClock.getElapsedTime().asSeconds();
+
+        while(window.pollEvent(Event))
+        {
+            if(Event.type == sf::Event::KeyPressed)
+            {
+                if(Event.key.code == sf::Keyboard::Space)
+                {
+                    if(delayClockTime > 2)
+                    {
+                        gameMusic.stop();
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
+{
+    window.clear(sf::Color::Black);
+    std::string adventure;
+    std::string sol;
+    sf::Text solNum;
+    std::string line;
+    std::ifstream currentAdventure;
+    int offset = 0;
+    std::string fileString;
+    fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
+
+    if (currentLevel == 10)
+        fileString = "assets/TextAdventures/Level11.txt";
+    currentAdventure.open(fileString);
+
+    journal.setPosition(450,25);
+    journal.setTexture(&loadedTextures -> textureArray[18]);
+    journal.setSize(sf::Vector2f(537,839));
+
+    solNum.setFont(gameFont);
+    solNum.setCharacterSize(20);
+    solNum.setFillColor(sf::Color::Black);
+    solNum.setPosition(475,75);
+    sol = "Sol " + std::to_string(logic -> getLevel());
+    if(currentLevel == 10)
+        sol = "Sol 11";
+    solNum.setString(sol);
+
+    window.draw(sky);
+    window.draw(background);
+    majorTom -> drawTom(window);
+    window.draw(journal);
+    window.draw(solNum);
+
+    textAdventure.setFont(gameFont);
+    textAdventure.setCharacterSize(24);
+    textAdventure.setFillColor(sf::Color::Black);
+
+    while(getline(currentAdventure,line))
+    {
+        adventure = line;
+        textAdventure.setString(adventure);
+        textAdventure.setPosition(475, 100 + offset);
+        window.draw(textAdventure);
+        offset += 40;
     }
 
-    return false;
+
+    window.display();
 }
 
 bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
@@ -516,6 +666,13 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
     updateLossScreen(window);
     while(window.isOpen() && !retry)
     {
+
+        if (delayClockStarted == false)
+        {
+            delayClock.restart();
+        }
+        delayClockStarted = true;
+        delayClockTime = delayClock.getElapsedTime().asSeconds();
         while(window.pollEvent(Event))
         {
             if(Event.type == sf::Event::Closed)
@@ -549,17 +706,20 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
                 if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
                 {
-                    if (selector.y == 0)
+                    if(delayClockTime > 2)
                     {
-                        retry = true;
-                        logic -> loseLevel(sky, majorTom);
-                        return false;
-                    }
-                    else if (selector.y == 1)
-                    {
-                        gameMusic.stop();
-                        window.close();
-                        return true;
+                        if (selector.y == 0)
+                        {
+                            retry = true;
+                            logic -> loseLevel(sky, majorTom);
+                            return false;
+                        }
+                        else if (selector.y == 1)
+                        {
+                            gameMusic.stop();
+                            window.close();
+                            return true;
+                        }
                     }
                 }
             }
@@ -570,74 +730,131 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
 bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 {
-    return false;
-}
+    /*
+        music skeleton
+    gameMusic.stop();
+    gameMusic.setBuffer(loadedAudio -> soundTrack[24]);
+    gameMusic.play();
+    gameMusic.setLoop(true);
+    */
 
-bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
-{
     window.clear(sf::Color::Black);
-    drawAdventure(window);
 
-    while(window.isOpen() && !optionSelected)
+    finalScoreCnt.setFont(gameFont);
+    finalScoreCnt.setPosition(sf::Vector2f(700,700));
+    finalScoreCnt.setFillColor(sf::Color::White);
+    finalScoreCnt.setCharacterSize(22);
+    string finalScore = "Final Score: " + std::to_string(majorTom -> getScore());
+    finalScoreCnt.setString(finalScore);
+    window.draw(winScreen);
+    window.draw(finalScoreCnt);
+    window.display();
+
+    window.draw(winBtnRec);
+    window.draw(menuBtnRec);
+    window.draw(scoreCnt);
+    window.display();
+    while(window.isOpen())
+
     {
-        while(window.pollEvent(Event))
-        {
-            if(Event.type == sf::Event::KeyPressed)
-            {
+         while(window.pollEvent(Event))
+         {
+                if(Event.type == sf::Event::Closed)
+                {
+                    gameMusic.stop();
+                    window.close(); // Quit game
+                    return true;
+                }
                 if(Event.key.code == sf::Keyboard::Space)
                 {
+                    resetGameToMenu(window);
                     return false;
                 }
-                if(Event.key.code == sf::Keyboard::Y)
+
+                if(Event.key.code == sf::Keyboard::Escape)
                 {
-                    optionSelected = true;
+                    gameMusic.stop();
+                    window.close();
                 }
-                if(Event.key.code == sf::Keyboard::N)
+         }
+    }
+
+
+    /*bool menu = false;
+    while(window.isOpen() && !menu)
+    {
+
+        if (delayClockStarted == false)
+        {
+            delayClock.restart();
+        }
+        delayClockStarted = true;
+        delayClockTime = delayClock.getElapsedTime().asSeconds();
+        while(window.pollEvent(Event))
+        {
+            if(Event.type == sf::Event::Closed)
+            {
+                gameMusic.stop();
+                window.close(); // Quit game
+                return true;
+            }
+
+            if(Event.type == sf::Event::KeyPressed)
+            {
+                if(Event.key.code == sf::Keyboard::Escape)
                 {
-                    optionSelected = true;
+                    gameMusic.stop();
+                    window.close();
+                }
+
+                if(Event.key.code == sf::Keyboard::Left || Event.key.code == sf::Keyboard::Right)
+                {
+                    if (selector.y == 1)
+                    {
+                        selector.y = 0;
+                        selectButton(window, selector.y);
+                    }
+                    else
+                    {
+                        selector.y = 1;
+                        selectButton(window, selector.y);
+                    }
+                }
+
+                if(Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Return)
+                {
+                    if(delayClockTime > 2)
+                    {
+                        if (selector.y == 0)
+                        {
+                            menu = true;
+                            //logic -> loseLevel(sky, majorTom);//how to set this up for menu?
+
+                            return false;
+                        }
+                        else if (selector.y == 1)
+                        {
+                            gameMusic.stop();
+                            window.close();
+                            return true;
+                        }
+                    }
                 }
             }
         }
-    }
+    }*/
+
+
     return false;
 }
 
-void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
+void GameViewPlayer::resetGameToMenu(sf::RenderWindow& window)
 {
-    window.clear(sf::Color::Black);
-    std::string adventure;
-    std::string sol;
-    sf::Text solNum;
-    std::string line;
-    std::ifstream currentAdventure;
-    int offset = 0;
-    std::string fileString;
-    fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
-    currentAdventure.open(fileString);
+    delete logic;
+    GameLogic* logic = new GameLogic();
+    logic -> pauseGame();
+    menuViewIsOpen(window);
 
-    solNum.setFont(gameFont);
-    solNum.setCharacterSize(24);
-    solNum.setFillColor(sf::Color::White);
-    solNum.setPosition(0,0);
-    sol = "Sol " + std::to_string(logic -> getLevel());
-    solNum.setString(sol);
-    window.draw(solNum);
-
-    textAdventure.setFont(gameFont);
-    textAdventure.setCharacterSize(32);
-    textAdventure.setFillColor(sf::Color::White);
-
-    while(getline(currentAdventure,line))
-    {
-        adventure = line;
-        textAdventure.setString(adventure);
-        textAdventure.setPosition(100, 250 + offset);
-        window.draw(textAdventure);
-        offset += 50;
-    }
-
-
-    window.display();
 }
 
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
@@ -660,6 +877,8 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
         logic -> drawTankBoss(window);
     }
 
+    window.draw(nightSky);
+    window.draw(selectionBox);
     window.draw(scoreCnt);
     window.draw(levelCnt);
 

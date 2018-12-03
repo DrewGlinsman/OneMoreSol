@@ -102,3 +102,8 @@ sf::Sprite LaserRifleBullet::getBullet()
     return laser;
 }
 
+int LaserRifleBullet::getType()
+{
+    return 3;
+}
+

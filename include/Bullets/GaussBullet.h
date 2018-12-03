@@ -31,7 +31,7 @@ public:
 
 	int getHeight();
 
-
+    int getType();
 
 private:
 

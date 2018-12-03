@@ -76,7 +76,7 @@ void PlasmaShotgunBullet::setLane(int givenLane)
 
 void PlasmaShotgunBullet::moveCurrentBullet(float timePassed)
 {
-        if(plasma.getPosition().x < 1500)
+        if(plasma.getPosition().x < 750)
         {
             plasma.move(speed * timePassed, 0);
             outOfBounds = false;
@@ -102,3 +102,7 @@ sf::Sprite PlasmaShotgunBullet::getBullet()
     return plasma;
 }
 
+int PlasmaShotgunBullet::getType()
+{
+    return 2;
+}

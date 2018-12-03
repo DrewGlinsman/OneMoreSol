@@ -9,6 +9,6 @@ private:
 public:
     TextureLoader();
     void load();
-    std::array<sf::Texture, 16> textureArray;
+    std::array<sf::Texture, 23> textureArray;
 };
 #endif

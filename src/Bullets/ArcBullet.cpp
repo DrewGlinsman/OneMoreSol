@@ -95,3 +95,7 @@ sf::Sprite ArcBullet::getBullet()
     return arc;
 }
 
+int ArcBullet::getType()
+{
+    return 5;
+}

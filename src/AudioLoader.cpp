@@ -91,7 +91,10 @@ void AudioLoader::load()
     if (!soundTrack[22].loadFromFile("assets/Menu_Selection.ogg"))
     std::cout << "Could not load request menu selection sound." << std::endl;
 
-    if(!soundTrack[23].loadFromFile("assets/Lose_Music.ogg"))
+    if (!soundTrack[23].loadFromFile("assets/Lose_Music.ogg"))
         std::cout << "Could not load loss music" << std::endl;
+
+    if (!soundTrack[24].loadFromFile("assets/Text_Adventure_Music.ogg"))
+        std::cout << "Could not load Text Adventure music" << std::endl;
 
 }

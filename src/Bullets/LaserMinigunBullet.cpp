@@ -102,3 +102,7 @@ sf::Sprite LaserMinigunBullet::getBullet()
     return laser;
 }
 
+int LaserMinigunBullet::getType()
+{
+    return 4;
+}

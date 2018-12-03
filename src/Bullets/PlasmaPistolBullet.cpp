@@ -101,3 +101,8 @@ sf::Sprite PlasmaPistolBullet::getBullet()
 {
     return plasma;
 }
+
+int PlasmaPistolBullet::getType()
+{
+    return 1;
+}

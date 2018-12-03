@@ -42,7 +42,7 @@ class TankBoss {
         sf::Sprite getBoss();
 
     private:
-        int speed = 10;
+        int speed = 60;
         int health = 500;
         bool survive = false;
 

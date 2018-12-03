@@ -95,3 +95,8 @@ sf::Sprite GaussBullet::getBullet()
     return gauss;
 }
 
+int GaussBullet::getType()
+{
+    return 6;
+}
+

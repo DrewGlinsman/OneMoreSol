@@ -24,6 +24,8 @@ class Bullet
 
         virtual int getHeight();
 
+        virtual int getType();
+
     protected:
 
     private:

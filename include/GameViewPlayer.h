@@ -10,6 +10,7 @@
 #include "MajorTom.h"
 #include "GameLogic.h"
 #include "TextureLoader.h"
+#include "AudioLoader.h"
 
 using namespace std;
 
@@ -18,6 +19,11 @@ class GameViewPlayer
 
 private:
     bool initialized;
+
+    sf::Clock delayClock;
+    float delayClockTime;
+    bool delayClockStarted;
+
     float timePassed;
 
     sf::Font menuFont;
@@ -34,12 +40,18 @@ private:
     sf::RectangleShape playBtnRec;
     sf::RectangleShape storyBtnRec;
     sf::RectangleShape exitBtnRec;
+    sf::RectangleShape nightSky;
+    sf::RectangleShape winScreen;
+
     sf::SoundBuffer Menu_Music;
     sf::SoundBuffer Menu_Transition;
     sf::SoundBuffer Menu_Selection;
+
     sf::Sound menuMusic;
     sf::Sound menuTransition;
     sf::Sound menuSelection;
+    sf::Sound textMusic;
+
     sf::Text menuTitle;
     sf::Text menuPlay1;
     sf::Text menuPlay2;
@@ -71,6 +83,7 @@ public:
     const int iconScale = 64;
     int currentLevel;
 
+    sf::RectangleShape journal;
     sf::RectangleShape background;
     sf::RectangleShape lossScreen;
     sf::RectangleShape reload1;
@@ -92,10 +105,13 @@ public:
     sf::Sprite weapon5;
     sf::Sprite weapon6;
     sf::Sprite weapon7;
+    sf::Sprite selectionBox;
 
     sf::Vector2f selector;
     sf::RectangleShape retryBtnRec;
     sf::RectangleShape giveUpBtnRec;
+    sf::RectangleShape menuBtnRec;
+    sf::RectangleShape winBtnRec;
 
     sf::Texture gameImage;
     sf::Texture playerImage;
@@ -112,6 +128,7 @@ public:
     sf::Text survivorCnt;
     sf::Text scoreCnt;
     sf::Text levelCnt;
+    sf::Text finalScoreCnt;
     sf::Text majorTomHealth;
     sf::Event Event;
 
@@ -145,7 +162,7 @@ public:
     void updateLossScreen(sf::RenderWindow &window);
     void selectButton(sf::RenderWindow &window, int y);
     void selectMenuButton(sf::RenderWindow &window, int y);
-
+    void resetGameToMenu(sf::RenderWindow &window);
 
 };
 

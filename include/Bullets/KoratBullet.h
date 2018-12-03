@@ -38,6 +38,8 @@ public:
 
 	int getHeight();
 
+	int getType();
+
 private:
 
 	int lane;

@@ -13,7 +13,7 @@ using namespace std;
 
 KoratBullet::KoratBullet(int givenLane, int givenHeight, TextureLoader* loadedTextures) {
     plasma.setTexture(loadedTextures->textureArray[0]);
-    plasma.setTextureRect(sf::IntRect(256,64,32,32));
+    plasma.setTextureRect(sf::IntRect(384,0,32,32));
 	//plasma.setSize(sf::Vector2f(16.f,16.f));
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(givenLane);
@@ -104,5 +104,10 @@ bool KoratBullet::getOutOfBounds()
 sf::Sprite KoratBullet::getBullet()
 {
     return plasma;
+}
+
+int KoratBullet::getType()
+{
+    return 8;
 }
 
