@@ -153,4 +153,3 @@ foreach(EXEC ${EXECLIST})
   message("-- Adding executable: ${EXECNAME}")
 endforeach(EXEC)
 
-file(COPY ${csci437_SOURCE_DIR}/assets DESTINATION .)

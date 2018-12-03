@@ -28,7 +28,7 @@ void GameViewPlayer::initializeMenuState()
     menuMusic.setVolume(75);
     menuSelection.setVolume(75);
     menuTransition.setVolume(75);
-    gameMusic.setVolume(75);
+    gameMusic.setVolume(85);
     textMusic.setVolume(75);
 
     menuTransition.setBuffer(loadedAudio -> soundTrack[21]);
@@ -58,10 +58,10 @@ void GameViewPlayer::initializeMenuState()
 
 void GameViewPlayer::initializePlayState()
 {
-    if(!gameFont.loadFromFile("assets/impact.ttf"))
+    if(!gameFont.loadFromFile("../assets/impact.ttf"))
         std::cout << "Could not load requested font." << std::endl;
 
-    if (!lockIcon.loadFromFile("assets/lockIcon.png"))
+    if (!lockIcon.loadFromFile("../assets/lockIcon.png"))
         std::cout << "Failed to Load Lock Icon." << std::endl;
 
     //Store the reload rectangles into the array
@@ -330,7 +330,12 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
     {
         if(logic -> isTankBossDead())
         {
-            winViewIsOpen(window);
+            bool exit;
+            exit = winViewIsOpen(window);
+            if (exit)
+            {
+              return true;
+            }
         }
 
         updateGame(window);
@@ -793,10 +798,10 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     std::ifstream currentAdventure;
     int offset = 0;
     std::string fileString;
-    fileString = "assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
+    fileString = "../assets/TextAdventures/Level" + std::to_string(logic->getLevel())+ ".txt";
 
     if (currentLevel == 10)
-        fileString = "assets/TextAdventures/Level11.txt";
+        fileString = "../assets/TextAdventures/Level11.txt";
     currentAdventure.open(fileString);
 
     journal.setPosition(450,25);

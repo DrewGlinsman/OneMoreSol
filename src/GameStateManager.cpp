@@ -9,7 +9,7 @@ GameStateManager::GameStateManager()
 
 void GameStateManager::initialize()
 {
-    if(!loadScreenTexture.loadFromFile("assets/loadingScreen.png"))
+    if(!loadScreenTexture.loadFromFile("../assets/loadingScreen.png"))
         std::cout<<"Failed to load loading screen." << std::endl;
     loadScreen.setOrigin(0,900);
     loadScreen.setPosition(0,900);
