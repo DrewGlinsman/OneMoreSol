@@ -95,6 +95,9 @@ private:
     int hunterBulletsFired = 0;
     int bikerBulletsFired = 0;
     int tankBossBulletsFired = 0;
+    int topBikerBulletsFired = 0;
+    int middleBikerBulletsFired = 0;
+    int bottomBikerBulletsFired = 0;
     int bombersExploded = 0;
     int koratHitCount = 0;
     int koratSurvived = 0;
