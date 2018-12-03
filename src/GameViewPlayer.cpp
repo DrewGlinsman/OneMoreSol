@@ -771,7 +771,7 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
             {
                 if(Event.key.code == sf::Keyboard::Return)
                 {
-                    if(delayClockTime > 2)
+                    if(delayClockTime > 1)
                     {
                         gameMusic.stop();
                         return false;
@@ -886,7 +886,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 
                 if(Event.key.code == sf::Keyboard::Return)
                 {
-                    if(delayClockTime > 2)
+                    if(delayClockTime > 1)
                     {
                         if (selector.y == 0)
                         {
