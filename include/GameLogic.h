@@ -150,7 +150,7 @@ class GameLogic{
         void moveKoratBullet(float, MajorTom*);
         void drawBullet(sf::RenderWindow&);
 
-        void fireBullet(MajorTom*, Gun*, float);
+        bool fireBullet(MajorTom*, Gun*, float);
         bool reloadCurrentGun(Gun*);
         void selectBullet(MajorTom*, Gun*, float);
         void spawnBullet(float);

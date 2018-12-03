@@ -407,35 +407,87 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                      switch(majorTom -> getGun())
                     {
                         case 1:
-                            logic -> fireBullet(majorTom, majorTom -> pistol, delta);
-                            break;
+                        	if (logic -> fireBullet(majorTom, majorTom -> pistol, delta)) //if the gun fired
+                        	{
+                        		playerWeaponSound.stop();
+								playerWeaponSound.setBuffer(loadedAudio->soundTrack[31]); //plasma pistol sound
+								playerWeaponSound.play();
+                        	}
+                        	break;
                         case 2:
                             if (logic -> getLevel() >= 3)
-                                logic -> fireBullet(majorTom, majorTom -> shotgun, delta);
+                            {
+                                if (logic -> fireBullet(majorTom, majorTom -> shotgun, delta))
+                                {
+                                	playerWeaponSound.stop();
+									playerWeaponSound.setBuffer(loadedAudio->soundTrack[32]);
+									playerWeaponSound.play();
+                                }
+                            }
                             break;
                         case 3:
                             if (logic -> getLevel() >= 5)
-                                logic -> fireBullet(majorTom, majorTom -> rifle, delta);
+                            {
+                            	if (logic -> fireBullet(majorTom, majorTom -> rifle, delta))
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[33]);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         case 4:
                             if (logic -> getLevel() >= 7)
-                                logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                            {
+                            	logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[34]);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         case 5:
                             if (logic -> getLevel() >= 9)
-                                logic -> fireBullet(majorTom, majorTom -> thrower, delta);
+                            {
+                            	if (logic -> fireBullet(majorTom, majorTom -> thrower, delta))
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[35]);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         case 6:
                             if (logic -> getLevel() >= 11)
-                                logic -> fireBullet(majorTom, majorTom -> sniper, delta);
+                            {
+                            	if (logic -> fireBullet(majorTom, majorTom -> sniper, delta))
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[36]);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         case 7:
                             if (logic -> getLevel() >= 13)
-                                logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta);
+                            {
+                            	if (logic -> fireBullet(majorTom, majorTom -> bigFunGun, delta))
+                            	{
+                                    playerWeaponSound.stop();
+    								playerWeaponSound.setBuffer(loadedAudio->soundTrack[37]);
+    								playerWeaponSound.play();
+                            	}
+                            }
                             break;
                         default:
-                            logic -> fireBullet(majorTom, majorTom -> pistol, delta);
-                            break;
+                        	if (logic -> fireBullet(majorTom, majorTom -> pistol, delta)) //if the gun fired
+                        	{
+                        		playerWeaponSound.stop();
+								playerWeaponSound.setBuffer(loadedAudio->soundTrack[31]); //plasma pistol sound
+								playerWeaponSound.play();
+                        	}
+                        	break;
                     }
                 }
             }

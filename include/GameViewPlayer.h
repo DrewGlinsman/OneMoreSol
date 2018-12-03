@@ -46,11 +46,13 @@ private:
     sf::SoundBuffer Menu_Music;
     sf::SoundBuffer Menu_Transition;
     sf::SoundBuffer Menu_Selection;
+    sf::SoundBuffer Player_Firing_Weapon_Sound;
 
     sf::Sound menuMusic;
     sf::Sound menuTransition;
     sf::Sound menuSelection;
     sf::Sound textMusic;
+    sf::Sound playerWeaponSound;
 
     sf::Text menuTitle;
     sf::Text menuPlay1;
