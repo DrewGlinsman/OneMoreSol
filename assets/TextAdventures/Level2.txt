@@ -9,4 +9,4 @@ research into a communication device that will
 give us contact with Earth. In the meantime, 
 they have sent out researchers to scavenge 
 equipment for the device and weaponry for me.
-(Press Space to Continue)
+(Press enter to continue)

@@ -166,6 +166,7 @@ public:
     bool textAdventureIsOpen(sf::RenderWindow& window);
     void drawAdventure(sf::RenderWindow& window);
     void updateMenu(sf::RenderWindow& window);
+    void updateWinScreen(sf::RenderWindow& window);
     void updateGame(sf::RenderWindow& window);
     void updateSurvivorCount();
     void updateMajorTomHealth();
@@ -174,6 +175,7 @@ public:
     void updateLossScreen(sf::RenderWindow &window);
     void selectButton(sf::RenderWindow &window, int y);
     void selectMenuButton(sf::RenderWindow &window, int y);
+    void selectWinButton(sf::RenderWindow &window, int x);
     void resetGameToMenu(sf::RenderWindow &window);
 
 };

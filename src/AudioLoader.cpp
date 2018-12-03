@@ -136,5 +136,8 @@ void AudioLoader::load()
     if (!soundTrack[37].loadFromFile("assets/BFG_Fire.ogg"))
                 std::cout << "Could not load BFG sound" << std::endl;
 
+    if(!soundTrack[38].loadFromFile("assets/Victory_Music.ogg"))
+        std::cout<<"Could not load Victory Music" << std::endl;
+
 
 }
