@@ -90,6 +90,7 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                 	koratSurvived += 1;
                     if(currentKorat[i][j] -> getName() == "Bomber")
                     {
+                    	bombersExploded += 1;
                         majorTom -> setSurvivors(0);
                         break;
                     }
@@ -112,6 +113,7 @@ void GameLogic::updateDyingKorat(MajorTom* majorTom)
             if (dyingKorat[i] -> getName() == "Bomber")
             {
                 explode(*dyingKorat[i], majorTom);
+                bombersExploded += 1;
             }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
@@ -1111,7 +1113,22 @@ void GameLogic::queryKoratFiring()
 
                         int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
                         currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
-                        koratBulletsFired += 1;
+                        if (currentKorat[i][j] -> getName() == "Jackal")
+                        {
+                        	jackalBulletsFired += 1;
+                        } else if (currentKorat[i][j] -> getName() == "Elite")
+                        {
+                        	eliteBulletsFired += 1;
+                        } else if (currentKorat[i][j] -> getName() == "Brute")
+                        {
+                        	bruteBulletsFired += 1;
+                        } else if (currentKorat[i][j] -> getName() == "Hunter")
+						{
+							hunterBulletsFired += 1;
+						} else if (currentKorat[i][j] -> getName() == "Biker")
+						{
+							bikerBulletsFired += 1;
+						}
                     } else {
                         //pass? basically ask again later
                     }
@@ -1248,6 +1265,7 @@ void GameLogic::queryTankFiring()
                     //implement stuff to make Korat fire here
                     Bullet* newBullet;
                     newBullet = new KoratBullet(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
+                    tankBossBulletsFired +=1;
 
                     int laneToGoIn;
 
@@ -1292,11 +1310,6 @@ int GameLogic::getKilledKorat() //method to report back
     return killedKorat;
 }
 
-int GameLogic::getKoratBulletSize()
-{
-	return koratBulletsFired;
-}
-
 int GameLogic::getKoratHitCount()
 {
 	return koratHitCount;
@@ -1305,4 +1318,39 @@ int GameLogic::getKoratHitCount()
 int GameLogic::getKoratSurvived()
 {
 	return koratSurvived;
+}
+
+int GameLogic::getJackalBulletsFired()
+{
+	return jackalBulletsFired;
+}
+
+int GameLogic::getEliteBulletsFired()
+{
+	return eliteBulletsFired;
+}
+
+int GameLogic::getBruteBulletsFired()
+{
+	return bruteBulletsFired;
+}
+
+int GameLogic::getHunterBulletsFired()
+{
+	return hunterBulletsFired;
+}
+
+int GameLogic::getBikerBulletsFired()
+{
+	return bikerBulletsFired;
+}
+
+int GameLogic::getBombersExploded()
+{
+	return bombersExploded;
+}
+
+int GameLogic::getTankBossBulletsFired()
+{
+	return tankBossBulletsFired;
 }

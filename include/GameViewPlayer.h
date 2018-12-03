@@ -89,7 +89,13 @@ private:
     float playY5 = 245;
 
     int koratKilled = 0;
-    int koratBulletSize = 0;
+    int jackalBulletsFired = 0;
+    int eliteBulletsFired = 0;
+    int bruteBulletsFired = 0;
+    int hunterBulletsFired = 0;
+    int bikerBulletsFired = 0;
+    int tankBossBulletsFired = 0;
+    int bombersExploded = 0;
     int koratHitCount = 0;
     int koratSurvived = 0;
 

@@ -62,7 +62,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
 
-        int currentLevel = 7;
+        int currentLevel = 18;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -123,9 +123,15 @@ class GameLogic{
         double directMove = 1;
 
         int killedKorat = 0;
-        int koratBulletsFired = 0;
+        int jackalBulletsFired = 0;
+        int eliteBulletsFired = 0;
+        int bruteBulletsFired = 0;
+        int hunterBulletsFired = 0;
+        int bikerBulletsFired = 0;
         int koratHitCount = 0;
         int koratSurvived = 0;
+        int bombersExploded = 0;
+        int tankBossBulletsFired = 0;
 
     public:
         GameLogic();
@@ -196,9 +202,15 @@ class GameLogic{
         bool isTankBossDead();
 
         int getKilledKorat();
-        int getKoratBulletSize();
+        int getJackalBulletsFired();
+        int getEliteBulletsFired();
+        int getBruteBulletsFired();
+        int getHunterBulletsFired();
+        int getBikerBulletsFired();
         int getKoratHitCount();
         int getKoratSurvived();
+        int getBombersExploded();
+        int getTankBossBulletsFired();
 
 };
 
