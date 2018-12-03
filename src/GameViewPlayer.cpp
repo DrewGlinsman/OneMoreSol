@@ -382,13 +382,13 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         {
             logic -> moveBikeBoss(sky, majorTom, delta);
             logic -> queryBikeFiring();
-            logic -> updateDyingBikeBoss();
+            logic -> updateDyingBikeBoss(majorTom);
         }
         if (logic -> getLevel() == 20)
         {
             logic -> moveTankBoss(sky, majorTom, delta);
             logic -> queryTankFiring();
-            logic -> updateDyingTankBoss();
+            logic -> updateDyingTankBoss(majorTom);
         }
 
         logic -> moveBullet(delta);
@@ -776,7 +776,7 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
             {
                 if(Event.key.code == sf::Keyboard::Return)
                 {
-                    if(delayClockTime > 2)
+                    if(delayClockTime > 1)
                     {
                         gameMusic.stop();
                         return false;
@@ -873,6 +873,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                 {
                     gameMusic.stop();
                     window.close();
+                    return true;
                 }
 
                 if(Event.key.code == sf::Keyboard::Left || Event.key.code == sf::Keyboard::Right)
@@ -902,7 +903,8 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                         else if (selector.y == 1)
                         {
                             gameMusic.stop();
-                            window.close();
+                            majorTom -> setHealth(100);
+                            majorTom -> setSurvivors(20);
                             return true;
                         }
                     }
