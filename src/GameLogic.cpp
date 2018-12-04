@@ -1388,6 +1388,15 @@ int GameLogic::getBottomBikerBulletsFired()
 	return bottomBikerBulletsFired;
 }
 
+float GameLogic::getRotation()
+{
+  return rotation;
+}
+
+void GameLogic::setTankBossBool(bool b)
+{
+  tankBossDead = b;
+}
 
 //string GameLogic::getHowDidIDie()
 //{

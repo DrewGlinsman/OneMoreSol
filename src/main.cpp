@@ -41,6 +41,7 @@ int main(int argc, char** argv)
         currentGameWindow -> setState("Play");
 
         quit = currentGameWindow -> gameViewIsOpen();
+        gameRestarted = !quit;
 
         if (quit == true)
         {

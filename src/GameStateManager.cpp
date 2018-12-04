@@ -33,19 +33,17 @@ bool GameStateManager::gameViewIsOpen()
     }
     if (currentState == "Play")
     {
+        std::cout << "Play View" << std::endl;
         quit = playView -> gameViewIsOpen(gameWindow);
         return quit;
     }
 
     if (currentState == "Lost")
     {
-        quit = playView -> lossViewIsOpen(gameWindow);
-        return quit;
-    }
-
-    if (currentState == "Won")
-    {
-        quit = playView -> winViewIsOpen(gameWindow);
+        if(playView -> returnToMenu)
+          quit = playView -> menuViewIsOpen(gameWindow);
+        else
+          quit = playView -> lossViewIsOpen(gameWindow);
         return quit;
     }
 

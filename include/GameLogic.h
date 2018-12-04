@@ -57,12 +57,12 @@ class GameLogic{
         int survivorCount = 20;
         int survivorCountSaved = 20;
 
-        bool lostGame;
+        bool lostGame = false;
         bool tankBossDead = false;
 
         int currentKoratCount = 0;
 
-        int currentLevel = 19;
+        int currentLevel = 20;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -222,6 +222,8 @@ class GameLogic{
         int getBombersExploded();
         int getTankBossBulletsFired();
 
+        float getRotation();
+        void setTankBossBool(bool b);
         //string getHowDidIDie();
 
 };

@@ -43,7 +43,6 @@ private:
     sf::RectangleShape nightSky;
     sf::RectangleShape winScreen;
 
-    sf::SoundBuffer Menu_Music;
     sf::SoundBuffer Menu_Transition;
     sf::SoundBuffer Menu_Selection;
     sf::SoundBuffer Player_Firing_Weapon_Sound;
@@ -52,7 +51,6 @@ private:
     sf::SoundBuffer Korat_Hit_Sound;
     sf::SoundBuffer Korat_Survived;
 
-    sf::Sound menuMusic;
     sf::Sound menuTransition;
     sf::Sound menuSelection;
     sf::Sound textMusic;
@@ -103,6 +101,7 @@ private:
     int koratSurvived = 0;
 
 public:
+    bool returnToMenu;
     sf::Font gameFont;
     const int iconScale = 64;
     int currentLevel;

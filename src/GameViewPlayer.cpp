@@ -22,10 +22,7 @@ void GameViewPlayer::initializeMenuState()
     loadedTextures = new TextureLoader();
     loadedAudio = new AudioLoader();
 
-    menuMusic.setBuffer(loadedAudio -> soundTrack[20]);
-
     //sound was a bit loud so I adjusted it
-    menuMusic.setVolume(75);
     menuSelection.setVolume(75);
     menuTransition.setVolume(75);
     gameMusic.setVolume(85);
@@ -197,8 +194,10 @@ void GameViewPlayer::initializePlayState()
 
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 {
-    menuMusic.play();
-    menuMusic.setLoop(true);
+    gameMusic.stop();
+    gameMusic.setBuffer(loadedAudio -> soundTrack[20]);
+    gameMusic.play();
+    gameMusic.setLoop(true);
     menuSelector.setPosition(0,0);
     std::cout << "0,0" << std::endl;
     while(window.isOpen()) // Menu loop
@@ -271,7 +270,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelection.play();
 						//Sleep(900); //cant use this on linux, find an alternative
 						sf::sleep(sf::milliseconds(900)); //the fix
-						menuMusic.stop();
+						gameMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,1) == menuSelector.getPosition())
@@ -279,7 +278,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelection.play();
 						//Sleep(900); //cant use this on linux, find an alternative
 						sf::sleep(sf::milliseconds(900)); //the fix
-						menuMusic.stop();
+						gameMusic.stop();
 						return false;
 					}
 					if(sf::Vector2f (0,2) == menuSelector.getPosition())
@@ -332,10 +331,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         {
             bool exit;
             exit = winViewIsOpen(window);
-            if (exit)
-            {
-              return true;
-            }
+            return exit;
         }
 
         updateGame(window);
@@ -1004,10 +1000,23 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                     {
                         menuSelection.play();
                         if(x == 0)
-                            resetGameToMenu(window);
+                        {
+                            sky.rotate(-(logic -> getRotation()));
+                            logic -> setLevel(1);
+                            logic -> setTankBossBool(false);
+
+                            majorTom -> setSurvivors(20);
+                            majorTom -> setHealth(100);
+                            majorTom -> setScore(0);
+
+                            returnToMenu = true;
+                            return false;
+                        }
                         if(x == 1)
+                        {
                             window.close();
-                        return false;
+                            return true;
+                        }
                     }
 
                     if(Event.key.code == sf::Keyboard::Escape)
@@ -1055,7 +1064,6 @@ void GameViewPlayer::resetGameToMenu(sf::RenderWindow& window)
     GameLogic* logic = new GameLogic();
     logic -> pauseGame();
     menuViewIsOpen(window);
-
 }
 
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
