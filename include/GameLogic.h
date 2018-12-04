@@ -41,10 +41,10 @@ class GameLogic{
         std::vector<std::vector<shared_ptr<KoratEmpire>>> currentKorat {{},{},{},{},{}};
         std::vector<std::vector<shared_ptr<Bullet>>> currentBullet {{},{},{},{},{}};
         std::vector<std::vector<shared_ptr<Bullet>>> currentKoratBullet {{},{},{},{},{}};
-
+        //separate vectors to hold the dying enemies to allow bullets to pass through them and hit living ones behind them
         std::vector<shared_ptr<Bullet>> dyingGauss {};
         std::vector<shared_ptr<KoratEmpire>> dyingKorat{};
-
+        //vectors to hold the bosses for separate handling
         std::vector<shared_ptr<BikeBoss>> currentBikeBoss{};
         std::vector<shared_ptr<BikeBoss>> dyingBikeBoss{};
 
@@ -53,7 +53,7 @@ class GameLogic{
 
         sf::Clock spawnClock;
         sf::Clock fireBulletClock;
-
+        //init counts for checks and updates
         int survivorCount = 20;
         int survivorCountSaved = 20;
 
@@ -61,7 +61,7 @@ class GameLogic{
         bool tankBossDead = false;
 
         int currentKoratCount = 0;
-
+        //change the current level
         int currentLevel = 10;
 
         int koratSpawnLane;
@@ -81,7 +81,8 @@ class GameLogic{
             6 = Bomber
             7 = MiniTank
         */
-
+        //holds the types of enemies allowed to spawn
+        //enemy pools used are changed based on level checks
         std::vector <int> enemyPool1 {1};
         std::vector <int> enemyPool2 {1, 2};
         std::vector <int> enemyPool3 {1, 2, 3};
@@ -95,7 +96,7 @@ class GameLogic{
 
         std::vector <float> levelSpeedModifierVector {7.5, 7.4, 7.3, 7.2, 7.1, 7.0, 6.9, 6.8, 6.7, 6.6,
                                                       6.5, 6.4, 6.3, 6.2, 6.1, 6.0, 5.9, 5.8, 5.7, 5.6};
-
+        //holds lane centers for entity reference
         const int lane1 = 335;
         const int lane2 = 422;
         const int lane3 = 508;
@@ -114,7 +115,7 @@ class GameLogic{
         float reloadTime;
 
         float lastBulletFired;
-
+        //used to make sure tom doesn't get stuck between a lane
         bool movingUp = false;
         bool movingDown = false;
 
