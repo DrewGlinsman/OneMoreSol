@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include "GameViewPlayer.h"
-#include "GameViewMenu.h"
 #include "GameLogic.h"
 #include "GameStateManager.h"
 

@@ -279,7 +279,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						//Sleep(900); //cant use this on linux, find an alternative
 						sf::sleep(sf::milliseconds(900)); //the fix
 						gameMusic.stop();
-						return false;
+						storyViewIsOpen(window);
 					}
 					if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
@@ -294,6 +294,37 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 		}
 	}
 	return false;
+}
+
+bool GameViewPlayer::storyViewIsOpen(sf::RenderWindow& window)
+{
+    controlScreen.setPosition(450,25);
+    controlScreen.setTexture(&loadedTextures -> textureArray[23]);
+    controlScreen.setSize(sf::Vector2f(658,839));
+
+    window.draw(controlScreen);
+    window.display();
+
+    while(window.isOpen())
+    {
+        while(window.pollEvent(Event))
+		{
+			if(Event.type == sf::Event::Closed)
+			{
+				window.close(); // Quit game
+				return true;
+			}
+
+			if(Event.type == sf::Event::KeyPressed)
+			{
+			    if(Event.key.code == sf::Keyboard::Return || Event.key.code == sf::Keyboard::Escape)
+                {
+                    menuSelection.play();
+                    return false;
+                }
+			}
+		}
+    }
 }
 
 void GameViewPlayer::updateMenu(sf::RenderWindow& window) // Updates screen

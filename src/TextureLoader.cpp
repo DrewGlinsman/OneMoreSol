@@ -89,6 +89,8 @@ void TextureLoader::load()
     if(!textureArray[22].loadFromFile("../assets/winButtonH.png"))
         std::cout << "Failed to Load Win buttonH" << std::endl;
 
+    if(!textureArray[23].loadFromFile("../assets/controlScreen.png"))
+        std::cout << "Failed to Load Control Screen" << std::endl;
 
     //goes through the textureArray and "anti-alias"es them.
     for(int i = 0; i < textureArray.size(); ++i)
