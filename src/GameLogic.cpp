@@ -348,12 +348,14 @@ bool GameLogic::reloadCurrentGun(Gun* currentGun)//needs to communicate to gamev
         reloadClock.restart();
         reloadTime = reloadClock.getElapsedTime().asSeconds();
         reloadStarted = true;
+        reloadFinished = false;
     }
     if(reloadTime > currentGun -> getReloadSpeed() && reloadStarted == true)
     {
         currentGun -> resetShotsFired();
         reloadClock.restart();
         reloadStarted = false;
+        reloadFinished = true;
         return true;
 
     }
@@ -365,6 +367,7 @@ bool GameLogic::reloadCurrentGun(Gun* currentGun)//needs to communicate to gamev
             currentGun -> resetShotsFired();
             reloadClock.restart();
             reloadStarted = false;
+            reloadFinished = true;
             return true;
         }
         return false;

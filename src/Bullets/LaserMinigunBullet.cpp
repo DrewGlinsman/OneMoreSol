@@ -9,7 +9,7 @@ LaserMinigunBullet::LaserMinigunBullet(int startLane, TextureLoader* loadedTextu
 	setLane(startLane);
 	laser.setPosition(height + 20, lane);
 	speed = 1250;
-	damage = 15;
+	damage = 20;
 }
 
 LaserMinigunBullet::~LaserMinigunBullet() {

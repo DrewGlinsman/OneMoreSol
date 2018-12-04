@@ -147,6 +147,7 @@ class GameLogic{
 
         sf::Clock reloadClock;
         bool reloadStarted = false;
+        bool reloadFinished = false;
 
         TextureLoader* loadedTextures;
 
