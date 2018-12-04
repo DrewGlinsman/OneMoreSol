@@ -9,7 +9,7 @@ ArcBullet::ArcBullet(int startLane, TextureLoader* loadedTextures) {
 	setLane(startLane);
 	arc.setPosition(height, lane);
 	speed = 1000;
-	damage = 5;
+	damage = 10;
 }
 
 ArcBullet::~ArcBullet() {

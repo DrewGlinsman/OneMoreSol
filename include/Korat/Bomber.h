@@ -46,7 +46,7 @@ private:
 
 	int lane;
 	int speed = 100;
-	int health = 100;
+	int health = 175;
 	bool survive = false;
 
     int lane1 = 335;

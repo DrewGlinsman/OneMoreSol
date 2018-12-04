@@ -980,6 +980,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
                             gameMusic.stop();
                             majorTom -> setHealth(100);
                             majorTom -> setSurvivors(20);
+                            sky.rotate(-logic -> getRotation());
                             return true;
                         }
                     }

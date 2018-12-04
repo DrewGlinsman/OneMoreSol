@@ -50,8 +50,8 @@ public:
 private:
 
 	int lane;
-	int speed = 100;
-	int health = 100;
+	int speed = 125;
+	int health = 300;
 	bool survive = false;
 
     int lane1 = 335;

@@ -9,7 +9,7 @@ PlasmaShotgunBullet::PlasmaShotgunBullet(int startLane, TextureLoader* loadedTex
 	setLane(startLane);
 	plasma.setPosition(height, lane);
 	speed = 500;
-	damage = 65;
+	damage = 75;
 }
 
 PlasmaShotgunBullet::~PlasmaShotgunBullet() {
