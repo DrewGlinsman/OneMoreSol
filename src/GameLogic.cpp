@@ -4,6 +4,8 @@ GameLogic.cpp
 */
 #include "GameLogic.h"
 #include "KoratBullet.h"
+#include "KoratBullet2.h"
+#include "KoratBullet3.h"
 #include <iostream>
 #include <typeinfo>
 
@@ -1124,25 +1126,40 @@ void GameLogic::queryKoratFiring()
                     {
                         //implement stuff to make Korat fire here
                         Bullet* newBullet;
-                        newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+                        //newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
 
-                        int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
-                        currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
+                        //int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
+                        //currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
                         if (currentKorat[i][j] -> getName() == "Jackal")
                         {
                         	jackalBulletsFired += 1;
+                        	newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+                        	int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
+                            currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
                         } else if (currentKorat[i][j] -> getName() == "Elite")
                         {
                         	eliteBulletsFired += 1;
+                        	newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+                        	int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
+                            currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
                         } else if (currentKorat[i][j] -> getName() == "Brute")
                         {
                         	bruteBulletsFired += 1;
+                        	newBullet = new KoratBullet3(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+                        	int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
+                            currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
                         } else if (currentKorat[i][j] -> getName() == "Hunter")
 						{
 							hunterBulletsFired += 1;
+							newBullet = new KoratBullet2(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+							int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
+                            currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
 						} else if (currentKorat[i][j] -> getName() == "Biker")
 						{
 							bikerBulletsFired += 1;
+							newBullet = new KoratBullet3(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX(), loadedTextures);
+							int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
+                            currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
 						}
                     } else {
                         //pass? basically ask again later
@@ -1203,7 +1220,7 @@ void GameLogic::queryBikeFiring()
                         {
                             Bullet* newBullet2;
                             firingLaneInPixels = currentBikeBoss[i] -> getBossPosition();
-                            newBullet2 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+                            newBullet2 = new KoratBullet3(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
                             middleBikerBulletsFired += 1;
 
                             int laneToGoIn;
@@ -1234,7 +1251,7 @@ void GameLogic::queryBikeFiring()
                         {
                             Bullet* newBullet3;
                             firingLaneInPixels = currentBikeBoss[i] -> getBossPosition() + 86;
-                            newBullet3 = new KoratBullet(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
+                            newBullet3 = new KoratBullet2(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 50, loadedTextures);
                             bottomBikerBulletsFired += 1;
 
                             int laneToGoIn;
@@ -1282,7 +1299,7 @@ void GameLogic::queryTankFiring()
                     int firingLaneInPixels = currentTankBoss[i] -> decideFiringLane();
                     //implement stuff to make Korat fire here
                     Bullet* newBullet;
-                    newBullet = new KoratBullet(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
+                    newBullet = new KoratBullet3(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
                     tankBossBulletsFired +=1;
 
                     int laneToGoIn;
