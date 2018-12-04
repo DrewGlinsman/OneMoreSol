@@ -53,6 +53,13 @@ void MajorTom::incrementRunFrame()
 {
     spriteFrame.left = (spriteFrame.left+64)%192;
     majorTom.setTextureRect(spriteFrame);
+    std::cout<< majorTom.getPosition().y << std::endl;
+    if((majorTom.getPosition().y == 335)||(majorTom.getPosition().y == 422)||(majorTom.getPosition().y == 508)||(majorTom.getPosition().y == 594)||(majorTom.getPosition().y == 680))
+    {
+        std::cout<< "TRUE" <<std::endl;
+        spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
+    }
 }
 
 bool MajorTom::initMove(float timePassed, string direction)
@@ -140,6 +147,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             {
                 setTomPositionX(238);
                 setTomPositionY(335);
+                spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
                 return false;
             }
             else
@@ -156,6 +165,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             {
                 setTomPositionX(197);
                 setTomPositionY(422);
+                spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
                 return false;
             }
             else
@@ -172,6 +183,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             {
                 setTomPositionX(155);
                 setTomPositionY(508);
+                spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
                 return false;
             }
             else
@@ -188,6 +201,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             {
                 setTomPositionX(114);
                 setTomPositionY(594);
+                spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
                 return false;
             }
             else
@@ -195,6 +210,7 @@ bool MajorTom::keepMoving(float timePassed, string direction)
                 majorTom.move(timePassed * 250, timePassed * -500);
                 if(!((int)majorTom.getPosition().x % 5))
                     incrementRunFrame();
+
                 return true;
             }
         }
@@ -208,6 +224,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             {
                 setTomPositionX(197);
                 setTomPositionY(422);
+                spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
                 return false;
             }
             else
@@ -224,6 +242,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             {
                 setTomPositionX(155);
                 setTomPositionY(508);
+                spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
                 return false;
             }
             else
@@ -240,6 +260,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             {
                 setTomPositionX(114);
                 setTomPositionY(594);
+                spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
                 return false;
             }
             else
@@ -256,6 +278,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             {
                 setTomPositionX(72);
                 setTomPositionY(680);
+                spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
                 return false;
             }
             else
@@ -270,6 +294,8 @@ bool MajorTom::keepMoving(float timePassed, string direction)
             {
                 setTomPositionX(72);
                 setTomPositionY(680);
+                spriteFrame.left = 0;
+        majorTom.setTextureRect(spriteFrame);
                 return false;
             }
         }
