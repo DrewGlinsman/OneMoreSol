@@ -122,7 +122,8 @@ bool Bomber::checkDeath()
                 spriteFrame.height = 192;
                 bomber.setOrigin(sf::Vector2f(96.f,96.f));
 
-                if(postDeathTime%1.f)
+                int timeCheck = postDeathTime * 100;
+                if((timeCheck)%100)
                 {
                     spriteFrame.left = ((spriteFrame.left + 192)%1344);//adjust for sprite location
                     if(spriteFrame.left == 0) {spriteFrame.left += 960;}//put on frame 3 to cycle plosion
