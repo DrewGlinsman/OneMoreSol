@@ -6,7 +6,7 @@
 *.cbp
 
 \Debug
-
+\debug
 #executables
 *.exe
 

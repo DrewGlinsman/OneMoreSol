@@ -581,11 +581,11 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                         case 4:
                             if (logic -> getLevel() >= 7)
                             {
-                            	logic -> fireBullet(majorTom, majorTom -> minigun, delta);
+                            	if(logic -> fireBullet(majorTom, majorTom -> minigun, delta))
                             	{
                                     playerWeaponSound.stop();
     								playerWeaponSound.setBuffer(loadedAudio->soundTrack[34]);
-    								playerWeaponSound.setVolume(60);
+    								playerWeaponSound.setVolume(45);
     								playerWeaponSound.play();
                             	}
                             }
