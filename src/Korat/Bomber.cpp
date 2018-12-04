@@ -100,18 +100,35 @@ bool Bomber::checkDeath()
     if (health <= 0)
     {
 		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
-		if (postDeathTime >= .5)
+		if (postDeathTime >= 1)//time till deletion, so essentially time to animate
 		{
 			postDeathClock.restart();
 			return true;
 		}
 		else
         {
-			speed = 0;
+			speed = 0;//stops moving and proceeds with death
 			if (koratDeathSoundPlayed == false)
 			{
 				postDeathClock.restart();
 				koratDeathSoundPlayed = true;
+				//death animate
+				//align the frame to the explosion
+				//alignment is one "frame" away from where it should be to compensate
+				//for the first math add of 192 in the modular arith
+				spriteFrame.left = 384;//576;//x
+                spriteFrame.top = 768;//y
+                spriteFrame.width = 192;
+                spriteFrame.height = 192;
+                bomber.setOrigin(sf::Vector2f(96.f,96.f));
+
+                if(postDeathTime%1.f)
+                {
+                    spriteFrame.left = ((spriteFrame.left + 192)%1344);//adjust for sprite location
+                    if(spriteFrame.left == 0) {spriteFrame.left += 960;}//put on frame 3 to cycle plosion
+                    bomber.setTextureRect(spriteFrame);
+                }
+
 			}
 			return false;
 		}
