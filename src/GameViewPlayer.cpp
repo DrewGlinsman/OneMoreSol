@@ -1141,11 +1141,14 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
         {
             reloadRect[c].setSize(sf::Vector2f(64.f,0.f));
         }
-        if(logic->reloadStarted)
-            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
-        if((64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1) > 32.f) || (64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1) < 0.f))
-            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,0.f));
+        if(logic->reloadStarted == true) // Draw reload symbol <----------
+        {
 
+        }
+        else if (logic->reloadFinished == true) // erase reload symbol <---------
+        {
+
+        }
         window.draw(reloadRect[i]);
     }
 
