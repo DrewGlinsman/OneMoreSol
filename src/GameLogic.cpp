@@ -559,6 +559,9 @@ void GameLogic::moveBullet(float timePassed)
                             currentTankBoss[z] -> wasShot(currentBullet[i][j] -> getDamage());
                             koratHitCount += 1;
                         }
+                        dyingGauss.emplace_back(move(currentBullet[i][j]));
+                        currentBullet[i].erase(currentBullet[i].begin() + j);
+                        continue;
                     }
                     else if(currentBullet[i][j] -> getBullet().getGlobalBounds().intersects(currentTankBoss[z] -> getBoss().getGlobalBounds()))
                     {
