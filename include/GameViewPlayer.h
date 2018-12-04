@@ -42,6 +42,7 @@ private:
     sf::RectangleShape exitBtnRec;
     sf::RectangleShape nightSky;
     sf::RectangleShape winScreen;
+    sf::RectangleShape controlScreen;
 
     sf::SoundBuffer Menu_Transition;
     sf::SoundBuffer Menu_Selection;
@@ -174,6 +175,7 @@ public:
     bool gameViewIsOpen(sf::RenderWindow& window);
     bool lossViewIsOpen(sf::RenderWindow& window);
     bool winViewIsOpen(sf::RenderWindow& window);
+    bool storyViewIsOpen(sf::RenderWindow& window);
     bool textAdventureIsOpen(sf::RenderWindow& window);
     void drawAdventure(sf::RenderWindow& window);
     void updateMenu(sf::RenderWindow& window);
