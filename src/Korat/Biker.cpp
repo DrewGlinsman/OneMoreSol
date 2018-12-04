@@ -111,6 +111,11 @@ bool Biker::checkDeath()
 				postDeathClock.restart();
 				koratDeathSoundPlayed = true;
 			}
+			spriteFrame.left = 192;//x
+            spriteFrame.top = 832;//y
+            spriteFrame.width = 64;
+            spriteFrame.height = 64;
+            biker.setTextureRect(spriteFrame);
 			return false;
 		}
     }

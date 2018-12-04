@@ -66,6 +66,13 @@ bool Grunt::checkDeath()
 				postDeathClock.restart();
 				koratDeathSoundPlayed = true;
 			}
+
+			//death animation
+			spriteFrame.left = 192;//x
+            spriteFrame.top = 448;//y
+            spriteFrame.width = 64;
+            spriteFrame.height = 64;
+            grunt.setTextureRect(spriteFrame);
 			return false;
 		}
     }

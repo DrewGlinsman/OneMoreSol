@@ -111,6 +111,11 @@ bool Elite::checkDeath()
 				postDeathClock.restart();
 				koratDeathSoundPlayed = true;
 			}
+			spriteFrame.left = 192;//x
+            spriteFrame.top = 512;//y
+            spriteFrame.width = 64;
+            spriteFrame.height = 64;
+            elite.setTextureRect(spriteFrame);
 			return false;
 		}
     }

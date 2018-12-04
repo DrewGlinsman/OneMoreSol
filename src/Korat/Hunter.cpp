@@ -109,6 +109,11 @@ bool Hunter::checkDeath()
 				postDeathClock.restart();
 				koratDeathSoundPlayed = true;
 			}
+			spriteFrame.left = 192;//x
+            spriteFrame.top = 576;//y
+            spriteFrame.width = 64;
+            spriteFrame.height = 64;
+            hunter.setTextureRect(spriteFrame);
 			return false;
 		}
     }
