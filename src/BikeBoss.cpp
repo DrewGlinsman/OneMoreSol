@@ -15,7 +15,7 @@ BikeBoss::BikeBoss(TextureLoader* loadedTextures)
     bikeBoss.setTextureRect(spriteFrame);
     bikeBoss.setOrigin(sf::Vector2f(96.f,96.f));
     bikeBoss.setScale(1.2f,1.2f);
-	bikeBoss.setPosition(1500, lane3);
+	bikeBoss.setPosition(1550, lane3);
 	dieBool = false;
 }
 
@@ -142,8 +142,7 @@ bool BikeBoss::checkDeath()
     if (health <= 0)
     {
 		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
-		cout << postDeathTime << endl;
-		if (postDeathTime >= 3)
+		if (postDeathTime >= 5)
 		{
 			postDeathClock.restart();
 			return true;

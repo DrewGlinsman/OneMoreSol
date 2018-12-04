@@ -7,9 +7,9 @@ PlasmaPistolBullet::PlasmaPistolBullet(int startLane, TextureLoader* loadedTextu
     plasma.setTextureRect(sf::IntRect(256,64,32,32));
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
-	plasma.setPosition(height, lane);
+	plasma.setPosition(height + 20, lane);
 	speed = 500;
-	damage = 35;
+	damage = 40;
 }
 
 PlasmaPistolBullet::~PlasmaPistolBullet() {

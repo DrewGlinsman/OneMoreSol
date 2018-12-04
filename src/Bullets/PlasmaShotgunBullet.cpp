@@ -7,9 +7,9 @@ PlasmaShotgunBullet::PlasmaShotgunBullet(int startLane, TextureLoader* loadedTex
     plasma.setTextureRect(sf::IntRect(256,64,32,32));
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
-	plasma.setPosition(height, lane);
-	speed = 500;
-	damage = 75;
+	plasma.setPosition(height + 15, lane);
+	speed = 400;
+	damage = 125;
 }
 
 PlasmaShotgunBullet::~PlasmaShotgunBullet() {
@@ -69,7 +69,7 @@ void PlasmaShotgunBullet::setLane(int givenLane)
 
 void PlasmaShotgunBullet::moveCurrentBullet(float timePassed)
 {
-        if(plasma.getPosition().x < 750)
+        if(plasma.getPosition().x < 1000)
         {
             plasma.move(speed * timePassed, 0);
             outOfBounds = false;

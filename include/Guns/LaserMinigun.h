@@ -23,7 +23,7 @@ class LaserMinigun: public Gun
         int bulletType = 4;
         float fireRate = 0.1;
         int clip = 50;
-        float reloadSpeed = 5;
+        float reloadSpeed = 3;
 };
 
 #endif

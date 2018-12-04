@@ -23,7 +23,7 @@ class ArcThrower: public Gun
         int bulletType = 5;
         float fireRate = 0.05;
         int clip = 100;
-        float reloadSpeed = 1.5;
+        float reloadSpeed = 3;
 };
 
 #endif

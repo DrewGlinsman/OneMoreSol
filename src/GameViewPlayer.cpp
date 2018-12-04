@@ -736,7 +736,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                             majorTom->setGun(1);
                             selectionBox.setPosition(285,780);
                         }
-                        std::cout << "selected plasma pistol" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num2)
@@ -749,7 +748,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 								selectionBox.setPosition(413,780);
                         	}
                         }
-                        std::cout << "selected plasma shotgun" << std::endl;
 
                     }
 
@@ -763,7 +761,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 								selectionBox.setPosition(541,780);
                         	}
                         }
-                        std::cout << "selected laser rifle" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num4)
@@ -776,7 +773,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 								selectionBox.setPosition(669,780);
                         	}
                         }
-                        std::cout << "selected laser minigun" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num5)
@@ -789,7 +785,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 								selectionBox.setPosition(797,780);
                         	}
                         }
-                        std::cout << "selected arc thrower" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num6)
@@ -802,7 +797,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 								selectionBox.setPosition(925,780);
                         	}
                         }
-                        std::cout << "selected gauss rifle" << std::endl;
                     }
 
                     if(Event.key.code == sf::Keyboard::Num7)
@@ -815,7 +809,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                                 selectionBox.setPosition(1053,780);
                         	}
                         }
-                        std::cout << "selected BFG" << std::endl;
                     }
                 }
             }

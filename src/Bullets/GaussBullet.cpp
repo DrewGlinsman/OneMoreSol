@@ -7,9 +7,9 @@ GaussBullet::GaussBullet(int startLane, TextureLoader* loadedTextures) {
     gauss.setTextureRect(sf::IntRect(320,128,1000,32));
 	gauss.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
-	gauss.setPosition(height, lane);
+	gauss.setPosition(height + 15, lane);
 	speed = 2000;
-	damage = 15;
+	damage = 140;
 }
 
 GaussBullet::~GaussBullet() {

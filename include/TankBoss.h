@@ -45,7 +45,7 @@ class TankBoss {
 
     private:
         int speed = 30;
-        int health = 500;
+        int health = 8000;
         bool survive = false;
 
         int lane1 = 335;

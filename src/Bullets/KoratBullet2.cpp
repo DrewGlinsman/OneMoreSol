@@ -6,16 +6,11 @@ using namespace std;
 KoratBullet2::KoratBullet2(int givenLane, int givenHeight, TextureLoader* loadedTextures) {
     plasma.setTexture(loadedTextures->textureArray[0]);
     plasma.setTextureRect(sf::IntRect(384,32,32,32));
-	//plasma.setSize(sf::Vector2f(16.f,16.f));
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(givenLane);
 	plasma.setPosition(givenHeight, lane);
-	speed = 500;
-	damage = 5;
-
-    firePlasmaPistol.setBuffer(plasmaPistolSound);
-    firePlasmaPistol.setVolume(50);
-    firePlasmaPistol.play();
+	speed = 900;
+	damage = 3;
 }
 
 KoratBullet2::~KoratBullet2() {

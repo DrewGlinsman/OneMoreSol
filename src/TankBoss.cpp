@@ -13,8 +13,6 @@ TankBoss::TankBoss(TextureLoader* loadedTextures)
 	spriteFrame.width = 320;
 	spriteFrame.height = 320;
     tankBoss.setTextureRect(spriteFrame);
-    //tankBoss.setSize(sf::Vector2f(384.f,384.f));
-    //tankBoss.setOrigin(sf::Vector2f(384.f/2,384.f/2));
     tankBoss.setOrigin(sf::Vector2f(160.f,160.f));
     tankBoss.setScale(1.2f,1.2f);
     tankBoss.setPosition(1713, lane3);
@@ -53,8 +51,7 @@ bool TankBoss::checkDeath()
     if (health <= 0)
     {
 		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
-		cout << postDeathTime << endl;
-		if (postDeathTime >= 3)
+		if (postDeathTime >= 5)
 		{
 			postDeathClock.restart();
 			return true;
@@ -66,10 +63,6 @@ bool TankBoss::checkDeath()
             if(dieBool == false)
             {
                 dieBool = true;
-                //death animate
-                //align the frame to the explosion
-                //alignment is one "frame" away from where it should be to compensate
-                //for the first math add of 192 in the modular arith
                 spriteFrame.left = 384;//576;//x
                 spriteFrame.top = 768;//y
                 spriteFrame.width = 192;
@@ -100,7 +93,7 @@ bool TankBoss::checkSurvive()
 
 float TankBoss::getPositionX()
 {
-    return tankBoss.getPosition().x - 175;
+    return tankBoss.getPosition().x - 165;
 }
 
 sf::Sprite TankBoss::getBoss()

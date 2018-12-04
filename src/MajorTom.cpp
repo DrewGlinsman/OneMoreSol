@@ -53,10 +53,8 @@ void MajorTom::incrementRunFrame()
 {
     spriteFrame.left = (spriteFrame.left+64)%192;
     majorTom.setTextureRect(spriteFrame);
-    std::cout<< majorTom.getPosition().y << std::endl;
     if((majorTom.getPosition().y == 335)||(majorTom.getPosition().y == 422)||(majorTom.getPosition().y == 508)||(majorTom.getPosition().y == 594)||(majorTom.getPosition().y == 680))
     {
-        std::cout<< "TRUE" <<std::endl;
         spriteFrame.left = 0;
         majorTom.setTextureRect(spriteFrame);
     }

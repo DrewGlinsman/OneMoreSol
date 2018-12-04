@@ -52,7 +52,7 @@ class BikeBoss {
 
     private:
         int speed = 40;
-        int health = 500;
+        int health = 4000;
         bool survive = false;
 
         float lastBulletFired;

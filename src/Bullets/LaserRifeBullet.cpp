@@ -7,9 +7,9 @@ LaserRifleBullet::LaserRifleBullet(int startLane, TextureLoader* loadedTextures)
     laser.setTextureRect(sf::IntRect(256,96,32,32));
 	laser.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(startLane);
-	laser.setPosition(height, lane);
+	laser.setPosition(height + 20, lane);
 	speed = 1000;
-	damage = 20;
+	damage = 25;
 }
 
 LaserRifleBullet::~LaserRifleBullet() {
