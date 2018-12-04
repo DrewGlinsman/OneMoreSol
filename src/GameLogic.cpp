@@ -1393,6 +1393,11 @@ float GameLogic::getRotation()
   return rotation;
 }
 
+void GameLogic::setTankBossBool(bool b)
+{
+  tankBossDead = b;
+}
+
 //string GameLogic::getHowDidIDie()
 //{
 //	return howDidIDie;

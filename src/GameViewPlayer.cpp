@@ -1002,11 +1002,12 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                         if(x == 0)
                         {
                             sky.rotate(-(logic -> getRotation()));
-                            delete logic;
-                            GameLogic* logic = new GameLogic();
+                            logic -> setLevel(1);
+                            logic -> setTankBossBool(false);
 
-                            delete majorTom;
-                            MajorTom* majorTom = new MajorTom(loadedTextures);
+                            majorTom -> setSurvivors(20);
+                            majorTom -> setHealth(100);
+                            majorTom -> setScore(0);
 
                             returnToMenu = true;
                             return false;

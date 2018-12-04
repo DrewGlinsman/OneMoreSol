@@ -223,6 +223,7 @@ class GameLogic{
         int getTankBossBulletsFired();
 
         float getRotation();
+        void setTankBossBool(bool b);
         //string getHowDidIDie();
 
 };
