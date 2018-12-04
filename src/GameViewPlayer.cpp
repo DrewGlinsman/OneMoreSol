@@ -268,7 +268,6 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					if(sf::Vector2f (0,0) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						//Sleep(900); //cant use this on linux, find an alternative
 						sf::sleep(sf::milliseconds(900)); //the fix
 						gameMusic.stop();
 						return false;
@@ -276,15 +275,12 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 					if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						//Sleep(900); //cant use this on linux, find an alternative
 						sf::sleep(sf::milliseconds(900)); //the fix
-						gameMusic.stop();
 						storyViewIsOpen(window);
 					}
 					if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelection.play();
-						//Sleep(900); //cant use this on linux, find an alternative
 						sf::sleep(sf::milliseconds(900)); //the fix
 						window.close();
 						return true;
