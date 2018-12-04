@@ -37,6 +37,8 @@ class BikeBoss {
 
         bool checkDeath();
 
+        bool dieBool;
+
         bool checkSurvive();
 
         void wasShot(int damage);

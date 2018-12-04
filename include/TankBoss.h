@@ -29,6 +29,8 @@ class TankBoss {
 
         bool checkDeath();
 
+        bool dieBool;
+
         bool checkSurvive();
 
         void wasShot(int damage);
