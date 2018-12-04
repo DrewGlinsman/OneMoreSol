@@ -10,7 +10,7 @@ Biker::Biker(int startLane, TextureLoader* loadedTextures){
 	spriteFrame.left = 0;//x
 	spriteFrame.top = 832;//y
 	spriteFrame.width = 64;
-	spriteFrame.height = 64;
+	spriteFrame.height = 62;
 	biker.setTextureRect(spriteFrame);
 	biker.setOrigin(sf::Vector2f(32.f,32.f));
 	setLane(startLane);
