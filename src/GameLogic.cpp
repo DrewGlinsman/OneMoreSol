@@ -1388,6 +1388,10 @@ int GameLogic::getBottomBikerBulletsFired()
 	return bottomBikerBulletsFired;
 }
 
+float GameLogic::getRotation()
+{
+  return rotation;
+}
 
 //string GameLogic::getHowDidIDie()
 //{
