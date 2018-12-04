@@ -810,6 +810,10 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                         	}
                         }
                     }
+                    if(Event.key.code == sf::Keyboard::K)
+                    {
+                        sky.rotate(150);
+                    }
                 }
             }
         }
