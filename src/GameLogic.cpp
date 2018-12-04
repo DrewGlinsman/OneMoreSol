@@ -10,7 +10,7 @@ GameLogic.cpp
 #include <typeinfo>
 
 using namespace std;
-
+//class initializer
 GameLogic::GameLogic()
 {
     loadedTextures = new TextureLoader();
@@ -30,7 +30,7 @@ bool GameLogic::currentLevelEnd()
 {
     return levelWon;
 }
-
+//checks game completion stats
 bool GameLogic::checkEnd(MajorTom *majorTom)
 {
     if(majorTom -> getSurvivors() <= 0 || majorTom -> getHealth() <= 0)
@@ -58,6 +58,15 @@ void GameLogic::updateKoratOrder()
         }
 }
 
+/** \brief
+ * Handles enemy death checks and movement
+ * If an enemy dies it adds appropriate score to the MajorTom*
+ * If an enemy is still alive it uses the float as a time to advance movement
+ * \param float
+ * \param MajorTom*
+ * \return void
+ *
+ */
 void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
 {
     if(!isPaused)
@@ -137,6 +146,13 @@ void GameLogic::updateDyingKorat(MajorTom* majorTom)
     }
 }
 
+/** \brief
+ *  Handles the logic for an enemy explosion damaging other lanes.
+ * \param bomber KoratEmpire&
+ * \param majorTom MajorTom*
+ * \return void
+ *
+ */
 void GameLogic::explode(KoratEmpire &bomber, MajorTom* majorTom)
 {
     for (int i = 0; i < currentKorat.size(); i ++)
@@ -162,6 +178,12 @@ void GameLogic::explode(KoratEmpire &bomber, MajorTom* majorTom)
     }
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return void
+ *
+ */
 void GameLogic::drawKorat(sf::RenderWindow& window)
 {
     for (int i = 0; i < currentKorat.size(); i ++)
@@ -177,6 +199,11 @@ void GameLogic::drawKorat(sf::RenderWindow& window)
     }
 }
 
+/** \brief
+ *  Checks what level the player is on and decides what pool of enemy types to pick from using the randomizer.
+ * \return void
+ *
+ */
 void GameLogic::selectKorat()
 {
     koratSpawnLane = decideKoratLane();
@@ -204,6 +231,11 @@ void GameLogic::selectKorat()
     spawnKorat();
 }
 
+/** \brief
+ *  Handles spawning new enemies.
+ * \return void
+ *
+ */
 void GameLogic::spawnKorat()
 {
     KoratEmpire* newKorat;
@@ -264,6 +296,11 @@ void GameLogic::spawnKorat()
    // cout << "==============================" << endl;
 }
 
+/** \brief
+ *  Randomizer to place enemies in lanes.
+ * \return int
+ *
+ */
 int GameLogic::decideKoratLane()
 {
 
@@ -283,6 +320,12 @@ int GameLogic::decideKoratLane()
     return lane;
 }
 
+/** \brief
+ *  Randomizer to select the type of enemy generated from a pool of allowed types.
+ * \param enemyPool std::vector<int>
+ * \return int
+ *
+ */
 int GameLogic::decideKoratType(std::vector<int> enemyPool)
 {
     double enemyType = Random() * enemyPool.size();
@@ -310,6 +353,14 @@ void GameLogic::updateBulletOrder()
         }
 }
 
+/** \brief
+ *  Paces bullet firing to prevent machine gunning and sustain reloads.
+ * \param majorTom MajorTom*
+ * \param currentGun Gun*
+ * \param timePassed float
+ * \return bool
+ *
+ */
 bool GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
 {
     lastBulletFired = fireBulletClock.getElapsedTime().asSeconds();
@@ -371,6 +422,12 @@ bool GameLogic::reloadCurrentGun(Gun* currentGun)//needs to communicate to gamev
     }
 }
 
+/** \brief
+ *
+ * \param timePassed float
+ * \return void
+ *
+ */
 void GameLogic::moveBullet(float timePassed)
 {
     gaussLeftScreen(timePassed);
