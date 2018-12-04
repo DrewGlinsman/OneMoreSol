@@ -1,11 +1,3 @@
-/*
- * KoratBullet.cpp
- *
- *  Created on: Nov 10, 2018
- *      Author: Bowden
- */
-
-
 #include "KoratBullet.h"
 #include <iostream>
 

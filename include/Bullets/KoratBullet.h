@@ -1,11 +1,3 @@
-/*
- * KoratBullet.h
- *
- *  Created on: Nov 10, 2018
- *      Author: Bowden
- */
-
-
 #ifndef INCLUDE_KoratBullet_H_
 #define INCLUDE_KoratBullet_H_
 
