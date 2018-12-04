@@ -39,7 +39,6 @@ int main(int argc, char** argv)
         gameStarted = true;
 
         currentGameWindow -> setState("Play");
-        cout << "Entering Play View" << endl;
 
         quit = currentGameWindow -> gameViewIsOpen();
         gameRestarted = !quit;
