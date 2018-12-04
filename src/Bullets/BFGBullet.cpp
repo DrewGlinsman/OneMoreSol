@@ -4,11 +4,12 @@
 
 BFGBullet::BFGBullet(int startLane, TextureLoader* loadedTextures) {
     blast.setTexture(loadedTextures->textureArray[0]);
-    blast.setTextureRect(sf::IntRect(256,256,192,192));
+    blast.setTextureRect(sf::IntRect(576,768,192,192));
 	blast.setOrigin(sf::Vector2f(96.f,96.f));
+	blast.setScale(sf::Vector2f(15.f,15.f));
 	setLane(startLane);
 	blast.setPosition(height, lane);
-	speed = 100;
+	speed = 2500;
 	damage = 500;
 }
 
@@ -69,7 +70,7 @@ void BFGBullet::setLane(int givenLane)
 
 void BFGBullet::moveCurrentBullet(float timePassed)
 {
-        if(blast.getPosition().x < 250)
+        if(blast.getPosition().x < 2000)
         {
             blast.move(speed * timePassed, 0);
             outOfBounds = false;
