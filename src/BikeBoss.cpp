@@ -16,6 +16,7 @@ BikeBoss::BikeBoss(TextureLoader* loadedTextures)
     bikeBoss.setOrigin(sf::Vector2f(96.f,96.f));
     bikeBoss.setScale(1.2f,1.2f);
 	bikeBoss.setPosition(1500, lane3);
+	dieBool = false;
 }
 
 float BikeBoss::getBossPosition()
@@ -150,6 +151,24 @@ bool BikeBoss::checkDeath()
 		else
         {
 			speed = 0;
+			if(dieBool == false)
+            {
+                dieBool = true;
+                //death animate
+                //align the frame to the explosion
+                //alignment is one "frame" away from where it should be to compensate
+                //for the first math add of 192 in the modular arith
+                spriteFrame.left = 384;//576;//x
+                spriteFrame.top = 768;//y
+                spriteFrame.width = 192;
+                spriteFrame.height = 192;
+                bikeBoss.setOrigin(sf::Vector2f(96.f,96.f));
+                bikeBoss.setScale(sf::Vector2f(2.f,2.f));
+            }
+
+            spriteFrame.left = ((spriteFrame.left + 192)%1344);//adjust for sprite location
+            if(spriteFrame.left == 0) {spriteFrame.left += 960;}//put on frame 3 to cycle plosion
+            bikeBoss.setTextureRect(spriteFrame);
 			return false;
 		}
     }

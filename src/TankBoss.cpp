@@ -18,6 +18,7 @@ TankBoss::TankBoss(TextureLoader* loadedTextures)
     tankBoss.setOrigin(sf::Vector2f(160.f,160.f));
     tankBoss.setScale(1.2f,1.2f);
     tankBoss.setPosition(1713, lane3);
+    dieBool = false;
 }
 
 void TankBoss::moveBoss(float timePassed)
@@ -61,6 +62,26 @@ bool TankBoss::checkDeath()
 		else
         {
 			speed = 0;
+
+            if(dieBool == false)
+            {
+                dieBool = true;
+                //death animate
+                //align the frame to the explosion
+                //alignment is one "frame" away from where it should be to compensate
+                //for the first math add of 192 in the modular arith
+                spriteFrame.left = 384;//576;//x
+                spriteFrame.top = 768;//y
+                spriteFrame.width = 192;
+                spriteFrame.height = 192;
+                tankBoss.setOrigin(sf::Vector2f(96.f,96.f));
+                tankBoss.setScale(sf::Vector2f(2.5,2.5));
+            }
+
+            spriteFrame.left = ((spriteFrame.left + 192)%1344);//adjust for sprite location
+            if(spriteFrame.left == 0) {spriteFrame.left += 960;}//put on frame 3 to cycle plosion
+            tankBoss.setTextureRect(spriteFrame);
+
 			return false;
 		}
     }
