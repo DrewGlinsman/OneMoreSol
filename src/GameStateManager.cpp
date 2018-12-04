@@ -33,7 +33,6 @@ bool GameStateManager::gameViewIsOpen()
     }
     if (currentState == "Play")
     {
-        std::cout << "Play View" << std::endl;
         quit = playView -> gameViewIsOpen(gameWindow);
         return quit;
     }

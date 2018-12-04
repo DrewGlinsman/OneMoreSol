@@ -421,7 +421,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logicKilledKorat > koratKilled)
         {
         	//for loop to count how many times to play death sound
-        	for(logicKilledKorat; logicKilledKorat > koratKilled; koratKilled++)
+        for(logicKilledKorat; logicKilledKorat > koratKilled; koratKilled++)
         {
 				koratDyingSound.stop();
 				koratDyingSound.setBuffer(loadedAudio->soundTrack[25]);
@@ -433,13 +433,13 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         int logicJackalBulletsFired = logic -> getJackalBulletsFired();
 		if (logicJackalBulletsFired > jackalBulletsFired)
 		{
-			for(logicJackalBulletsFired; logicJackalBulletsFired > jackalBulletsFired; jackalBulletsFired++)
-      {
+        for(logicJackalBulletsFired; logicJackalBulletsFired > jackalBulletsFired; jackalBulletsFired++)
+        {
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[27]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
-      }
+        }
 		}
 
         int logicEliteBulletsFired = logic -> getEliteBulletsFired();
