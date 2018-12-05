@@ -7,7 +7,7 @@ Hunter::Hunter(int startLane, TextureLoader* loadedTextures){
 
 	hunter.setTexture(loadedTextures->textureArray[0]);
 	spriteFrame.left = 0;//x
-	spriteFrame.top = 576;//y
+	spriteFrame.top = 768;//y
 	spriteFrame.width = 64;
 	spriteFrame.height = 64;
 	hunter.setTextureRect(spriteFrame);
@@ -110,7 +110,7 @@ bool Hunter::checkDeath()
 				koratDeathSoundPlayed = true;
 			}
 			spriteFrame.left = 192;//x
-            spriteFrame.top = 576;//y
+            spriteFrame.top = 768;//y
             spriteFrame.width = 64;
             spriteFrame.height = 64;
             hunter.setTextureRect(spriteFrame);
