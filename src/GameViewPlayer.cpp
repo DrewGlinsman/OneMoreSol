@@ -998,11 +998,19 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
     window.clear(sf::Color::Black);
 
     finalScoreCnt.setFont(gameFont);
-    finalScoreCnt.setPosition(sf::Vector2f(700,700));
+    finalScoreCnt.setPosition(sf::Vector2f(650,700));
     finalScoreCnt.setFillColor(sf::Color::White);
     finalScoreCnt.setCharacterSize(22);
     string finalScore = "Final Score: " + std::to_string(majorTom -> getScore());
     finalScoreCnt.setString(finalScore);
+
+    koratKilledCnt.setFont(gameFont);
+    koratKilledCnt.setPosition(sf::Vector2f(650, 750));
+    koratKilledCnt.setFillColor(sf::Color::White);
+    koratKilledCnt.setCharacterSize(22);
+    int koratKilled = logic -> getKilledKorat();
+    string koratKill = "Korat Killed: " + std::to_string(koratKilled);
+    koratKilledCnt.setString(koratKill);
 
     updateWinScreen(window);
     int x = 0;
@@ -1078,6 +1086,7 @@ void GameViewPlayer::updateWinScreen(sf::RenderWindow& window)
 {
     window.draw(winScreen);
     window.draw(finalScoreCnt);
+    window.draw(koratKilledCnt);
     window.draw(winBtnRec);
     window.draw(menuBtnRec);
     window.display();

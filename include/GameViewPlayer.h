@@ -68,6 +68,7 @@ private:
     sf::Text menuPlay4;
     sf::Text menuPlay5;
     sf::Text textAdventure;
+    sf::Text koratKilledCnt;
 
     float titleX = 130;
     float titleY = 20;
