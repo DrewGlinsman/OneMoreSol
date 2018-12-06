@@ -62,7 +62,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
         //change the current level
-        int currentLevel = 14;
+        int currentLevel = 1;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -200,7 +200,6 @@ class GameLogic{
         void queryBikeFiring();
         void queryTankFiring();
 
-        void pauseGame();
         void explode(KoratEmpire &bomber, MajorTom* majorTom);
         void clearAssets();
         bool currentLevelEnd();
