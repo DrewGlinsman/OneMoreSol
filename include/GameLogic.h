@@ -106,8 +106,8 @@ class GameLogic{
         int sunStartOrientation = 0;
         int sunRiseOrientation = 10;
         int sunSetOrientation = 150;
-        float levelSpeedModifier = 4.5;
-        float levelSpawnModifier = 2.5;
+        float levelSpeedModifier = 7.5;
+        float levelSpawnModifier = 2;
         float rotation;
         float spawnTime;
         bool enemyBehindTom = false;

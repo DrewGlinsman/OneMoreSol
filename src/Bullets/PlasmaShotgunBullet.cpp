@@ -70,7 +70,7 @@ void PlasmaShotgunBullet::setLane(int givenLane)
 
 void PlasmaShotgunBullet::moveCurrentBullet(float timePassed)
 {
-        if(plasma.getPosition().x < 1000)
+        if(plasma.getPosition().x < 850)
         {
             plasma.move(speed * timePassed, 0);
             outOfBounds = false;
