@@ -25,6 +25,7 @@ private:
     bool delayClockStarted;
 
     float timePassed;
+    int savedGun;
 
     sf::Font menuFont;
     sf::Texture menuImage;

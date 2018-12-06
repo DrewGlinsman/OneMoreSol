@@ -112,8 +112,6 @@ class GameLogic{
         float spawnTime;
         bool enemyBehindTom = false;
 
-        float reloadTime;
-
         float lastBulletFired;
         //used to make sure tom doesn't get stuck between a lane
         bool movingUp = false;
@@ -148,6 +146,7 @@ class GameLogic{
         sf::Clock reloadClock;
         bool reloadStarted = false;
         bool reloadFinished = false;
+        float reloadTime;
 
         TextureLoader* loadedTextures;
 
