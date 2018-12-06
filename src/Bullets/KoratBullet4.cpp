@@ -5,7 +5,7 @@ using namespace std;
 
 KoratBullet4::KoratBullet4(int givenLane, int givenHeight, TextureLoader* loadedTextures) {
     plasma.setTexture(loadedTextures->textureArray[0]);
-    plasma.setTextureRect(sf::IntRect(480,32,32,32));
+    plasma.setTextureRect(sf::IntRect(847,847,32,32));
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(givenLane);
 	plasma.setPosition(givenHeight, lane);
