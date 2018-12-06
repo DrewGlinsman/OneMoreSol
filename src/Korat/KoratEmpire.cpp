@@ -4,7 +4,7 @@
 
 #include <KoratEmpire.h>
 
-KoratEmpire::KoratEmpire(int startLane, TextureLoader* loadedTextures){
+KoratEmpire::KoratEmpire(int startLane) {
 }
 //empty override
 KoratEmpire::KoratEmpire(){
