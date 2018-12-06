@@ -30,8 +30,8 @@ void GameViewPlayer::initializeMenuState()
     //sound was a bit loud so I adjusted it
     menuSelection.setVolume(75);
     menuTransition.setVolume(75);
-    gameMusic.setVolume(65);
-    textMusic.setVolume(60);
+    gameMusic.setVolume(45);
+    textMusic.setVolume(40);
 
     menuTransition.setBuffer(loadedAudio -> soundTrack[21]);
     menuSelection.setBuffer(loadedAudio -> soundTrack[22]);
@@ -480,133 +480,133 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 		if (logicEliteBulletsFired > eliteBulletsFired)
 		{
 			for(logicEliteBulletsFired; logicEliteBulletsFired > eliteBulletsFired; eliteBulletsFired++)
-      {
+			{
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[27]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
-		 }
-   }
+			}
+		}
 
         int logicBruteBulletsFired = logic -> getBruteBulletsFired();
 		if (logicBruteBulletsFired > bruteBulletsFired)
 		{
 			for(logicBruteBulletsFired; logicBruteBulletsFired > bruteBulletsFired; bruteBulletsFired++)
-      {
+			{
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[28]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
-		  }
-    }
+			}
+		}
 
         int logicHunterBulletsFired = logic -> getHunterBulletsFired();
 		if (logicHunterBulletsFired > hunterBulletsFired)
 		{
 			for(logicHunterBulletsFired; logicHunterBulletsFired > hunterBulletsFired; hunterBulletsFired++)
-      {
+			{
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[28]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
-		  }
-    }
+			}
+		}
 
         int logicBikerBulletsFired = logic -> getBikerBulletsFired();
 		if (logicBikerBulletsFired > bikerBulletsFired)
 		{
 			for(logicBikerBulletsFired; logicBikerBulletsFired > bikerBulletsFired; bikerBulletsFired++)
-      {
+			{
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[29]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
-		  }
-    }
+			}
+		}
         int logicBombersExploded = logic -> getBombersExploded();
 		if (logicBombersExploded > bombersExploded)
 		{
 			for(logicBombersExploded; logicBombersExploded > bombersExploded; bombersExploded++)
-      {
+			{
 				bomberExplodingSound.stop();
 				bomberExplodingSound.setBuffer(loadedAudio->soundTrack[26]);
 				bomberExplodingSound.setVolume(100);
 				bomberExplodingSound.play();
-		  }
-    }
+			}
+		}
 
 		int logicKoratHitCount = logic -> getKoratHitCount();
 		if (logicKoratHitCount > koratHitCount)
 		{
 			//for loop to count how many times to play death sound
 			for(logicKoratHitCount; logicKoratHitCount > koratHitCount; koratHitCount++)
-      {
+			{
 				koratHitSound.stop();
 				koratHitSound.setBuffer(loadedAudio->soundTrack[30]);
 				koratHitSound.setVolume(60);
 				koratHitSound.play();
-		  }
-    }
+			}
+		}
 
 		int logicKoratSurvived = logic -> getKoratSurvived();
 		if (logicKoratSurvived > koratSurvived)
 		{
 			for(logicKoratSurvived; logicKoratSurvived > koratSurvived; koratSurvived++)
-      {
+			{
 				koratSurvivedSound.stop();
 				koratSurvivedSound.setBuffer(loadedAudio->soundTrack[39]);
 				koratSurvivedSound.setVolume(60);
 				koratSurvivedSound.play();
-		  }
-    }
+			}
+		}
 
-    int logicTankBossBulletsFired = logic -> getTankBossBulletsFired();
+		int logicTankBossBulletsFired = logic -> getTankBossBulletsFired();
 		if (logicTankBossBulletsFired > tankBossBulletsFired)
 		{
 			for(logicTankBossBulletsFired; logicTankBossBulletsFired > tankBossBulletsFired; tankBossBulletsFired++)
-      {
+			{
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[40]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
-		  }
-    }
+			}
+		}
 
-    int logicTopBikerBulletsFired = logic -> getTopBikerBulletsFired();
+		int logicTopBikerBulletsFired = logic -> getTopBikerBulletsFired();
 		if (logicTopBikerBulletsFired > topBikerBulletsFired)
 		{
 			for(logicTopBikerBulletsFired; logicTopBikerBulletsFired > topBikerBulletsFired; topBikerBulletsFired++)
-      {
+			{
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[27]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
-		  }
-    }
+			}
+		}
 
-    int logicMiddleBikerBulletsFired = logic -> getMiddleBikerBulletsFired();
+		int logicMiddleBikerBulletsFired = logic -> getMiddleBikerBulletsFired();
 		if (logicMiddleBikerBulletsFired > middleBikerBulletsFired)
 		{
 			for(logicMiddleBikerBulletsFired; logicMiddleBikerBulletsFired > middleBikerBulletsFired; middleBikerBulletsFired++)
-      {
+			{
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[37]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
-		  }
-    }
+			}
+		}
 
-    int logicBottomBikerBulletsFired = logic -> getBottomBikerBulletsFired();
+		int logicBottomBikerBulletsFired = logic -> getBottomBikerBulletsFired();
 		if (logicBottomBikerBulletsFired > bottomBikerBulletsFired)
 		{
 			for(logicBottomBikerBulletsFired; logicBottomBikerBulletsFired > bottomBikerBulletsFired; bottomBikerBulletsFired++)
-      {
+			{
 				koratFiringSound.stop();
 				koratFiringSound.setBuffer(loadedAudio->soundTrack[29]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
-		  }
-    }
+			}
+		}
 //-----------------------------------------------------------------
         if(keepMovingUp == true)
         {
