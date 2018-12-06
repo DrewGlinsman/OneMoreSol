@@ -60,9 +60,10 @@ class GameLogic{
         bool lostGame = false;
         bool tankBossDead = false;
 
+
         int currentKoratCount = 0;
         //change the current level
-        int currentLevel = 1;
+        int currentLevel = 20;
 
         int koratSpawnLane;
         int koratSpawnType;
@@ -142,6 +143,7 @@ class GameLogic{
         GameLogic();
 
         bool levelWon;
+        bool firstLevel = true;
 
         sf::Clock reloadClock;
         bool reloadStarted = false;

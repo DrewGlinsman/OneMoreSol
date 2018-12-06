@@ -85,38 +85,44 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                             if(currentKorat[i][j] -> getName() == "Biker")
                             {
                             	majorTom -> setScore(majorTom -> getScore() + 60);
-                            	killedKorat += 1;
                             }
                             if(currentKorat[i][j] -> getName() == "Bomber")
                             {
-                            	majorTom -> setScore(majorTom -> getScore() + 45);
-                            	bombersExploded += 1;
+                                majorTom -> setScore(majorTom -> getScore() + 45);
+                                bombersExploded += 1;
                             }
+
                             if(currentKorat[i][j] -> getName() == "Brute")
                             {
-                            	majorTom -> setScore(majorTom -> getScore() + 50);
-                            	killedKorat += 1;
+                                majorTom -> setScore(majorTom -> getScore() + 50);
+                                killedKorat += 1;
                             }
+
                             if(currentKorat[i][j] -> getName() == "Elite")
                             {
-                            	majorTom -> setScore(majorTom -> getScore() + 35);
-                            	killedKorat += 1;
+                                majorTom -> setScore(majorTom -> getScore() + 35);
+                                killedKorat += 1;
                             }
+
                             if(currentKorat[i][j] -> getName() == "Grunt")
                             {
-                            	majorTom -> setScore(majorTom -> getScore() + 20);
-                            	killedKorat += 1;
+                                majorTom -> setScore(majorTom -> getScore() + 20);
+                                killedKorat += 1;
                             }
+
                             if(currentKorat[i][j] -> getName() == "Hunter")
                             {
-                            	majorTom -> setScore(majorTom -> getScore() + 40);
-                            	killedKorat += 1;
+                                 majorTom -> setScore(majorTom -> getScore() + 40);
+                                 killedKorat += 1;
                             }
+
                             if(currentKorat[i][j] -> getName() == "Jackal")
                             {
-                            	majorTom -> setScore(majorTom -> getScore() + 30);
-                            	killedKorat += 1;
+                                majorTom -> setScore(majorTom -> getScore() + 30);
+                                killedKorat += 1;
                             }
+
+
                             dyingKorat.emplace_back(move(currentKorat[i][j]));
                             currentKorat[i].erase(currentKorat[i].begin() + j);
                         }
@@ -158,6 +164,7 @@ void GameLogic::updateDyingKorat(MajorTom* majorTom)
             if (dyingKorat[i] -> getName() == "Bomber")
             {
                 explode(*dyingKorat[i], majorTom);
+                bombersExploded += 1;
             }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
@@ -669,12 +676,6 @@ void GameLogic::moveBullet(float timePassed)
     }
 }
 
-/** \brief
- *
- * \param timePassed float
- * \return void
- *
- */
 void GameLogic::gaussLeftScreen(float timePassed)
 {
     for (int i = 0; i < dyingGauss.size(); i++)
@@ -691,14 +692,6 @@ void GameLogic::gaussLeftScreen(float timePassed)
 
 }
 
-/** \brief
- *
- * \param timePassed float
- * \param i int
- * \param j int
- * \return void
- *
- */
 void GameLogic::bulletLeftScreen(float timePassed, int i, int j)
 {
     if (currentBullet[i][j] -> getOutOfBounds() == false)
@@ -711,13 +704,6 @@ void GameLogic::bulletLeftScreen(float timePassed, int i, int j)
     }
 }
 
-/** \brief
- *
- * \param timePassed float
- * \param majorTom MajorTom*
- * \return void
- *
- */
 void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 {
 	//! KORAT BULLETS
@@ -752,12 +738,6 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 	}
 }
 
-/** \brief
- *
- * \param window sf::RenderWindow&
- * \return void
- *
- */
 void GameLogic::drawBullet(sf::RenderWindow& window)
 {
     for (int i = 0; i < currentBullet.size(); i ++)
@@ -782,14 +762,6 @@ void GameLogic::drawBullet(sf::RenderWindow& window)
 
 }
 
-/** \brief
- *
- * \param majorTom MajorTom*
- * \param currentGun Gun*
- * \param timePassed float
- * \return void
- *
- */
 void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
 {
     bulletSpawnLane = decideBulletLane(majorTom);
@@ -799,12 +771,6 @@ void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePass
     spawnBullet(timePassed);
 }
 
-/** \brief
- *
- * \param timePassed float
- * \return void
- *
- */
 void GameLogic::spawnBullet(float timePassed)
 {
     Bullet* newBullet1 = 0;
@@ -840,6 +806,7 @@ void GameLogic::spawnBullet(float timePassed)
             break;
         default:
             newBullet1 = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
+            cout << "Break Case Activated" << endl;
             break;
 
     }
@@ -871,12 +838,6 @@ void GameLogic::spawnBullet(float timePassed)
     }
 }
 
-/** \brief
- *
- * \param majorTom MajorTom*
- * \return int
- *
- */
 int GameLogic::decideBulletLane(MajorTom* majorTom)
 {
     if (majorTom->getTomPosition() == lane1)
@@ -890,15 +851,9 @@ int GameLogic::decideBulletLane(MajorTom* majorTom)
     else if (majorTom->getTomPosition() == lane5)
         return 5;
     else
-        std::cout << "bullet deciding is broken" << std::endl;
+        cout << "bullet shit is broken" << endl;
 }
 
-/** \brief
- *
- * \param givenLane int
- * \return int
- *
- */
 int GameLogic::decideBulletLaneKorat(int givenLane)
 {
     if (givenLane == lane1)
@@ -912,7 +867,7 @@ int GameLogic::decideBulletLaneKorat(int givenLane)
     else if (givenLane == lane5)
         return 5;
     else
-        std::cout << "korat bullet deciding is broken" << std::endl;
+        cout << "bullet shit is broken 2" << endl;
 }
 
 int GameLogic::decideBulletType(Gun* currentGun)
@@ -949,6 +904,29 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
         }
 
         //-------------------------------------------------------------
+
+        if (currentLevel == 1 && firstLevel)
+        {
+            survivorCountSaved = majorTom->getSurvivors();
+            levelSpeedModifier = levelSpeedModifierVector[currentLevel - 1];
+            levelSpawnModifier = levelSpawnModifierVector[currentLevel - 1];
+
+            majorTom ->  setTomPositionX(156);
+
+            majorTom -> setTomPositionY(508);
+
+            majorTom -> pistol -> resetShotsFired();
+            majorTom -> shotgun -> resetShotsFired();
+            majorTom -> rifle -> resetShotsFired();
+            majorTom -> minigun -> resetShotsFired();
+            majorTom -> thrower -> resetShotsFired();
+            majorTom -> sniper -> resetShotsFired();
+            majorTom -> bigFunGun -> resetShotsFired();
+
+            levelWon = true;
+            firstLevel = false;
+        }
+
 
         if (rotation >= sunSetOrientation) // if the sun has set
         {
@@ -993,7 +971,6 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
         {
             gameSky.rotate(timePassed * levelSpeedModifier);
             levelWon = false;
-
             if((gameSky.getRotation() > 90.f) && (gameSky.getRotation() < 130.f))
                 nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()/2));
             else if(gameSky.getRotation() > 130.f)
@@ -1022,11 +999,6 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
     }
 }
 
-/** \brief
- *
- * \return void
- *
- */
 void GameLogic::clearAssets()
 {
     for (int i = 0; i < currentBullet.size(); i++)
@@ -1045,13 +1017,6 @@ void GameLogic::clearAssets()
     currentTankBoss.clear();
 }
 
-/** \brief
- *
- * \param gameSky sf::CircleShape&
- * \param majorTom MajorTom*
- * \return void
- *
- */
 void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 {
     clearAssets();
@@ -1086,12 +1051,6 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
 }
 
-/** \brief
- *
- * \param loadedTextures TextureLoader*
- * \return void
- *
- */
 void GameLogic::startBikeBoss(TextureLoader* loadedTextures)
 {
     BikeBoss* bikeBoss = new BikeBoss(loadedTextures);
@@ -1099,12 +1058,6 @@ void GameLogic::startBikeBoss(TextureLoader* loadedTextures)
     currentKoratCount = 1;
 }
 
-/** \brief
- *
- * \param window sf::RenderWindow&
- * \return void
- *
- */
 void GameLogic::drawBikeBoss(sf::RenderWindow& window)
 {
     for(int i = 0; i < currentBikeBoss.size(); i++)
@@ -1118,12 +1071,6 @@ void GameLogic::drawBikeBoss(sf::RenderWindow& window)
 
 }
 
-/** \brief
- *
- * \param majorTom MajorTom*
- * \return void
- *
- */
 void GameLogic::updateDyingBikeBoss(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingBikeBoss.size(); i++)
@@ -1137,14 +1084,6 @@ void GameLogic::updateDyingBikeBoss(MajorTom* majorTom)
     }
 }
 
-/** \brief
- *
- * \param gameSky sf::CircleShape&
- * \param majorTom MajorTom*
- * \param timePassed float
- * \return void
- *
- */
 void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
     if(!isPaused)
@@ -1161,12 +1100,12 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                 {
                     if (currentBikeBoss[i] -> getSpeed() == 0)
                     {
-                    		bombersExploded += 1;
                             dyingBikeBoss.emplace_back(move(currentBikeBoss[i]));
                             currentBikeBoss.erase(currentBikeBoss.begin() + i);
                             movingUp = false;
                             movingDown = false;
                             directMove = 1;
+                            bombersExploded += 1;
                     }
                     else if (movingUp == false && movingDown == false)
                     {
@@ -1225,12 +1164,6 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
 }
 
 
-/** \brief
- *
- * \param loadedTextures TextureLoader*
- * \return void
- *
- */
 void GameLogic::startTankBoss(TextureLoader* loadedTextures)
 {
     TankBoss* tankBoss = new TankBoss(loadedTextures);
@@ -1238,12 +1171,6 @@ void GameLogic::startTankBoss(TextureLoader* loadedTextures)
     currentKoratCount = 1;
 }
 
-/** \brief
- *
- * \param window sf::RenderWindow&
- * \return void
- *
- */
 void GameLogic::drawTankBoss(sf::RenderWindow& window)
 {
     for(int i = 0; i < currentTankBoss.size(); i++)
@@ -1257,12 +1184,6 @@ void GameLogic::drawTankBoss(sf::RenderWindow& window)
 
 }
 
-/** \brief
- *
- * \param majorTom MajorTom*
- * \return void
- *
- */
 void GameLogic::updateDyingTankBoss(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingTankBoss.size(); i++)
@@ -1283,14 +1204,6 @@ bool GameLogic::isTankBossDead()
     return tankBossDead;
 }
 
-/** \brief
- *
- * \param gameSky sf::CircleShape&
- * \param majorTom MajorTom*
- * \param timePassed float
- * \return void
- *
- */
 void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
     if(!isPaused)
@@ -1303,9 +1216,9 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                 {
                     if (currentTankBoss[i] -> getSpeed() == 0)
                     {
-                    		bombersExploded += 1;
                             dyingTankBoss.emplace_back(move(currentTankBoss[i]));
                             currentTankBoss.erase(currentTankBoss.begin() + i);
+                            bombersExploded += 1;
                     }
                     else
                     {
@@ -1341,11 +1254,6 @@ void GameLogic::pauseGame()
     isPaused = !isPaused;
 }
 
-/** \brief
- *
- * \return void
- *
- */
 void GameLogic::queryKoratFiring()
 {
     if(!isPaused)
@@ -1387,7 +1295,7 @@ void GameLogic::queryKoratFiring()
 						} else if (currentKorat[i][j] -> getName() == "Biker")
 						{
 							bikerBulletsFired += 1;
-							newBullet = new KoratBullet4(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX() - 25, loadedTextures);
+							newBullet = new KoratBullet3(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX() - 25, loadedTextures);
 							int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
                             currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
 						}
@@ -1400,11 +1308,6 @@ void GameLogic::queryKoratFiring()
     }
 }
 
-/** \brief
- *
- * \return void
- *
- */
 void GameLogic::queryBikeFiring()
 {
     if(!isPaused)
@@ -1521,11 +1424,6 @@ void GameLogic::queryBikeFiring()
 }
 
 
-/** \brief
- *
- * \return void
- *
- */
 void GameLogic::queryTankFiring()
 {
     if(!isPaused)
@@ -1653,9 +1551,4 @@ float GameLogic::getRotation()
 void GameLogic::setTankBossBool(bool b)
 {
   tankBossDead = b;
-}
-
-bool GameLogic::getIsPaused()
-{
-	return isPaused;
 }

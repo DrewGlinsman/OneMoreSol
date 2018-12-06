@@ -222,6 +222,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
     gameMusic.play();
     gameMusic.setLoop(true);
     menuSelector.setPosition(0,0);
+    returnToMenu = false;
     while(window.isOpen()) // Menu loop
 	{
         updateMenu(window);
@@ -467,6 +468,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
 			logic -> moveBullet(delta);
 			logic -> moveKoratBullet(delta, majorTom);
+            logic -> updateDyingTankBoss(majorTom);
         }
 
         int logicKilledKorat = logic -> getKilledKorat();
@@ -868,8 +870,9 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     }
                     if(Event.key.code == sf::Keyboard::K)
                     {
-                        //sky.rotate(150);
+                        sky.rotate(150);
                     }
+
                     if(Event.key.code == sf::Keyboard::P)
 					{
                     	paused = !paused;
@@ -930,9 +933,9 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
                 }
                 if(Event.key.code == sf::Keyboard::Return)
                 {
-                    menuSelection.play();
                     if(delayClockTime > 1)
                     {
+                        menuSelection.play();
                         gameMusic.stop();
                         return false;
                     }
@@ -1153,6 +1156,7 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                             majorTom -> setScore(0);
 
                             returnToMenu = true;
+                            logic -> firstLevel = true;
                             return false;
                         }
                         if(x == 1)
