@@ -100,7 +100,7 @@ bool Bomber::checkDeath()
     if (health <= 0)
     {
 		postDeathTime = postDeathClock.getElapsedTime().asSeconds();
-		if (postDeathTime >= 1)//time till deletion, so essentially time to animate
+		if (postDeathTime >= .7)//time till deletion, so essentially time to animate
 		{
 			postDeathClock.restart();
 			return true;

@@ -1237,6 +1237,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
        // }
         if(logic->reloadStarted == true) // Draw reload symbol <----------
         {
+
             if (majorTom -> getGun() == savedGun)
             {
                 reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,122.f));//reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
@@ -1244,6 +1245,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
             else
             {
                 logic-> reloadStarted = false;
+                logic->reloadClock.restart();
             }
         }
         else
