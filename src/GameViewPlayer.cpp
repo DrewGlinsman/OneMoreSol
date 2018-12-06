@@ -200,6 +200,13 @@ void GameViewPlayer::initializePlayState()
 	majorTomHealth.setFillColor(sf::Color(0,0,0,255));
 	majorTomHealth.setPosition(75,770);
 
+	//Paused message
+    pausedMsg.setFont(gameFont);
+    pausedMsg.setCharacterSize(22);
+    pausedMsg.setString("Game Paused\nPress P to continue.");//might be able to take out due to updater code redundancy
+    pausedMsg.setFillColor(sf::Color(0,0,0,255));
+    pausedMsg.setPosition(680,113);
+
 }
 
 /** \brief
@@ -397,6 +404,10 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         updateGame(window);
         delta = gameClock.getElapsedTime().asSeconds();
+        if (!window.hasFocus() || paused)
+        {
+        	delta = 0;
+        }
         gameClock.restart();
 
 //-----------------------------------------------------------------
@@ -410,7 +421,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logic -> currentLevelEnd())
         {
             std::cout << "Entered text adventure" << std::endl;
-            logic -> pauseGame();
             logic -> levelWon = false;
             textAdventureIsOpen(window);
         }
@@ -425,31 +435,32 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         currentLevel = logic -> getLevel();
 
-        logic -> pauseGame();
-
-        logic -> runLevel(sky, majorTom, delta, nightSky);
-        logic -> updateKoratOrder();
-        logic -> updateBulletOrder(); //Bullets generation and drawing
-        logic -> updateDyingKorat(majorTom);
-        logic -> moveKorat(delta, majorTom);
-        logic -> queryKoratFiring();
-
-
-        if (logic -> getLevel() == 10)
+        if (!paused)
         {
-            logic -> moveBikeBoss(sky, majorTom, delta);
-            logic -> queryBikeFiring();
-            logic -> updateDyingBikeBoss(majorTom);
-        }
-        if (logic -> getLevel() == 20)
-        {
-            logic -> moveTankBoss(sky, majorTom, delta);
-            logic -> queryTankFiring();
-            logic -> updateDyingTankBoss(majorTom);
-        }
+			logic -> runLevel(sky, majorTom, delta, nightSky);
+			logic -> updateKoratOrder();
+			logic -> updateBulletOrder(); //Bullets generation and drawing
+			logic -> updateDyingKorat(majorTom);
+			logic -> moveKorat(delta, majorTom);
+			logic -> queryKoratFiring();
 
-        logic -> moveBullet(delta);
-        logic -> moveKoratBullet(delta, majorTom);
+
+			if (logic -> getLevel() == 10)
+			{
+				logic -> moveBikeBoss(sky, majorTom, delta);
+				logic -> queryBikeFiring();
+				logic -> updateDyingBikeBoss(majorTom);
+			}
+			if (logic -> getLevel() == 20)
+			{
+				logic -> moveTankBoss(sky, majorTom, delta);
+				logic -> queryTankFiring();
+				logic -> updateDyingTankBoss(majorTom);
+			}
+
+			logic -> moveBullet(delta);
+			logic -> moveKoratBullet(delta, majorTom);
+        }
 
         int logicKilledKorat = logic -> getKilledKorat();
         if (logicKilledKorat > koratKilled)
@@ -848,6 +859,10 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     {
                         sky.rotate(150);
                     }
+                    if(Event.key.code == sf::Keyboard::P)
+					{
+						paused = !paused;
+					}
                 }
             }
         }
@@ -1175,7 +1190,6 @@ void GameViewPlayer::resetGameToMenu(sf::RenderWindow& window)
 {
     delete logic;
     GameLogic* logic = new GameLogic();
-    logic -> pauseGame();
     menuViewIsOpen(window);
 }
 
@@ -1209,6 +1223,8 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.draw(selectionBox);
     window.draw(scoreCnt);
     window.draw(levelCnt);
+    if(paused)
+    	window.draw(pausedMsg);
 
     logic -> drawBullet(window);
 

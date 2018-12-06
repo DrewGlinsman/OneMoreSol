@@ -105,6 +105,8 @@ private:
     int koratHitCount = 0;
     int koratSurvived = 0;
 
+    bool paused = false;
+
 public:
     bool returnToMenu;
     sf::Font gameFont;
@@ -158,6 +160,8 @@ public:
     sf::Text levelCnt;
     sf::Text finalScoreCnt;
     sf::Text majorTomHealth;
+    sf::Text pausedMsg;
+
     sf::Event Event;
 
     bool lost;

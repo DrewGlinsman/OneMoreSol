@@ -117,8 +117,6 @@ class GameLogic{
         bool movingUp = false;
         bool movingDown = false;
 
-        bool isPaused = false;
-
         double directMove = 1;
 
         int topBikerBulletsFired = 0;
