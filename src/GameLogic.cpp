@@ -996,10 +996,11 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
         {
             gameSky.rotate(timePassed * levelSpeedModifier);
             levelWon = false;
+
             if((gameSky.getRotation() > 90.f) && (gameSky.getRotation() < 130.f))
-                nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()/3));
-            else if(gameSky.getRotation() > 130.f)
                 nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()/2));
+            else if(gameSky.getRotation() > 130.f)
+                nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()));
             else
                 nightLayer.setFillColor(sf::Color(255,255,255,0));
         }
