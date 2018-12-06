@@ -6,6 +6,7 @@ LaserMinigunBullet::LaserMinigunBullet(int startLane, TextureLoader* loadedTextu
     laser.setTexture(loadedTextures->textureArray[0]);
     laser.setTextureRect(sf::IntRect(256,96,32,32));
 	laser.setOrigin(sf::Vector2f(16.f,16.f));
+	laser.scale(sf::Vector2f(.7f,.7f));
 	setLane(startLane);
 	laser.setPosition(height + 20, lane);
 	speed = 1250;
