@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 
             quit = currentGameWindow -> gameViewIsOpen();
 
-            if(quit == true)
+            if(quit)
             {
                 return 0;
             }
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
         quit = currentGameWindow -> gameViewIsOpen();
         gameRestarted = !quit;
 
-        if (quit == true)
+        if (quit)
         {
             return 0;
         }

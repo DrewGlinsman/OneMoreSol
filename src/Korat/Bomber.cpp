@@ -108,7 +108,7 @@ bool Bomber::checkDeath()
 		else
         {
 			speed = 0;//stops moving and proceeds with death
-			if (koratDeathSoundPlayed == false)
+			if (!koratDeathSoundPlayed)
 			{
 				postDeathClock.restart();
 				koratDeathSoundPlayed = true;

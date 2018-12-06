@@ -104,7 +104,7 @@ bool Hunter::checkDeath()
 		else
         {
 			speed = 0;
-			if (koratDeathSoundPlayed == false)
+			if (!koratDeathSoundPlayed)
 			{
 				postDeathClock.restart();
 				koratDeathSoundPlayed = true;
