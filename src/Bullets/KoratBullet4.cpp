@@ -1,43 +1,43 @@
-#include "KoratBullet3.h"
+#include "KoratBullet4.h"
 #include <iostream>
 
 using namespace std;
 
-KoratBullet3::KoratBullet3(int givenLane, int givenHeight, TextureLoader* loadedTextures) {
+KoratBullet4::KoratBullet4(int givenLane, int givenHeight, TextureLoader* loadedTextures) {
     plasma.setTexture(loadedTextures->textureArray[0]);
     plasma.setTextureRect(sf::IntRect(480,32,32,32));
 	plasma.setOrigin(sf::Vector2f(16.f,16.f));
 	setLane(givenLane);
 	plasma.setPosition(givenHeight, lane);
-	speed = 600;
-	damage = 8;
+	speed = 500;
+	damage = 10;
 }
 
-KoratBullet3::~KoratBullet3() {
+KoratBullet4::~KoratBullet4() {
 	// TODO Auto-generated destructor stub
 }
 
-int KoratBullet3::getDamage()
+int KoratBullet4::getDamage()
 {
     return damage;
 }
 
-int KoratBullet3::getLane()
+int KoratBullet4::getLane()
 {
     return lane;
 }
 
-int KoratBullet3::getHeight()
+int KoratBullet4::getHeight()
 {
     return height;
 }
 
-float KoratBullet3::getPositionX()
+float KoratBullet4::getPositionX()
 {
     return plasma.getPosition().x;
 }
 
-void KoratBullet3::setLane(int givenLane)
+void KoratBullet4::setLane(int givenLane)
 {
 	switch(givenLane)
 	{
@@ -62,7 +62,7 @@ void KoratBullet3::setLane(int givenLane)
 	}
 }
 
-void KoratBullet3::moveCurrentBullet(float timePassed)
+void KoratBullet4::moveCurrentBullet(float timePassed)
 {
         if(plasma.getPosition().x > -100)
         {
@@ -75,22 +75,22 @@ void KoratBullet3::moveCurrentBullet(float timePassed)
         }
 }
 
-void KoratBullet3::drawCurrentBullet(sf::RenderWindow& window)
+void KoratBullet4::drawCurrentBullet(sf::RenderWindow& window)
 {
     window.draw(plasma);
 }
 
-bool KoratBullet3::getOutOfBounds()
+bool KoratBullet4::getOutOfBounds()
 {
     return outOfBounds;
 }
 
-sf::Sprite KoratBullet3::getBullet()
+sf::Sprite KoratBullet4::getBullet()
 {
     return plasma;
 }
 
-int KoratBullet3::getType()
+int KoratBullet4::getType()
 {
     return 8;
 }

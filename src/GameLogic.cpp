@@ -1388,7 +1388,7 @@ void GameLogic::queryTankFiring()
                     int firingLaneInPixels = currentTankBoss[i] -> decideFiringLane();
                     //implement stuff to make Korat fire here
                     Bullet* newBullet;
-                    newBullet = new KoratBullet3(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
+                    newBullet = new KoratBullet4(firingLaneInPixels, currentTankBoss[i] -> getPositionX(), loadedTextures);
                     tankBossBulletsFired +=1;
 
                     int laneToGoIn;
