@@ -6,6 +6,7 @@ GameLogic.cpp
 #include "KoratBullet.h"
 #include "KoratBullet2.h"
 #include "KoratBullet3.h"
+#include "KoratBullet4.h"
 #include <iostream>
 #include <typeinfo>
 
