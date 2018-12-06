@@ -1279,7 +1279,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
             if (majorTom -> getGun() == savedGun)
             {
-                reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,70.f));//reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
+                reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,64.f));//reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
                 reloadRect[majorTom->currentGun-1].setFillColor(sf::Color(255,0,0,125));
             }
 
