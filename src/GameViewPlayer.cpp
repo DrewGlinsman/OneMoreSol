@@ -306,6 +306,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelection.play();
 						sf::sleep(sf::milliseconds(900)); //the fix
 						window.close();
+						menuExit = true;
 						return true;
 					}
 				}

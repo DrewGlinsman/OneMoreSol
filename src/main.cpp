@@ -51,5 +51,8 @@ int main(int argc, char** argv)
 
         gameRestarted = currentGameWindow -> gameViewIsOpen();
 
+        if(currentGameWindow -> playView -> menuExit)
+            return 0;
+
     }
 }
