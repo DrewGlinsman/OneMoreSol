@@ -82,22 +82,41 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                     {
                         if (currentKorat[i][j] -> getSpeed() == 0)
                         {
-                        	  killedKorat += 1;
                             if(currentKorat[i][j] -> getName() == "Biker")
-                                  majorTom -> setScore(majorTom -> getScore() + 60);
+                            {
+                            	majorTom -> setScore(majorTom -> getScore() + 60);
+                            	killedKorat += 1;
+                            }
                             if(currentKorat[i][j] -> getName() == "Bomber")
-                                  majorTom -> setScore(majorTom -> getScore() + 45);
+                            {
+                            	majorTom -> setScore(majorTom -> getScore() + 45);
+                            	bombersExploded += 1;
+                            }
                             if(currentKorat[i][j] -> getName() == "Brute")
-                                  majorTom -> setScore(majorTom -> getScore() + 50);
+                            {
+                            	majorTom -> setScore(majorTom -> getScore() + 50);
+                            	killedKorat += 1;
+                            }
                             if(currentKorat[i][j] -> getName() == "Elite")
-                                  majorTom -> setScore(majorTom -> getScore() + 35);
+                            {
+                            	majorTom -> setScore(majorTom -> getScore() + 35);
+                            	killedKorat += 1;
+                            }
                             if(currentKorat[i][j] -> getName() == "Grunt")
-                                  majorTom -> setScore(majorTom -> getScore() + 20);
+                            {
+                            	majorTom -> setScore(majorTom -> getScore() + 20);
+                            	killedKorat += 1;
+                            }
                             if(currentKorat[i][j] -> getName() == "Hunter")
-                                  majorTom -> setScore(majorTom -> getScore() + 40);
+                            {
+                            	majorTom -> setScore(majorTom -> getScore() + 40);
+                            	killedKorat += 1;
+                            }
                             if(currentKorat[i][j] -> getName() == "Jackal")
-                                  majorTom -> setScore(majorTom -> getScore() + 30);
-
+                            {
+                            	majorTom -> setScore(majorTom -> getScore() + 30);
+                            	killedKorat += 1;
+                            }
                             dyingKorat.emplace_back(move(currentKorat[i][j]));
                             currentKorat[i].erase(currentKorat[i].begin() + j);
                         }
@@ -1145,6 +1164,7 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                 {
                     if (currentBikeBoss[i] -> getSpeed() == 0)
                     {
+                    		bombersExploded += 1;
                             dyingBikeBoss.emplace_back(move(currentBikeBoss[i]));
                             currentBikeBoss.erase(currentBikeBoss.begin() + i);
                             movingUp = false;
@@ -1286,6 +1306,7 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                 {
                     if (currentTankBoss[i] -> getSpeed() == 0)
                     {
+                    		bombersExploded += 1;
                             dyingTankBoss.emplace_back(move(currentTankBoss[i]));
                             currentTankBoss.erase(currentTankBoss.begin() + i);
                     }

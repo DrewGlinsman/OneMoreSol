@@ -30,8 +30,8 @@ void GameViewPlayer::initializeMenuState()
     //sound was a bit loud so I adjusted it
     menuSelection.setVolume(75);
     menuTransition.setVolume(75);
-    gameMusic.setVolume(85);
-    textMusic.setVolume(75);
+    gameMusic.setVolume(65);
+    textMusic.setVolume(60);
 
     menuTransition.setBuffer(loadedAudio -> soundTrack[21]);
     menuSelection.setBuffer(loadedAudio -> soundTrack[22]);
@@ -459,7 +459,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         {
 				koratDyingSound.stop();
 				koratDyingSound.setBuffer(loadedAudio->soundTrack[25]);
-				koratFiringSound.setVolume(60);
+				koratDyingSound.setVolume(60);
 				koratDyingSound.play();
         }
         }
@@ -528,10 +528,10 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 		{
 			for(logicBombersExploded; logicBombersExploded > bombersExploded; bombersExploded++)
       {
-				koratFiringSound.stop();
-				koratFiringSound.setBuffer(loadedAudio->soundTrack[26]);
-				koratFiringSound.setVolume(60);
-				koratFiringSound.play();
+				bomberExplodingSound.stop();
+				bomberExplodingSound.setBuffer(loadedAudio->soundTrack[26]);
+				bomberExplodingSound.setVolume(100);
+				bomberExplodingSound.play();
 		  }
     }
 
@@ -543,7 +543,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
       {
 				koratHitSound.stop();
 				koratHitSound.setBuffer(loadedAudio->soundTrack[30]);
-				koratFiringSound.setVolume(60);
+				koratHitSound.setVolume(60);
 				koratHitSound.play();
 		  }
     }
@@ -555,7 +555,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
       {
 				koratSurvivedSound.stop();
 				koratSurvivedSound.setBuffer(loadedAudio->soundTrack[39]);
-				koratFiringSound.setVolume(60);
+				koratSurvivedSound.setVolume(60);
 				koratSurvivedSound.play();
 		  }
     }
@@ -1067,7 +1067,8 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
     koratKilledCnt.setFillColor(sf::Color::White);
     koratKilledCnt.setCharacterSize(22);
     int koratKilled = logic -> getKilledKorat();
-    string koratKill = "Korat Killed: " + std::to_string(koratKilled);
+    int bombersExploded = logic -> getBombersExploded();
+    string koratKill = "Korat Killed: " + std::to_string(koratKilled + bombersExploded);
     koratKilledCnt.setString(koratKill);
 
     updateWinScreen(window);
