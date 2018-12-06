@@ -433,7 +433,8 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         {
             logic -> pauseGame();
             logic -> levelWon = false;
-            textAdventureIsOpen(window);
+            if(textAdventureIsOpen(window))
+                return true;
         }
 
         if(currentLevel < logic -> getLevel())
@@ -874,7 +875,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     }
                     if(Event.key.code == sf::Keyboard::K)
                     {
-                        sky.rotate(150);
+                        //sky.rotate(150);
                     }
                     if(Event.key.code == sf::Keyboard::P)
 					{
@@ -922,8 +923,18 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 
         while(window.pollEvent(Event))
         {
+            if(Event.type == sf::Event::Closed)
+            {
+                window.close();
+                return true;
+            }
             if(Event.type == sf::Event::KeyPressed)
             {
+                if(Event.key.code == sf::Keyboard::Escape)
+                {
+                    window.close();
+                    return true;
+                }
                 if(Event.key.code == sf::Keyboard::Return)
                 {
                     menuSelection.play();
@@ -1282,16 +1293,13 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
                 reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,64.f));//reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
                 reloadRect[majorTom->currentGun-1].setFillColor(sf::Color(255,0,0,125));
             }
+
             else
             {
                 logic-> reloadStarted = false;
-                logic->reloadClock.restart();
             }
         }
-        else
-        {
-            logic->reloadClock.restart();
-        }
+
             switch(majorTom -> getGun())
             {
                 case 1: if((logic -> reloadClock.getElapsedTime().asSeconds() > majorTom->pistol->getReloadSpeed()))
