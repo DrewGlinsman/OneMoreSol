@@ -430,7 +430,6 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         if (logic -> currentLevelEnd())
         {
-            std::cout << "Entered text adventure" << std::endl;
             logic -> pauseGame();
             logic -> levelWon = false;
             textAdventureIsOpen(window);
@@ -996,7 +995,7 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     {
         for(int c = 0; c < 7; ++c)
         {
-            reloadRect[c].setSize(sf::Vector2f(64.f,0.f));
+            reloadRect[c].setSize(sf::Vector2f(32.f,0.f));
         }
     }
 
@@ -1273,16 +1272,14 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
 
     for(int i = 0; i < 7; ++i)
     {
-        //for(int c = 0; c < 7; ++c)
-      //  {
-          //  reloadRect[c].setSize(sf::Vector2f(64.f,0.f));
-       // }
+
         if(logic->reloadStarted == true) // Draw reload symbol <----------
         {
 
             if (majorTom -> getGun() == savedGun)
             {
-                reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,122.f));//reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
+                reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,70.f));//reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
+                reloadRect[majorTom->currentGun-1].setFillColor(sf::Color(255,0,0,125));
             }
             else
             {
