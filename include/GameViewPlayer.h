@@ -51,6 +51,7 @@ private:
     sf::SoundBuffer Korat_Firing_Sound;
     sf::SoundBuffer Korat_Hit_Sound;
     sf::SoundBuffer Korat_Survived;
+    sf::SoundBuffer Bomber_Exploding_Sound;
 
     sf::Sound menuTransition;
     sf::Sound menuSelection;
@@ -60,6 +61,7 @@ private:
     sf::Sound koratFiringSound;
     sf::Sound koratHitSound;
     sf::Sound koratSurvivedSound;
+    sf::Sound bomberExplodingSound;
 
     sf::Text menuTitle;
     sf::Text menuPlay1;
