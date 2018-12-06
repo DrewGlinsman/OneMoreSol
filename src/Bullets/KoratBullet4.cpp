@@ -3,6 +3,13 @@
 
 using namespace std;
 
+/** \brief
+ *
+ * \param givenLane int
+ * \param givenHeight int
+ * \param loadedTextures TextureLoader*
+ *
+ */
 KoratBullet4::KoratBullet4(int givenLane, int givenHeight, TextureLoader* loadedTextures) {
     plasma.setTexture(loadedTextures->textureArray[0]);
     plasma.setTextureRect(sf::IntRect(847,847,32,32));
@@ -37,6 +44,12 @@ float KoratBullet4::getPositionX()
     return plasma.getPosition().x;
 }
 
+/** \brief
+ *
+ * \param givenLane int
+ * \return void
+ *
+ */
 void KoratBullet4::setLane(int givenLane)
 {
 	switch(givenLane)
@@ -62,6 +75,12 @@ void KoratBullet4::setLane(int givenLane)
 	}
 }
 
+/** \brief
+ *
+ * \param timePassed float
+ * \return void
+ *
+ */
 void KoratBullet4::moveCurrentBullet(float timePassed)
 {
         if(plasma.getPosition().x > -100)
