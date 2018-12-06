@@ -69,7 +69,7 @@ void ArcBullet::setLane(int givenLane)
 
 void ArcBullet::moveCurrentBullet(float timePassed)
 {
-        if(arc.getPosition().x < 500)
+        if(arc.getPosition().x < 650)
         {
             arc.move(speed * timePassed, 0);
             outOfBounds = false;
