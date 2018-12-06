@@ -49,6 +49,11 @@ void MajorTom::setTomPositionY(float positionPassed)
     majorTom.setPosition(majorTom.getPosition().x, positionPassed);
 }
 
+/** \brief
+ *
+ * \return void
+ *
+ */
 void MajorTom::incrementRunFrame()
 {
     spriteFrame.left = (spriteFrame.left+64)%192;
@@ -60,6 +65,13 @@ void MajorTom::incrementRunFrame()
     }
 }
 
+/** \brief
+ *
+ * \param timePassed float
+ * \param direction string
+ * \return bool
+ *
+ */
 bool MajorTom::initMove(float timePassed, string direction)
 {
     if(direction == "Up")
@@ -129,6 +141,13 @@ bool MajorTom::initMove(float timePassed, string direction)
     else return false;
 }
 
+/** \brief
+ *
+ * \param timePassed float
+ * \param direction string
+ * \return bool
+ *
+ */
 bool MajorTom::keepMoving(float timePassed, string direction)
 {
     if(direction == "Up")
@@ -335,6 +354,12 @@ int MajorTom::getGun()
     return currentGun;
 }
 
+/** \brief
+ *
+ * \param gunNumber int
+ * \return void
+ *
+ */
 void MajorTom::setGun(int gunNumber)
 {
     switch(gunNumber)

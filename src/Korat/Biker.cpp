@@ -39,6 +39,12 @@ std::string Biker::getName()
     return "Biker";
 }
 
+/** \brief
+ *
+ * \param givenLane int
+ * \return void
+ *
+ */
 void Biker::setLane(int givenLane)
 {
      switch(givenLane)
@@ -93,6 +99,11 @@ float Biker::getPositionX()
     return biker.getPosition().x;
 }
 
+/** \brief
+ *
+ * \return bool
+ *
+ */
 bool Biker::checkDeath()
 {
     if (health <= 0)
@@ -152,6 +163,11 @@ void Biker::setFireRate(double givenFireRate)
 	fireRate = givenFireRate;
 }
 
+/** \brief
+ *
+ * \return bool
+ *
+ */
 bool Biker::queryToFire()
 {
 	bool readyToFire = false;
