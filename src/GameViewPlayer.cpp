@@ -30,8 +30,8 @@ void GameViewPlayer::initializeMenuState()
     //sound was a bit loud so I adjusted it
     menuSelection.setVolume(75);
     menuTransition.setVolume(75);
-    gameMusic.setVolume(85);
-    textMusic.setVolume(75);
+    gameMusic.setVolume(65);
+    textMusic.setVolume(60);
 
     menuTransition.setBuffer(loadedAudio -> soundTrack[21]);
     menuSelection.setBuffer(loadedAudio -> soundTrack[22]);
