@@ -158,7 +158,6 @@ void GameLogic::updateDyingKorat(MajorTom* majorTom)
             if (dyingKorat[i] -> getName() == "Bomber")
             {
                 explode(*dyingKorat[i], majorTom);
-                bombersExploded += 1;
             }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
