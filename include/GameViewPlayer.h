@@ -108,7 +108,7 @@ private:
     bool paused = false;
 
 public:
-    bool menuExit;
+    bool menuExit = false;
     bool returnToMenu;
     sf::Font gameFont;
     const int iconScale = 64;

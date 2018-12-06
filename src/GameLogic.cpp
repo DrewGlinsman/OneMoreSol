@@ -840,7 +840,6 @@ void GameLogic::spawnBullet(float timePassed)
             break;
         default:
             newBullet1 = new PlasmaPistolBullet(bulletSpawnLane, loadedTextures);
-            cout << "Break Case Activated" << endl;
             break;
 
     }
