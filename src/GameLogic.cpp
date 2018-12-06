@@ -1310,7 +1310,7 @@ void GameLogic::queryBikeFiring()
                         {
                             Bullet* newBullet2;
                             firingLaneInPixels = currentBikeBoss[i] -> getBossPosition();
-                            newBullet2 = new KoratBullet3(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 100, loadedTextures);
+                            newBullet2 = new KoratBullet4(firingLaneInPixels, currentBikeBoss[i] -> getPositionX() - 100, loadedTextures);
                             middleBikerBulletsFired += 1;
 
                             int laneToGoIn;
