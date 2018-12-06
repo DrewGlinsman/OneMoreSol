@@ -1222,11 +1222,11 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
         }
         if(logic->reloadStarted == true) // Draw reload symbol <----------
         {
-            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
+            reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,122.f));//reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
         }
         else if (logic->reloadFinished == true) // erase reload symbol <---------
         {
-            reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,o.f));
+            reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,0.f));
         }
         window.draw(reloadRect[i]);
     }
