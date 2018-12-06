@@ -506,7 +506,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 			for(logicHunterBulletsFired; logicHunterBulletsFired > hunterBulletsFired; hunterBulletsFired++)
 			{
 				koratFiringSound.stop();
-				koratFiringSound.setBuffer(loadedAudio->soundTrack[28]);
+				koratFiringSound.setBuffer(loadedAudio->soundTrack[40]);
 				koratFiringSound.setVolume(60);
 				koratFiringSound.play();
 			}

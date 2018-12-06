@@ -1389,7 +1389,7 @@ void GameLogic::queryKoratFiring()
 						} else if (currentKorat[i][j] -> getName() == "Biker")
 						{
 							bikerBulletsFired += 1;
-							newBullet = new KoratBullet3(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX() - 25, loadedTextures);
+							newBullet = new KoratBullet4(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX() - 25, loadedTextures);
 							int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
                             currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
 						}

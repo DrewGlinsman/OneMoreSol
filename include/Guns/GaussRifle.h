@@ -22,10 +22,10 @@ class GaussRifle: public Gun
     private:
         int shotsFired = 0;
         int bulletType = 6;
-        float fireRate = 1.0;
+        float fireRate = 1.25;
         int clip = 3;
 
-        float reloadSpeed = 4;
+        float reloadSpeed = 3;
 };
 
 #endif

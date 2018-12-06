@@ -62,7 +62,7 @@ class GameLogic{
 
         int currentKoratCount = 0;
         //change the current level
-        int currentLevel = 14;
+        int currentLevel = 1;
 
         int koratSpawnLane;
         int koratSpawnType;
