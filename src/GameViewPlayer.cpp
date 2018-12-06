@@ -404,10 +404,20 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         updateGame(window);
         delta = gameClock.getElapsedTime().asSeconds();
-        if (!window.hasFocus() || paused)
+
+        if (!window.hasFocus())
+        {
+        	paused = true;
+        }
+
+        if(paused)
         {
         	delta = 0;
+        	gameMusic.pause();
+        	lockOutKeyboard = true;
         }
+
+
         gameClock.restart();
 
 //-----------------------------------------------------------------
@@ -421,6 +431,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         if (logic -> currentLevelEnd())
         {
             std::cout << "Entered text adventure" << std::endl;
+            logic -> pauseGame();
             logic -> levelWon = false;
             textAdventureIsOpen(window);
         }
@@ -434,6 +445,8 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         }
 
         currentLevel = logic -> getLevel();
+
+        logic -> pauseGame();
 
         if (!paused)
         {
@@ -628,6 +641,10 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         {
             keepMovingDown = majorTom->keepMoving(delta, "Down");
             lockOutKeyboard = true;
+        }
+        else if(paused)
+        {
+        	lockOutKeyboard = true;
         }
         else
             lockOutKeyboard = false;
@@ -861,7 +878,15 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     }
                     if(Event.key.code == sf::Keyboard::P)
 					{
-						paused = !paused;
+                    	paused = !paused;
+                    	if (paused)
+                    	{
+                    		lockOutKeyboard = true;
+                    		gameMusic.pause();
+                    	} else {
+                    		lockOutKeyboard = false;
+                    		gameMusic.play();
+                    	}
 					}
                 }
             }
@@ -1190,6 +1215,7 @@ void GameViewPlayer::resetGameToMenu(sf::RenderWindow& window)
 {
     delete logic;
     GameLogic* logic = new GameLogic();
+    logic -> pauseGame();
     menuViewIsOpen(window);
 }
 
