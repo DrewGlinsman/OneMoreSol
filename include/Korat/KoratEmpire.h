@@ -12,7 +12,7 @@ public:
     sf::IntRect spriteFrame;
 
     KoratEmpire();
-    KoratEmpire(int startLane);
+    KoratEmpire(int, TextureLoader*);
 	virtual ~KoratEmpire();
 
 	virtual bool checkDeath();

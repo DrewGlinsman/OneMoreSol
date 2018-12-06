@@ -105,7 +105,7 @@ bool Brute::checkDeath()
 		else
         {
 			speed = 0;//gets death system to work
-			if (!koratDeathSoundPlayed)
+			if (koratDeathSoundPlayed == false)
 			{
 				postDeathClock.restart();
 				koratDeathSoundPlayed = true;

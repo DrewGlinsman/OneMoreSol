@@ -60,7 +60,7 @@ bool TankBoss::checkDeath()
         {
 			speed = 0;
 
-            if(!dieBool)
+            if(dieBool == false)
             {
                 dieBool = true;
                 spriteFrame.left = 384;//576;//x

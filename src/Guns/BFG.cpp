@@ -1,9 +1,13 @@
 
 #include "BFG.h"
 
-BFG::BFG() = default;
+BFG::BFG() {
 
-BFG::~BFG() = default;
+}
+
+BFG::~BFG() {
+
+}
 
 int BFG::getBulletType()
 {

@@ -377,8 +377,10 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
     sf::Clock fireRate1;
     sf::Clock fireRate2;
 
+    float fireGun = fireRate1.getElapsedTime().asSeconds();
 
-	sf::Clock gameClock;
+
+    sf::Clock gameClock;
     float delta;
 
     bool keepMovingUp = false;
@@ -624,12 +626,12 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 			}
 		}
 //-----------------------------------------------------------------
-        if(keepMovingUp)
+        if(keepMovingUp == true)
         {
             keepMovingUp = majorTom->keepMoving(delta, "Up");
             lockOutKeyboard = true;
         }
-        else if(keepMovingDown)
+        else if(keepMovingDown == true)
         {
             keepMovingDown = majorTom->keepMoving(delta, "Down");
             lockOutKeyboard = true;
@@ -643,7 +645,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
          if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             {
-                if(!lockOutKeyboard)
+                if(lockOutKeyboard == false)
                 {
                      switch(majorTom -> getGun())
                     {
@@ -761,31 +763,31 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
                     if(Event.key.code == sf::Keyboard::Up)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         keepMovingUp = majorTom->initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::Down)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         keepMovingDown = majorTom->initMove(delta, "Down");
                     }
 
                     if(Event.key.code == sf::Keyboard::W)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         keepMovingUp = majorTom->initMove(delta, "Up");
                     }
 
                     if(Event.key.code == sf::Keyboard::S)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         keepMovingDown = majorTom->initMove(delta, "Down");
                     }
 
                     if(Event.key.code == sf::Keyboard::Num1)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         {
                             majorTom->setGun(1);
                             selectionBox.setPosition(285,780);
@@ -794,7 +796,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
                     if(Event.key.code == sf::Keyboard::Num2)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         {
                         	if (logic -> getLevel() >= 3)
                         	{
@@ -807,7 +809,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
                     if(Event.key.code == sf::Keyboard::Num3)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         {
                         	if (logic -> getLevel() >= 5)
                         	{
@@ -819,7 +821,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
                     if(Event.key.code == sf::Keyboard::Num4)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         {
                         	if (logic -> getLevel() >= 7)
                         	{
@@ -831,7 +833,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
                     if(Event.key.code == sf::Keyboard::Num5)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         {
                         	if (logic -> getLevel() >= 9)
                         	{
@@ -843,7 +845,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
                     if(Event.key.code == sf::Keyboard::Num6)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         {
                         	if (logic -> getLevel() >= 11)
                         	{
@@ -855,7 +857,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
                     if(Event.key.code == sf::Keyboard::Num7)
                     {
-                        if(!lockOutKeyboard)
+                        if(lockOutKeyboard == false)
                         {
                         	if (logic -> getLevel() >= 13)
                         	{
@@ -905,7 +907,7 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 
     while(window.isOpen())
     {
-        if (!delayClockStarted)
+        if (delayClockStarted == false)
         {
             delayClock.restart();
         }
@@ -1024,7 +1026,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
     while(window.isOpen() && !retry)
     {
 
-        if (!delayClockStarted)
+        if (delayClockStarted == false)
         {
             delayClock.restart();
         }
@@ -1274,7 +1276,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     for(int i = 0; i < 7; ++i)
     {
 
-        if(logic->reloadStarted) // Draw reload symbol <----------
+        if(logic->reloadStarted == true) // Draw reload symbol <----------
         {
 
             if (majorTom -> getGun() == savedGun)

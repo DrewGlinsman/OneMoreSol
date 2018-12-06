@@ -76,9 +76,9 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
         {
             for (int j = 0; j < currentKorat[i].size(); j++)
             {
-                if (!currentKorat[i][j] -> checkSurvive())
+                if (currentKorat[i][j] -> checkSurvive() == false)
                 {
-                    if (!currentKorat[i][j] -> checkDeath())
+                    if (currentKorat[i][j] -> checkDeath() == false)
                     {
                         if (currentKorat[i][j] -> getSpeed() == 0)
                         {
@@ -153,7 +153,7 @@ void GameLogic::updateDyingKorat(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingKorat.size(); i++)
     {
-        if (dyingKorat[i] -> checkDeath())
+        if (dyingKorat[i] -> checkDeath() == true)
         {
             if (dyingKorat[i] -> getName() == "Bomber")
             {
@@ -258,6 +258,7 @@ void GameLogic::selectKorat()
 void GameLogic::spawnKorat()
 {
     KoratEmpire* newKorat;
+    bool print;
 
     switch(koratSpawnType)
     {
@@ -300,7 +301,10 @@ void GameLogic::spawnKorat()
             //cout << currentKorat[i][j] -> getName() << ' ';
             if (currentKorat[i][j] -> getLane() == 680)
             {
+                 print = false;
             }
+            else
+                 print = true;
 
         }
         //if(print == true)
@@ -390,7 +394,7 @@ bool GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed
     }
     else if(currentGun -> getShotsFired() == currentGun -> getClipSize())
     {
-        if (reloadCurrentGun(currentGun))
+        if (reloadCurrentGun(currentGun) == true)
         {
                 currentGun -> shotsFiredPlusOne();
                 selectBullet(majorTom, currentGun, timePassed);
@@ -409,14 +413,14 @@ bool GameLogic::fireBullet(MajorTom* majorTom, Gun* currentGun, float timePassed
  */
 bool GameLogic::reloadCurrentGun(Gun* currentGun)//needs to communicate to gameview to visualize reload time
 {
-    if(!reloadStarted)
+    if(reloadStarted == false)
     {
         reloadClock.restart();
         reloadTime = reloadClock.getElapsedTime().asSeconds();
         reloadStarted = true;
         reloadFinished = false;
     }
-    if(reloadTime > currentGun -> getReloadSpeed() && reloadStarted)
+    if(reloadTime > currentGun -> getReloadSpeed() && reloadStarted == true)
     {
         currentGun -> resetShotsFired();
         reloadClock.restart();
@@ -428,7 +432,7 @@ bool GameLogic::reloadCurrentGun(Gun* currentGun)//needs to communicate to gamev
     else
     {
         reloadTime = reloadClock.getElapsedTime().asSeconds();
-        if(reloadTime > currentGun -> getReloadSpeed() && reloadStarted)
+        if(reloadTime > currentGun -> getReloadSpeed() && reloadStarted == true)
         {
             currentGun -> resetShotsFired();
             reloadClock.restart();
@@ -675,7 +679,7 @@ void GameLogic::gaussLeftScreen(float timePassed)
 {
     for (int i = 0; i < dyingGauss.size(); i++)
     {
-        if (!dyingGauss[i] -> getOutOfBounds())
+        if (dyingGauss[i] -> getOutOfBounds() == false)
         {
             dyingGauss[i] -> moveCurrentBullet(timePassed);
         }
@@ -697,7 +701,7 @@ void GameLogic::gaussLeftScreen(float timePassed)
  */
 void GameLogic::bulletLeftScreen(float timePassed, int i, int j)
 {
-    if (!currentBullet[i][j] -> getOutOfBounds())
+    if (currentBullet[i][j] -> getOutOfBounds() == false)
     {
         currentBullet[i][j] -> moveCurrentBullet(timePassed);
     }
@@ -735,7 +739,7 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 			}
 			else
             {
-				if (!currentKoratBullet[i][j] -> getOutOfBounds())
+				if (currentKoratBullet[i][j] -> getOutOfBounds() == false)
 				{
 					currentKoratBullet[i][j] -> moveCurrentBullet(timePassed);
 				}
@@ -1124,7 +1128,7 @@ void GameLogic::updateDyingBikeBoss(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingBikeBoss.size(); i++)
     {
-        if (dyingBikeBoss[i] -> checkDeath())
+        if (dyingBikeBoss[i] -> checkDeath() == true)
         {
             dyingBikeBoss.erase(dyingBikeBoss.begin() + i);
             currentKoratCount--;
@@ -1151,9 +1155,9 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
             {
                 majorTom -> setHealth(0);
             }
-            if (!currentBikeBoss[i] -> checkSurvive())
+            if (currentBikeBoss[i] -> checkSurvive() == false)
             {
-                if (!currentBikeBoss[i] -> checkDeath())
+                if (currentBikeBoss[i] -> checkDeath() == false)
                 {
                     if (currentBikeBoss[i] -> getSpeed() == 0)
                     {
@@ -1164,7 +1168,7 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                             movingDown = false;
                             directMove = 1;
                     }
-                    else if (!movingUp && !movingDown)
+                    else if (movingUp == false && movingDown == false)
                     {
                         if (directMove < 1998)
                         {
@@ -1186,18 +1190,18 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
                             movingDown = true;
                         }
                     }
-                    else if(movingUp)
+                    else if(movingUp == true)
                     {
-                        if (currentBikeBoss[i] -> moveBossUp(timePassed))
+                        if (currentBikeBoss[i] -> moveBossUp(timePassed) == true)
                         {
                             movingUp = false;
                             movingDown = false;
                         }
                         currentBikeBoss[i] -> moveBoss(timePassed);
                     }
-                    else if(movingDown)
+                    else if(movingDown == true)
                     {
-                        if (currentBikeBoss[i] -> moveBossDown(timePassed))
+                        if (currentBikeBoss[i] -> moveBossDown(timePassed) == true)
                         {
                             movingUp = false;
                             movingDown = false;
@@ -1263,7 +1267,7 @@ void GameLogic::updateDyingTankBoss(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingTankBoss.size(); i++)
     {
-        if (dyingTankBoss[i] -> checkDeath())
+        if (dyingTankBoss[i] -> checkDeath() == true)
         {
             dyingTankBoss.erase(dyingTankBoss.begin() + i);
             currentKoratCount--;
@@ -1293,9 +1297,9 @@ void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
     {
         for(int i = 0; i < currentTankBoss.size(); i++)
         {
-            if (!currentTankBoss[i] -> checkSurvive())
+            if (currentTankBoss[i] -> checkSurvive() == false)
             {
-                if (!currentTankBoss[i] -> checkDeath())
+                if (currentTankBoss[i] -> checkDeath() == false)
                 {
                     if (currentTankBoss[i] -> getSpeed() == 0)
                     {
@@ -1353,7 +1357,7 @@ void GameLogic::queryKoratFiring()
 
                 if (currentKorat[i][j] -> getName() == "Jackal" or currentKorat[i][j] -> getName() == "Elite" or currentKorat[i][j] -> getName() == "Brute" or currentKorat[i][j] -> getName() == "Biker" or currentKorat[i][j] -> getName() == "Hunter")
                 {
-                    if (currentKorat[i][j] -> queryToFire()) //if the Korat is ready to Fire
+                    if (currentKorat[i][j] -> queryToFire() == true) //if the Korat is ready to Fire
                     {
                         Bullet* newBullet;
                         if (currentKorat[i][j] -> getName() == "Jackal")
@@ -1409,9 +1413,9 @@ void GameLogic::queryBikeFiring()
         {
             if (currentBikeBoss[i] -> getPositionX() < 1440)
             {
-                if (currentBikeBoss[i] -> queryToFire()) //if the Korat is ready to Fire
+                if (currentBikeBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
                 {
-                    if(!movingDown && !movingUp)
+                    if( movingDown == false && movingUp == false)
                     {
                         double bikerGun = Random() * 4;
                         int firingLaneInPixels;
@@ -1530,7 +1534,7 @@ void GameLogic::queryTankFiring()
         {
             if (currentTankBoss[i] -> getPositionX() < 1440)
             {
-                if (currentTankBoss[i] -> queryToFire()) //if the Korat is ready to Fire
+                if (currentTankBoss[i] -> queryToFire() == true) //if the Korat is ready to Fire
                 {
                     int firingLaneInPixels = currentTankBoss[i] -> decideFiringLane();
                     //implement stuff to make Korat fire here

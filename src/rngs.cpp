@@ -158,12 +158,13 @@ static int  initialized   = 0;          /* test for stream initialization */
 {
   long   i;
   long   x;
-    char   ok = 0;
+  double u;
+  char   ok = 0;  
 
   SelectStream(0);                  /* select the default stream */
   PutSeed(1);                       /* and set the state to 1    */
   for(i = 0; i < 10000; i++)
-    Random();
+    u = Random();
   GetSeed(&x);                      /* get the new state value   */
   ok = (x == CHECK);                /* and check for correctness */
 

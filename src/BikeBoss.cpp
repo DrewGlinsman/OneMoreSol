@@ -150,7 +150,7 @@ bool BikeBoss::checkDeath()
 		else
         {
 			speed = 0;
-			if(!dieBool)
+			if(dieBool == false)
             {
                 dieBool = true;
                 //death animate

@@ -104,7 +104,7 @@ bool Jackal::checkDeath()
 		else
         {
 			speed = 0;
-			if (!koratDeathSoundPlayed)
+			if (koratDeathSoundPlayed == false)
 			{
 				postDeathClock.restart();
 				koratDeathSoundPlayed = true;
