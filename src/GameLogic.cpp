@@ -651,6 +651,12 @@ void GameLogic::moveBullet(float timePassed)
     }
 }
 
+/** \brief
+ *
+ * \param timePassed float
+ * \return void
+ *
+ */
 void GameLogic::gaussLeftScreen(float timePassed)
 {
     for (int i = 0; i < dyingGauss.size(); i++)
@@ -667,6 +673,14 @@ void GameLogic::gaussLeftScreen(float timePassed)
 
 }
 
+/** \brief
+ *
+ * \param timePassed float
+ * \param i int
+ * \param j int
+ * \return void
+ *
+ */
 void GameLogic::bulletLeftScreen(float timePassed, int i, int j)
 {
     if (currentBullet[i][j] -> getOutOfBounds() == false)
@@ -679,6 +693,13 @@ void GameLogic::bulletLeftScreen(float timePassed, int i, int j)
     }
 }
 
+/** \brief
+ *
+ * \param timePassed float
+ * \param majorTom MajorTom*
+ * \return void
+ *
+ */
 void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 {
 	//! KORAT BULLETS
@@ -713,6 +734,12 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 	}
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return void
+ *
+ */
 void GameLogic::drawBullet(sf::RenderWindow& window)
 {
     for (int i = 0; i < currentBullet.size(); i ++)
@@ -737,6 +764,14 @@ void GameLogic::drawBullet(sf::RenderWindow& window)
 
 }
 
+/** \brief
+ *
+ * \param majorTom MajorTom*
+ * \param currentGun Gun*
+ * \param timePassed float
+ * \return void
+ *
+ */
 void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePassed)
 {
     bulletSpawnLane = decideBulletLane(majorTom);
@@ -746,6 +781,12 @@ void GameLogic::selectBullet(MajorTom* majorTom, Gun* currentGun, float timePass
     spawnBullet(timePassed);
 }
 
+/** \brief
+ *
+ * \param timePassed float
+ * \return void
+ *
+ */
 void GameLogic::spawnBullet(float timePassed)
 {
     Bullet* newBullet1 = 0;
@@ -813,6 +854,12 @@ void GameLogic::spawnBullet(float timePassed)
     }
 }
 
+/** \brief
+ *
+ * \param majorTom MajorTom*
+ * \return int
+ *
+ */
 int GameLogic::decideBulletLane(MajorTom* majorTom)
 {
     if (majorTom->getTomPosition() == lane1)
@@ -826,9 +873,15 @@ int GameLogic::decideBulletLane(MajorTom* majorTom)
     else if (majorTom->getTomPosition() == lane5)
         return 5;
     else
-        cout << "bullet shit is broken" << endl;
+        std::cout << "bullet shit is broken" << std::endl;
 }
 
+/** \brief
+ *
+ * \param givenLane int
+ * \return int
+ *
+ */
 int GameLogic::decideBulletLaneKorat(int givenLane)
 {
     if (givenLane == lane1)
@@ -842,7 +895,7 @@ int GameLogic::decideBulletLaneKorat(int givenLane)
     else if (givenLane == lane5)
         return 5;
     else
-        cout << "bullet shit is broken 2" << endl;
+        std::cout << "bullet shit is broken 2" << std::endl;
 }
 
 int GameLogic::decideBulletType(Gun* currentGun)
@@ -953,6 +1006,11 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
     }
 }
 
+/** \brief
+ *
+ * \return void
+ *
+ */
 void GameLogic::clearAssets()
 {
     for (int i = 0; i < currentBullet.size(); i++)
@@ -971,6 +1029,13 @@ void GameLogic::clearAssets()
     currentTankBoss.clear();
 }
 
+/** \brief
+ *
+ * \param gameSky sf::CircleShape&
+ * \param majorTom MajorTom*
+ * \return void
+ *
+ */
 void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 {
     clearAssets();
@@ -1005,6 +1070,12 @@ void GameLogic::loseLevel(sf::CircleShape& gameSky, MajorTom* majorTom)
 
 }
 
+/** \brief
+ *
+ * \param loadedTextures TextureLoader*
+ * \return void
+ *
+ */
 void GameLogic::startBikeBoss(TextureLoader* loadedTextures)
 {
     BikeBoss* bikeBoss = new BikeBoss(loadedTextures);
@@ -1012,6 +1083,12 @@ void GameLogic::startBikeBoss(TextureLoader* loadedTextures)
     currentKoratCount = 1;
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return void
+ *
+ */
 void GameLogic::drawBikeBoss(sf::RenderWindow& window)
 {
     for(int i = 0; i < currentBikeBoss.size(); i++)
@@ -1025,6 +1102,12 @@ void GameLogic::drawBikeBoss(sf::RenderWindow& window)
 
 }
 
+/** \brief
+ *
+ * \param majorTom MajorTom*
+ * \return void
+ *
+ */
 void GameLogic::updateDyingBikeBoss(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingBikeBoss.size(); i++)
@@ -1038,6 +1121,14 @@ void GameLogic::updateDyingBikeBoss(MajorTom* majorTom)
     }
 }
 
+/** \brief
+ *
+ * \param gameSky sf::CircleShape&
+ * \param majorTom MajorTom*
+ * \param timePassed float
+ * \return void
+ *
+ */
 void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
     if(!isPaused)
@@ -1117,6 +1208,12 @@ void GameLogic::moveBikeBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float
 }
 
 
+/** \brief
+ *
+ * \param loadedTextures TextureLoader*
+ * \return void
+ *
+ */
 void GameLogic::startTankBoss(TextureLoader* loadedTextures)
 {
     TankBoss* tankBoss = new TankBoss(loadedTextures);
@@ -1124,6 +1221,12 @@ void GameLogic::startTankBoss(TextureLoader* loadedTextures)
     currentKoratCount = 1;
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return void
+ *
+ */
 void GameLogic::drawTankBoss(sf::RenderWindow& window)
 {
     for(int i = 0; i < currentTankBoss.size(); i++)
@@ -1137,6 +1240,12 @@ void GameLogic::drawTankBoss(sf::RenderWindow& window)
 
 }
 
+/** \brief
+ *
+ * \param majorTom MajorTom*
+ * \return void
+ *
+ */
 void GameLogic::updateDyingTankBoss(MajorTom* majorTom)
 {
     for (int i = 0; i < dyingTankBoss.size(); i++)
@@ -1157,6 +1266,14 @@ bool GameLogic::isTankBossDead()
     return tankBossDead;
 }
 
+/** \brief
+ *
+ * \param gameSky sf::CircleShape&
+ * \param majorTom MajorTom*
+ * \param timePassed float
+ * \return void
+ *
+ */
 void GameLogic::moveTankBoss(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed)
 {
     if(!isPaused)
@@ -1206,6 +1323,11 @@ void GameLogic::pauseGame()
     isPaused = !isPaused;
 }
 
+/** \brief
+ *
+ * \return void
+ *
+ */
 void GameLogic::queryKoratFiring()
 {
     if(!isPaused)
@@ -1260,6 +1382,11 @@ void GameLogic::queryKoratFiring()
     }
 }
 
+/** \brief
+ *
+ * \return void
+ *
+ */
 void GameLogic::queryBikeFiring()
 {
     if(!isPaused)
@@ -1376,6 +1503,11 @@ void GameLogic::queryBikeFiring()
 }
 
 
+/** \brief
+ *
+ * \return void
+ *
+ */
 void GameLogic::queryTankFiring()
 {
     if(!isPaused)

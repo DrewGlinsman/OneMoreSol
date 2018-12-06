@@ -16,6 +16,11 @@ GameViewPlayer::GameViewPlayer() // Player window constructor
     initialized = true;
 }
 
+/** \brief
+ *
+ * \return void
+ *
+ */
 void GameViewPlayer::initializeMenuState()
 {
 
@@ -53,6 +58,11 @@ void GameViewPlayer::initializeMenuState()
     exitBtnRec.setTexture(&(loadedTextures -> textureArray[9]));
 }
 
+/** \brief
+ *
+ * \return void
+ *
+ */
 void GameViewPlayer::initializePlayState()
 {
     if(!gameFont.loadFromFile("../assets/impact.ttf"))
@@ -192,6 +202,12 @@ void GameViewPlayer::initializePlayState()
 
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return bool
+ *
+ */
 bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 {
     gameMusic.stop();
@@ -292,6 +308,12 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 	return false;
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return bool
+ *
+ */
 bool GameViewPlayer::storyViewIsOpen(sf::RenderWindow& window)
 {
     controlScreen.setPosition(450,25);
@@ -323,6 +345,12 @@ bool GameViewPlayer::storyViewIsOpen(sf::RenderWindow& window)
     }
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return void
+ *
+ */
 void GameViewPlayer::updateMenu(sf::RenderWindow& window) // Updates screen
 {
     window.clear(sf::Color::Black);
@@ -335,6 +363,12 @@ void GameViewPlayer::updateMenu(sf::RenderWindow& window) // Updates screen
     window.display();
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return bool
+ *
+ */
 bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 {
     currentLevel = logic -> getLevel() - 1;
@@ -820,6 +854,12 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
     return false;
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return bool
+ *
+ */
 bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 {
 
@@ -859,6 +899,12 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
     return false;
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return void
+ *
+ */
 void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
 {
     window.clear(sf::Color::Black);
@@ -911,6 +957,12 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     window.display();
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return bool
+ *
+ */
 bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
 {
     gameMusic.stop();
@@ -988,6 +1040,12 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
     return false;
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return bool
+ *
+ */
 bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
 {
     gameMusic.stop();
@@ -1092,6 +1150,12 @@ void GameViewPlayer::updateWinScreen(sf::RenderWindow& window)
     window.display();
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return void
+ *
+ */
 void GameViewPlayer::resetGameToMenu(sf::RenderWindow& window)
 {
     delete logic;
@@ -1100,6 +1164,12 @@ void GameViewPlayer::resetGameToMenu(sf::RenderWindow& window)
     menuViewIsOpen(window);
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return void
+ *
+ */
 void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements of screen
 {
     window.clear(sf::Color::Black);
@@ -1170,6 +1240,12 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     window.display();
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \return void
+ *
+ */
 void GameViewPlayer::updateLossScreen(sf::RenderWindow &window)
 {
     window.clear(sf::Color::Black);
@@ -1179,6 +1255,13 @@ void GameViewPlayer::updateLossScreen(sf::RenderWindow &window)
     window.display();
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \param x int
+ * \return void
+ *
+ */
 void GameViewPlayer::selectWinButton(sf::RenderWindow& window, int x)
 {
     if (x == 0)
@@ -1195,6 +1278,13 @@ void GameViewPlayer::selectWinButton(sf::RenderWindow& window, int x)
     }
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \param y int
+ * \return void
+ *
+ */
 void GameViewPlayer::selectMenuButton(sf::RenderWindow& window, int y)
 {
     if(y == 0)
@@ -1218,6 +1308,13 @@ void GameViewPlayer::selectMenuButton(sf::RenderWindow& window, int y)
     updateMenu(window);//could this be more optimally placed?
 }
 
+/** \brief
+ *
+ * \param window sf::RenderWindow&
+ * \param y int
+ * \return void
+ *
+ */
 void GameViewPlayer::selectButton(sf::RenderWindow& window, int y)
 {
     if(y == 0)
