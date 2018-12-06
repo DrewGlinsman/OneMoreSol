@@ -222,7 +222,6 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
     gameMusic.play();
     gameMusic.setLoop(true);
     menuSelector.setPosition(0,0);
-    std::cout << "0,0" << std::endl;
     while(window.isOpen()) // Menu loop
 	{
         updateMenu(window);
@@ -243,21 +242,18 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelector.setPosition(0,2);
 						selectMenuButton(window,2);
 						menuTransition.play();
-						std::cout << "0,2" << std::endl;
 					}
 					else if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,0);
 						selectMenuButton(window,0);
 						menuTransition.play();
-						std::cout << "0,0" << std::endl;
 					}
 					else if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,1);
 						selectMenuButton(window,1);
 						menuTransition.play();
-						std::cout << "0,1" << std::endl;
 					}
 				}
 
@@ -268,21 +264,18 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
 						menuSelector.setPosition(0,1);
 						selectMenuButton(window,1);
 						menuTransition.play();
-						std::cout << "0,1" << std::endl;
 					}
 					else if(sf::Vector2f (0,1) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,2);
 						selectMenuButton(window,2);
 						menuTransition.play();
-						std::cout << "0,2" << std::endl;
 					}
 					else if(sf::Vector2f (0,2) == menuSelector.getPosition())
 					{
 						menuSelector.setPosition(0,0);
 						selectMenuButton(window,0);
 						menuTransition.play();
-						std::cout << "0,0" << std::endl;
 					}
 				}
 
@@ -1180,14 +1173,12 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
                     {
                         if (x == 0)
                         {
-                            cout << "Moved Right" << endl;;
                             x = 1;
                             selectWinButton(window, x);
                             updateWinScreen(window);
                         }
                         else
                         {
-                            cout << "Moved left" << endl;
                             x = 0;
                             selectWinButton(window, x);
                             updateWinScreen(window);

@@ -890,7 +890,7 @@ int GameLogic::decideBulletLane(MajorTom* majorTom)
     else if (majorTom->getTomPosition() == lane5)
         return 5;
     else
-        std::cout << "bullet shit is broken" << std::endl;
+        std::cout << "bullet deciding is broken" << std::endl;
 }
 
 /** \brief
@@ -912,7 +912,7 @@ int GameLogic::decideBulletLaneKorat(int givenLane)
     else if (givenLane == lane5)
         return 5;
     else
-        std::cout << "bullet shit is broken 2" << std::endl;
+        std::cout << "korat bullet deciding is broken" << std::endl;
 }
 
 int GameLogic::decideBulletType(Gun* currentGun)
@@ -957,10 +957,8 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
                 gameSky.rotate(-rotation); //rotate the sun back to the beginning
                 currentLevel++;
                 survivorCountSaved = majorTom->getSurvivors();
-                cout << "Survivor Count Saved: " << survivorCountSaved << endl;
                 levelSpeedModifier = levelSpeedModifierVector[currentLevel - 1];
                 levelSpawnModifier = levelSpawnModifierVector[currentLevel - 1];
-                cout << "level spawn modifier = " <<levelSpawnModifierVector[currentLevel - 1] << endl;
 
                 majorTom ->  setTomPositionX(156);
 
