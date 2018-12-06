@@ -1222,15 +1222,19 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
         }
         if(logic->reloadStarted == true) // Draw reload symbol <----------
         {
-
+            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
         }
         else if (logic->reloadFinished == true) // erase reload symbol <---------
         {
-
+            reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,o.f));
         }
-//test comment
         window.draw(reloadRect[i]);
     }
+
+    /*if(logic->reloadStarted)
+            reloadRect[majorTom->currentGun - 1].setSize(sf::Vector2f(64.f,(64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1))*2));
+        if((64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1) > 32.f) || (64.f * ((logic->reloadClock.getElapsedTime().asSeconds())-1) < 0.f))
+            reloadRect[majorTom->currentGun-1].setSize(sf::Vector2f(64.f,o.f));*/
 
     updateSurvivorCount();
     updateMajorTomHealth();
