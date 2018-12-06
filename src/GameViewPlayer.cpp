@@ -433,7 +433,8 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
         {
             logic -> pauseGame();
             logic -> levelWon = false;
-            textAdventureIsOpen(window);
+            if(textAdventureIsOpen(window))
+                return true;
         }
 
         if(currentLevel < logic -> getLevel())
@@ -874,7 +875,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
                     }
                     if(Event.key.code == sf::Keyboard::K)
                     {
-                        sky.rotate(150);
+                        //sky.rotate(150);
                     }
                     if(Event.key.code == sf::Keyboard::P)
 					{
@@ -922,8 +923,18 @@ bool GameViewPlayer::textAdventureIsOpen(sf::RenderWindow& window)
 
         while(window.pollEvent(Event))
         {
+            if(Event.type == sf::Event::Closed)
+            {
+                window.close();
+                return true;
+            }
             if(Event.type == sf::Event::KeyPressed)
             {
+                if(Event.key.code == sf::Keyboard::Escape)
+                {
+                    window.close();
+                    return true;
+                }
                 if(Event.key.code == sf::Keyboard::Return)
                 {
                     menuSelection.play();
