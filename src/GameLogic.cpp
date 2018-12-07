@@ -715,6 +715,7 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 			    if(currentKoratBullet[i][j] -> getBullet().getPosition().x < majorTom -> getTomPositionX())
                 {
                     majorTom -> wasShot(currentKoratBullet[i][j] -> getDamage());
+                    koratHitCount++;
                     currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
                 }
                 else
@@ -1295,7 +1296,7 @@ void GameLogic::queryKoratFiring()
                         } else if (currentKorat[i][j] -> getName() == "Elite")
                         {
                         	eliteBulletsFired += 1;
-                        	newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX() - 30, loadedTextures);
+                        	newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX() - 30, loadedTextures, 255, 255, 0);
                         	int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
                             currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
                         } else if (currentKorat[i][j] -> getName() == "Brute")
