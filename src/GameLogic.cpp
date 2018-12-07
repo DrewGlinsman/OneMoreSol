@@ -90,7 +90,8 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                             if(currentKorat[i][j] -> getName() == "Bomber")
                             {
                                 majorTom -> setScore(majorTom -> getScore() + 45);
-                                bombersExploded++;
+                                bombersExploded += 1;
+
                             }
 
                             if(currentKorat[i][j] -> getName() == "Brute")
@@ -165,7 +166,6 @@ void GameLogic::updateDyingKorat(MajorTom* majorTom)
             if (dyingKorat[i] -> getName() == "Bomber")
             {
                 explode(*dyingKorat[i], majorTom);
-                bombersExploded += 1;
             }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;
@@ -717,6 +717,7 @@ void GameLogic::moveKoratBullet(float timePassed, MajorTom* majorTom)
 			    if(currentKoratBullet[i][j] -> getBullet().getPosition().x < majorTom -> getTomPositionX())
                 {
                     majorTom -> wasShot(currentKoratBullet[i][j] -> getDamage());
+                    koratHitCount++;
                     currentKoratBullet[i].erase(currentKoratBullet[i].begin() + j);
                 }
                 else
@@ -978,9 +979,9 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
             levelWon = false;
 
             if((gameSky.getRotation() > 0.f) && (gameSky.getRotation() < 25.f))//if it's before noon
-                fogLayer.setFillColor(sf::Color(255,255,255,150 - gameSky.getRotation()/2));
+                fogLayer.setFillColor(sf::Color(255,255,255,100 - gameSky.getRotation()/2));
             else if((gameSky.getRotation() > 25.f) && (gameSky.getRotation() < 50.f))
-                fogLayer.setFillColor(sf::Color(255,255,255,150 - gameSky.getRotation()));
+                fogLayer.setFillColor(sf::Color(255,255,255,100 - gameSky.getRotation()));
             else
                 fogLayer.setFillColor(sf::Color(255,255,255,0));
 
@@ -997,9 +998,9 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
             gameSky.rotate(timePassed * levelSpeedModifier);
 
             if((gameSky.getRotation() > 0.f) && (gameSky.getRotation() < 25.f))//if it's before noon
-                fogLayer.setFillColor(sf::Color(255,255,255,150 - gameSky.getRotation()/2));
+                fogLayer.setFillColor(sf::Color(255,255,255,100 - gameSky.getRotation()/2));
             else if((gameSky.getRotation() > 25.f) && (gameSky.getRotation() < 50.f))
-                fogLayer.setFillColor(sf::Color(255,255,255,150 - gameSky.getRotation()));
+                fogLayer.setFillColor(sf::Color(255,255,255,100 - gameSky.getRotation()));
             else
                 fogLayer.setFillColor(sf::Color(255,255,255,0));
 
@@ -1297,7 +1298,7 @@ void GameLogic::queryKoratFiring()
                         } else if (currentKorat[i][j] -> getName() == "Elite")
                         {
                         	eliteBulletsFired += 1;
-                        	newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX() - 30, loadedTextures);
+                        	newBullet = new KoratBullet(currentKorat[i][j] -> getLane(), currentKorat[i][j] -> getPositionX() - 30, loadedTextures, 255, 255, 0);
                         	int laneToGoIn = decideBulletLaneKorat(currentKorat[i][j] -> getLane());
                             currentKoratBullet[laneToGoIn - 1].emplace_back(newBullet);
                         } else if (currentKorat[i][j] -> getName() == "Brute")

@@ -10,6 +10,7 @@ public:
 	sf::Sprite plasma;
 
 	KoratBullet(int, int, TextureLoader*);
+	KoratBullet(int, int, TextureLoader*, int, int, int);
 	virtual ~KoratBullet();
 
 	int getDamage();
