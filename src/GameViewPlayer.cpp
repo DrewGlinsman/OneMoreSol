@@ -992,6 +992,7 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     majorTom -> drawTom(window);
     window.draw(journal);
     window.draw(solNum);
+    window.draw(fogSky);
 
     textAdventure.setFont(gameFont);
     textAdventure.setCharacterSize(24);
