@@ -85,10 +85,12 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                             if(currentKorat[i][j] -> getName() == "Biker")
                             {
                             	majorTom -> setScore(majorTom -> getScore() + 60);
+                            	killedKorat++;
                             }
                             if(currentKorat[i][j] -> getName() == "Bomber")
                             {
                                 majorTom -> setScore(majorTom -> getScore() + 45);
+                                bombersExploded++;
                             }
 
                             if(currentKorat[i][j] -> getName() == "Brute")
