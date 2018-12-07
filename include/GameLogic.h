@@ -182,7 +182,7 @@ class GameLogic{
         void bulletLeftScreen(float timePassed, int i, int j);
 
         //changes survivor count
-        void runLevel(sf::CircleShape&, MajorTom*, float, sf::RectangleShape&);
+        void runLevel(sf::CircleShape&, MajorTom*, float, sf::RectangleShape&, sf::RectangleShape&);
 
         void loseLevel(sf::CircleShape&, MajorTom*);
 

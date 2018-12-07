@@ -92,6 +92,9 @@ void TextureLoader::load()
     if(!textureArray[23].loadFromFile("../assets/controlScreen.png"))
         std::cout << "Failed to Load Control Screen" << std::endl;
 
+    if(!textureArray[24].loadFromFile("../assets/fogLayer.png"))
+        std::cout << "Failed to Load Fog Layer" << std::endl;
+
     //goes through the textureArray and "anti-alias"es them.
     for(int i = 0; i < textureArray.size(); ++i)
     {

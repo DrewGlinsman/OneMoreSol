@@ -877,14 +877,18 @@ int GameLogic::decideBulletType(Gun* currentGun)
 
 //----------------------------------------------------------
 
+
 /** \brief
- *  Includes logic for running the day/night cycle.
- * \param
- * \param
- * \return
+ * Includes logic for running the day/night cycle.
+ * \param gameSky sf::CircleShape&
+ * \param majorTom MajorTom*
+ * \param timePassed float
+ * \param nightLayer sf::RectangleShape&
+ * \param fogLayer sf::RectangleShape&
+ * \return void
  *
  */
-void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed, sf::RectangleShape& nightLayer)
+void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float timePassed, sf::RectangleShape& nightLayer, sf::RectangleShape& fogLayer)
 {
     if(!isPaused)
     {
@@ -970,6 +974,14 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
         {
             gameSky.rotate(timePassed * levelSpeedModifier);
             levelWon = false;
+
+            if((gameSky.getRotation() > 0.f) && (gameSky.getRotation() < 25.f))//if it's before noon
+                fogLayer.setFillColor(sf::Color(255,255,255,150 - gameSky.getRotation()/2));
+            else if((gameSky.getRotation() > 25.f) && (gameSky.getRotation() < 50.f))
+                fogLayer.setFillColor(sf::Color(255,255,255,150 - gameSky.getRotation()));
+            else
+                fogLayer.setFillColor(sf::Color(255,255,255,0));
+
             if((gameSky.getRotation() > 90.f) && (gameSky.getRotation() < 130.f))
                 nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()/2));
             else if(gameSky.getRotation() > 130.f)
@@ -982,7 +994,14 @@ void GameLogic::runLevel(sf::CircleShape& gameSky, MajorTom* majorTom, float tim
             levelWon = false;
             gameSky.rotate(timePassed * levelSpeedModifier);
 
-            if((gameSky.getRotation() > 90.f) && (gameSky.getRotation() < 130.f))
+            if((gameSky.getRotation() > 0.f) && (gameSky.getRotation() < 25.f))//if it's before noon
+                fogLayer.setFillColor(sf::Color(255,255,255,150 - gameSky.getRotation()/2));
+            else if((gameSky.getRotation() > 25.f) && (gameSky.getRotation() < 50.f))
+                fogLayer.setFillColor(sf::Color(255,255,255,150 - gameSky.getRotation()));
+            else
+                fogLayer.setFillColor(sf::Color(255,255,255,0));
+
+            if((gameSky.getRotation() > 110.f) && (gameSky.getRotation() < 130.f))
                 nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()/2));
             else if(gameSky.getRotation() > 130.f)
                 nightLayer.setFillColor(sf::Color(255,255,255,gameSky.getRotation()));

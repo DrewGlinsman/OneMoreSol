@@ -90,6 +90,11 @@ void GameViewPlayer::initializePlayState()
     nightSky.setFillColor(sf::Color(255,255,255,0));
     nightSky.setTexture(&(loadedTextures->textureArray[16]));
 
+    fogSky.setPosition(0,0);
+    fogSky.setSize(sf::Vector2f(1440,760));
+    fogSky.setFillColor(sf::Color(255,255,255,150));
+    fogSky.setTexture(&(loadedTextures->textureArray[24]));
+
     background.setOrigin(0,724);
     background.setPosition(0,900);
     background.setSize(sf::Vector2f(1440,724));
@@ -446,7 +451,7 @@ bool GameViewPlayer::gameViewIsOpen(sf::RenderWindow& window)
 
         if (!paused)
         {
-			logic -> runLevel(sky, majorTom, delta, nightSky);
+			logic -> runLevel(sky, majorTom, delta, nightSky, fogSky);
 			logic -> updateKoratOrder();
 			logic -> updateBulletOrder(); //Bullets generation and drawing
 			logic -> updateDyingKorat(majorTom);
@@ -1112,14 +1117,14 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
     window.clear(sf::Color::Black);
 
     finalScoreCnt.setFont(gameFont);
-    finalScoreCnt.setPosition(sf::Vector2f(650,700));
+    finalScoreCnt.setPosition(sf::Vector2f(625,700));
     finalScoreCnt.setFillColor(sf::Color::White);
     finalScoreCnt.setCharacterSize(22);
     string finalScore = "Final Score: " + std::to_string(majorTom -> getScore());
     finalScoreCnt.setString(finalScore);
 
     koratKilledCnt.setFont(gameFont);
-    koratKilledCnt.setPosition(sf::Vector2f(650, 750));
+    koratKilledCnt.setPosition(sf::Vector2f(625, 750));
     koratKilledCnt.setFillColor(sf::Color::White);
     koratKilledCnt.setCharacterSize(22);
     int koratKilled = logic -> getKilledKorat();
@@ -1263,6 +1268,7 @@ void GameViewPlayer::updateGame(sf::RenderWindow& window) // Draws all elements 
     }
 
     window.draw(nightSky);
+    window.draw(fogSky);
     window.draw(selectionBox);
     window.draw(scoreCnt);
     window.draw(levelCnt);
