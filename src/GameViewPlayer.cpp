@@ -992,6 +992,7 @@ void GameViewPlayer::drawAdventure(sf::RenderWindow& window)
     majorTom -> drawTom(window);
     window.draw(journal);
     window.draw(solNum);
+    fogSky.setFillColor(sf::Color(255,255,255,100));
     window.draw(fogSky);
 
     textAdventure.setFont(gameFont);
