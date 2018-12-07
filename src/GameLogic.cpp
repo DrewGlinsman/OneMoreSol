@@ -89,6 +89,7 @@ void GameLogic::moveKorat(float timePassed, MajorTom* majorTom)
                             if(currentKorat[i][j] -> getName() == "Bomber")
                             {
                                 majorTom -> setScore(majorTom -> getScore() + 45);
+                                bombersExploded += 1;
                             }
 
                             if(currentKorat[i][j] -> getName() == "Brute")
@@ -163,7 +164,6 @@ void GameLogic::updateDyingKorat(MajorTom* majorTom)
             if (dyingKorat[i] -> getName() == "Bomber")
             {
                 explode(*dyingKorat[i], majorTom);
-                bombersExploded += 1;
             }
             dyingKorat.erase(dyingKorat.begin() + i);
             currentKoratCount--;

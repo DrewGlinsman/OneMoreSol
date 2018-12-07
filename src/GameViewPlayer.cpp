@@ -223,6 +223,7 @@ bool GameViewPlayer::menuViewIsOpen(sf::RenderWindow& window)
     gameMusic.setLoop(true);
     menuSelector.setPosition(0,0);
     returnToMenu = false;
+    timesDied = 0;
     while(window.isOpen()) // Menu loop
 	{
         updateMenu(window);
@@ -1023,6 +1024,7 @@ bool GameViewPlayer::lossViewIsOpen(sf::RenderWindow& window)
     gameMusic.setBuffer(loadedAudio -> soundTrack[23]);
     gameMusic.play();
     gameMusic.setLoop(true);
+    timesDied = timesDied + 1;
 
     bool retry = false;
     updateLossScreen(window);
@@ -1125,6 +1127,14 @@ bool GameViewPlayer::winViewIsOpen(sf::RenderWindow& window)
     string koratKill = "Korat Killed: " + std::to_string(koratKilled + bombersExploded);
     koratKilledCnt.setString(koratKill);
 
+    finalDeathCnt.setFont(gameFont);
+    finalDeathCnt.setPosition(sf::Vector2f(650,800));
+    finalDeathCnt.setFillColor(sf::Color::White);
+    finalDeathCnt.setCharacterSize(22);
+    string finalDeath = "Times Died: " + std::to_string(timesDied);
+    finalDeathCnt.setString(finalDeath);
+
+
     updateWinScreen(window);
     int x = 0;
 
@@ -1199,6 +1209,7 @@ void GameViewPlayer::updateWinScreen(sf::RenderWindow& window)
     window.draw(winScreen);
     window.draw(finalScoreCnt);
     window.draw(koratKilledCnt);
+    window.draw(finalDeathCnt);
     window.draw(winBtnRec);
     window.draw(menuBtnRec);
     window.display();

@@ -72,6 +72,7 @@ private:
     sf::Text menuPlay5;
     sf::Text textAdventure;
     sf::Text koratKilledCnt;
+    sf::Text finalDeathCnt;
 
     float titleX = 130;
     float titleY = 20;
@@ -104,6 +105,7 @@ private:
     int bombersExploded = 0;
     int koratHitCount = 0;
     int koratSurvived = 0;
+    int timesDied = 0;
 
     bool paused = false;
 
