@@ -42,6 +42,7 @@ private:
     sf::RectangleShape storyBtnRec;
     sf::RectangleShape exitBtnRec;
     sf::RectangleShape nightSky;
+    sf::RectangleShape fogSky;
     sf::RectangleShape winScreen;
     sf::RectangleShape controlScreen;
 
