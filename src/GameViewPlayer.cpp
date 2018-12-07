@@ -92,7 +92,7 @@ void GameViewPlayer::initializePlayState()
 
     fogSky.setPosition(0,0);
     fogSky.setSize(sf::Vector2f(1440,760));
-    fogSky.setFillColor(sf::Color(255,255,255,150));
+    fogSky.setFillColor(sf::Color(255,255,255,100));
     fogSky.setTexture(&(loadedTextures->textureArray[24]));
 
     background.setOrigin(0,724);
