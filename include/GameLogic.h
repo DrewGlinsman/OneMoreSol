@@ -96,7 +96,7 @@ class GameLogic{
                                                       1.2, 1.2, 1.2, 1.2, 1.2, 1.1, 1.1, 1.1, 1.0, .1};
 
         std::vector <float> levelSpeedModifierVector {7.5, 7.4, 7.3, 7.2, 7.1, 7.0, 6.9, 6.8, 6.7, 6.6,
-                                                      6.5, 6.4, 6.3, 6.2, 6.1, 6.0, 5.9, 5.8, 5.7, 5.6};
+                                                      6.5, 6.4, 6.3, 6.2, 6.1, 6.0, 5.9, 5.8, 5.7, 3.5};
         //holds lane centers for entity reference
         const int lane1 = 335;
         const int lane2 = 422;

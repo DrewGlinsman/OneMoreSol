@@ -15,7 +15,7 @@ TankBoss::TankBoss(TextureLoader* loadedTextures)
     tankBoss.setTextureRect(spriteFrame);
     tankBoss.setOrigin(sf::Vector2f(160.f,160.f));
     tankBoss.setScale(1.2f,1.2f);
-    tankBoss.setPosition(1713, lane3);
+    tankBoss.setPosition(1756, lane3);
     dieBool = false;
 }
 

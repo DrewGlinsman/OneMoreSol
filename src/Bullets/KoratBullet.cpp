@@ -13,6 +13,17 @@ KoratBullet::KoratBullet(int givenLane, int givenHeight, TextureLoader* loadedTe
 	damage = 5;
 }
 
+KoratBullet::KoratBullet(int givenLane, int givenHeight, TextureLoader* loadedTextures, int r, int g, int b) {
+    plasma.setTexture(loadedTextures->textureArray[0]);
+    plasma.setTextureRect(sf::IntRect(384,0,32,32));
+	plasma.setOrigin(sf::Vector2f(16.f,16.f));
+	plasma.setColor(sf::Color(r,g,b));
+	setLane(givenLane);
+	plasma.setPosition(givenHeight, lane);
+	speed = 700;
+	damage = 5;
+}
+
 KoratBullet::~KoratBullet() {
 	// TODO Auto-generated destructor stub
 }
